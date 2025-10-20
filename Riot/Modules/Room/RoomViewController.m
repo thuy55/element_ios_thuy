@@ -1985,20 +1985,20 @@ static CGSize kThreadListBarButtonItemImageSize;
                 }
             }
             
-            if ([self widgetsCount:NO])
-            {
-                UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:AssetImages.integrationsIcon.image
-                                                                         style:UIBarButtonItemStylePlain
-                                                                        target:self
-                                                                        action:@selector(onIntegrationsPressed:)];
-                item.accessibilityLabel = [VectorL10n roomAccessibilityIntegrations];
-                if (hasCustomJoinButton)
-                {
-                    item.imageInsets = UIEdgeInsetsMake(0, -5, 0, -5);
-                    item.landscapeImagePhoneInsets = UIEdgeInsetsMake(0, -5, 0, -5);
-                }
-                [rightBarButtonItems addObject:item];
-            }
+//            if ([self widgetsCount:NO])
+//            {
+//                UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:AssetImages.integrationsIcon.image
+//                                                                         style:UIBarButtonItemStylePlain
+//                                                                        target:self
+//                                                                        action:@selector(onIntegrationsPressed:)];
+//                item.accessibilityLabel = [VectorL10n roomAccessibilityIntegrations];
+//                if (hasCustomJoinButton)
+//                {
+//                    item.imageInsets = UIEdgeInsetsMake(0, -5, 0, -5);
+//                    item.landscapeImagePhoneInsets = UIEdgeInsetsMake(0, -5, 0, -5);
+//                }
+//                [rightBarButtonItems addObject:item];
+//            }
         }
         
         // Do not change title view class here if the expanded header is visible.

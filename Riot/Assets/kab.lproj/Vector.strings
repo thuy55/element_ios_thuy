@@ -953,7 +953,7 @@
 
 // Events formatter
 "event_formatter_member_updates" = "%tu yisnifal deg umulteɣ";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "matrix.5hpc.com";
 "directory_server_all_native_rooms" = "Tixxamin meṛṛa tidiganin n Matrix";
 "directory_server_all_rooms" = "Tixxamin meṛṛa ɣef uqeddac %@";
 "directory_server_picker_title" = "Fren akaram";

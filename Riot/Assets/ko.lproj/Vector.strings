@@ -516,7 +516,7 @@
 "directory_server_all_rooms" = "%@ 서버에 있는 모든 방";
 "directory_server_all_native_rooms" = "모든 네이티브 Matrix 방";
 "directory_server_type_homeserver" = "홈서버를 입력하면 공개 방 목록을 나열합니다";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "matrix.5hpc.com";
 // Events formatter
 "event_formatter_member_updates" = "%tu명의 구성원 변경 사항";
 "event_formatter_widget_added" = "%@ 위젯을 %@님이 추가했습니다";

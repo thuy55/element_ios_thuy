@@ -344,7 +344,7 @@
 
 // Events formatter
 "event_formatter_member_updates" = "ການປ່ຽນແປງການເປັນສະມາຊິກ %tu";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "matrix.5hpc.com";
 "directory_server_type_homeserver" = "ພິມ homeserver ເພື່ອລາຍຊື່ຫ້ອງສາທາລະນະຈາກ";
 "directory_server_all_native_rooms" = "ຫ້ອງ Matrix ເດີມທັງໝົດ";
 "directory_server_all_rooms" = "ຫ້ອງທັງໝົດຢູ່ໃນເຊີບເວີ %@";

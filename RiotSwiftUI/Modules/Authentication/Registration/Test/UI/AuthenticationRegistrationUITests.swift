@@ -12,7 +12,7 @@ class AuthenticationRegistrationUITests: MockScreenTestCase {
     func testMatrixDotOrg() {
         app.goToScreenWithIdentifier(MockAuthenticationRegistrationScreenState.matrixDotOrg.title)
         
-        let state = "matrix.org"
+        let state = "matrix.5hpc.com"
         validateRegistrationFormIsVisible(for: state)
         validateSSOButtonsAreShown(for: state)
         validateSunsetBannersAreHidden(for: state)

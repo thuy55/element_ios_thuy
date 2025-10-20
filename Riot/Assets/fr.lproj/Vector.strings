@@ -400,7 +400,7 @@
 "directory_server_all_rooms" = "Tous les salons sur le serveur %@";
 "directory_server_all_native_rooms" = "Tous les salons Matrix natifs";
 "directory_server_type_homeserver" = "Saisir un serveur d’accueil pour lister ses salons publics";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "matrix.5hpc.com";
 // Others
 "or" = "ou";
 "you" = "Vous";

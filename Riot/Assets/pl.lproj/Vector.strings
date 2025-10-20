@@ -321,7 +321,7 @@
 "directory_server_picker_title" = "Wybierz katalog";
 "directory_server_all_rooms" = "Wszystkie pokoje na serwerze %@";
 "directory_server_type_homeserver" = "Wpisz serwer domowy, aby pobrać z niego listę publicznych pokoi";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "matrix.5hpc.com";
 "event_formatter_widget_added" = "widżet %@ został dodany przez %@";
 "event_formatter_widget_removed" = "widżet %@ został usunięty przez %@";
 "event_formatter_rerequest_keys_part1_link" = "Poproś o ponowne przesłanie kluczy szyfrujących";

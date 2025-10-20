@@ -563,7 +563,7 @@
 "media_picker_select" = "Vali";
 "directory_server_all_native_rooms" = "Kõik Matrix'i jututoad";
 "directory_server_type_homeserver" = "Sisesta koduserveri nimi, mille avalike jututubade loendit soovid näha";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "matrix.5hpc.com";
 // Events formatter
 "event_formatter_member_updates" = "%tu liikmelisuse muudatused";
 "event_formatter_widget_added" = "%@ vidin on lisatud %@ poolt";

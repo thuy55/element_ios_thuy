@@ -349,7 +349,7 @@
 "directory_server_all_rooms" = "Все комнаты на сервере %@";
 "directory_server_all_native_rooms" = "Все местные комнаты Matrix";
 "directory_server_type_homeserver" = "Введите домашний сервер для вывода списка открытых комнат";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "matrix.5hpc.com";
 // Events formatter
 "event_formatter_member_updates" = "%tu изменения членства";
 // Others

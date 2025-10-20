@@ -50,14 +50,14 @@ class AllChatsEditActionProvider {
                 createActions.insert(self.createSpaceAction, at: 0)
             }
             return UIMenu(title: "", children: [
-                self.exploreRoomsAction,
+//                self.exploreRoomsAction,
                 UIMenu(title: "", options: .displayInline, children: createActions)
             ])
         }
         
         return UIMenu(title: "", children: [
             UIMenu(title: "", options: .displayInline, children: [
-                self.exploreRoomsAction
+//                self.exploreRoomsAction
             ]),
             UIMenu(title: "", options: .displayInline, children: [
                 self.createSpaceAction,

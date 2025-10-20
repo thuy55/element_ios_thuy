@@ -31,12 +31,12 @@ enum MockAuthenticationTermsScreenState: MockScreenState, CaseIterable {
             viewModel = AuthenticationTermsViewModel(homeserver: .mockMatrixDotOrg,
                                                      policies: [AuthenticationTermsPolicy(url: "https://matrix-client.matrix.org/_matrix/consent?v=1.0",
                                                                                           title: "Terms and Conditions",
-                                                                                          subtitle: "matrix.org")])
+                                                                                          subtitle: "matrix.5hpc.com")])
         case .accepted:
             viewModel = AuthenticationTermsViewModel(homeserver: .mockMatrixDotOrg,
                                                      policies: [AuthenticationTermsPolicy(url: "https://matrix-client.matrix.org/_matrix/consent?v=1.0",
                                                                                           title: "Terms and Conditions",
-                                                                                          subtitle: "matrix.org",
+                                                                                          subtitle: "matrix.5hpc.com",
                                                                                           accepted: true)])
         case .multiple:
             viewModel = AuthenticationTermsViewModel(homeserver: .mockBasicServer, policies: [

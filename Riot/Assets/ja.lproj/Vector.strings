@@ -390,7 +390,7 @@
 "directory_server_all_rooms" = "%@サーバー上の全てのルーム";
 "directory_server_all_native_rooms" = "全てのMatrix連携ルーム";
 "directory_server_type_homeserver" = "公開ルームの一覧を表示するホームサーバーを入力してください";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "matrix.5hpc.com";
 // Events formatter
 "event_formatter_member_updates" = "%tu個のメンバーシップの変更";
 "event_formatter_widget_added" = "%@のウィジェットが%@により追加されました";

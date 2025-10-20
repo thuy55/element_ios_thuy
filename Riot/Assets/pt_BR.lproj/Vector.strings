@@ -462,7 +462,7 @@
 "directory_server_all_rooms" = "Todas as salas em servidor %@";
 "directory_server_all_native_rooms" = "Todas as salas Matrix nativas";
 "directory_server_type_homeserver" = "Digite um servidorcasa para de onde listar salas públicas";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "matrix.5hpc.com";
 // Events formatter
 "event_formatter_member_updates" = "%tu mudanças de filiação";
 "event_formatter_widget_added" = "%@ widget adicionado por %@";

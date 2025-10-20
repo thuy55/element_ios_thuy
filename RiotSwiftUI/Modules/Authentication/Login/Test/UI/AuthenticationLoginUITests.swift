@@ -12,7 +12,7 @@ class AuthenticationLoginUITests: MockScreenTestCase {
     func testMatrixDotOrg() {
         app.goToScreenWithIdentifier(MockAuthenticationLoginScreenState.matrixDotOrg.title)
         
-        let state = "matrix.org"
+        let state = "matrix.5hpc.com"
         validateLoginFormIsVisible(for: state)
         validateSSOButtonsAreShown(for: state)
     }

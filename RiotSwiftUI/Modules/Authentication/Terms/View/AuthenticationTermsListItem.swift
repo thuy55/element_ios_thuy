@@ -67,10 +67,10 @@ struct AuthenticationTermsListItem: View {
 struct Previews_AuthenticationTermsListItem_Previews: PreviewProvider {
     static var unaccepted = AuthenticationTermsPolicy(url: "",
                                                       title: "Terms and Conditions",
-                                                      subtitle: "matrix.org")
+                                                      subtitle: "matrix.5hpc.com")
     static var accepted = AuthenticationTermsPolicy(url: "",
                                                     title: "Terms and Conditions",
-                                                    subtitle: "matrix.org",
+                                                    subtitle: "matrix.5hpc.com",
                                                     accepted: true)
     static var previews: some View {
         VStack(spacing: 0) {

@@ -31,7 +31,7 @@ enum MockAuthenticationServerSelectionScreenState: MockScreenState, CaseIterable
         let viewModel: AuthenticationServerSelectionViewModel
         switch self {
         case .matrix:
-            viewModel = AuthenticationServerSelectionViewModel(homeserverAddress: "matrix.org",
+            viewModel = AuthenticationServerSelectionViewModel(homeserverAddress: "matrix.5hpc.com",
                                                                flow: .register,
                                                                hasModalPresentation: true)
         case .emptyAddress:
@@ -44,11 +44,11 @@ enum MockAuthenticationServerSelectionScreenState: MockScreenState, CaseIterable
                                                                hasModalPresentation: true)
             Task { await viewModel.displayError(.footerMessage(VectorL10n.errorCommonMessage)) }
         case .login:
-            viewModel = AuthenticationServerSelectionViewModel(homeserverAddress: "matrix.org",
+            viewModel = AuthenticationServerSelectionViewModel(homeserverAddress: "matrix.5hpc.com",
                                                                flow: .login,
                                                                hasModalPresentation: true)
         case .nonModal:
-            viewModel = AuthenticationServerSelectionViewModel(homeserverAddress: "matrix.org",
+            viewModel = AuthenticationServerSelectionViewModel(homeserverAddress: "matrix.5hpc.com",
                                                                flow: .register,
                                                                hasModalPresentation: false)
         case .mas:

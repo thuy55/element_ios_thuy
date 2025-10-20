@@ -385,7 +385,7 @@
 "directory_server_all_rooms" = "Alle kamers op server %@";
 "directory_server_all_native_rooms" = "Alle lokale Matrix-kamers";
 "directory_server_type_homeserver" = "Voer een server in om de publieke kamers ervan weer te geven";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "matrix.5hpc.com";
 // Others
 "or" = "of";
 "you" = "Jij";

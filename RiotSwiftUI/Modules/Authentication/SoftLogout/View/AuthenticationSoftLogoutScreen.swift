@@ -80,13 +80,13 @@ struct AuthenticationSoftLogoutScreen: View {
         VStack(alignment: .leading, spacing: 12) {
             passwordTextField
 
-            Button(action: forgotPassword) {
-                Text(VectorL10n.authenticationLoginForgotPassword)
-                    .font(theme.fonts.body)
-            }
-            .frame(maxWidth: .infinity, alignment: .trailing)
-            .padding(.bottom, 8)
-            .accessibilityIdentifier("forgotPasswordButton")
+//            Button(action: forgotPassword) {
+//                Text(VectorL10n.authenticationLoginForgotPassword)
+//                    .font(theme.fonts.body)
+//            }
+//            .frame(maxWidth: .infinity, alignment: .trailing)
+//            .padding(.bottom, 8)
+//            .accessibilityIdentifier("forgotPasswordButton")
 
             Button(action: login) {
                 Text(VectorL10n.login)

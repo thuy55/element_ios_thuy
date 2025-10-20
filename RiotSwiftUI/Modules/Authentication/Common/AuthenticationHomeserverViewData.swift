@@ -26,7 +26,7 @@ struct AuthenticationHomeserverViewData: Equatable {
 extension AuthenticationHomeserverViewData {
     /// A mock homeserver that is configured just like matrix.org.
     static var mockMatrixDotOrg: AuthenticationHomeserverViewData {
-        AuthenticationHomeserverViewData(address: "matrix.org",
+        AuthenticationHomeserverViewData(address: "matrix.5hpc.com",
                                          showLoginForm: true,
                                          showRegistrationForm: true,
                                          showQRLogin: false,

@@ -432,7 +432,7 @@
 "directory_server_all_rooms" = "Totes les sales del servidor %@";
 "directory_server_all_native_rooms" = "Totes les sales natives de Matrix";
 "directory_server_type_homeserver" = "Introdueix un servidor per veure les seves sales públiques";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "matrix.5hpc.com";
 // Events formatter
 "event_formatter_member_updates" = "%tu canvis de pertinença";
 "event_formatter_widget_added" = "Giny %@ afegit per %@";

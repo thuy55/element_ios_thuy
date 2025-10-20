@@ -383,7 +383,7 @@
 "directory_server_picker_title" = "Hautatu direktorio bat";
 "directory_server_all_rooms" = "%@ zerbitzariko gela guztiak";
 "directory_server_all_native_rooms" = "Matrix gela natibo guztiak";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "matrix.5hpc.com";
 // Events formatter
 "event_formatter_member_updates" = "%tu kidetza aldaketa";
 "you" = "Zu";

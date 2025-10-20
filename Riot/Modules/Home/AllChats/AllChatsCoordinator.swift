@@ -338,9 +338,9 @@ class AllChatsCoordinator: NSObject, SplitViewMasterCoordinatorProtocol {
             })
         }
 
-        subMenuActions.append(UIAction(title: VectorL10n.sideMenuActionFeedback, image: UIImage(systemName: "questionmark.circle")) { [weak self] action in
-            self?.showBugReport()
-        })
+//        subMenuActions.append(UIAction(title: VectorL10n.sideMenuActionFeedback, image: UIImage(systemName: "questionmark.circle")) { [weak self] action in
+//            self?.showBugReport()
+//        })
         
         actions.append(UIMenu(title: "", options: .displayInline, children: subMenuActions))
         actions.append(UIMenu(title: "", options: .displayInline, children: [

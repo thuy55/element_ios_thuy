@@ -450,7 +450,7 @@
 "directory_server_all_rooms" = "%@ szerveren az összes szoba";
 "directory_server_all_native_rooms" = "Minden eredeti Matrix szoba";
 "directory_server_type_homeserver" = "Add meg a Matrix szervert aminek a nyilvános szobáit listázni szeretnéd";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "matrix.5hpc.com";
 // Events formatter
 "event_formatter_member_updates" = "%tu tagság változás";
 "event_formatter_widget_added" = "%@ kisalkalmazás innen: %@";

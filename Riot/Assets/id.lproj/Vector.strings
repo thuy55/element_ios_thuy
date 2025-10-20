@@ -415,7 +415,7 @@
 "event_formatter_call_answer" = "Jawab";
 "event_formatter_call_decline" = "Tolak";
 "event_formatter_message_edited_mention" = "(diedit)";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "matrix.5hpc.com";
 
 // Directory
 "directory_title" = "Direktori";

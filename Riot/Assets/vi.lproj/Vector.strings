@@ -394,7 +394,7 @@
 "directory_server_all_rooms" = "Tất cả phòng trong máy chủ %@";
 "directory_server_all_native_rooms" = "Tất cả phòng thuần Matrix";
 "directory_server_type_homeserver" = "Gõ một máy chủ nhà để liệt kê danh sách phòng";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "matrix.5hpc.com";
 // Events formatter
 "event_formatter_member_updates" = "%tu thành viên thay đổi";
 "event_formatter_widget_added" = "%@ widget tạo bởi %@";
@@ -480,6 +480,7 @@
 "side_menu_action_help" = "Trợ giúp";
 "side_menu_action_settings" = "Cài đặt";
 "side_menu_action_invite_friends" = "Mời bạn bè";
+"all_chats_user_menu_settings"="Cài đặt người dùng";
 
 // Mark: - Side menu
 
@@ -1620,7 +1621,7 @@
 "skip" = "Bỏ qua";
 "close" = "Đóng";
 "store_promotional_text" = "Ứng dụng trò chuyện và cộng tác bảo vệ quyền riêng tư, trên mạng mở. Phi tập trung để đưa bạn vào tầm kiểm soát. Không có datamining, không có backdoors và không có quyền truy cập của bên thứ ba.";
-"store_full_description" = "Element là một loại ứng dụng cộng tác và nhắn tin mới:\n\n1. Đặt bạn kiểm soát để giữ quyền riêng tư của bạn\n2. Cho phép bạn giao tiếp với bất kỳ ai trong mạng Matrix, và thậm chí hơn thế nữa bằng cách tích hợp với các ứng dụng như Slack\n3. Bảo vệ bạn khỏi quảng cáo, datamining, cửa hậu và khu vườn có tường bao quanh\n4. Bảo mật bạn thông qua mã hóa đầu cuối, với việc ký chéo để xác minh người khác\n\nElement hoàn toàn khác với các ứng dụng nhắn tin và cộng tác khác vì nó được phân cấp và nguồn mở.\n\nElement cho phép bạn tự lưu trữ - hoặc chọn máy chủ - để bạn có quyền riêng tư, quyền sở hữu và kiểm soát dữ liệu và cuộc trò chuyện của mình. Nó cho phép bạn truy cập vào một mạng mở; vì vậy, bạn không chỉ bị mắc kẹt khi nói chuyện với những người dùng Element khác. Và nó rất an toàn.\n\nElement có thể làm tất cả điều này bởi vì nó hoạt động trên Matrix - tiêu chuẩn cho giao tiếp mở, phi tập trung. \n\nElement giúp bạn kiểm soát bằng cách cho phép bạn chọn người tổ chức các cuộc trò chuyện của bạn. Từ ứng dụng Element, bạn có thể chọn lưu trữ theo nhiều cách khác nhau:\n\n1. Nhận tài khoản miễn phí trên máy chủ công cộng matrix.org\n2. Tự lưu trữ tài khoản của bạn bằng cách chạy máy chủ trên phần cứng của riêng bạn\n3. Đăng ký tài khoản trên máy chủ tùy chỉnh bằng cách đăng ký vào nền tảng lưu trữ Dịch vụ Element Matrix\n\nTại sao chọn Element?\n\nSở hữu dữ liệu của bạn: Bạn quyết định nơi để giữ dữ liệu và tin nhắn của bạn. Bạn sở hữu nó và kiểm soát nó, không phải một số MEGACORP khai thác dữ liệu của bạn hoặc cho phép truy cập vào bên thứ ba.\n\nTIN NHẮN MỞ VÀ CỘNG TÁC: Bạn có thể trò chuyện với bất kỳ ai khác trong mạng Matrix, cho dù họ đang sử dụng Element hay ứng dụng Matrix khác và ngay cả khi họ đang sử dụng một hệ thống nhắn tin khác như Slack, IRC hoặc XMPP.\n\nSUPER-SECURE: Mã hóa đầu cuối thực sự (chỉ những người trong cuộc trò chuyện mới có thể giải mã tin nhắn) và ký chéo để xác minh các thiết bị của người tham gia hội thoại.\n\nGIAO TIẾP ĐẦY ĐỦ: Nhắn tin, cuộc gọi thoại và video, chia sẻ tệp, chia sẻ màn hình và một loạt các tích hợp, bot và tiện ích. Xây dựng phòng, cộng đồng, giữ liên lạc và hoàn thành công việc.\n\nỞ mọi nơi bạn đang có: Giữ liên lạc bất cứ nơi nào bạn đang có với lịch sử tin nhắn được đồng bộ hóa hoàn toàn trên tất cả các thiết bị của bạn và trên web tại https://element.io/app.";
+"store_full_description" = "5HPC là một loại ứng dụng cộng tác và nhắn tin mới:\n\n1. Đặt bạn kiểm soát để giữ quyền riêng tư của bạn\n2. Cho phép bạn giao tiếp với bất kỳ ai trong mạng Matrix, và thậm chí hơn thế nữa bằng cách tích hợp với các ứng dụng như Slack\n3. Bảo vệ bạn khỏi quảng cáo, datamining, cửa hậu và khu vườn có tường bao quanh\n4. Bảo mật bạn thông qua mã hóa đầu cuối, với việc ký chéo để xác minh người khác\n\n5HPC hoàn toàn khác với các ứng dụng nhắn tin và cộng tác khác vì nó được phân cấp và nguồn mở.\n\n5HPC cho phép bạn tự lưu trữ - hoặc chọn máy chủ - để bạn có quyền riêng tư, quyền sở hữu và kiểm soát dữ liệu và cuộc trò chuyện của mình. Nó cho phép bạn truy cập vào một mạng mở; vì vậy, bạn không chỉ bị mắc kẹt khi nói chuyện với những người dùng 5HPC khác. Và nó rất an toàn.\n\n5HPC có thể làm tất cả điều này bởi vì nó hoạt động trên Matrix - tiêu chuẩn cho giao tiếp mở, phi tập trung. \n\n5HPC giúp bạn kiểm soát bằng cách cho phép bạn chọn người tổ chức các cuộc trò chuyện của bạn. Từ ứng dụng 5HPC, bạn có thể chọn lưu trữ theo nhiều cách khác nhau:\n\n1. Nhận tài khoản miễn phí trên máy chủ công cộng matrix.org\n2. Tự lưu trữ tài khoản của bạn bằng cách chạy máy chủ trên phần cứng của riêng bạn\n3. Đăng ký tài khoản trên máy chủ tùy chỉnh bằng cách đăng ký vào nền tảng lưu trữ Dịch vụ 5HPC Matrix\n\nTại sao chọn 5HPC?\n\nSở hữu dữ liệu của bạn: Bạn quyết định nơi để giữ dữ liệu và tin nhắn của bạn. Bạn sở hữu nó và kiểm soát nó, không phải một số MEGACORP khai thác dữ liệu của bạn hoặc cho phép truy cập vào bên thứ ba.\n\nTIN NHẮN MỞ VÀ CỘNG TÁC: Bạn có thể trò chuyện với bất kỳ ai khác trong mạng Matrix, cho dù họ đang sử dụng 5HPC hay ứng dụng Matrix khác và ngay cả khi họ đang sử dụng một hệ thống nhắn tin khác như Slack, IRC hoặc XMPP.\n\nSUPER-SECURE: Mã hóa đầu cuối thực sự (chỉ những người trong cuộc trò chuyện mới có thể giải mã tin nhắn) và ký chéo để xác minh các thiết bị của người tham gia hội thoại.\n\nGIAO TIẾP ĐẦY ĐỦ: Nhắn tin, cuộc gọi thoại và video, chia sẻ tệp, chia sẻ màn hình và một loạt các tích hợp, bot và tiện ích. Xây dựng phòng, cộng đồng, giữ liên lạc và hoàn thành công việc.\n\nỞ mọi nơi bạn đang có: Giữ liên lạc bất cứ nơi nào bạn đang có với lịch sử tin nhắn được đồng bộ hóa hoàn toàn trên tất cả các thiết bị của bạn và trên web tại https://5HPC.io/app.";
 // String for App Store
 "store_short_description" = "Chat/VoIP bảo mật phi tập trung";
 
@@ -1985,10 +1986,10 @@
 "onboarding_splash_page_3_message" = "Được mật mã hoá nối đầu và không yêu cầu số điện thoại. Không quảng cáo hay thu thập dữ liệu.";
 "onboarding_splash_page_1_message" = "Giao tiếp an ninh và độc lập, cho bạn cùng mức độ riêng tư như khi nói chuyện đối diện tại nhà mình.";
 "onboarding_splash_page_3_title" = "Nhắn tin an ninh.";
-"onboarding_splash_page_2_message" = "Lựa chọn nơi mà các cuộc nói chuyện của bạn được lưu trữ, cho bạn quyền kiểm soát và sự độc lập. Kết nối thông qua Matrix.";
+"onboarding_splash_page_2_message" = "Lựa chọn nơi mà các cuộc nói chuyện của bạn được lưu trữ, cho bạn quyền kiểm soát và sự độc lập. Kết nối thông qua 5HPC.";
 "onboarding_splash_page_2_title" = "Bạn nắm kiểm soát.";
 "onboarding_splash_page_1_title" = "Làm chủ các cuộc nói chuyện của bạn.";
-"onboarding_splash_login_button_title" = "Tôi đã có danh khoản";
+"onboarding_splash_login_button_title" = "Đăng nhập";
 
 // Onboarding
 "onboarding_splash_register_button_title" = "Tạo danh khoản";
@@ -2007,3 +2008,53 @@
 "authentication_verify_email_input_message" = "%@ cần xác thực tài khoản của bạn";
 "authentication_verify_email_waiting_message" = "Làm theo chỉ dẫn được gửi đến %@";
 "authentication_forgot_password_waiting_title" = "Kiểm tra hòm thư của bạn.";
+
+///Thêm dịch tiếng việt
+"all_chats_edit_layout_show_recents" = "Hiển thị gần đây";
+"all_chats_edit_layout_show_filters" = "Hiển thị bộ lọc";
+"all_chats_edit_layout_activity_order" = "Sắp xếp theo hoạt động";
+"all_chats_edit_layout_alphabetical_order" = "Sắp xếp A-Z";
+
+"settings_enable_room_message_bubbles" = "Bong bóng tin nhắn";
+"settings_ui_show_redactions_in_room_history" = "Hiển thị thông báo cho các tin nhắn đã bị xóa";
+"settings_labs_use_only_latest_user_avatar_and_name" = "Hiển thị avatar và tên mới nhất của người dùng trong lịch sử tin nhắn";
+"settings_analytics_and_crash_data" = "Gửi dữ liệu sự cố và phân tích";
+"settings_labs_enable_threads" = "Tin nhắn theo luồng";
+"settings_labs_enable_auto_report_decryption_errors" = "Tự động Báo cáo Lỗi Giải mã";
+"settings_labs_enable_live_location_sharing" = "Chia sẻ vị trí trực tiếp - chia sẻ vị trí hiện tại (đang phát triển, và tạm thời, các vị trí sẽ được lưu trong lịch sử phòng)";
+"settings_labs_enable_new_session_manager" = "Trình quản lý phiên mới";
+"settings_labs_enable_new_client_info_feature" = "Ghi lại tên, phiên bản và url của client để nhận dạng các phiên dễ dàng hơn trong trình quản lý phiên";
+"settings_labs_enable_new_app_layout" = "Bố cục Ứng dụng Mới";
+"settings_labs_enable_wysiwyg_composer" = "Thử trình soạn thảo văn bản đa định dạng";
+"settings_labs_enable_voice_broadcast" = "Phát sóng giọng nói";
+
+"threads_notice_title" = "Luồng không còn là thử nghiệm nữa 🎉";
+"threads_notice_information" = "Tất cả các luồng được tạo trong giai đoạn thử nghiệm bây giờ sẽ được <b>hiển thị như các trả lời thông thường</b>.<br/><br/>Đây là một sự chuyển đổi một lần, vì luồng bây giờ đã là một phần của đặc tả Matrix.";
+"threads_notice_done" = "Đã hiểu";
+"notice_room_join_by_you" = "Bạn đã tham gia";
+"notice_room_created_by_you_for_dm" = "Bạn đã tham gia.";
+"notice_room_invite_by_you" = "Bạn đã mời %@";
+"notice_room_invite_you" = "%@ đã mời bạn";
+"room_details_polls" = "Lịch sử bình chọn";
+"room_details_access_row_title" = "Truy cập";
+"room_details_promote_room_title" = "Quảng bá phòng";
+"room_details_promote_room_suggest_title" = "Đề xuất cho thành viên không gian";
+"room_member_power_level_short_owner" = "Chủ sở hữu";
+"poll_history_active_segment_title" = "Bình chọn đang hoạt động";
+"poll_history_past_segment_title" = "Bình chọn đã qua";
+"poll_history_no_active_poll_text" = "Không có bình chọn nào đang hoạt động trong phòng này";
+"poll_history_no_past_poll_text" = "Không có bình chọn nào đã qua trong phòng này";
+"threads_empty_title" = "Sắp xếp các cuộc thảo luận bằng luồng";
+"threads_empty_info_all" = "Luồng giúp các cuộc trò chuyện của bạn đi đúng chủ đề và dễ theo dõi.";
+"threads_empty_tip" = "Mẹo: Chạm vào một tin nhắn và dùng “Luồng” để bắt đầu.";
+"room_access_settings_screen_private_message" = "Chỉ những người được mời mới có thể tìm và tham gia.";
+"space_selector_empty_view_title" = "Chưa có không gian nào.";
+"space_selector_empty_view_information" = "Không gian là một cách để nhóm các phòng và mọi người lại với nhau. Tạo một không gian để bắt đầu.";
+"space_selector_create_space" = "Tạo Không gian";
+"home_syncing" = "Đang đồng bộ";
+"onboarding_splash_page_4_message" = "5HPC cũng rất tuyệt vời cho công việc. Nó được tin dùng bởi các tổ chức bảo mật nhất thế giới.";
+"authentication_login_title" = "Chào mừng trở lại!";
+"device_verification_self_verify_open_on_other_device_title" = "Mở %@ trên thiết bị khác của bạn";
+"device_verification_self_verify_open_on_other_device_information" = "Bạn cần xác minh phiên này để đọc lịch sử tin nhắn được bảo mật của bạn.\n\nMở 5HPC trên một trong các thiết bị khác của bạn và làm theo hướng dẫn.";
+
+

@@ -29,9 +29,9 @@ struct AuthenticationLoginScreen: View {
                     .padding(.top, OnboardingMetrics.topPaddingToNavigationBar)
                     .padding(.bottom, 28)
                 
-                serverInfo
-                    .padding(.leading, 12)
-                    .padding(.bottom, 16)
+//                serverInfo
+//                    .padding(.leading, 12)
+//                    .padding(.bottom, 16)
                 
                 Rectangle()
                     .fill(theme.colors.quinaryContent)
@@ -109,12 +109,12 @@ struct AuthenticationLoginScreen: View {
                                    onCommit: submit)
                 .accessibilityIdentifier("passwordTextField")
             
-            Button { viewModel.send(viewAction: .forgotPassword) } label: {
-                Text(VectorL10n.authenticationLoginForgotPassword)
-                    .font(theme.fonts.body)
-            }
-            .frame(maxWidth: .infinity, alignment: .trailing)
-            .padding(.bottom, 8)
+//            Button { viewModel.send(viewAction: .forgotPassword) } label: {
+//                Text(VectorL10n.authenticationLoginForgotPassword)
+//                    .font(theme.fonts.body)
+//            }
+//            .frame(maxWidth: .infinity, alignment: .trailing)
+//            .padding(.bottom, 8)
             
             Button(action: submit) {
                 Text(VectorL10n.next)

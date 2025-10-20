@@ -465,7 +465,7 @@
 "group_participants_invite_prompt_msg" = "Ertu viss um að þú viljir bjóða %@ í þennan hóp?";
 "group_participants_invite_malformed_id_title" = "Villa við boð";
 "group_participants_invite_malformed_id" = "Rangt formað auðkenni. Ætti að vera Matrix-auðkenni á borð við'@sérheiti:lén'";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "matrix.5hpc.com";
 // Events formatter
 "event_formatter_member_updates" = "%tu breytingar á aðild";
 "event_formatter_widget_added" = "%@ viðmótshluta bætt við af %@";

@@ -485,7 +485,7 @@
 "directory_server_all_rooms" = "Tutte le stanze sul server %@";
 "directory_server_all_native_rooms" = "Tutte le stanze Matrix native";
 "directory_server_type_homeserver" = "Digita un Homeserver per vedere l'elenco delle sue stanze pubbliche";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "matrix.5hpc.com";
 // Events formatter
 "event_formatter_member_updates" = "%tu cambi d'appartenenza";
 "event_formatter_widget_added" = "%@ widget aggiunto da %@";

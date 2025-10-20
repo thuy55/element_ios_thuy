@@ -483,7 +483,7 @@
 // Group Details
 "group_details_title" = "Samfunnsdetaljer";
 "image_picker_action_library" = "Velg fra biblioteket";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "matrix.5hpc.com";
 "do_not_ask_again" = "Ikke spør igjen";
 "room_does_not_exist" = "%@ eksisterer ikke";
 "call_no_stun_server_error_use_fallback_button" = "Prøv å bruk %@";

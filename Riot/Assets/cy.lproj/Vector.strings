@@ -582,7 +582,7 @@
 "directory_server_all_rooms" = "Pob ystafell ar weinydd %@";
 "directory_server_all_native_rooms" = "Pob ystafell Matrix frodorol";
 "directory_server_type_homeserver" = "Teipiwch hafanweinydd i restru ystafelloedd cyhoeddus o";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "matrix.5hpc.com";
 // Events formatter
 "event_formatter_member_updates" = "%tu newidiadau aelodaeth";
 "event_formatter_widget_added" = "Ychwanegwyd teclyn %@ gan %@";

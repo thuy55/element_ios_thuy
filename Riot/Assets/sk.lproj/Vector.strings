@@ -411,7 +411,7 @@
 "event_formatter_call_ringing" = "Vyzváňanie…";
 "event_formatter_call_connecting" = "Pripájanie…";
 "event_formatter_message_edited_mention" = "(upravené)";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "matrix.5hpc.com";
 
 // Directory
 "directory_title" = "Priečinok";

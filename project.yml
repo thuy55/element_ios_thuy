@@ -1,6 +1,6 @@
 name: Riot
 attributes:
-  ORGANIZATIONNAME: matrix.org
+  ORGANIZATIONNAME: matrix.5hpc.com
 
 configs:
   Debug: debug

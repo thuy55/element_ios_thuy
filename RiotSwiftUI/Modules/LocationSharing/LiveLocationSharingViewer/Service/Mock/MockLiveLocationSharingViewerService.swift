@@ -43,7 +43,7 @@ class MockLiveLocationSharingViewerService: LiveLocationSharingViewerServiceProt
     // MARK: Public
     
     func isCurrentUserId(_ userId: String) -> Bool {
-        userId == "@alice:matrix.org"
+        userId == "@alice:matrix.5hpc.com"
     }
     
     func startListeningLiveLocationUpdates() { }
@@ -59,7 +59,7 @@ class MockLiveLocationSharingViewerService: LiveLocationSharingViewerServiceProt
     // MARK: Private
     
     private func createFirstUserLiveLocation() -> UserLiveLocation {
-        let userAvatarData = AvatarInput(mxContentUri: nil, matrixItemId: "@alice:matrix.org", displayName: "Alice")
+        let userAvatarData = AvatarInput(mxContentUri: nil, matrixItemId: "@alice:matrix.5hpc.com", displayName: "Alice")
         let userCoordinate = CLLocationCoordinate2D(latitude: 51.4932641, longitude: -0.257096)
         
         let currentTimeInterval = Date().timeIntervalSince1970
@@ -71,7 +71,7 @@ class MockLiveLocationSharingViewerService: LiveLocationSharingViewerServiceProt
     }
     
     private func createSecondUserLiveLocation() -> UserLiveLocation {
-        let userAvatarData = AvatarInput(mxContentUri: nil, matrixItemId: "@bob:matrix.org", displayName: "Bob")
+        let userAvatarData = AvatarInput(mxContentUri: nil, matrixItemId: "@bob:matrix.5hpc", displayName: "Bob")
         let coordinate = CLLocationCoordinate2D(latitude: 51.4952641, longitude: -0.259096)
         
         let currentTimeInterval = Date().timeIntervalSince1970
@@ -88,7 +88,7 @@ class MockLiveLocationSharingViewerService: LiveLocationSharingViewerServiceProt
         
         let random = Double.random(in: 0.005...0.010)
         
-        let userAvatarData = AvatarInput(mxContentUri: nil, matrixItemId: "@user_\(uuidString):matrix.org", displayName: "User \(uuidString)")
+        let userAvatarData = AvatarInput(mxContentUri: nil, matrixItemId: "@user_\(uuidString):matrix.5hpc.com", displayName: "User \(uuidString)")
         let coordinate = CLLocationCoordinate2D(latitude: 51.4952641 + random, longitude: -0.259096 + random)
         
         let currentTimeInterval = Date().timeIntervalSince1970

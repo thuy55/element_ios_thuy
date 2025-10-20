@@ -252,7 +252,9 @@ Please see LICENSE in the repository root for full details.
         return;
     }
     
-    self.contactsTableView.tableFooterView = self.findYourContactsFooterView ?: [self makeFooterView];
+//    self.contactsTableView.tableFooterView = self.findYourContactsFooterView ?: [self makeFooterView];
+    
+    self.contactsTableView.tableFooterView = [[UIView alloc] init];
     [self updateFooterViewHeight];
 }
 

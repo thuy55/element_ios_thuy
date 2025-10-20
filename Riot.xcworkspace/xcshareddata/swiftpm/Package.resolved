@@ -1,5 +1,5 @@
 {
-  "originHash" : "7aef13d4107c517de08082c578f4e05c70046de1a77e79990a0ba3eef4abdf25",
+  "originHash" : "bb061934eb11e230018a45401d97b933ab4065ebc12a21d6062bcbcf3b0d7894",
   "pins" : [
     {
       "identity" : "devicekit",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "d37e70cb2646666dcf276d7d3d4a9760a41ff8a6",
         "version" : "4.9.0"
+      }
+    },
+    {
+      "identity" : "down",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/iwasrobbed/Down.git",
+      "state" : {
+        "revision" : "f34b166be1f1db4aa8f573067e901d72f2a6be57",
+        "version" : "0.11.0"
       }
     },
     {

@@ -339,7 +339,7 @@
 "directory_title" = "Drejtori";
 "directory_server_picker_title" = "Përzgjidhni drejtori";
 "directory_server_all_rooms" = "Krejt dhomat te shërbyesi %@";
-"directory_server_placeholder" = "matrix.org";
+"directory_server_placeholder" = "matrix.5hpc.com";
 // Events formatter
 "event_formatter_member_updates" = "%tu ndryshime anëtarësie";
 "event_formatter_jitsi_widget_added" = "Konferencë VoIP e shtuar nga %@";
