@@ -63,6 +63,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Call legacy AppDelegate
         self.legacyAppDelegate.window = window
         self.legacyAppDelegate.application(application, didFinishLaunchingWithOptions: launchOptions)
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            MXLog.debug("🔔 Notification permission status: \(settings.authorizationStatus.rawValue)")
+        }
+
         
         return true
     }
@@ -103,13 +107,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: Push Notifications
     
+//    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+//        self.legacyAppDelegate.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
+//    }
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        // ✅ Log token ra console
+        let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
+        let token = tokenParts.joined()
+        MXLog.debug("📱 [APNs Device Token] \(token)")
+
+        // ✅ Log môi trường (DEBUG vs RELEASE)
+        #if DEBUG
+        MXLog.debug("🌱 Running in DEBUG mode → using sandbox APNs (development)")
+        #else
+        MXLog.debug("🚀 Running in RELEASE mode → using production APNs")
+        #endif
+        
+        MXLog.debug("📡 Sygnal server config URL: \(BuildSettings.serverConfigSygnalAPIUrlString)")
+        MXLog.debug("📡 Registered pusher app_id: \(BuildSettings.pusherAppIdProd)")
+        MXLog.debug("📞 Registered VoIP app_id: \(BuildSettings.pushKitAppIdProd)")
+
+
+        MXLog.debug("📱 APNs Device Token: \(token)")
+        if let pushGatewayURL = UserDefaults.standard.string(forKey: "pushGatewayURL") {
+                MXLog.debug("📡 Current Sygnal URL: \(pushGatewayURL)")
+            } else {
+                MXLog.debug("⚠️ No Sygnal URL found in defaults.")
+            }
+
+        // Gọi legacy delegate (đừng xoá)
         self.legacyAppDelegate.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
     }
+
+    
+//    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+//        self.legacyAppDelegate.application(application, didFailToRegisterForRemoteNotificationsWithError: error)
+//    }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        MXLog.debug("❌ Failed to register for remote notifications: \(error.localizedDescription)")
         self.legacyAppDelegate.application(application, didFailToRegisterForRemoteNotificationsWithError: error)
     }
+
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         self.legacyAppDelegate.application(application, didReceiveRemoteNotification: userInfo, fetchCompletionHandler: completionHandler)

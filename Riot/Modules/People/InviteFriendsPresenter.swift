@@ -50,9 +50,26 @@ final class InviteFriendsPresenter: NSObject {
         self.present(activityViewController, animated: true)
     }
     
+//    private func buildShareText(with userId: String) -> String {
+//        let userMatrixToLink: String = MXTools.permalinkToUser(withUserId: userId)
+//        return VectorL10n.inviteFriendsShareText(AppInfo.current.displayName, userMatrixToLink)
+//    }
+    
     private func buildShareText(with userId: String) -> String {
-        let userMatrixToLink: String = MXTools.permalinkToUser(withUserId: userId)
-        return VectorL10n.inviteFriendsShareText(AppInfo.current.displayName, userMatrixToLink)
+        // 1. Get the app name
+        let appName = AppInfo.current.displayName
+
+        // 2. Define your App Store link
+        let appStoreLink = "https://apps.apple.com/app/id284882215" // Make sure this ID is correct
+
+        // 3. Create the final text with the desired format (two lines)
+        let resultText = """
+        Này, trò chuyện với tôi ở \(appName): \(appStoreLink)
+        Tài khoản của tôi là: \(userId)
+        """
+
+        // 4. Return the newly created text
+        return resultText
     }
     
     private func present(_ viewController: UIViewController, animated: Bool) {

@@ -46,21 +46,38 @@ final class BuildSettings: NSObject {
         return externalURLScheme
     }
     
+//    static var pushKitAppIdProd: String {
+//        return baseBundleIdentifier + ".ios.voip.prod"
+//    }
+//    
+//    static var pushKitAppIdDev: String {
+//        return baseBundleIdentifier + ".ios.voip.dev"
+//    }
+//    
+//    static var pusherAppIdProd: String {
+//        return baseBundleIdentifier + ".ios.prod"
+//    }
+//    
+//    static var pusherAppIdDev: String {
+//        return baseBundleIdentifier + ".ios.dev"
+//    }
+    
     static var pushKitAppIdProd: String {
-        return baseBundleIdentifier + ".ios.voip.prod"
+        return baseBundleIdentifier + ".voip"
     }
-    
+
     static var pushKitAppIdDev: String {
-        return baseBundleIdentifier + ".ios.voip.dev"
+        return baseBundleIdentifier + ".voip"
     }
-    
+
     static var pusherAppIdProd: String {
-        return baseBundleIdentifier + ".ios.prod"
+        return baseBundleIdentifier
     }
-    
+
     static var pusherAppIdDev: String {
-        return baseBundleIdentifier + ".ios.dev"
+        return baseBundleIdentifier
     }
+
     
     static var pushKitAppId: String {
         #if DEBUG

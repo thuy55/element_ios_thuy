@@ -112,9 +112,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - MatrixSDKCrypto
-    - Sentry
-  trunk:
     - AFNetworking
     - BlueCryptor
     - BlueECC
@@ -135,9 +132,11 @@ SPEC REPOS:
     - libPhoneNumber-iOS
     - LoggerAPI
     - Logging
+    - MatrixSDKCrypto
     - ReadMoreTextView
     - Realm
     - Reusable
+    - Sentry
     - SideMenu
     - SwiftBase32
     - SwiftFormat
