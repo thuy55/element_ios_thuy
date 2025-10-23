@@ -20,9 +20,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" image="launch_screen_logo" translatesAutoresizingMaskIntoConstraints="NO" id="IcW-17-3Qq">
+                            <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" image="nen" highlightedImage="nen" translatesAutoresizingMaskIntoConstraints="NO" id="IcW-17-3Qq">
                                 <rect key="frame" x="135" y="346" width="145" height="45"/>
-                                <color key="tintColor" red="0.050980392156862744" green="0.74117647058823533" blue="0.54509803921568623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.070021824013225861" green="0.78039215689999997" blue="0.47472948799894982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="IcW-17-3Qq" secondAttribute="height" multiplier="1:1" id="nyP-l5-s1B"/>
                                     <constraint firstAttribute="width" constant="120" id="v1s-rq-3ay"/>
@@ -42,7 +42,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launch_screen_logo" width="265.66665649414062" height="78"/>
+        <image name="nen" width="512" height="341.33334350585938"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

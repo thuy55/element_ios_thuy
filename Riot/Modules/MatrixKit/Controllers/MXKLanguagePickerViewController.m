@@ -73,37 +73,77 @@ NSString* const kMXKLanguagePickerCellDataKeyLanguage = @"language";
 
     previousSearchPattern = nil;
 
+    // --- START: Thêm dòng này ---
+    // Danh sách các ngôn ngữ bạn muốn hiển thị (mã ISO 639-1)
+    NSArray *allowedLanguages = @[@"en", @"vi"];
+    // --- END: Thêm dòng này ---
+
     // Populate cellDataArray
     // Start by the default language chosen by the OS
     NSString *defaultLanguage = [MXKLanguagePickerViewController defaultLanguage];
     NSString *languageDescription = [VectorL10n languagePickerDefaultLanguage:[MXKLanguagePickerViewController languageDescription:defaultLanguage]];
 
-    [cellDataArray addObject:@{
-                               kMXKLanguagePickerCellDataKeyText:languageDescription
-                               }];
+    // --- START: Chỉ thêm ngôn ngữ mặc định nếu nó có trong danh sách cho phép ---
+    if ([allowedLanguages containsObject:defaultLanguage]) {
+        [cellDataArray addObject:@{
+            kMXKLanguagePickerCellDataKeyText:languageDescription,
+            // Không cần kMXKLanguagePickerCellDataKeyLanguage ở đây vì đây là dòng "Mặc định"
+        }];
+    } else {
+        // Nếu ngôn ngữ mặc định không có trong danh sách, ta vẫn cần một dòng "Mặc định"
+        // trỏ đến ngôn ngữ đầu tiên trong danh sách cho phép (ví dụ: Tiếng Anh)
+        defaultLanguage = allowedLanguages.firstObject; // Dùng ngôn ngữ đầu tiên làm mặc định nếu OS default không được phép
+        languageDescription = [VectorL10n languagePickerDefaultLanguage:[MXKLanguagePickerViewController languageDescription:defaultLanguage]];
+         [cellDataArray addObject:@{
+            kMXKLanguagePickerCellDataKeyText:languageDescription
+            // Key ngôn ngữ thực tế sẽ được thêm vào trong vòng lặp dưới đây nếu cần
+         }];
+    }
+    // --- END: Chỉ thêm ngôn ngữ mặc định nếu nó có trong danh sách cho phép ---
+
 
     // Then, add languages available in the app bundle
     NSArray<NSString *> *localizations = [[NSBundle mainBundle] localizations];
     for (NSString *language in localizations)
     {
-        // Do not duplicate the default lang
-        if (![language isEqualToString:defaultLanguage])
+        // --- START: Thêm điều kiện kiểm tra ---
+        // Chỉ xử lý nếu ngôn ngữ này nằm trong danh sách cho phép
+        if ([allowedLanguages containsObject:language])
+        // --- END: Thêm điều kiện kiểm tra ---
         {
-            languageDescription = [MXKLanguagePickerViewController languageDescription:language];
-            NSString *localisedLanguageDescription = [MXKLanguagePickerViewController languageLocalisedDescription:language];
+            // Do not duplicate the default lang (nếu nó đã được thêm vào như dòng "Mặc định")
+            // Tuy nhiên, nếu defaultLanguage ban đầu không có trong allowedLanguages,
+            // dòng "Mặc định" ở trên có thể đang hiển thị tên của một ngôn ngữ khác (ví dụ: 'en').
+            // Chúng ta vẫn cần thêm dòng thực sự cho ngôn ngữ này (ví dụ: 'vi') nếu nó là defaultLanguage
+            // nhưng không phải là ngôn ngữ mặc định hiển thị trong dòng đầu tiên.
+            BOOL isDisplayedAsDefault = NO;
+            if (cellDataArray.count > 0) {
+                 NSString *defaultDisplayText = cellDataArray[0][kMXKLanguagePickerCellDataKeyText];
+                 NSString *currentDefaultLangDesc = [VectorL10n languagePickerDefaultLanguage:[MXKLanguagePickerViewController languageDescription:language]];
+                 if ([defaultDisplayText isEqualToString:currentDefaultLangDesc]) {
+                     isDisplayedAsDefault = YES;
+                 }
+            }
 
-            // Capitalise the description in the language locale
-            NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:language];
-            languageDescription = [languageDescription capitalizedStringWithLocale:locale];
-            localisedLanguageDescription = [localisedLanguageDescription capitalizedStringWithLocale:locale];
 
-            if (languageDescription)
+            if (!isDisplayedAsDefault)
             {
-                [cellDataArray addObject:@{
-                                           kMXKLanguagePickerCellDataKeyText: languageDescription,
-                                           kMXKLanguagePickerCellDataKeyDetailText: localisedLanguageDescription,
-                                           kMXKLanguagePickerCellDataKeyLanguage: language
-                                           }];
+                languageDescription = [MXKLanguagePickerViewController languageDescription:language];
+                NSString *localisedLanguageDescription = [MXKLanguagePickerViewController languageLocalisedDescription:language];
+
+                // Capitalise the description in the language locale
+                NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:language];
+                languageDescription = [languageDescription capitalizedStringWithLocale:locale];
+                localisedLanguageDescription = [localisedLanguageDescription capitalizedStringWithLocale:locale];
+
+                if (languageDescription)
+                {
+                    [cellDataArray addObject:@{
+                        kMXKLanguagePickerCellDataKeyText: languageDescription,
+                        kMXKLanguagePickerCellDataKeyDetailText: localisedLanguageDescription,
+                        kMXKLanguagePickerCellDataKeyLanguage: language
+                    }];
+                }
             }
         }
     }

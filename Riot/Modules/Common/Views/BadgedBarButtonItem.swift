@@ -82,7 +82,7 @@ class BadgedBarButtonItem: UIBarButtonItem {
             //  let width at least be as height
             width = height
         }
-        baseButton.sizeToFit()
+//        baseButton.sizeToFit()
         badgeLabel.frame = CGRect(x: baseButton.frame.width - baseButton.contentEdgeInsets.right - width/2,
                                   y: baseButton.contentEdgeInsets.top - height/2,
                                   width: width,

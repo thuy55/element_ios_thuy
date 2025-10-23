@@ -450,7 +450,7 @@ SSOAuthenticationPresenterDelegate>
 //    {
 //        Section *sectionCalls = [Section sectionWithTag:SECTION_TAG_CALLS];
 //        sectionCalls.headerTitle = [VectorL10n settingsCallsSettings];
-//        
+//
 //        // Remove "stun:"
 //        NSString* stunFallbackHost = [BuildSettings.stunServerFallbackUrlString componentsSeparatedByString:@":"].lastObject;
 //        sectionCalls.footerTitle = [VectorL10n settingsCallsStunServerFallbackDescription:stunFallbackHost];
@@ -471,17 +471,17 @@ SSOAuthenticationPresenterDelegate>
 //        sectionDiscovery.attributedFooterTitle = self.settingsDiscoveryTableViewSection.attributedFooterTitle;
 //        [tmpSections addObject:sectionDiscovery];
 //    }
-//    
+//
 //    if (BuildSettings.settingsScreenAllowIdentityServerConfig)
 //    {
 //        Section *sectionIdentityServer = [Section sectionWithTag:SECTION_TAG_IDENTITY_SERVER];
 //        [sectionIdentityServer addRowWithTag:IDENTITY_SERVER_INDEX];
-//        
+//
 //        sectionIdentityServer.headerTitle = [VectorL10n settingsIdentityServerSettings];
 //        sectionIdentityServer.footerTitle = account.mxSession.identityService.identityServer ? VectorL10n.settingsIdentityServerDescription : VectorL10n.settingsIdentityServerNoIsDescription;
 //        [tmpSections addObject:sectionIdentityServer];
 //    }
-//    
+//
 //    if (BuildSettings.allowLocalContactsAccess)
 //    {
 //        Section *sectionLocalContacts = [Section sectionWithTag:SECTION_TAG_LOCAL_CONTACTS];
@@ -490,7 +490,7 @@ SSOAuthenticationPresenterDelegate>
 //        {
 //            [sectionLocalContacts addRowWithTag:LOCAL_CONTACTS_PHONEBOOK_COUNTRY_INDEX];
 //        }
-//        
+//
 //        NSString *headerTitle = UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone ? VectorL10n.settingsPhoneContacts : VectorL10n.settingsContacts;
 //        sectionLocalContacts.headerTitle = headerTitle;
 //        sectionLocalContacts.footerTitle = VectorL10n.settingsContactsEnableSyncDescription;
@@ -589,10 +589,10 @@ SSOAuthenticationPresenterDelegate>
 //    sectionAbout.headerTitle = VectorL10n.settingsAbout;
 //
 //    if (BuildSettings.settingsScreenShowAdvancedSettings)
-//    {        
+//    {
 //        sectionAbout.footerTitle = [self buildAboutSectionFooterTitleWithAccount:account];
 //    }
-//    
+//
 //    [tmpSections addObject:sectionAbout];
     
     if (BuildSettings.settingsScreenShowLabSettings)
@@ -962,7 +962,7 @@ SSOAuthenticationPresenterDelegate>
                 [self.tableView reloadRowsAtIndexPaths:@[addEmailIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             }
             
-            [self.tableView endUpdates];            
+            [self.tableView endUpdates];
         });
     }
 }
@@ -1439,7 +1439,7 @@ SSOAuthenticationPresenterDelegate>
 }
 
 - (NSString*)buildAboutSectionFooterTitleWithAccount:(MXKAccount*)account
-{    
+{
     NSMutableString *footerText = [NSMutableString new];
     
     AppInfo *appInfo = AppInfo.current;
@@ -1452,7 +1452,7 @@ SSOAuthenticationPresenterDelegate>
  
     NSString *loggedUserInfo = [VectorL10n settingsConfigUserId:account.mxCredentials.userId];
     
-    NSString *homeserverInfo = [VectorL10n settingsConfigHomeServer:account.mxCredentials.homeServer];       
+    NSString *homeserverInfo = [VectorL10n settingsConfigHomeServer:account.mxCredentials.homeServer];
     
     NSString *sdkVersionInfo = [NSString stringWithFormat:@"Matrix SDK %@", MatrixSDKVersion];
     
@@ -1580,7 +1580,7 @@ SSOAuthenticationPresenterDelegate>
             animationCompletion();
             [[AppDelegate theDelegate] showErrorAsAlert:error];
         }
-    }];            
+    }];
 }
 
 #pragma mark - Segues
@@ -2462,9 +2462,9 @@ SSOAuthenticationPresenterDelegate>
 //            MXKTableViewCell *termAndConditionCell = [self getDefaultTableViewCell:tableView];
 //
 //            termAndConditionCell.textLabel.text = [VectorL10n settingsAcceptableUse];
-//            
+//
 //            [termAndConditionCell vc_setAccessoryDisclosureIndicatorWithCurrentTheme];
-//            
+//
 //            cell = termAndConditionCell;
 //        }
 //        else if (row == ABOUT_COPYRIGHT_INDEX)
@@ -2472,29 +2472,29 @@ SSOAuthenticationPresenterDelegate>
 //            MXKTableViewCell *copyrightCell = [self getDefaultTableViewCell:tableView];
 //
 //            copyrightCell.textLabel.text = [VectorL10n settingsCopyright];
-//            
+//
 //            [copyrightCell vc_setAccessoryDisclosureIndicatorWithCurrentTheme];
-//            
+//
 //            cell = copyrightCell;
 //        }
 //        else if (row == ABOUT_PRIVACY_INDEX)
 //        {
 //            MXKTableViewCell *privacyPolicyCell = [self getDefaultTableViewCell:tableView];
-//            
+//
 //            privacyPolicyCell.textLabel.text = [VectorL10n settingsPrivacyPolicy];
-//            
+//
 //            [privacyPolicyCell vc_setAccessoryDisclosureIndicatorWithCurrentTheme];
-//            
+//
 //            cell = privacyPolicyCell;
 //        }
 //        else if (row == ABOUT_THIRD_PARTY_INDEX)
 //        {
 //            MXKTableViewCell *thirdPartyCell = [self getDefaultTableViewCell:tableView];
-//            
+//
 //            thirdPartyCell.textLabel.text = [VectorL10n settingsThirdPartyNotices];
-//            
+//
 //            [thirdPartyCell vc_setAccessoryDisclosureIndicatorWithCurrentTheme];
-//            
+//
 //            cell = thirdPartyCell;
 //        }
 //    }
@@ -2709,7 +2709,7 @@ SSOAuthenticationPresenterDelegate>
     cell.backgroundColor = ThemeService.shared.theme.backgroundColor;
     
     if (cell.selectionStyle != UITableViewCellSelectionStyleNone)
-    {        
+    {
         // Update the selected background view
         if (ThemeService.shared.theme.selectedBackgroundColor)
         {

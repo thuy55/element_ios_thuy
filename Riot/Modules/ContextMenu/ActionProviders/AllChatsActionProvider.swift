@@ -46,15 +46,37 @@ class AllChatsActionProvider {
     }
     
     private var filtersAction: UIAction {
+        // 1. Read the CURRENT state from data to set the initial UI state
+        let currentFilters = AllChatsLayoutSettingsManager.shared.allChatLayoutSettings.filters
+        // Note: AllChatsLayoutFilterType seems to be an OptionSet, check if isEmpty works as expected
+        // If filters is an OptionSet, check if it contains any values or is empty
+        let initialState: UIAction.State = currentFilters.isEmpty ? .off : .on
+
         return UIAction(title: VectorL10n.allChatsEditLayoutShowFilters,
                         image: UIImage(systemName: "bubble.right")?.withRenderingMode(.alwaysTemplate),
-                        state: AllChatsLayoutSettingsManager.shared.allChatLayoutSettings.filters == [] ? .off : .on) { action in
-                            let settings = AllChatsLayoutSettingsManager.shared.allChatLayoutSettings
-                            let newSettings = AllChatsLayoutSettings(sections: settings.sections,
-                                                                     filters: action.state == .on ? [] : [.unreads, .favourites, .people],
-                                                                     sorting: settings.sorting)
+                        state: initialState) { action in // 2. Set initial state based on data
+
+                            // 3. Inside the handler, decide the NEW state based on the current DATA state
+                            let currentSettings = AllChatsLayoutSettingsManager.shared.allChatLayoutSettings
+                            // If current filters are empty, the user wants to ENABLE them
+                            let shouldEnableFilters = currentSettings.filters.isEmpty
+
+                            // Calculate the NEW filters state
+                            // --- Use the CORRECT type name here ---
+                            let newFilters: AllChatsLayoutFilterType = shouldEnableFilters ? [.unreads, .favourites, .people] : []
+                            // --- End correction ---
+
+                            let newSettings = AllChatsLayoutSettings(sections: currentSettings.sections,
+                                                                     filters: newFilters, // Use the new filters
+                                                                     sorting: currentSettings.sorting)
+
+                            // 4. Update the data
                             AllChatsLayoutSettingsManager.shared.allChatLayoutSettings = newSettings
-                            Analytics.shared.trackInteraction(action.state == .on ? .allChatsFiltersDisabled : .allChatsFiltersEnabled)
+
+                            // Send analytics based on the action (enabled or disabled)
+                            Analytics.shared.trackInteraction(shouldEnableFilters ? .allChatsFiltersEnabled : .allChatsFiltersDisabled)
+
+                            // The system will automatically toggle the UI state (checkmark) after the tap.
                         }
     }
     

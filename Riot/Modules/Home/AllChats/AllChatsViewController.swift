@@ -117,6 +117,30 @@ class AllChatsViewController: HomeViewController {
         recentsTableView.contentInsetAdjustmentBehavior = .automatic
         
         toolbarHeight = toolbar.frame.height
+        // --- THÊM CODE ĐỂ XÓA NỀN TOOLBAR ---
+                toolbar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
+        toolbar.setShadowImage(UIImage(), forToolbarPosition: .any) // Tùy chọn: xóa đường kẻ 1px phía trên toolbar
+        // --- CODE ÉP TOOLBAR THAY ĐỔI CHIỀU CAO ---
+
+                // 1. Tính toán lại kích thước nút (PHẢI GIỐNG HỆT BƯỚC 1)
+                let iconImage = Asset.Images.allChatsSpacesIcon.image
+                let padding: CGFloat = 10.0 // <-- ĐẢM BẢO GIÁ TRỊ NÀY GIỐNG HỆT BƯỚC 1
+                let iconSize = iconImage.size.height
+                let buttonTotalSize = iconSize + (padding * 2)
+                
+                // 2. Đặt chiều cao tối thiểu cho toolbar
+                //    (Chúng ta thêm 10pt đệm trên/dưới cho đẹp)
+                let toolbarMinHeight = buttonTotalSize + 10.0
+
+                // 3. Kích hoạt constraint
+                toolbar.translatesAutoresizingMaskIntoConstraints = false
+                let heightConstraint = toolbar.heightAnchor.constraint(greaterThanOrEqualToConstant: toolbarMinHeight)
+                
+                // Set priority để tránh xung đột với constraint hệ thống
+                heightConstraint.priority = .defaultHigh // (750)
+                heightConstraint.isActive = true
+
+                // --- KẾT THÚC CODE ÉP TOOLBAR ---
         emptyViewBottomAnchor = toolbar.topAnchor
 
         updateUI()
@@ -500,12 +524,94 @@ class AllChatsViewController: HomeViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), menu: menu)
     }
     
+//    private lazy var spacesButton: BadgedBarButtonItem = {
+//        let innerButton = UIButton(type: .system)
+//        innerButton.accessibilityLabel = VectorL10n.spaceSelectorTitle
+//        innerButton.addTarget(self, action: #selector(self.showSpaceSelectorAction(sender:)), for: .touchUpInside)
+//        innerButton.setImage(Asset.Images.allChatsSpacesIcon.image, for: .normal)
+//        return BadgedBarButtonItem(withBaseButton: innerButton, theme: theme)
+//    }()
+    
     private lazy var spacesButton: BadgedBarButtonItem = {
-        let innerButton = UIButton(type: .system)
+        // 1. Đổi thành .custom để toàn quyền kiểm soát
+        let innerButton = UIButton(type: .custom)
         innerButton.accessibilityLabel = VectorL10n.spaceSelectorTitle
         innerButton.addTarget(self, action: #selector(self.showSpaceSelectorAction(sender:)), for: .touchUpInside)
-        innerButton.setImage(Asset.Images.allChatsSpacesIcon.image, for: .normal)
+        
+        // 2. Lấy thông tin ảnh
+        let iconImage = Asset.Images.allChatsSpacesIcon.image
+        innerButton.setImage(iconImage, for: .normal)
+
+        let padding: CGFloat = 10.0
+        
+        // 3. Tính toán kích thước
+        
+        // --- SỬA Ở ĐÂY ---
+        // Lấy cả chiều rộng và chiều cao để tìm cạnh lớn nhất
+        let iconHeight = iconImage.size.height
+        let iconWidth = iconImage.size.width
+        let iconSize = max(iconHeight, iconWidth) // Lấy cạnh lớn nhất làm chuẩn
+        // --- KẾT THÚC SỬA ---
+        
+        let buttonTotalSize = iconSize + (padding * 2)
+
+        // 4. Đặt viền và bo tròn
+        innerButton.layer.borderColor = theme.colors.accent.cgColor
+        innerButton.layer.borderWidth = 1.0
+        innerButton.layer.cornerRadius = buttonTotalSize / 2 // Làm cho nó tròn
+        innerButton.layer.masksToBounds = true
+        
+        // 5. ĐẶT KÍCH THƯỚC CỐ ĐỊNH
+        innerButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            innerButton.widthAnchor.constraint(equalToConstant: buttonTotalSize),
+            innerButton.heightAnchor.constraint(equalToConstant: buttonTotalSize)
+        ])
+        
         return BadgedBarButtonItem(withBaseButton: innerButton, theme: theme)
+    }()
+
+    // (Nằm ngay sau dấu } của spacesButton)
+        
+    private lazy var editBarButtonItem: UIBarButtonItem = {
+        // 1. Dùng .custom để toàn quyền kiểm soát
+        let editButton = UIButton(type: .custom)
+        
+        // 2. Lấy thông tin ảnh
+        let iconImage = Asset.Images.allChatsEditIcon.image
+        editButton.setImage(iconImage, for: .normal)
+        editButton.tintColor = theme.colors.accent
+
+        // 3. Sao chép logic kích thước
+        let padding: CGFloat = 10.0
+        
+        // --- SỬA Ở ĐÂY ---
+        // Lấy cả chiều rộng và chiều cao để tìm cạnh lớn nhất
+        let iconHeight = iconImage.size.height
+        let iconWidth = iconImage.size.width
+        let iconSize = max(iconHeight, iconWidth) // Lấy cạnh lớn nhất làm chuẩn
+        // --- KẾT THÚC SỬA ---
+        
+        let buttonTotalSize = iconSize + (padding * 2)
+
+        // 4. Đặt viền và bo tròn (giống hệt)
+        editButton.layer.borderColor = theme.colors.accent.cgColor
+        editButton.layer.borderWidth = 1.0
+        editButton.layer.cornerRadius = buttonTotalSize / 2
+        editButton.layer.masksToBounds = true
+        
+        // 5. Quan trọng: Nút này hiển thị Menu
+        editButton.showsMenuAsPrimaryAction = true
+        
+        // 6. Đặt kích thước cố định
+        editButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            editButton.widthAnchor.constraint(equalToConstant: buttonTotalSize),
+            editButton.heightAnchor.constraint(equalToConstant: buttonTotalSize)
+        ])
+        
+        // 7. Trả về một UIBarButtonItem chứa nút này
+        return UIBarButtonItem(customView: editButton)
     }()
     
     @objc private func updateBadgeButton() {
@@ -539,11 +645,20 @@ class AllChatsViewController: HomeViewController {
         self.isToolbarHidden = false
         self.update(with: theme)
         
-        self.toolbar.items = [
-            spacesButton,
-            UIBarButtonItem.flexibleSpace(),
-            UIBarButtonItem(image: Asset.Images.allChatsEditIcon.image, menu: menu)
-        ]
+        // --- SỬA ĐỔI TỪ ĐÂY ---
+                
+                // 1. Lấy nút `editButton` thật (nằm trong customView)
+                if let editButton = editBarButtonItem.customView as? UIButton {
+                    // 2. Gán menu mới cho nó
+                    editButton.menu = menu
+                }
+                
+                // 3. Sử dụng `editBarButtonItem` đã được tạo
+                self.toolbar.items = [
+                    spacesButton,
+                    UIBarButtonItem.flexibleSpace(),
+                    editBarButtonItem // <-- Thay thế dòng cũ
+                ]
     }
     
     private func showCreateSpace(parentSpaceId: String?) {
@@ -1120,3 +1235,5 @@ private extension MXSpaceService {
         notificationCounter.homeNotificationState.allHighlightCount > 0
     }
 }
+
+

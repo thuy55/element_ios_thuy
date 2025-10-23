@@ -17,7 +17,7 @@
 
 // String for App Store
 "store_short_description" = "Secure decentralised chat/VoIP";
-"store_full_description" = "5HPC is a new type of messenger and collaboration app that:\n\n1. Puts you in control to preserve your privacy\n2. Lets you communicate with anyone in the Matrix network, and even beyond by integrating with apps such as Slack\n3. Protects you from advertising, datamining, backdoors and walled gardens\n4. Secures you through end-to-end encryption, with cross-signing to verify others\n\n5HPC is completely different from other messaging and collaboration apps because it is decentralised and open source.\n\n5HPC lets you self-host - or choose a host - so that you have privacy, ownership and control of your data and conversations. It gives you access to an open network; so you’re not just stuck speaking to other 5HPC users only. And it is very secure.\n\n5HPC is able to do all this because it operates on Matrix - the standard for open, decentralised communication. \n\n5HPC puts you in control by letting you choose who hosts your conversations. From the 5HPC app, you can choose to host in different ways:\n\n1. Get a free account on the matrix.org public server\n2. Self-host your account by running a server on your own hardware\n3. Sign up for an account on a custom server by simply subscribing to the 5HPC Matrix Services hosting platform\n\nWhy choose 5HPC?\n\nOWN YOUR DATA: You decide where to keep your data and messages. You own it and control it, not some MEGACORP that mines your data or gives access to third parties.\n\nOPEN MESSAGING AND COLLABORATION: You can chat with anyone else in the Matrix network, whether they’re using 5HPC or another Matrix app, and even if they are using a different messaging system of the likes of Slack, IRC or XMPP.\n\nSUPER-SECURE: Real end-to-end encryption (only those in the conversation can decrypt messages), and cross-signing to verify the devices of conversation participants.\n\nCOMPLETE COMMUNICATION: Messaging, voice and video calls, file sharing, screen sharing and a whole bunch of integrations, bots and widgets. Build rooms, communities, stay in touch and get things done.\n\nEVERYWHERE YOU ARE: Stay in touch wherever you are with fully synchronised message history across all your devices and on the web at https://5HPC.io/app.";
+"store_full_description" = "5HPC is a new type of messenger and collaboration app that:\n\n1. Puts you in control to preserve your privacy\n2. Lets you communicate with anyone in the 5HPC network, and even beyond by integrating with apps such as Slack\n3. Protects you from advertising, datamining, backdoors and walled gardens\n4. Secures you through end-to-end encryption, with cross-signing to verify others\n\n5HPC is completely different from other messaging and collaboration apps because it is decentralised and open source.\n\n5HPC lets you self-host - or choose a host - so that you have privacy, ownership and control of your data and conversations. It gives you access to an open network; so you’re not just stuck speaking to other 5HPC users only. And it is very secure.\n\n5HPC is able to do all this because it operates on 5HPC - the standard for open, decentralised communication. \n\n5HPC puts you in control by letting you choose who hosts your conversations. From the 5HPC app, you can choose to host in different ways:\n\n1. Get a free account on the matrix.5hpc.com public server\n2. Self-host your account by running a server on your own hardware\n3. Sign up for an account on a custom server by simply subscribing to the 5HPC Services hosting platform\n\nWhy choose 5HPC?\n\nOWN YOUR DATA: You decide where to keep your data and messages. You own it and control it, not some MEGACORP that mines your data or gives access to third parties.\n\nOPEN MESSAGING AND COLLABORATION: You can chat with anyone else in the 5HPC network, whether they’re using 5HPC or another 5HPC app, and even if they are using a different messaging system of the likes of Slack, IRC or XMPP.\n\nSUPER-SECURE: Real end-to-end encryption (only those in the conversation can decrypt messages), and cross-signing to verify the devices of conversation participants.\n\nCOMPLETE COMMUNICATION: Messaging, voice and video calls, file sharing, screen sharing and a whole bunch of integrations, bots and widgets. Build rooms, communities, stay in touch and get things done.\n\nEVERYWHERE YOU ARE: Stay in touch wherever you are with fully synchronised message history across all your devices and on the web at https://5HPC.io/app.";
 "store_promotional_text" = "Privacy-preserving chat and collaboration app, on an open network. Decentralised to put you in control. No datamining, no backdoors and no third party access.";
 
 // Titles
@@ -287,8 +287,8 @@
 "auth_optional_phone_placeholder" = "Phone number (optional)";
 "auth_phone_placeholder" = "Phone number";
 "auth_repeat_password_placeholder" = "Repeat password";
-"auth_repeat_new_password_placeholder" = "Confirm your new Matrix account password";
-"auth_home_server_placeholder" = "URL (e.g. https://matrix.org)";
+"auth_repeat_new_password_placeholder" = "Confirm your new 5HPC account password";
+"auth_home_server_placeholder" = "URL (e.g. https://matrix.5hpc.com)";
 "auth_identity_server_placeholder" = "URL (e.g. https://vector.im)";
 "auth_invalid_login_param" = "Incorrect username and/or password";
 "auth_invalid_user_name" = "User names may only contain letters, numbers, dots, hyphens and underscores";
@@ -304,13 +304,13 @@
 "auth_missing_email_or_phone" = "Missing email address or phone number";
 "auth_email_in_use" = "This email address is already in use";
 "auth_phone_in_use" = "This phone number is already in use";
-"auth_email_is_required" = "No identity server is configured so you cannot add an email address in order to reset your Matrix account password in the future.";
-"auth_phone_is_required" = "No identity server is configured so you cannot add a phone number in order to reset your Matrix account password in the future.";
+"auth_email_is_required" = "No identity server is configured so you cannot add an email address in order to reset your 5HPC account password in the future.";
+"auth_phone_is_required" = "No identity server is configured so you cannot add a phone number in order to reset your 5HPC account password in the future.";
 "auth_untrusted_id_server" = "The identity server is not trusted";
 "auth_password_dont_match" = "Passwords don't match";
 "auth_username_in_use" = "Username in use";
-"auth_forgot_password" = "Forgot Matrix account password?";
-"auth_forgot_password_error_no_configured_identity_server" = "No identity server is configured: add one to reset your Matrix account password.";
+"auth_forgot_password" = "Forgot 5HPC account password?";
+"auth_forgot_password_error_no_configured_identity_server" = "No identity server is configured: add one to reset your 5HPC account password.";
 "auth_email_not_found" = "Failed to send email: This email address was not found";
 "auth_use_server_options" = "Use custom server options (advanced)";
 "auth_email_validation_message" = "Please check your email to continue registration";
@@ -318,15 +318,15 @@
 "auth_msisdn_validation_message" = "We\'ve sent an SMS with an activation code. Please enter this code below.";
 "auth_msisdn_validation_error" = "Unable to verify phone number.";
 "auth_recaptcha_message" = "This homeserver would like to make sure you are not a robot";
-"auth_reset_password_message" = "To reset your Matrix account password, enter the email address linked to your account:";
+"auth_reset_password_message" = "To reset your 5HPC account password, enter the email address linked to your account:";
 "auth_reset_password_missing_email" = "The email address linked to your account must be entered.";
 "auth_reset_password_missing_password" = "A new password must be entered.";
 "auth_reset_password_email_validation_message" = "An email has been sent to %@. Once you've followed the link it contains, click below.";
 "auth_reset_password_next_step_button" = "I have verified my email address";
 "auth_reset_password_error_unauthorized" = "Failed to verify email address: make sure you clicked the link in the email";
-"auth_reset_password_error_not_found" = "Your email address does not appear to be associated with a Matrix ID on this homeserver.";
-"auth_reset_password_error_is_required" = "No identity server is configured: add one in server options to reset your Matrix account password.";
-"auth_reset_password_success_message" = "Your Matrix account password has been reset.\n\nYou have been logged out of all sessions and will no longer receive push notifications. To re-enable notifications, re-log in on each device.";
+"auth_reset_password_error_not_found" = "Your email address does not appear to be associated with a 5HPC ID on this homeserver.";
+"auth_reset_password_error_is_required" = "No identity server is configured: add one in server options to reset your 5HPC account password.";
+"auth_reset_password_success_message" = "Your 5HPC account password has been reset.\n\nYou have been logged out of all sessions and will no longer receive push notifications. To re-enable notifications, re-log in on each device.";
 "auth_add_email_and_phone_warning" = "Registration with email and phone number at once is not supported yet until the api exists. Only the phone number will be taken into account. You may add your email to your profile in settings.";
 "auth_accept_policies" = "Please review and accept the policies of this homeserver:";
 "auth_autodiscover_invalid_response" = "Invalid homeserver discovery response";
@@ -375,7 +375,7 @@
 "room_creation_dm_error" = "We couldn't create your DM. Please check the users you want to invite and try again.";
 "room_creation_only_one_email_invite" = "You can only invite one email at a time";
 "room_creation_user_not_found_prompt_title" = "Confirmation";
-"room_creation_user_not_found_prompt_message" = "Unable to find profiles for this Matrix ID. Would you like to start a DM anyway?";
+"room_creation_user_not_found_prompt_message" = "Unable to find profiles for this 5HPC ID. Would you like to start a DM anyway?";
 "room_creation_user_not_found_prompt_invite_action" = "Start DM anyway";
 
 // Room recents
@@ -438,7 +438,7 @@ Tap the + to start adding people.";
 
 // Contacts
 "contacts_address_book_section" = "LOCAL CONTACTS";
-"contacts_address_book_matrix_users_toggle" = "Matrix users only";
+"contacts_address_book_matrix_users_toggle" = "5HPC users only";
 "contacts_address_book_no_identity_server" = "No identity server configured";
 "contacts_address_book_no_contact" = "No local contacts";
 "contacts_address_book_permission_required" = "Permission required to access local contacts";
@@ -470,13 +470,13 @@ Tap the + to start adding people.";
 "room_participants_invite_prompt_title" = "Confirmation";
 "room_participants_invite_prompt_msg" = "Are you sure you want to invite %@ to this chat?";
 "room_participants_invite_prompt_to_msg" = "Are you sure you want to invite %@ to %@?";
-"room_participants_invite_unknown_participant_prompt_to_msg" = "Unable to find profiles for this Matrix ID. Are you sure you want to invite %@ to %@?";
+"room_participants_invite_unknown_participant_prompt_to_msg" = "Unable to find profiles for this 5HPC ID. Are you sure you want to invite %@ to %@?";
 "room_participants_invite_anyway" = "Invite anyway";
 "room_participants_filter_room_members" = "Filter room members";
 "room_participants_filter_room_members_for_dm" = "Filter members";
 "room_participants_invite_another_user" = "Search / invite by User ID, Name or email";
 "room_participants_invite_malformed_id_title" = "Invite Error";
-"room_participants_invite_malformed_id" = "Malformed ID. Should be an email address or a Matrix ID like '@localpart:domain'";
+"room_participants_invite_malformed_id" = "Malformed ID. Should be an email address or a 5HPC ID like '@localpart:domain'";
 "room_participants_invited_section" = "INVITED";
 "room_participants_start_new_chat_error_using_user_email_without_identity_server" = "No identity server is configured so you cannot start a chat with a contact using an email.";
 "room_participants_leave_not_allowed_for_last_owner_msg" = "You can't leave the room since you're the only owner of it.";
@@ -660,7 +660,7 @@ Tap the + to start adding people.";
 "threads_empty_show_all_threads" = "Show all threads";
 "message_from_a_thread" = "From a thread";
 "threads_notice_title" = "Threads no longer experimental 🎉";
-"threads_notice_information" = "All threads created during the experimental period will now be <b>rendered as regular replies</b>.<br/><br/>This will be a one-off transition, as threads are now part of the Matrix specification.";
+"threads_notice_information" = "All threads created during the experimental period will now be <b>rendered as regular replies</b>.<br/><br/>This will be a one-off transition, as threads are now part of the 5HPC specification.";
 "threads_notice_done" = "Got it";
 "threads_beta_title" = "Threads";
 "threads_beta_information" = "Keep discussions organised with threads.\n\nThreads help keep your conversations on-topic and easy to track. ";
@@ -857,12 +857,12 @@ Tap the + to start adding people.";
 "settings_old_password" = "Old password";
 "settings_new_password" = "New password";
 "settings_confirm_password" = "Confirm password";
-"settings_fail_to_update_password" = "Fail to update Matrix account password";
-"settings_password_updated" = "Your Matrix account password has been updated";
+"settings_fail_to_update_password" = "Fail to update 5HPC account password";
+"settings_password_updated" = "Your 5HPC account password has been updated";
 
 "settings_add_3pid_password_title_email" = "Add email address";
 "settings_add_3pid_password_title_msidsn" = "Add phone number";
-"settings_add_3pid_password_message" = "To continue, please enter your Matrix account password";
+"settings_add_3pid_password_message" = "To continue, please enter your 5HPC account password";
 "settings_add_3pid_invalid_password_message" = "Invalid credentials";
 
 "settings_crypto_device_name" = "Session name: ";
@@ -934,7 +934,7 @@ Tap the + to start adding people.";
 "security_settings_title" = "Security";
 "security_settings_crypto_sessions" = "MY SESSIONS";
 "security_settings_crypto_sessions_loading" = "Loading sessions…";
-"security_settings_crypto_sessions_description_2" = "If you don’t recognise a login, change your Matrix account password and reset Secure Backup.";
+"security_settings_crypto_sessions_description_2" = "If you don’t recognise a login, change your 5HPC account password and reset Secure Backup.";
 
 "security_settings_secure_backup" = "SECURE BACKUP";
 "security_settings_secure_backup_description" =  "Back up your encryption keys with your account data in case you lose access to your sessions. Your keys will be secured with a unique Security Key.";
@@ -966,8 +966,8 @@ Tap the + to start adding people.";
 "security_settings_complete_security_alert_title" = "Complete security";
 "security_settings_complete_security_alert_message" = "You should complete security on your current session first.";
 
-"security_settings_coming_soon" = "Sorry. This action is not available on %@ iOS yet. Please use another Matrix client to set it up. %@ iOS will use it.";
-"security_settings_user_password_description" = "Confirm your identity by entering your Matrix account password";
+"security_settings_coming_soon" = "Sorry. This action is not available on %@ iOS yet. Please use another 5HPC client to set it up. %@ iOS will use it.";
+"security_settings_user_password_description" = "Confirm your identity by entering your 5HPC account password";
 
 // Manage session
 "manage_session_title" = "Manage session";
@@ -1165,7 +1165,7 @@ Tap the + to start adding people.";
 "group_participants_filter_members" = "Filter community members";
 "group_participants_invite_another_user" = "Search / invite by User ID or Name";
 "group_participants_invite_malformed_id_title" = "Invite Error";
-"group_participants_invite_malformed_id" = "Malformed ID. Should be a Matrix ID like '@localpart:domain'";
+"group_participants_invite_malformed_id" = "Malformed ID. Should be a 5HPC ID like '@localpart:domain'";
 "group_participants_invited_section" = "INVITED";
 
 // Group rooms
@@ -1188,7 +1188,7 @@ Tap the + to start adding people.";
 "directory_title" = "Directory";
 "directory_server_picker_title" = "Select a directory";
 "directory_server_all_rooms" = "All rooms on %@ server";
-"directory_server_all_native_rooms" = "All native Matrix rooms";
+"directory_server_all_native_rooms" = "All native 5HPC rooms";
 "directory_server_type_homeserver" = "Type a homeserver to list public rooms from";
 "directory_server_placeholder" = "matrix.5hpc.com";
 
@@ -1402,7 +1402,7 @@ Tap the + to start adding people.";
 "deactivate_account_informations_part2_emphasize" = "This action is irreversible.";
 "deactivate_account_informations_part3" = "\n\nDeactivating your account ";
 "deactivate_account_informations_part4_emphasize" = "does not by default cause us to forget messages you have sent. ";
-"deactivate_account_informations_part5" = "If you would like us to forget your messages, please tick the box below\n\nMessage visibility in Matrix is similar to email. Our forgetting your messages means that messages you have sent will not be shared with any new or unregistered users, but registered users who already have access to these messages will still have access to their copy.";
+"deactivate_account_informations_part5" = "If you would like us to forget your messages, please tick the box below\n\nMessage visibility in 5HPC is similar to email. Our forgetting your messages means that messages you have sent will not be shared with any new or unregistered users, but registered users who already have access to these messages will still have access to their copy.";
 
 "deactivate_account_forget_messages_information_part1" = "Please forget all messages I have sent when my account is deactivated (";
 "deactivate_account_forget_messages_information_part2_emphasize" = "Warning";
@@ -1411,7 +1411,7 @@ Tap the + to start adding people.";
 "deactivate_account_validate_action" = "Deactivate account";
 
 "deactivate_account_password_alert_title" = "Deactivate Account";
-"deactivate_account_password_alert_message" = "To continue, please enter your Matrix account password";
+"deactivate_account_password_alert_message" = "To continue, please enter your 5HPC account password";
 
 // Re-request confirmation dialog
 "rerequest_keys_alert_title" = "Request Sent";
@@ -1467,7 +1467,7 @@ Tap the + to start adding people.";
 // Passphrase
 
 "key_backup_setup_passphrase_title" = "Secure your backup with a Security Phrase";
-"key_backup_setup_passphrase_info" = "We'll store an encrypted copy of your keys on our server. Protect your backup with a phrase to keep it secure.\n\nFor maximum security, this should be different from your Matrix account password.";
+"key_backup_setup_passphrase_info" = "We'll store an encrypted copy of your keys on our server. Protect your backup with a phrase to keep it secure.\n\nFor maximum security, this should be different from your 5HPC account password.";
 "key_backup_setup_passphrase_passphrase_title" = "Enter";
 "key_backup_setup_passphrase_passphrase_placeholder" = "Enter phrase";
 "key_backup_setup_passphrase_passphrase_valid" = "Great!";
@@ -1612,7 +1612,7 @@ Tap the + to start adding people.";
 "device_verification_self_verify_wait_title" = "Complete security";
 "device_verification_self_verify_wait_new_sign_in_title" = "Verify this login";
 "device_verification_self_verify_wait_information" = "Verify this session from one of your other sessions, granting it access to encrypted messages.\n\nUse the latest %@ on your other devices:";
-"device_verification_self_verify_wait_additional_information" = "This works with %@ and other cross-signing capable Matrix clients.";
+"device_verification_self_verify_wait_additional_information" = "This works with %@ and other cross-signing capable 5HPC clients.";
 "device_verification_self_verify_open_on_other_device_title" = "Open %@ on your other device";
 "device_verification_self_verify_open_on_other_device_information" = "You need to verify this session in order to read your secure message history.\n\nOpen 5HPC on one of your other devices and follow the instructions.";
 "device_verification_self_verify_wait_recover_secrets_without_passphrase" = "Use Security Key";
@@ -1902,7 +1902,7 @@ Tap the + to start adding people.";
 
 "secrets_setup_recovery_passphrase_title" = "Set a Security Phrase";
 "secrets_setup_recovery_passphrase_information" = "Enter a security phrase only you know, used to secure secrets on your server.";
-"secrets_setup_recovery_passphrase_additional_information" = "Don't use your Matrix account password.";
+"secrets_setup_recovery_passphrase_additional_information" = "Don't use your 5HPC account password.";
 "secrets_setup_recovery_passphrase_validate_action" = "Done";
 
 "secrets_setup_recovery_passphrase_confirm_information" = "Enter your Security Phrase again to confirm it.";
@@ -1920,7 +1920,7 @@ Tap the + to start adding people.";
 "secrets_reset_warning_title" = "If you reset everything";
 "secrets_reset_warning_message" = "You will restart with no history, no messages, trusted devices or trusted users.";
 "secrets_reset_reset_action" = "Reset";
-"secrets_reset_authentication_message" = "Enter your Matrix account password to confirm";
+"secrets_reset_authentication_message" = "Enter your 5HPC account password to confirm";
 
 // MARK: - Cross-signing
 
@@ -2007,7 +2007,7 @@ Tap the + to start adding people.";
 "create_room_show_in_directory" = "Show in room directory";
 "create_room_show_in_directory_footer" = "This will help people find and join.";
 "create_room_section_header_address" = "ADDRESS";
-"create_room_placeholder_address" = "#testroom:matrix.org";
+"create_room_placeholder_address" = "#testroom:matrix.5hpc.com";
 "create_room_suggest_room" = "Suggest to space members";
 "create_room_suggest_room_footer" = "Suggested rooms are promoted to space members as good to join.";
 "create_room_processing" = "Creating room";
@@ -2552,7 +2552,7 @@ To enable access, tap Settings> Location and select Always";
 "user_session_verified_session_description" = "Verified sessions are anywhere you are using 5HPC after entering your passphrase or confirming your identity with another verified session.\n\nThis means that you have all the keys needed to unlock your encrypted messages and confirm to other users that you trust this session.";
 "user_session_unverified_session_title" = "Unverified session";
 "user_session_unverified_session_description" = "Unverified sessions are sessions that have logged in with your credentials but not been cross-verified.\n\nYou should make especially certain that you recognise these sessions as they could represent an unauthorised use of your account.";
-"user_session_permanently_unverified_session_description" = "This session doesn't support encryption, so it can't be verified.\n\nYou won't be able to participate in rooms where encryption is enabled when using this session.\n\nFor best security and privacy, it is recommended to use Matrix clients that support encryption.";
+"user_session_permanently_unverified_session_description" = "This session doesn't support encryption, so it can't be verified.\n\nYou won't be able to participate in rooms where encryption is enabled when using this session.\n\nFor best security and privacy, it is recommended to use 5HPC clients that support encryption.";
 "user_session_inactive_session_title" = "Inactive sessions";
 "user_session_inactive_session_description" = "Inactive sessions are sessions you have not used in some time, but they continue to receive encryption keys.\n\nRemoving inactive sessions improves security and performance, and makes it easier for you to identify if a new session is suspicious.";
 "user_session_rename_session_title" = "Renaming sessions";
@@ -2657,20 +2657,20 @@ To enable access, tap Settings> Location and select Always";
 /*      iOS specific       */
 /* *********************** */
 
-"matrix" = "Matrix";
+"matrix" = "5HPC";
 
 // Login Screen
 "login_create_account" = "Create account:";
-"login_server_url_placeholder" = "URL (e.g. https://matrix.org)";
+"login_server_url_placeholder" = "URL (e.g. https://matrix.5hpc.com)";
 "login_home_server_title" = "Homeserver URL:";
 "login_home_server_info" = "Your homeserver stores all your conversations and account data";
 "login_identity_server_title" = "Identity server URL:";
-"login_identity_server_info" = "Matrix provides identity servers to track which emails etc. belong to which Matrix IDs. Only https://matrix.org currently exists.";
-"login_user_id_placeholder" = "Matrix ID (e.g. @bob:matrix.org or bob)";
+"login_identity_server_info" = "5HPC provides identity servers to track which emails etc. belong to which 5HPC IDs. Only https://matrix.5hpc.com currently exists.";
+"login_user_id_placeholder" = "5HPC ID (e.g. @bob:matrix.5hpc.com or bob)";
 "login_password_placeholder" = "Password";
 "login_optional_field" = "optional";
 "login_display_name_placeholder" = "Display name (e.g. Bob Obson)";
-"login_email_info" = "Specify an email address lets other users find you on Matrix more easily, and will give you a way to reset your password in the future.";
+"login_email_info" = "Specify an email address lets other users find you on 5HPC more easily, and will give you a way to reset your password in the future.";
 "login_email_placeholder" = "Email address";
 "login_prompt_email_token" = "Please enter your email validation token:";
 "login_error_title" = "Login Failed";
@@ -2718,7 +2718,7 @@ To enable access, tap Settings> Location and select Always";
 "select_account" = "Select an account";
 "attach_media" = "Attach Media from Library";
 "capture_media" = "Take Photo/Video";
-"invite_user" = "Invite matrix User";
+"invite_user" = "Invite 5HPC User";
 "reset_to_default" = "Reset to default";
 "resend_message" = "Resend the message";
 "select_all" = "Select All";
@@ -2863,7 +2863,7 @@ To enable access, tap Settings> Location and select Always";
 
 "account_error_display_name_change_failed" = "Display name change failed";
 "account_error_picture_change_failed" = "Picture change failed";
-"account_error_matrix_session_is_not_opened" = "Matrix session is not opened";
+"account_error_matrix_session_is_not_opened" = "5HPC session is not opened";
 "account_error_email_wrong_title" = "Invalid Email Address";
 "account_error_email_wrong_description" = "This doesn't appear to be a valid email address";
 "account_error_msisdn_wrong_title" = "Invalid Phone Number";
@@ -2922,13 +2922,13 @@ To enable access, tap Settings> Location and select Always";
 "attachment_cancel_upload" = "Cancel the upload?";
 "attachment_multiselection_size_prompt" = "Do you want to send images as:";
 "attachment_multiselection_original" = "Actual Size";
-"attachment_e2e_keys_file_prompt" = "This file contains encryption keys exported from a Matrix client.\nDo you want to view the file content or import the keys it contains?";
+"attachment_e2e_keys_file_prompt" = "This file contains encryption keys exported from a 5HPC client.\nDo you want to view the file content or import the keys it contains?";
 "attachment_e2e_keys_import" = "Import...";
 "attachment_unsupported_preview_title" = "Unable to preview";
 "attachment_unsupported_preview_message" = "This file type is not supported.";
 
 // Contacts
-"contact_mx_users" = "Matrix Users";
+"contact_mx_users" = "5HPC Users";
 "contact_local_contacts" = "Local Contacts";
 
 // Groups
@@ -2945,13 +2945,13 @@ To enable access, tap Settings> Location and select Always";
 
 // E2E import
 "e2e_import_room_keys" = "Import room keys";
-"e2e_import_prompt" = "This process allows you to import encryption keys that you had previously exported from another Matrix client. You will then be able to decrypt any messages that the other client could decrypt.\nThe export file is protected with a passphrase. You should enter the passphrase here, to decrypt the file.";
+"e2e_import_prompt" = "This process allows you to import encryption keys that you had previously exported from another 5HPC client. You will then be able to decrypt any messages that the other client could decrypt.\nThe export file is protected with a passphrase. You should enter the passphrase here, to decrypt the file.";
 "e2e_import" = "Import";
 "e2e_passphrase_enter" = "Enter passphrase";
 
 // E2E export
 "e2e_export_room_keys" = "Export room keys";
-"e2e_export_prompt" = "This process allows you to export the keys for messages you have received in encrypted rooms to a local file. You will then be able to import the file into another Matrix client in the future, so that client will also be able to decrypt these messages.\nThe exported file will allow anyone who can read it to decrypt any encrypted messages that you can see, so you should be careful to keep it secure.";
+"e2e_export_prompt" = "This process allows you to export the keys for messages you have received in encrypted rooms to a local file. You will then be able to import the file into another 5HPC client in the future, so that client will also be able to decrypt these messages.\nThe exported file will allow anyone who can read it to decrypt any encrypted messages that you can see, so you should be careful to keep it secure.";
 "e2e_export" = "Export";
 "e2e_passphrase_confirm" = "Confirm passphrase";
 "e2e_passphrase_empty" = "Passphrase must not be empty";
@@ -2977,7 +2977,7 @@ To enable access, tap Settings> Location and select Always";
 "local_contacts_access_not_granted" = "Users discovery from local contacts requires access to you contacts but %@ doesn't have permission to use it";
 
 "local_contacts_access_discovery_warning_title" = "Users discovery";
-"local_contacts_access_discovery_warning" = "To discover contacts already using Matrix, %@ can send email addresses and phone numbers in your address book to your chosen Matrix identity server. Where supported, personal data is hashed before sending - please check your identity server's privacy policy for more details.";
+"local_contacts_access_discovery_warning" = "To discover contacts already using 5HPC, %@ can send email addresses and phone numbers in your address book to your chosen 5HPC identity server. Where supported, personal data is hashed before sending - please check your identity server's privacy policy for more details.";
 
 "microphone_access_not_granted_for_voice_message" = "Voice messages require access to the Microphone but %@ doesn't have permission to use it";
 
@@ -3134,7 +3134,7 @@ To enable access, tap Settings> Location and select Always";
 // room details dialog screen
 
 // contacts list screen
-"invitation_message" = "I\'d like to chat with you with matrix. Please, visit the website http://matrix.org to have more information.";
+"invitation_message" = "I\'d like to chat with you with 5HPC. Please, visit the website http://matrix.5hpc.com to have more information.";
 
 // Settings screen
 "settings_title_config" = "Configuration";

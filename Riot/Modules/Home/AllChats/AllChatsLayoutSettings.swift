@@ -20,13 +20,20 @@ class AllChatsLayoutSettings: NSObject, NSCoding {
     let filters: AllChatsLayoutFilterType
     let sorting: AllChatsLayoutSortingType
     
-    init(sections: AllChatsLayoutSectionType = [],
-         filters: AllChatsLayoutFilterType = [],
-         sorting: AllChatsLayoutSortingType = .activity) {
-        self.sections = sections
-        self.filters = filters
-        self.sorting = sorting
-    }
+//    init(sections: AllChatsLayoutSectionType = [],
+//         filters: AllChatsLayoutFilterType = [],
+//         sorting: AllChatsLayoutSortingType = .activity) {
+//        self.sections = sections
+//        self.filters = filters
+//        self.sorting = sorting
+//    }
+    init(sections: AllChatsLayoutSectionType = [], // Or your desired default sections
+             filters: AllChatsLayoutFilterType = [.unreads, .favourites, .people], // <-- Set default filters here
+             sorting: AllChatsLayoutSortingType = .activity) { // Or your desired default sorting
+            self.sections = sections
+            self.filters = filters
+            self.sorting = sorting
+        }
     
     func encode(with coder: NSCoder) {
         coder.encode(Int(sections.rawValue), forKey: Constants.sectionsKey)

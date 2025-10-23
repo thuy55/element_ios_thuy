@@ -2,7 +2,7 @@
 "title_home" = "Trang chủ";
 "title_favourites" = "Yêu thích";
 "title_people" = "Danh bạ";
-"title_rooms" = "Phòng chat";
+"title_rooms" = "Nhóm chat";
 // Actions
 "view" = "Xem";
 "next" = "Kế tiếp";
@@ -48,9 +48,9 @@
 "auth_optional_phone_placeholder" = "Số điện thoại (không bắt buộc)";
 "auth_phone_placeholder" = "Số điện thoại";
 "auth_repeat_password_placeholder" = "Nhật lại mật khẩu";
-"auth_repeat_new_password_placeholder" = "Xác nhận mật khẩu mới cho danh khoản Matrix";
-"auth_home_server_placeholder" = "URL (ví dụ: https://matrix.org)";
-"auth_identity_server_placeholder" = "URL (vd. https://vector.im)";
+"auth_repeat_new_password_placeholder" = "Xác nhận mật khẩu mới cho danh khoản 5HPC";
+"auth_home_server_placeholder" = "URL (ví dụ: https://5hpc.com)";
+"auth_identity_server_placeholder" = "URL (vd. https://5hpc.com)";
 "auth_invalid_login_param" = "Tên đăng nhập hoặc mật khẩu không đúng";
 "warning" = "Cảnh báo";
 "auth_invalid_user_name" = "Tên đăng nhập chỉ được chứa các chữ cái, dấu chấm, dấu gạch ngang và dấu gạch dưới";
@@ -70,7 +70,7 @@
 "auth_untrusted_id_server" = "Máy chủ xác thực không được tin cậy";
 "auth_password_dont_match" = "Mật khẩu không trùng khớp";
 "auth_username_in_use" = "Tên đăng nhập đang được sử dụng";
-"auth_forgot_password" = "Quên mật khẩu danh khoản Matrix?";
+"auth_forgot_password" = "Quên mật khẩu danh khoản 5HPC?";
 "auth_email_not_found" = "Gửi thư thất bại: Địa chỉ thư điện tử này không thể tìm thấy";
 "auth_use_server_options" = "Sử dụng tùy chọn máy chủ tuỳ chỉnh (nâng cao)";
 "auth_email_validation_message" = "Vui lòng kiểm tra hòm thư của bẹn để tiếp tục đăng ký";
@@ -101,29 +101,29 @@
 "room_creation_make_public_prompt_msg" = "Bạn có chắc là bạn muốn làm cuộc trò chuyện này công khai? Mọi người có thể đọc tin nhắn và tham gia cuộc trò chuyện.";
 "room_creation_keep_private" = "Giữ nó riêng tư";
 "room_creation_make_private" = "Riêng tư";
-"room_creation_wait_for_creation" = "Phòng trò chuyện đã được tạo. Vui lòng chờ.";
+"room_creation_wait_for_creation" = "Nhóm trò chuyện đã được tạo. Vui lòng chờ.";
 "room_creation_invite_another_user" = "Tìm / mời bằng ID người dùng, tên hoặc email";
 // Room recents
-"room_recents_directory_section" = "DANH MỤC PHÒNG";
+"room_recents_directory_section" = "DANH MỤC nhóm";
 "room_recents_favourites_section" = "YÊU THÍCH";
 "room_recents_people_section" = "DANH BẠ";
-"room_recents_conversations_section" = "PHÒNG";
+"room_recents_conversations_section" = "Nhóm";
 "room_recents_no_conversation" = "Không có cuộc trò chuyện nào";
 "room_recents_low_priority_section" = "ƯU TIÊN THẤP";
 "room_recents_invites_section" = "MỜI";
 "room_recents_start_chat_with" = "Bắt đầu chat";
-"room_recents_create_empty_room" = "Tạo phòng";
-"room_recents_join_room" = "Tham gia phòng";
-"room_recents_join_room_title" = "Tham gia một phòng đã tồn tại";
-"room_recents_join_room_prompt" = "Nhập id phòng hoặc bí danh phòng";
+"room_recents_create_empty_room" = "Tạo nhóm";
+"room_recents_join_room" = "Tham gia nhóm";
+"room_recents_join_room_title" = "Tham gia một nhóm đã tồn tại";
+"room_recents_join_room_prompt" = "Nhập id Nhóm hoặc bí danh nhóm";
 // People tab
 "people_invites_section" = "MỜI";
 "people_conversation_section" = "CUỘC TRÒ CHUYỆN";
 "people_no_conversation" = "Không có cuộc trò chuyện nào";
 // Rooms tab
-"room_directory_no_public_room" = "Không có phòng chung nào";
+"room_directory_no_public_room" = "Không có nhóm chung nào";
 // Search
-"search_rooms" = "Phòng";
+"search_rooms" = "Nhóm";
 "search_messages" = "Tin nhắn";
 "search_people" = "Mọi người";
 "search_files" = "Tập tin";
@@ -133,7 +133,7 @@
 "search_in_progress" = "Đang tìm…";
 // Directory
 "directory_cell_title" = "Duyệt danh mục";
-"directory_cell_description" = "%tu phòng";
+"directory_cell_description" = "%tu nhóm";
 "directory_search_results_title" = "Kết quả duyệt danh mục";
 "directory_search_results" = "%1$tu kết quả được tìm thấy cho %2$@";
 "directory_search_results_more_than" = ">%1$tu kết quả được tìm thấy cho %2$@";
@@ -141,7 +141,7 @@
 "directory_search_fail" = "Không thể tìm nạp dữ liệu";
 // Contacts
 "contacts_address_book_section" = "DANH BẠ NỘI BỘ";
-"contacts_address_book_matrix_users_toggle" = "Chỉ người dùng của matrix";
+"contacts_address_book_matrix_users_toggle" = "Chỉ người dùng của 5HPC";
 "contacts_address_book_no_contact" = "Không có danh bạ nội bộ";
 "contacts_address_book_permission_required" = "Quyền được yêu cầu để truy cập danh bạ nội bộ";
 "contacts_user_directory_section" = "DANH MỤC NGƯỜI DÙNG";
@@ -151,17 +151,17 @@
 "room_participants_add_participant" = "Thêm người tham gia";
 "room_participants_one_participant" = "1 người tham gia";
 "room_participants_multi_participants" = "%d người tham gia";
-"room_participants_leave_prompt_title" = "Rời phòng";
-"room_participants_leave_prompt_msg" = "Bạn có chắc muốn rời phòng này?";
+"room_participants_leave_prompt_title" = "Rời nhóm";
+"room_participants_leave_prompt_msg" = "Bạn có chắc muốn rời nhóm này?";
 "room_participants_remove_prompt_title" = "Xác nhận";
 "room_participants_remove_prompt_msg" = "Bạn có muốn gỡ bỏ %@ ra khỏi cuộc trò chuyện?";
 "room_participants_remove_third_party_invite_msg" = "Gỡ bỏ lời mời của bên thứ ba chưa được hỗ trợ cho tới khi api được thực hiện";
 "room_participants_invite_prompt_title" = "Xác nhận";
 "room_participants_invite_prompt_msg" = "Bạn có chắc muốn mời %@ vào cuộc trò chuyện này?";
-"room_participants_filter_room_members" = "Lọc thành viên trong phòng";
+"room_participants_filter_room_members" = "Lọc thành viên trong nhóm";
 "room_participants_invite_another_user" = "Tìm / mời bằng ID Người dùng, Tên hoặc Email";
 "room_participants_invite_malformed_id_title" = "Lỗi mời";
-"room_participants_invite_malformed_id" = "ID không hợp lệ. Nên là một địa chỉ email hoặc một Matrix ID như '@localpart:domain'";
+"room_participants_invite_malformed_id" = "ID không hợp lệ. Nên là một địa chỉ email hoặc một 5HPC ID như '@localpart:domain'";
 "room_participants_invited_section" = "ĐÃ MỜI";
 "room_participants_online" = "Trực tuyến";
 "room_participants_offline" = "Ngoại tuyến";
@@ -174,9 +174,9 @@
 "room_participants_action_section_devices" = "Thiết bị";
 "room_participants_action_section_other" = "Khác";
 "room_participants_action_invite" = "Mời";
-"room_participants_action_leave" = "Rời khỏi phòng này";
-"room_participants_action_remove" = "Loại bỏ khỏi phòng này";
-"room_participants_action_ban" = "Cấm từ phòng này";
+"room_participants_action_leave" = "Rời khỏi nhóm này";
+"room_participants_action_remove" = "Loại bỏ khỏi nhóm này";
+"room_participants_action_ban" = "Cấm từ nhóm này";
 "room_participants_action_unban" = "Huỷ cấm";
 "room_participants_action_ignore" = "Ẩn tất cả tin nhắn từ người dùng này";
 "room_participants_action_unignore" = "Hiển thị tất cả tin nhắn từ người dùng này";
@@ -203,7 +203,7 @@
 "room_ongoing_conference_call" = "Cuộc gọi hội nghị đang diễn ra. Tham gia như %@ hoặc %@.";
 "room_ongoing_conference_call_with_close" = "Cuộc gọi hội nghị đang diễn ra. Tham gia như %@ hoặc %@. %@ nó.";
 "room_ongoing_conference_call_close" = "Đóng";
-"room_conference_call_no_power" = "Bạn cần quyền để quản lí cuộc gọi hội nghị trong phòng này";
+"room_conference_call_no_power" = "Bạn cần quyền để quản lí cuộc gọi hội nghị trong nhóm này";
 "room_prompt_resend" = "Gửi lại tất cả";
 "room_prompt_cancel" = "huỷ tất cả";
 "room_resend_unsent_messages" = "Gửi lại các tin nhắn chưa được gửi";
@@ -224,29 +224,29 @@
 "room_event_action_cancel_send" = "Huỷ Gửi";
 "room_event_action_cancel_download" = "Huỷ Tải";
 "room_event_action_view_encryption" = "Thông tin mã hoá";
-"room_warning_about_encryption" = "Mã hoá đầu-cuối đang trong giai đoạn thử nghiệm và có thể không đáng tin cậy.\n\nBạn có thể không nên tin tưởng hoàn toàn vào sự bảo mật dữ liệu này.\n\nCác thiết bị có thể không giải mã lịch sử từ trước khi họ tham gia vào phòng.\n\nCác tin nhắn được mã hoá sẽ không hiển thị trên các máy khách chưa tích hợp mã hoá.";
+"room_warning_about_encryption" = "Mã hoá đầu-cuối đang trong giai đoạn thử nghiệm và có thể không đáng tin cậy.\n\nBạn có thể không nên tin tưởng hoàn toàn vào sự bảo mật dữ liệu này.\n\nCác thiết bị có thể không giải mã lịch sử từ trước khi họ tham gia vào nhóm.\n\nCác tin nhắn được mã hoá sẽ không hiển thị trên các máy khách chưa tích hợp mã hoá.";
 "room_event_failed_to_send" = "Gửi thất bại";
 // Unknown devices
-"unknown_devices_alert_title" = "Phòng chứa các thiết bị không xác định";
-"unknown_devices_alert" = "Phòng này có các thiết bị không xác định chưa được xác minh.\nĐiều này có nghĩa là không có đảm bảo rằng thiết bị thuộc về người dùng mà họ yêu cầu.\nChúng tôi khuyên bạn nên đi qua quá trình xác minh cho từng thiết bị trước khi tiếp tục, nhưng bạn có thể gửi lại tin nhắn mà không cần xác nhận nếu bạn muốn.";
+"unknown_devices_alert_title" = "Nhóm chứa các thiết bị không xác định";
+"unknown_devices_alert" = "Nhóm này có các thiết bị không xác định chưa được xác minh.\nĐiều này có nghĩa là không có đảm bảo rằng thiết bị thuộc về người dùng mà họ yêu cầu.\nChúng tôi khuyên bạn nên đi qua quá trình xác minh cho từng thiết bị trước khi tiếp tục, nhưng bạn có thể gửi lại tin nhắn mà không cần xác nhận nếu bạn muốn.";
 "unknown_devices_send_anyway" = "Gửi bằng mọi cách";
 "unknown_devices_call_anyway" = "Gọi bằng mọi cách";
 "unknown_devices_answer_anyway" = "Trả lời bằng mọi cách";
 "unknown_devices_verify" = "Xác thực…";
 "unknown_devices_title" = "Các thiết bị không xác định";
 // Room Title
-"room_title_new_room" = "Phòng mới";
+"room_title_new_room" = "Nhóm mới";
 "room_title_multiple_active_members" = "%@/%@ thành viên đang hoạt động";
 "room_title_one_active_member" = "%@/%@ thành viên đang hoạt động";
 "room_title_invite_members" = "Mời các thành viên";
 "room_title_members" = "%@ thành viên";
 "room_title_one_member" = "1 thành viên";
 // Room Preview
-"room_preview_invitation_format" = "Bạn đã được mời tham gia phòng này bởi %@";
-"room_preview_subtitle" = "Đây là bản xem trước của phòng này. Tương tác với phòng đã bị tắt.";
+"room_preview_invitation_format" = "Bạn đã được mời tham gia nhóm này bởi %@";
+"room_preview_subtitle" = "Đây là bản xem trước của nhóm này. Tương tác với nhóm đã bị tắt.";
 "room_preview_unlinked_email_warning" = "Lời mời này đã được gửi tới %@, không được liên kết với tài khoản này. Bạn có thể đăng nhập bằng một tài khoản khác hoặc thêm email này vào tài khoản của bạn.";
 "room_preview_try_join_an_unknown_room" = "Bạn đang cố gắng để truy cập %@. Bạn có muốn tham gia vào cuộc thảo luận không?";
-"room_preview_try_join_an_unknown_room_default" = "phòng";
+"room_preview_try_join_an_unknown_room_default" = "Nhóm";
 // Settings
 "settings_title" = "Cài đặt";
 "account_logout_all" = "Đăng xuất tất cả tài khoản";
@@ -264,12 +264,12 @@
 "settings_contacts" = "DANH BẠ";
 "settings_advanced" = "NÂNG CAO";
 "settings_other" = "KHÁC";
-"settings_labs" = "PHÒNG THÍ NGHIỆM";
+"settings_labs" = "NHÓM THÍ NGHIỆM";
 "settings_devices" = "THIẾT BỊ";
 "settings_cryptography" = "MÃ HOÁ";
 "settings_sign_out" = "Đăng xuất";
 "settings_sign_out_confirmation" = "Bạn có chắc chắn?";
-"settings_sign_out_e2e_warn" = "Bạn sẽ mất end-to-end khoá bảo mật. Điều đó có nghĩa rằng bạn sẽ không thể đọc các tin nhắn trước đó đã được mã hoá trong phòng bởi thiết bị này.";
+"settings_sign_out_e2e_warn" = "Bạn sẽ mất end-to-end khoá bảo mật. Điều đó có nghĩa rằng bạn sẽ không thể đọc các tin nhắn trước đó đã được mã hoá trong nhóm bởi thiết bị này.";
 "settings_profile_picture" = "Hình ảnh hồ sơ";
 "settings_display_name" = "Tên hiển thị";
 "settings_first_name" = "Tên";
@@ -287,8 +287,8 @@
 "settings_enable_push_notif" = "Thông báo trên thiết bị";
 "settings_show_decrypted_content" = "Hiện nội dung đã giải mã";
 "settings_global_settings_info" = "Cài đặt thông báo toàn cầu khả dụng trên %@ trình duyệt khách của bạn";
-"settings_pin_rooms_with_missed_notif" = "Ghim các phòng có thông báo bị bỏ lỡ";
-"settings_pin_rooms_with_unread" = "Ghim các phòng có các tin nhắn chưa đọc";
+"settings_pin_rooms_with_missed_notif" = "Ghim các nhóm có thông báo bị bỏ lỡ";
+"settings_pin_rooms_with_unread" = "Ghim các nhóm có các tin nhắn chưa đọc";
 "settings_enable_callkit" = "Cuộc gọi tích hợp";
 "settings_ui_language" = "Ngôn ngữ";
 "settings_ui_theme" = "Chủ đề";
@@ -324,64 +324,64 @@
 "settings_crypto_export" = "Xuất khóa";
 "settings_crypto_blacklist_unverified_devices" = "Chỉ mã hóa để xác thực thiết bị";
 // Room Details
-"room_details_title" = "Chi tiết phòng chat";
+"room_details_title" = "Chi tiết nhóm chat";
 "room_details_people" = "Thành viên";
 "room_details_files" = "Tập tin";
 "room_details_settings" = "Cài đặt";
-"room_details_photo" = "Hình ảnh của phòng";
-"room_details_room_name" = "Tên của phòng";
+"room_details_photo" = "Hình ảnh của nhóm";
+"room_details_room_name" = "Tên của nhóm";
 "room_details_topic" = "Chủ đề";
 "room_details_favourite_tag" = "Yêu thích";
 "room_details_low_priority_tag" = "Ưu tiên thấp";
 "room_details_mute_notifs" = "Tắt tiếng thông báo";
 "room_details_direct_chat" = "Trò chuyện trực tiếp";
-"room_details_access_section" = "Ai có thể truy cập phòng này?";
+"room_details_access_section" = "Ai có thể truy cập nhóm này?";
 "room_details_access_section_invited_only" = "Chỉ người được mời";
-"room_details_access_section_anyone_apart_from_guest" = "Bất cứ ai biết đường dẫn của phòng, ngoại trừ khách";
-"room_details_access_section_anyone" = "Bất cứ ai biết đường dẫn của phòng, kể cả khách";
-"room_details_access_section_no_address_warning" = "Phải có địa chỉ để có thể liên kết đến một phòng";
-"room_details_access_section_directory_toggle" = "Liệt kê phòng trong danh mục phòng";
+"room_details_access_section_anyone_apart_from_guest" = "Bất cứ ai biết đường dẫn của nhóm, ngoại trừ khách";
+"room_details_access_section_anyone" = "Bất cứ ai biết đường dẫn của nhóm, kể cả khách";
+"room_details_access_section_no_address_warning" = "Phải có địa chỉ để có thể liên kết đến một nhóm";
+"room_details_access_section_directory_toggle" = "Liệt kê nhóm trong danh mục nhóm";
 "room_details_history_section" = "Ai có thể xem lịch sử?";
 "room_details_history_section_anyone" = "Bất cứ ai";
 "room_details_history_section_members_only" = "Chỉ thành viên (kể từ thời điểm chọn tùy chọn này)";
 "room_details_history_section_members_only_since_invited" = "Chỉ thành viên (kể từ khi họ được mời)";
 "room_details_history_section_members_only_since_joined" = "Chỉ thành viên (kể từ khi họ tham gia)";
 "room_details_history_section_prompt_title" = "Cảnh báo riêng tư";
-"room_details_history_section_prompt_msg" = "Thay đổi đối với những người có thể đọc lịch sử sẽ chỉ áp dụng cho các tin nhắn trong tương lai trong phòng này. Khả năng hiển thị của lịch sử hiện tại sẽ không thay đổi.";
+"room_details_history_section_prompt_msg" = "Thay đổi đối với những người có thể đọc lịch sử sẽ chỉ áp dụng cho các tin nhắn trong tương lai trong nhóm này. Khả năng hiển thị của lịch sử hiện tại sẽ không thay đổi.";
 "room_details_addresses_section" = "Địa chỉ";
-"room_details_no_local_addresses" = "Phòng này không có địa chỉ nội bộ";
+"room_details_no_local_addresses" = "Nhóm này không có địa chỉ nội bộ";
 "room_details_new_address" = "Thêm địa chỉ mới";
 "room_details_new_address_placeholder" = "Thêm địa chỉ mới (ví dụ: #foo%@)";
 "room_details_addresses_invalid_address_prompt_title" = "Sai định dạng bí danh";
 "room_details_addresses_invalid_address_prompt_msg" = "%@ không phải là một bí danh phù hợp định dạng";
 "room_details_addresses_disable_main_address_prompt_title" = "Cảnh báo địa chỉ chính";
-"room_details_addresses_disable_main_address_prompt_msg" = "Bạn sẽ không có địa chỉ chính được chỉ định. Địa chỉ chính mặc định cho phòng này sẽ được chọn ngẫu nhiên";
+"room_details_addresses_disable_main_address_prompt_msg" = "Bạn sẽ không có địa chỉ chính được chỉ định. Địa chỉ chính mặc định cho nhóm này sẽ được chọn ngẫu nhiên";
 "room_details_banned_users_section" = "Người dùng bị cấm";
 "room_details_advanced_section" = "Nâng cao";
-"room_details_advanced_room_id" = "ID Phòng:";
+"room_details_advanced_room_id" = "ID Nhóm:";
 "room_details_advanced_enable_e2e_encryption" = "Bật mã hóa (cảnh báo: không thể tắt trở lại!)";
-"room_details_advanced_e2e_encryption_enabled" = "Mã hóa được kích hoạt cho phòng này";
-"room_details_advanced_e2e_encryption_disabled" = "Mã hóa chưa được kích hoạt cho phòng này.";
+"room_details_advanced_e2e_encryption_enabled" = "Mã hóa được kích hoạt cho nhóm này";
+"room_details_advanced_e2e_encryption_disabled" = "Mã hóa chưa được kích hoạt cho nhóm này.";
 "room_details_advanced_e2e_encryption_blacklist_unverified_devices" = "Chỉ mã hóa cho các thiết bị đã được xác thực";
-"room_details_advanced_e2e_encryption_prompt_message" = "End-to-end, mã hoá đang trong giai đoạn thử nghiệm và có thể không đáng tin cậy.\n\nBạn không nên tin tưởng tuyệt đối vào nó về việc bảo mật dữ liệu hoàn toàn.\n\nThiết bị sẽ không thể giải mã lịch sử từ trước khi họ tham gia vào phòng.\n\nMột khi mã hóa được kích hoạt cho một căn phòng nó không thể tắt (cho đến bây giờ).\n\nTin nhắn được mã hóa sẽ không hiển thị trên các máy khách khi chúng chưa được tích hợp mã hoá.";
-"room_details_fail_to_update_avatar" = "Cập nhật ảnh phòng thất bại";
-"room_details_fail_to_update_room_name" = "Cập nhật tên phòng thất bại";
+"room_details_advanced_e2e_encryption_prompt_message" = "End-to-end, mã hoá đang trong giai đoạn thử nghiệm và có thể không đáng tin cậy.\n\nBạn không nên tin tưởng tuyệt đối vào nó về việc bảo mật dữ liệu hoàn toàn.\n\nThiết bị sẽ không thể giải mã lịch sử từ trước khi họ tham gia vào nhóm.\n\nMột khi mã hóa được kích hoạt cho một căn nhóm nó không thể tắt (cho đến bây giờ).\n\nTin nhắn được mã hóa sẽ không hiển thị trên các máy khách khi chúng chưa được tích hợp mã hoá.";
+"room_details_fail_to_update_avatar" = "Cập nhật ảnh nhóm thất bại";
+"room_details_fail_to_update_room_name" = "Cập nhật tên nhóm thất bại";
 "room_details_fail_to_update_topic" = "Cập nhật chủ đề thất bại";
-"room_details_fail_to_update_room_guest_access" = "Cập nhật truy cập khách của phòng thất bại";
+"room_details_fail_to_update_room_guest_access" = "Cập nhật truy cập khách của nhóm thất bại";
 "room_details_fail_to_update_room_join_rule" = "Cập nhật quy định tham gia thất bại";
-"room_details_fail_to_update_room_directory_visibility" = "Cập nhật chế độ hiển thị danh mục phòng thất bại";
+"room_details_fail_to_update_room_directory_visibility" = "Cập nhật chế độ hiển thị danh mục nhóm thất bại";
 "room_details_fail_to_update_history_visibility" = "Cập nhật hiển thị lịch sử thất bại";
-"room_details_fail_to_add_room_aliases" = "Thêm địa chỉ mới của phòng thất bại";
-"room_details_fail_to_remove_room_aliases" = "Gỡ bỏ địa chỉ phòng thất bại";
+"room_details_fail_to_add_room_aliases" = "Thêm địa chỉ mới của nhóm thất bại";
+"room_details_fail_to_remove_room_aliases" = "Gỡ bỏ địa chỉ nhóm thất bại";
 "room_details_fail_to_update_room_canonical_alias" = "Cập nhật địa chỉ chính thất bại";
-"room_details_fail_to_update_room_direct" = "Cập nhật đánh dấu trực tiếp của phòng thất bại";
-"room_details_fail_to_enable_encryption" = "Bật mã hoá của phòng thất bại";
+"room_details_fail_to_update_room_direct" = "Cập nhật đánh dấu trực tiếp của nhóm thất bại";
+"room_details_fail_to_enable_encryption" = "Bật mã hoá của nhóm thất bại";
 "room_details_save_changes_prompt" = "Bạn có muốn lưu thay đổi?";
 "room_details_set_main_address" = "Đặt làm địa chỉ chính";
 "room_details_unset_main_address" = "Bỏ cài làm địa chỉ chính";
-"room_details_copy_room_id" = "Sao chép ID phòng";
-"room_details_copy_room_address" = "Sao chép địa chỉ phòng";
-"room_details_copy_room_url" = "Sao chép đường dẫn của phòng";
+"room_details_copy_room_id" = "Sao chép ID Nhóm";
+"room_details_copy_room_address" = "Sao chép địa chỉ nhóm";
+"room_details_copy_room_url" = "Sao chép đường dẫn của nhóm";
 // Read Receipts
 "read_receipts_list" = "Đọc danh sách người đã xem";
 "receipt_status_read" = "Đọc: ";
@@ -391,9 +391,9 @@
 // Directory
 "directory_title" = "Danh mục";
 "directory_server_picker_title" = "Chọn một danh mục";
-"directory_server_all_rooms" = "Tất cả phòng trong máy chủ %@";
-"directory_server_all_native_rooms" = "Tất cả phòng thuần Matrix";
-"directory_server_type_homeserver" = "Gõ một máy chủ nhà để liệt kê danh sách phòng";
+"directory_server_all_rooms" = "Tất cả nhóm trong máy chủ %@";
+"directory_server_all_native_rooms" = "Tất cả nhóm thuần 5HPC";
+"directory_server_type_homeserver" = "Gõ một máy chủ nhà để liệt kê danh sách nhóm";
 "directory_server_placeholder" = "matrix.5hpc.com";
 // Events formatter
 "event_formatter_member_updates" = "%tu thành viên thay đổi";
@@ -407,7 +407,7 @@
 "today" = "Ngày hôm nay";
 "yesterday" = "Ngày hôm qua";
 "network_offline_prompt" = "Kết nối mạng có vẻ không hoạt động.";
-"public_room_section_title" = "Phòng chung (tại %@):";
+"public_room_section_title" = "Nhóm chung (tại %@):";
 "bug_report_prompt" = "Ứng dụng đã bị lỗi lần trước. Bạn có muốn gửi báo cáo sự cố không?";
 "rage_shake_prompt" = "Bạn dường như đang lắc điện thoại trong sự thất vọng. Bạn có muốn gửi báo cáo lỗi không?";
 "do_not_ask_again" = "Đừng hỏi lại";
@@ -438,22 +438,22 @@
 "bug_report_progress_uploading" = "Gửi báo cáo";
 "bug_report_send" = "Gửi";
 // Widget
-"widget_no_power_to_manage" = "Bạn cần quyền để quản lí widgets trong phòng này";
+"widget_no_power_to_manage" = "Bạn cần quyền để quản lí widgets trong nhóm này";
 "widget_creation_failure" = "Tạo widget thất bại";
 // Widget Integration Manager
 "widget_integration_need_to_be_able_to_invite" = "Bạn cần có khả năng mời người dùng để làm điều đó.";
 "widget_integration_unable_to_create" = "Không thể tạo widget.";
 "widget_integration_failed_to_send_request" = "Gửi yêu cầu thất bại.";
-"widget_integration_room_not_recognised" = "Phòng này không được công nhận.";
+"widget_integration_room_not_recognised" = "Nhóm này không được công nhận.";
 "widget_integration_positive_power_level" = "Cấp quyền phải là số nguyên dương.";
-"widget_integration_must_be_in_room" = "Bạn không có trong phòng này.";
-"widget_integration_no_permission_in_room" = "Bạn không có quyền để làm điều này trong phòng.";
+"widget_integration_must_be_in_room" = "Bạn không có trong nhóm này.";
+"widget_integration_no_permission_in_room" = "Bạn không có quyền để làm điều này trong nhóm.";
 "widget_integration_missing_room_id" = "Thiếu room_id trong yêu cầu.";
 "widget_integration_missing_user_id" = "Thiếu user_id trong yêu cầu.";
-"widget_integration_room_not_visible" = "Phòng %@ không hiện hữu.";
+"widget_integration_room_not_visible" = "Nhóm %@ không hiện hữu.";
 // Share extension
 "share_extension_auth_prompt" = "Đăng nhập vào ứng dụng chính để chia sẻ nội dung";
-"share_extension_failed_to_encrypt" = "Gửi thất bại. Kiểm tra cài đặt bảo mật phòng trong ứng dụng chính";
+"share_extension_failed_to_encrypt" = "Gửi thất bại. Kiểm tra cài đặt bảo mật nhóm trong ứng dụng chính";
 "title_groups" = "Cộng đồng";
 "version_check_modal_action_title_deprecated" = "Tìm hiểu cách";
 "version_check_modal_subtitle_deprecated" = "Chúng tôi đã làm việc để nâng cao %@ để có trải nghiệm nhanh hơn và bóng bẩy hơn. Thật không may, phiên bản iOS hiện tại của bạn không tương thích với một số bản sửa lỗi và sẽ không còn được hỗ trợ.\nChúng tôi khuyến nghị bạn nên nâng cấp hệ điều hành của bạn để sử dụng %@ với tất cả tiềm năng của nó.";
@@ -500,28 +500,28 @@
 "space_participants_action_ban" = "Cấm từ space này";
 "space_participants_action_remove" = "Loại bỏ khỏi space này";
 "spaces_invites_coming_soon_title" = "Mời sắp có";
-"spaces_add_rooms_coming_soon_title" = "Thêm phòng sắp có";
+"spaces_add_rooms_coming_soon_title" = "Thêm nhóm sắp có";
 "spaces_coming_soon_title" = "Sắp có";
 "spaces_no_member_found_detail" = "Tìm kiếm ai đó không có trong %@? Bây giờ, bạn có thể mời họ trên Web hoặc Desktop.";
 "spaces_no_room_found_detail" = "Vài kết quả có thể bị ẩn vì chúng riêng tư và bạn cần một lời mời để tham gia vào chúng.";
 "spaces_no_result_found_title" = "Không tìm thấy kết quả";
-"spaces_empty_space_detail" = "Vài phòng có thể bị ẩn vì chúng là phòng riêng và bạn cần một lời mời.";
-"spaces_empty_space_title" = "Space này chưa có phòng";
+"spaces_empty_space_detail" = "Vài nhóm có thể bị ẩn vì chúng là nhóm riêng và bạn cần một lời mời.";
+"spaces_empty_space_title" = "Space này chưa có nhóm";
 "space_tag" = "space";
 "spaces_suggested_room" = "Đề nghị";
-"spaces_explore_rooms" = "Khám phá phòng";
-"leave_space_and_all_rooms_action" = "Rời tất cả phòng và spaces";
-"leave_space_only_action" = "Không rời phòng nào";
+"spaces_explore_rooms" = "Khám phá nhóm";
+"leave_space_and_all_rooms_action" = "Rời tất cả nhóm và spaces";
+"leave_space_only_action" = "Không rời nhóm nào";
 "leave_space_message_admin_warning" = "Bạn là quản trị viên của space này, chắc chắn là bạn vừa chuyển quyền quản trị cho thành viên khác trước khi rời khỏi.";
-"leave_space_message" = "Bạn có chắc muốn rời khỏi %@? Bạn có muốn rời tất cả phòng và spaces của space này?";
+"leave_space_message" = "Bạn có chắc muốn rời khỏi %@? Bạn có muốn rời tất cả nhóm và spaces của space này?";
 "leave_space_title" = "Rời khỏi %@";
 "spaces_left_panel_title" = "Spaces";
 "spaces_home_space_title" = "Nhà";
-"space_beta_announce_information" = "Spaces là cách mới để nhóm các phòng và người. Chúng chưa có trên iOS, nhưng bạn có thể sử dụng chúng bây giờ trên Web và Desktop.";
+"space_beta_announce_information" = "Spaces là cách mới để nhóm các nhóm và người. Chúng chưa có trên iOS, nhưng bạn có thể sử dụng chúng bây giờ trên Web và Desktop.";
 "space_beta_announce_subtitle" = "Phiên bản mới của cộng đồng";
 "space_beta_announce_title" = "Spaces sắp có ở đây";
 "space_beta_announce_badge" = "BETA";
-"space_feature_unavailable_information" = "Spaces là cách mới để nhóm các phòng và người.\n\nChúng sẽ sớm có mặt. Bây giờ, nếu bạn tham gia vào một nền tảng khác, bạn sẽ có thể truy cập bất cứ phòng nào bạn tham gia ở đây.";
+"space_feature_unavailable_information" = "Spaces là cách mới để nhóm các nhóm và người.\n\nChúng sẽ sớm có mặt. Bây giờ, nếu bạn tham gia vào một nền tảng khác, bạn sẽ có thể truy cập bất cứ nhóm nào bạn tham gia ở đây.";
 "space_feature_unavailable_subtitle" = "Spaces chưa có trên iOS, nhưng bạn có thể sử dụng nó bây giờ trên Web và Desktop";
 
 // Mark: - Spaces
@@ -531,7 +531,7 @@
 "room_intro_cell_information_dm_sentence2" = "Chỉ có hai người trong cuộc trò chuyện này, không ai khác có thể tham gia.";
 "room_intro_cell_information_dm_sentence1_part3" = ". ";
 "room_intro_cell_information_dm_sentence1_part1" = "Đây là khởi đầu của tin nhắn trực tiếp của bạn với ";
-"room_intro_cell_information_room_without_topic_sentence2_part2" = " để mọi người biết phòng này là gì.";
+"room_intro_cell_information_room_without_topic_sentence2_part2" = " để mọi người biết nhóm này là gì.";
 "room_intro_cell_information_room_without_topic_sentence2_part1" = "Thêm chủ đề";
 "room_intro_cell_information_room_with_topic_sentence2" = "Chủ đề: %@";
 "room_intro_cell_information_room_sentence1_part3" = ". ";
@@ -540,7 +540,7 @@
 // Mark: - Room creation introduction cell
 
 "room_intro_cell_add_participants_action" = "Thêm người";
-"room_avatar_view_accessibility_hint" = "Thay đổi avatar phòng";
+"room_avatar_view_accessibility_hint" = "Thay đổi avatar nhóm";
 
 // Mark: - Room avatar view
 
@@ -554,8 +554,8 @@
 
 // MARK: - Favourites
 
-"favourites_empty_view_title" = "Các phòng và danh bạ yêu thích";
-"home_empty_view_information" = "Ứng dụng trò chuyển bảo mật tất cả trong một cho các nhóm, bạn và tổ chức. Nhấn nút + bên dưới để thêm người và phòng.";
+"favourites_empty_view_title" = "Các nhóm và danh bạ yêu thích";
+"home_empty_view_information" = "Ứng dụng trò chuyển bảo mật tất cả trong một cho các nhóm, bạn và tổ chức. Nhấn nút + bên dưới để thêm người và nhóm.";
 
 // MARK: - Home
 
@@ -578,30 +578,30 @@
 // MARK: - Room Info
 
 "room_info_list_one_member" = "1 thành viên";
-"create_room_placeholder_address" = "#testroom:matrix.org";
-"create_room_section_header_address" = "Địa chỉ phòng";
-"create_room_show_in_directory" = "Hiển thị phòng trong thư mục";
-"create_room_section_footer_type" = "Mọi người chỉ tham gia vào phòng riêng bằng lời mời";
-"create_room_type_public" = "Phòng công cộng";
-"create_room_type_private" = "Phòng riêng";
-"create_room_section_header_type" = "Loại phòng";
+"create_room_placeholder_address" = "#testroom:5hpc.com";
+"create_room_section_header_address" = "Địa chỉ nhóm";
+"create_room_show_in_directory" = "Hiển thị nhóm trong thư mục";
+"create_room_section_footer_type" = "Mọi người chỉ tham gia vào nhóm riêng bằng lời mời";
+"create_room_type_public" = "Nhóm công cộng";
+"create_room_type_private" = "Nhóm riêng";
+"create_room_section_header_type" = "Loại nhóm";
 "create_room_section_footer_encryption" = "Mã hóa không thể tắt sau này.";
 "create_room_enable_encryption" = "Bật mã hóa";
-"create_room_section_header_encryption" = "Mã hóa phòng";
+"create_room_section_header_encryption" = "Mã hóa nhóm";
 "create_room_placeholder_topic" = "Chủ đề";
-"create_room_section_header_topic" = "Chủ đề phòng (tùy chọn)";
+"create_room_section_header_topic" = "Chủ đề nhóm (tùy chọn)";
 "create_room_placeholder_name" = "Tên";
-"create_room_section_header_name" = "Tên phòng";
+"create_room_section_header_name" = "Tên nhóm";
 
 // MARK: - Create Room
 
-"create_room_title" = "Phòng mới";
+"create_room_title" = "Nhóm mới";
 "searchable_directory_search_placeholder" = "Tên hoặc ID";
 "searchable_directory_x_network" = "%@ Mạng";
 
 // MARK: - Searchable Directory View Controller
 
-"searchable_directory_create_new_room" = "Tạo một phòng mới";
+"searchable_directory_create_new_room" = "Tạo một nhóm mới";
 "biometrics_cant_unlocked_alert_message_retry" = "Thử lại";
 "biometrics_cant_unlocked_alert_message_login" = "Đăng nhập lại";
 "biometrics_cant_unlocked_alert_message_x" = "Để mở, sử dụng %@ hoặc đăng nhập lại và bật lại %@";
@@ -679,7 +679,7 @@
 // Recovery passphrase
 
 "secrets_setup_recovery_passphrase_title" = "Đặt một Chuỗi Bảo mật";
-"secrets_setup_recovery_key_storage_alert_message" = "✓ In nó và lưu trữ nó ở nơi nào đó an toàn\n✓ Lưu nó trong một USB hoặc ổ cứng dự phòng\n✓ Sao chép nó lên kho lưu trữ đám mây cá nhân của bạn";
+"secrets_setup_recovery_key_storage_alert_message" = "✓ In nó và lưu trữ nó ở nơi nào đó an toàn\n✓ Lưu nó trong một USB hoặc ổ cứng dự nhóm\n✓ Sao chép nó lên kho lưu trữ đám mây cá nhân của bạn";
 "secrets_setup_recovery_key_storage_alert_title" = "Giữ nó an toàn";
 "secrets_setup_recovery_key_done_action" = "Hoàn tất";
 "secrets_setup_recovery_key_export_action" = "Lưu";
@@ -708,7 +708,7 @@
 "user_verification_sessions_list_session_untrusted" = "Không tin tưởng";
 "user_verification_sessions_list_session_trusted" = "Tin tưởng";
 "user_verification_sessions_list_table_title" = "Các thiết bị";
-"user_verification_sessions_list_information" = "Các tin nhắn với người dùng này trong phòng này được mã hóa đầu-cuối và không thể được đọc bởi các bên thứ ba.";
+"user_verification_sessions_list_information" = "Các tin nhắn với người dùng này trong nhóm này được mã hóa đầu-cuối và không thể được đọc bởi các bên thứ ba.";
 "user_verification_sessions_list_user_trust_level_unknown_title" = "Không biết";
 "user_verification_sessions_list_user_trust_level_warning_title" = "Cảnh báo";
 
@@ -905,7 +905,7 @@
 "device_verification_self_verify_wait_recover_secrets_additional_information" = "Nếu bạn không thể truy cập vào các thiệt bị hiện có";
 "device_verification_self_verify_wait_recover_secrets_with_passphrase" = "Sử dụng Chuỗi hoặc Khóa Bảo mật";
 "device_verification_self_verify_wait_recover_secrets_without_passphrase" = "Sử dụng Khóa Bảo mật";
-"device_verification_self_verify_wait_additional_information" = "Điều này hoạt động với %@ và các thiết bị Matrix đầu cuối khác có khả năng xác thực chéo";
+"device_verification_self_verify_wait_additional_information" = "Điều này hoạt động với %@ và các thiết bị 5HPC đầu cuối khác có khả năng xác thực chéo";
 "device_verification_self_verify_wait_information" = "Xác minh thiết bị này từ một trong các thiết bị của bạn, cấp cho nó quyền truy cập vào các tin nhắn mã hóa.\n\nSử dụng cái %@ mới nhất trên các thiết bị của bạn:";
 "device_verification_self_verify_wait_new_sign_in_title" = "Xác minh đăng nhập này";
 
@@ -1035,7 +1035,7 @@
 "key_backup_setup_intro_manual_export_info" = "(Nâng cao)";
 "key_backup_setup_intro_setup_connect_action_with_existing_backup" = "Kết nối thiết bị này đến khóa sao lưu";
 "key_backup_setup_intro_setup_action_without_existing_backup" = "Bắt đầu sử dụng bản sao khóa";
-"key_backup_setup_intro_info" = "Các tin nhắn trong các phòng mã hóa được bảo mật bằng mã hóa đầu-cuối. Chỉ có bạn và (các) người nhận có các khóa để đọc các tin nhắn này.\n\nSao lưu một cách bảo mật các khóa của bạn để tránh mất chúng.";
+"key_backup_setup_intro_info" = "Các tin nhắn trong các nhóm mã hóa được bảo mật bằng mã hóa đầu-cuối. Chỉ có bạn và (các) người nhận có các khóa để đọc các tin nhắn này.\n\nSao lưu một cách bảo mật các khóa của bạn để tránh mất chúng.";
 
 // Intro
 
@@ -1084,11 +1084,11 @@
 "deactivate_account_forget_messages_information_part3" = ": điều này sẽ làm cho các người dùng trong tương lai thấy một khung cảnh không đầy đủ của các cuộc hội thoại)";
 "deactivate_account_forget_messages_information_part2_emphasize" = "Cảnh báo";
 "deactivate_account_forget_messages_information_part1" = "Vui lòng quên tất cả tin nhắn tôi vừa gửi khi tài khoản của tôi bị hủy kích hoạt (";
-"deactivate_account_informations_part5" = "Nếu bạn muốn chúng tôi quên các tin nhắn của bạn, vui lòng đánh dấu vào ô bên dưới\n\nKhả năng hiển thị tin nhắn trong Matrix là tương tự như email. Việc quên các tin nhắn của bạn  nghĩa là các tin nhắn bạn vừa gửi sẽ không được chia sẻ với các người dùng mới hoặc chưa được đăng ký, nhưng các người dùng đã đăng ký, người đã có quyền truy cập vào các tin nhắn này, vẫn sẽ truy cập được vào bản sao của họ.";
+"deactivate_account_informations_part5" = "Nếu bạn muốn chúng tôi quên các tin nhắn của bạn, vui lòng đánh dấu vào ô bên dưới\n\nKhả năng hiển thị tin nhắn trong 5HPC là tương tự như email. Việc quên các tin nhắn của bạn  nghĩa là các tin nhắn bạn vừa gửi sẽ không được chia sẻ với các người dùng mới hoặc chưa được đăng ký, nhưng các người dùng đã đăng ký, người đã có quyền truy cập vào các tin nhắn này, vẫn sẽ truy cập được vào bản sao của họ.";
 "deactivate_account_informations_part4_emphasize" = "Không phải do mặc định làm cho chúng tôi quên các tin nhắn bạn vừa gửi. ";
 "deactivate_account_informations_part3" = "\n\nĐang hủy kích hoạt tài khoản của bạn. ";
 "deactivate_account_informations_part2_emphasize" = "Hành động này là không thể đảo ngược";
-"deactivate_account_informations_part1" = "Điều này sẽ làm cho tài khoản của bạn sẽ không sử dụng được vĩnh viễn. Bạn sẽ không thể đăng nhập, và không ai sẽ có thể đăng ký cùng ID người dùng. Điều này sẽ làm cho tài khoản của bạn rời khỏi tất cả phòng nó đang tham gia, và sẽ xóa chi tiết tài khoản của bạn khỏi máy chủ xác thực. ";
+"deactivate_account_informations_part1" = "Điều này sẽ làm cho tài khoản của bạn sẽ không sử dụng được vĩnh viễn. Bạn sẽ không thể đăng nhập, và không ai sẽ có thể đăng ký cùng ID người dùng. Điều này sẽ làm cho tài khoản của bạn rời khỏi tất cả nhóm nó đang tham gia, và sẽ xóa chi tiết tài khoản của bạn khỏi máy chủ xác thực. ";
 
 // Deactivate account
 
@@ -1122,7 +1122,7 @@
 
 // Room key request dialog
 "e2e_room_key_request_title" = "Yêu cầu khóa mã hóa";
-"room_widget_permission_room_id_permission" = "ID Phòng";
+"room_widget_permission_room_id_permission" = "ID Nhóm";
 "room_widget_permission_widget_id_permission" = "ID Widget";
 "room_widget_permission_theme_permission" = "Chủ đề của bạn";
 "room_widget_permission_user_id_permission" = "User ID của bạn";
@@ -1145,7 +1145,7 @@
 "widget_menu_refresh" = "Làm mới";
 "widget_sticker_picker_no_stickerpacks_alert_add_now" = "Thêm một số bây giờ?";
 "widget_sticker_picker_no_stickerpacks_alert" = "Bạn không có stickerpack nào được kích hoạt.";
-"widget_integrations_server_failed_to_connect" = "Bạn cần quyền để quản lý các widget trong phòng này";
+"widget_integrations_server_failed_to_connect" = "Bạn cần quyền để quản lý các widget trong nhóm này";
 
 // Widget
 "widget_no_integrations_server_configured" = "Không có máy chủ tích hợp được cấu hình";
@@ -1204,9 +1204,9 @@
 "media_picker_title" = "Thư viện phương tiện";
 
 // Group rooms
-"group_rooms_filter_rooms" = "Lọc các phòng cộng đồng";
+"group_rooms_filter_rooms" = "Lọc các nhóm cộng đồng";
 "group_participants_invited_section" = "ĐÃ MỜI";
-"group_participants_invite_malformed_id" = "ID lạ. Nên là Matrix ID giống như '@localpart:domain'";
+"group_participants_invite_malformed_id" = "ID lạ. Nên là 5HPC ID giống như '@localpart:domain'";
 "group_participants_invite_malformed_id_title" = "Lỗi mời";
 "group_participants_invite_another_user" = "Tìm / mời bằng ID người dùng hoặc tên";
 "group_participants_filter_members" = "Lọc thành viên cộng đồng";
@@ -1220,19 +1220,19 @@
 // Group participants
 "group_participants_add_participant" = "Thêm người tham gia";
 "group_invitation_format" = "%@ đã mời bạn tham gia vào cộng đồng này";
-"group_home_multi_rooms_format" = "%tu phòng";
-"group_home_one_room_format" = "1 phòng";
+"group_home_multi_rooms_format" = "%tu nhóm";
+"group_home_one_room_format" = "1 nhóm";
 "group_home_multi_members_format" = "%tu thành viên";
 
 // Group Home
 "group_home_one_member_format" = "1 thành viên";
-"group_details_rooms" = "Phòng";
+"group_details_rooms" = "Nhóm";
 "group_details_people" = "Danh bạ";
 "group_details_home" = "Nhà";
 
 // Group Details
 "group_details_title" = "Chi tiết cộng đồng";
-"room_notifs_settings_encrypted_room_notice" = "Vui lòng lưu ý rằng các thông báo đề cập và từ khóa không có trong các phòng mã hóa trên di động.";
+"room_notifs_settings_encrypted_room_notice" = "Vui lòng lưu ý rằng các thông báo đề cập và từ khóa không có trong các nhóm mã hóa trên di động.";
 "room_notifs_settings_account_settings" = "Cài đặt tài khoản";
 "room_notifs_settings_manage_notifications" = "Bạn có thể quản lý thông báo trong %@";
 "room_notifs_settings_cancel_action" = "Hủy";
@@ -1251,8 +1251,8 @@
 "room_details_flair_invalid_id_prompt_title" = "Định dạng không hợp lệ";
 "room_details_new_flair_placeholder" = "Thêm ID cộng đồng mới (ví dụ: +foo%@)";
 "room_details_flair_section" = "Hiển thị sự tinh tế cho cộng đồng";
-"room_details_no_local_addresses_for_dm" = "Phòng này không có địa chỉ nội bộ";
-"room_details_access_section_directory_toggle_for_dm" = "Liệt kê trong danh mục phòng";
+"room_details_no_local_addresses_for_dm" = "Nhóm này không có địa chỉ nội bộ";
+"room_details_access_section_directory_toggle_for_dm" = "Liệt kê trong danh mục nhóm";
 "room_details_access_section_anyone_for_dm" = "Bất cứ ai biết đường dẫn, kể cả khách";
 "room_details_access_section_anyone_apart_from_guest_for_dm" = "Bất cứ ai biết đường dẫn, ngoài khách";
 "secrets_recovery_with_key_recovery_key_title" = "Nhập";
@@ -1293,7 +1293,7 @@
 "room_details_room_name_for_dm" = "Tên";
 "room_details_photo_for_dm" = "Hình ảnh";
 "room_details_integrations" = "Tích hợp";
-"room_details_search" = "Tìm phòng";
+"room_details_search" = "Tìm nhóm";
 "room_details_title_for_dm" = "Chi tiết";
 "identity_server_settings_alert_error_invalid_identity_server" = "%@ không phải là máy chủ xác thực hợp lệ.";
 "identity_server_settings_alert_error_terms_not_accepted" = "Bạn phải chấp nhận các điều khoản của %@ để thiết lập nó là máy chủ xác thực.";
@@ -1328,7 +1328,7 @@
 // Manage session
 "manage_session_title" = "Quản lý thiết bị";
 "security_settings_user_password_description" = "Xác nhận danh tính của bạn bằng cách nhập mật khẩu tài khoản của bạn";
-"security_settings_coming_soon" = "Xin lỗi. Hành động này vẫn chưa có trên %@ iOS. Vui lòng sử dụng client Matrix khác để thiết lập nó. %@ iOS sẽ sử dụng nó.";
+"security_settings_coming_soon" = "Xin lỗi. Hành động này vẫn chưa có trên %@ iOS. Vui lòng sử dụng client 5HP khác để thiết lập nó. %@ iOS sẽ sử dụng nó.";
 "security_settings_complete_security_alert_message" = "Bạn nên hoàn thành bảo mật trên thiết bị hiện tại của bạn trước.";
 "security_settings_complete_security_alert_title" = "Hoàn thành bảo mật";
 "security_settings_blacklist_unverified_devices_description" = "Xác nhận tất cả các phiên của người dùng để đánh dấu chúng là tin cậy và gửi tin nhắn đến chúng.";
@@ -1359,7 +1359,7 @@
 
 // Security settings
 "security_settings_title" = "Bảo mật";
-"settings_show_NSFW_public_rooms" = "Hiện các phòng công cộng NSFW";
+"settings_show_NSFW_public_rooms" = "Hiện các nhóm công cộng NSFW";
 "settings_identity_server_no_is_description" = "Bạn đang không dùng máy chủ xác thực. Để tìm thấy hoặc được tìm thấy bời các liên hệ bạn biết, hãy thêm vào một";
 "settings_identity_server_no_is" = "Không có máy chủ xác thực được cấu hình";
 "settings_identity_server_description" = "Sử dụng máy chủ xác thực được cài đặt bên trên, bạn có thể tìm thấy và được tìm thấy bởi các liên hệ bạn biết.";
@@ -1367,14 +1367,14 @@
 "settings_discovery_three_pid_details_cancel_email_validation_action" = "Hủy xác thực email";
 "settings_discovery_three_pid_details_revoke_action" = "Thu hồi";
 "settings_discovery_three_pid_details_share_action" = "Chia sẻ";
-"settings_discovery_three_pid_details_information_phone_number" = "Quản lý tùy chọn cho số điện thoại này, mà người dùng khác có thể dùng để tìm thấy bạn và sử dụng để mời bạn vào phòng. Thêm hoặc xóa các số điện thoại trong các tài khoản.";
+"settings_discovery_three_pid_details_information_phone_number" = "Quản lý tùy chọn cho số điện thoại này, mà người dùng khác có thể dùng để tìm thấy bạn và sử dụng để mời bạn vào nhóm. Thêm hoặc xóa các số điện thoại trong các tài khoản.";
 "settings_discovery_three_pid_details_title_phone_number" = "Quản lý số điện thoại";
-"settings_discovery_three_pid_details_information_email" = "Quản lý tùy chọn cho địa chỉ email này, mà các người dùng khác có thể dùng để tìm thấy bạn và sử dụng để mời bạn vào phòng. Thêm hoặc xóa các địa chỉ email trong các tài khoản.";
+"settings_discovery_three_pid_details_information_email" = "Quản lý tùy chọn cho địa chỉ email này, mà các người dùng khác có thể dùng để tìm thấy bạn và sử dụng để mời bạn vào nhóm. Thêm hoặc xóa các địa chỉ email trong các tài khoản.";
 "settings_discovery_three_pid_details_title_email" = "Quản lý email";
 "settings_discovery_error_message" = "Có lỗi xảy ra. Vui lòng thử lại.";
 "settings_discovery_three_pids_management_information_part3" = ".";
 "settings_discovery_three_pids_management_information_part2" = "Cài đặt người dùng";
-"settings_discovery_three_pids_management_information_part1" = "Quản lý các địa chỉ email hoặc số điện thoại mà người dùng khác có thể sử dụng để tìm thấy bạn và sử dụng để mời bạn vào phòng. Thêm hoặc xóa các địa chỉ email hoặc số điện thoại từ danh sách này trong ";
+"settings_discovery_three_pids_management_information_part1" = "Quản lý các địa chỉ email hoặc số điện thoại mà người dùng khác có thể sử dụng để tìm thấy bạn và sử dụng để mời bạn vào nhóm. Thêm hoặc xóa các địa chỉ email hoặc số điện thoại từ danh sách này trong ";
 "settings_discovery_terms_not_signed" = "Chấp nhận Điều khoản dịch vụ của máy chủ xác thực (%@) để cho phép bạn có thể được tìm thấy bằng địa chỉ email hoặc số điện thoại.";
 "settings_discovery_no_identity_server" = "Bạn đang không xài máy chủ xác thực. Để các liên hệ bạn biết tìm thấy bạn, hãy thêm một.";
 "settings_devices_description" = "Tên công khai của một thiết bị hiển thị cho mọi người mà bạn đang giao tiếp";
@@ -1410,22 +1410,22 @@
 "settings_labs_message_reaction" = "Phản ứng với các tin nhắn bằng emoji";
 "settings_contacts_enable_sync_description" = "Điều này sẽ dùng máy chủ xác thực của bạn để kết nối bạn với các liên hệ của bạn, và hỗ trợ họ tìm thấy bạn.";
 "settings_contacts_enable_sync" = "Tìm các liên hệ của bạn";
-"settings_show_url_previews_description" = "Các bản xem trước chỉ được hiển thị trong các phòng không mã hóa.";
+"settings_show_url_previews_description" = "Các bản xem trước chỉ được hiển thị trong các nhóm không mã hóa.";
 "settings_show_url_previews" = "Hiện bản xem trước trang web";
 "settings_ui_theme_picker_message_match_system_theme" = "\"Tự động\" khớp chủ đề hệ thống của thiết bị của bạn";
 "settings_ui_theme_picker_message_invert_colours" = "\"Tự động\" sử dụng cài đặt \"Các màu đảo ngược\" của thiết bị của bạn";
 "settings_ui_theme_black" = "Đen";
-"settings_integrations_allow_description" = "Sử dụng một trình quản lý tích hợp (%@) để quản lý bot, cầu nối, widget và các gói sticker.\n\nCác trình quản lý tích hợp nhận dữ liệu cấu hình, và có thể sửa đổi các widget, gửi các lời mời phòng và đặt cấp độ quản lý thay cho bạn";
+"settings_integrations_allow_description" = "Sử dụng một trình quản lý tích hợp (%@) để quản lý bot, cầu nối, widget và các gói sticker.\n\nCác trình quản lý tích hợp nhận dữ liệu cấu hình, và có thể sửa đổi các widget, gửi các lời mời nhóm và đặt cấp độ quản lý thay cho bạn";
 "settings_integrations_allow_button" = "Quản lý tích hợp";
-"settings_calls_stun_server_fallback_description" = "Cho phép máy chủ hỗ trợ cuộc gọi dự phòng %@ khi homeserver của bạn không cung cấp (địa chỉ IP của bạn sẽ được chia sẻ trong cuộc gọi).";
-"settings_calls_stun_server_fallback_button" = "Cho phép máy chủ hỗ trợ cuộc gọi dự phòng";
-"settings_mentions_and_keywords_encryption_notice" = "Bạn sẽ không nhận được thông báo cho các đề cập và từ khóa trong các phòng được mã hóa trên di động";
+"settings_calls_stun_server_fallback_description" = "Cho phép máy chủ hỗ trợ cuộc gọi dự nhóm %@ khi homeserver của bạn không cung cấp (địa chỉ IP của bạn sẽ được chia sẻ trong cuộc gọi).";
+"settings_calls_stun_server_fallback_button" = "Cho phép máy chủ hỗ trợ cuộc gọi dự nhóm";
+"settings_mentions_and_keywords_encryption_notice" = "Bạn sẽ không nhận được thông báo cho các đề cập và từ khóa trong các nhóm được mã hóa trên di động";
 "settings_new_keyword" = "Thêm từ khóa mới";
 "settings_your_keywords" = "Các từ khóa của bạn";
-"settings_room_upgrades" = "Các nâng cấp phòng";
+"settings_room_upgrades" = "Các nâng cấp nhóm";
 "settings_messages_by_a_bot" = "Các tin nhắn của bot";
 "settings_call_invitations" = "Các lời mời cuộc gọi";
-"settings_room_invitations" = "Các lời mời phòng";
+"settings_room_invitations" = "Các lời mời nhóm";
 "settings_messages_containing_keywords" = "Các từ khóa";
 "settings_messages_containing_at_room" = "@room";
 "settings_messages_containing_user_name" = "Tên người dùng của tôi";
@@ -1447,7 +1447,7 @@
 "settings_three_pids_management_information_part2" = "Tìm kiếm";
 "settings_three_pids_management_information_part1" = "Quản lý các địa chỉ email hoặc số điện thoại bạn có thể sử dụng để đăng nhập hoặc khôi phục tài khoản của bạn ở đây. Điều khiển ai có thể tìm thấy bạn ";
 "settings_deactivate_account" = "HỦY KÍCH HOẠT TÀI KHOẢN";
-"settings_key_backup" = "KHÓA DỰ PHÒNG";
+"settings_key_backup" = "KHÓA DỰ nhóm";
 "settings_flair" = "Thể hiện sự tinh tế khi được phép";
 "settings_phone_contacts" = "DANH BẠ ĐIỆN THOẠI";
 "settings_integrations" = "TÍCH HỢP";
@@ -1484,9 +1484,9 @@
 "room_resource_limit_exceeded_message_contact_2_link" = "Liên hệ quản trị viên dịch vụ của bạn";
 "room_resource_limit_exceeded_message_contact_1" = " Vui lòng ";
 "room_predecessor_link" = "Nhấn vào đây để xem các tin nhắn cũ.";
-"room_predecessor_information" = "Phòng này là sự tiếp nối của cuộc trò chuyện khác.";
+"room_predecessor_information" = "Nhóm này là sự tiếp nối của cuộc trò chuyện khác.";
 "room_replacement_link" = "Cuộc trò chuyện tiếp tục ở đây";
-"room_replacement_information" = "Phòng này đã được thay thế và không còn hoạt động nữa";
+"room_replacement_information" = "Nhóm này đã được thay thế và không còn hoạt động nữa";
 "room_action_reply" = "Trả lời";
 "room_action_send_file" = "Gửi tệp";
 "room_action_send_sticker" = "Gửi sticker";
@@ -1502,7 +1502,7 @@
 "room_event_action_ban_prompt_reason" = "Lí do cấm người dùng này";
 "room_event_action_kick_prompt_reason" = "Lí do đá người dùng này";
 "room_event_action_view_decrypted_source" = "Xem nguồn được giải mã";
-"room_unsent_messages_cancel_message" = "Bạn có chắc muốn xóa tất cả các tin nhắn chưa được gửi trong phòng này?";
+"room_unsent_messages_cancel_message" = "Bạn có chắc muốn xóa tất cả các tin nhắn chưa được gửi trong nhóm này?";
 "room_unsent_messages_cancel_title" = "Xóa các tin nhắn chưa được gửi";
 "room_message_reply_to_short_placeholder" = "Gửi trả lời…";
 "encrypted_room_message_reply_to_placeholder" = "Gửi trả lời đã mã hóa…";
@@ -1515,7 +1515,7 @@
 // Success from secure backup
 "key_backup_setup_success_from_secure_backup_info" = "Các khóa của bạn đang được sao lưu.";
 "key_backup_setup_success_from_recovery_key_made_copy_action" = "Tôi vừa tạo một bản sao";
-"room_do_not_have_permission_to_post" = "Bạn không có quyền đăng bài vào phòng này";
+"room_do_not_have_permission_to_post" = "Bạn không có quyền đăng bài vào nhóm này";
 "room_message_replying_to" = "Đang trả lời %@";
 "room_message_editing" = "Chỉnh sửa";
 "room_message_unable_open_link_error_message" = "Không thể mở liên kết";
@@ -1531,9 +1531,9 @@
 "room_member_power_level_moderator_in" = "Điều hành viên trong %@";
 "room_member_power_level_admin_in" = "Quản trị viên trong %@";
 "room_participants_security_information_room_encrypted_for_dm" = "Các tin nhắn ở đây được mã hóa đầu-cuối.\n\nCác tin nhắn của bạn được mã hóa bằng các khóa và chỉ có bạn và người nhận có những khóa duy nhất để mở chúng.";
-"room_participants_security_information_room_encrypted" = "Các tin nhắn trong phòng này được mã hóa đầu-cuối.\n\nCác tin nhắn của bạn được bảo mật bằng các khóa và chỉ có bạn và người nhận có các khóa duy nhất để mở chúng.";
+"room_participants_security_information_room_encrypted" = "Các tin nhắn trong nhóm này được mã hóa đầu-cuối.\n\nCác tin nhắn của bạn được bảo mật bằng các khóa và chỉ có bạn và người nhận có các khóa duy nhất để mở chúng.";
 "room_participants_security_information_room_not_encrypted_for_dm" = "Các tin nhắn ở đây không được mã hóa đầu-cuối";
-"room_participants_security_information_room_not_encrypted" = "Các tin nhắn trong phòng này không được mã hóa đầu-cuối";
+"room_participants_security_information_room_not_encrypted" = "Các tin nhắn trong nhóm này không được mã hóa đầu-cuối";
 "room_participants_security_loading" = "Đang tải…";
 "room_participants_action_security_status_loading" = "Đang tải…";
 "room_participants_action_security_status_warning" = "Cảnh báo";
@@ -1558,12 +1558,12 @@
 
 // Groups tab
 "group_invite_section" = "MỜI";
-"rooms_empty_view_information" = "Phòng là tuyệt vời cho bất kỳ trò chuyện nhóm, riêng tư hoặc công cộng. Nhấn vào + để tìm các phòng hiện có hoặc tạo phòng mới.";
-"rooms_empty_view_title" = "Phòng";
+"rooms_empty_view_information" = "Nhóm là tuyệt vời cho bất kỳ trò chuyện nhóm, riêng tư hoặc công cộng. Nhấn vào + để tìm các nhóm hiện có hoặc tạo nhóm mới.";
+"rooms_empty_view_title" = "Nhóm";
 "people_empty_view_information" = "Trò chuyện bảo mật với bất cứ ai. Nhấn vào + để bắt đầu thêm người";
 "people_empty_view_title" = "Danh bạ";
-"room_recents_unknown_room_error_message" = "Không thể tìm thấy phòng này. Hãy chắc chắn rằng nó tồn tại";
-"room_recents_suggested_rooms_section" = "PHÒNG GỢI Ý";
+"room_recents_unknown_room_error_message" = "Không thể tìm thấy nhóm này. Hãy chắc chắn rằng nó tồn tại";
+"room_recents_suggested_rooms_section" = "Nhóm GỢI Ý";
 "room_recents_server_notice_section" = "CẢNH BẢO HỆ THỐNG";
 "room_creation_dm_error" = "Chúng tôi không thể tạo DM của bạn. Vui lòng kiểm tra người dùng bạn muốn mời và thử lại.";
 "room_creation_error_invite_user_by_email_without_identity_server" = "Không có máy chủ xác thực nào được cấu hình vì vậy bạn không thể thêm người dự bằng email.";
@@ -1621,7 +1621,7 @@
 "skip" = "Bỏ qua";
 "close" = "Đóng";
 "store_promotional_text" = "Ứng dụng trò chuyện và cộng tác bảo vệ quyền riêng tư, trên mạng mở. Phi tập trung để đưa bạn vào tầm kiểm soát. Không có datamining, không có backdoors và không có quyền truy cập của bên thứ ba.";
-"store_full_description" = "5HPC là một loại ứng dụng cộng tác và nhắn tin mới:\n\n1. Đặt bạn kiểm soát để giữ quyền riêng tư của bạn\n2. Cho phép bạn giao tiếp với bất kỳ ai trong mạng Matrix, và thậm chí hơn thế nữa bằng cách tích hợp với các ứng dụng như Slack\n3. Bảo vệ bạn khỏi quảng cáo, datamining, cửa hậu và khu vườn có tường bao quanh\n4. Bảo mật bạn thông qua mã hóa đầu cuối, với việc ký chéo để xác minh người khác\n\n5HPC hoàn toàn khác với các ứng dụng nhắn tin và cộng tác khác vì nó được phân cấp và nguồn mở.\n\n5HPC cho phép bạn tự lưu trữ - hoặc chọn máy chủ - để bạn có quyền riêng tư, quyền sở hữu và kiểm soát dữ liệu và cuộc trò chuyện của mình. Nó cho phép bạn truy cập vào một mạng mở; vì vậy, bạn không chỉ bị mắc kẹt khi nói chuyện với những người dùng 5HPC khác. Và nó rất an toàn.\n\n5HPC có thể làm tất cả điều này bởi vì nó hoạt động trên Matrix - tiêu chuẩn cho giao tiếp mở, phi tập trung. \n\n5HPC giúp bạn kiểm soát bằng cách cho phép bạn chọn người tổ chức các cuộc trò chuyện của bạn. Từ ứng dụng 5HPC, bạn có thể chọn lưu trữ theo nhiều cách khác nhau:\n\n1. Nhận tài khoản miễn phí trên máy chủ công cộng matrix.org\n2. Tự lưu trữ tài khoản của bạn bằng cách chạy máy chủ trên phần cứng của riêng bạn\n3. Đăng ký tài khoản trên máy chủ tùy chỉnh bằng cách đăng ký vào nền tảng lưu trữ Dịch vụ 5HPC Matrix\n\nTại sao chọn 5HPC?\n\nSở hữu dữ liệu của bạn: Bạn quyết định nơi để giữ dữ liệu và tin nhắn của bạn. Bạn sở hữu nó và kiểm soát nó, không phải một số MEGACORP khai thác dữ liệu của bạn hoặc cho phép truy cập vào bên thứ ba.\n\nTIN NHẮN MỞ VÀ CỘNG TÁC: Bạn có thể trò chuyện với bất kỳ ai khác trong mạng Matrix, cho dù họ đang sử dụng 5HPC hay ứng dụng Matrix khác và ngay cả khi họ đang sử dụng một hệ thống nhắn tin khác như Slack, IRC hoặc XMPP.\n\nSUPER-SECURE: Mã hóa đầu cuối thực sự (chỉ những người trong cuộc trò chuyện mới có thể giải mã tin nhắn) và ký chéo để xác minh các thiết bị của người tham gia hội thoại.\n\nGIAO TIẾP ĐẦY ĐỦ: Nhắn tin, cuộc gọi thoại và video, chia sẻ tệp, chia sẻ màn hình và một loạt các tích hợp, bot và tiện ích. Xây dựng phòng, cộng đồng, giữ liên lạc và hoàn thành công việc.\n\nỞ mọi nơi bạn đang có: Giữ liên lạc bất cứ nơi nào bạn đang có với lịch sử tin nhắn được đồng bộ hóa hoàn toàn trên tất cả các thiết bị của bạn và trên web tại https://5HPC.io/app.";
+"store_full_description" = "5HPC là một loại ứng dụng cộng tác và nhắn tin mới:\n\n1. Đặt bạn kiểm soát để giữ quyền riêng tư của bạn\n2. Cho phép bạn giao tiếp với bất kỳ ai trong mạng 5HPC, và thậm chí hơn thế nữa bằng cách tích hợp với các ứng dụng như Slack\n3. Bảo vệ bạn khỏi quảng cáo, datamining, cửa hậu và khu vườn có tường bao quanh\n4. Bảo mật bạn thông qua mã hóa đầu cuối, với việc ký chéo để xác minh người khác\n\n5HPC hoàn toàn khác với các ứng dụng nhắn tin và cộng tác khác vì nó được phân cấp và nguồn mở.\n\n5HPC cho phép bạn tự lưu trữ - hoặc chọn máy chủ - để bạn có quyền riêng tư, quyền sở hữu và kiểm soát dữ liệu và cuộc trò chuyện của mình. Nó cho phép bạn truy cập vào một mạng mở; vì vậy, bạn không chỉ bị mắc kẹt khi nói chuyện với những người dùng 5HPC khác. Và nó rất an toàn.\n\n5HPC có thể làm tất cả điều này bởi vì nó hoạt động trên 5HPC - tiêu chuẩn cho giao tiếp mở, phi tập trung. \n\n5HPC giúp bạn kiểm soát bằng cách cho phép bạn chọn người tổ chức các cuộc trò chuyện của bạn. Từ ứng dụng 5HPC, bạn có thể chọn lưu trữ theo nhiều cách khác nhau:\n\n1. Nhận tài khoản miễn phí trên máy chủ công cộng 5hpc.com\n2. Tự lưu trữ tài khoản của bạn bằng cách chạy máy chủ trên phần cứng của riêng bạn\n3. Đăng ký tài khoản trên máy chủ tùy chỉnh bằng cách đăng ký vào nền tảng lưu trữ Dịch vụ 5HPC\n\nTại sao chọn 5HPC?\n\nSở hữu dữ liệu của bạn: Bạn quyết định nơi để giữ dữ liệu và tin nhắn của bạn. Bạn sở hữu nó và kiểm soát nó, không phải một số MEGACORP khai thác dữ liệu của bạn hoặc cho phép truy cập vào bên thứ ba.\n\nTIN NHẮN MỞ VÀ CỘNG TÁC: Bạn có thể trò chuyện với bất kỳ ai khác trong mạng 5HPC, cho dù họ đang sử dụng 5HPC hay ứng dụng 5HPC khác và ngay cả khi họ đang sử dụng một hệ thống nhắn tin khác như Slack, IRC hoặc XMPP.\n\nSUPER-SECURE: Mã hóa đầu cuối thực sự (chỉ những người trong cuộc trò chuyện mới có thể giải mã tin nhắn) và ký chéo để xác minh các thiết bị của người tham gia hội thoại.\n\nGIAO TIẾP ĐẦY ĐỦ: Nhắn tin, cuộc gọi thoại và video, chia sẻ tệp, chia sẻ màn hình và một loạt các tích hợp, bot và tiện ích. Xây dựng nhóm, cộng đồng, giữ liên lạc và hoàn thành công việc.\n\nỞ mọi nơi bạn đang có: Giữ liên lạc bất cứ nơi nào bạn đang có với lịch sử tin nhắn được đồng bộ hóa hoàn toàn trên tất cả các thiết bị của bạn và trên web tại https://5HPC.io/app.";
 // String for App Store
 "store_short_description" = "Chat/VoIP bảo mật phi tập trung";
 
@@ -1629,19 +1629,19 @@
 // MARK: - MatrixKit
 
 
-"matrix" = "Matrix";
+"matrix" = "5HPC";
 // Login Screen
 "login_create_account" = "Tạo tài khoản:";
-"login_server_url_placeholder" = "URL (e.g. https://matrix.org)";
+"login_server_url_placeholder" = "URL (e.g. https://5hpc.com)";
 "login_home_server_title" = "Máy chủ nhà:";
 "login_home_server_info" = "Máy chủ nhà của bạn lưu trữ tất cả dữ liệu cần giữ gìn và tài khoản";
 "login_identity_server_title" = "Máy chủ xác thực:";
-"login_identity_server_info" = "Matrix cung cấp máy chủ xác thực để theo dõi email nào thuộc về Matrix IDs nào. Chỉ https://matrix.org hiện đang tồn tại.";
-"login_user_id_placeholder" = "Matrix ID (ví dụ: @bob:matrix.org hoặc bob)";
+"login_identity_server_info" = "5HPC cung cấp máy chủ xác thực để theo dõi email nào thuộc về 5HPC IDs nào. Chỉ https://5hpc.com hiện đang tồn tại.";
+"login_user_id_placeholder" = "5HPC ID (ví dụ: @bob:5hpc.com hoặc bob)";
 "login_password_placeholder" = "Mật khẩu";
 "login_optional_field" = "không bắt buộc";
 "login_display_name_placeholder" = "Tên hiển thị (ví dụ: Bob Obson)";
-"login_email_info" = "Định nghĩa địa chỉ email cho phép người dùng khác tìm thấy bạn trên Matrix dễ dàng hơn và giúp bạn đặt lại mật khẩu của bạn sau này.";
+"login_email_info" = "Định nghĩa địa chỉ email cho phép người dùng khác tìm thấy bạn trên 5HPC dễ dàng hơn và giúp bạn đặt lại mật khẩu của bạn sau này.";
 "login_email_placeholder" = "Địa chỉ email";
 "login_prompt_email_token" = "Vui lòng nhập mã xác nhận hợp lệ email của bạn:";
 "login_error_title" = "Đăng nhập thất bại";
@@ -1655,7 +1655,7 @@
 "login_error_limit_exceeded" = "Quá nhiều yêu cầu đã được gửi";
 "login_error_user_in_use" = "Tên đăng nhập này đã được sử dụng";
 "login_error_login_email_not_yet" = "Liên kết email chưa được nhấp vào";
-"login_use_fallback" = "Sử dụng dự phòng";
+"login_use_fallback" = "Sử dụng dự nhóm";
 "login_leave_fallback" = "Huỷ";
 "login_invalid_param" = "Tham số không hợp lệ";
 "register_error_title" = "Đăng kí thất bại";
@@ -1682,7 +1682,7 @@
 "select_account" = "Chọn một tài khoản";
 "attach_media" = "Đính kèm Media từ thư viện";
 "capture_media" = "Chụp ảnh/quay video";
-"invite_user" = "Mời người dùng Matrix";
+"invite_user" = "Mời người dùng 5HPC";
 "reset_to_default" = "Thiết lập lại về mặc định";
 "resend_message" = "Gửi lại tin nhắn";
 "select_all" = "Chọn tất cả";
@@ -1696,15 +1696,15 @@
 "unignore" = "Huỷ bỏ qua";
 // Events formatter
 "notice_avatar_changed_too" = "(hình đại diện cũng đã được thay đổi)";
-"notice_room_name_removed" = "%@ bị gỡ bỏ khỏi tên của phòng";
-"notice_room_topic_removed" = "%@ bị gỡ bỏ khỏi chủ đề của phòng";
+"notice_room_name_removed" = "%@ bị gỡ bỏ khỏi tên của nhóm";
+"notice_room_topic_removed" = "%@ bị gỡ bỏ khỏi chủ đề của nhóm";
 "notice_event_redacted" = "<sửa lại%@>";
 "notice_event_redacted_by" = " bởi %@";
 "notice_event_redacted_reason" = " [lí do: %@]";
 "notice_profile_change_redacted" = "%@ cập nhật hồ sơ của họ %@";
-"notice_room_created" = "%@ đã tạo phòng";
+"notice_room_created" = "%@ đã tạo nhóm";
 "notice_room_join_rule" = "Quy tắc tham gia là: %@";
-"notice_room_power_level_intro" = "Công suất của thành viên trong phòng:";
+"notice_room_power_level_intro" = "Công suất của thành viên trong nhóm:";
 "notice_room_power_level_acting_requirement" = "Mức công suất tối thiểu mà người dùng phải có trước khi hoạt động là:";
 "notice_room_power_level_event_requirement" = "Mức công suất tối thiểu liên quan đến sự kiện là:";
 "notice_encrypted_message" = "Tin nhắn đã được mã hoá";
@@ -1720,21 +1720,21 @@
 "notice_error_unsupported_event" = "Sự kiện không được hỗ trợ";
 "notice_error_unexpected_event" = "Sự kiện bất ngờ";
 "notice_error_unknown_event_type" = "Loại sự kiện không xác định";
-"notice_room_history_visible_to_anyone" = "%@ làm cho mọi người có thể thấy lịch sử phòng.";
-"notice_room_history_visible_to_members" = "%@ làm cho thành viên trong phòng có thể thấy được lịch sử phòng.";
-"notice_room_history_visible_to_members_from_invited_point" = "%@ làm cho mọi thành viên có thể thấy được lịch sử phòng từ thời điểm được mời.";
-"notice_room_history_visible_to_members_from_joined_point" = "%@ làm cho mọi người có thể thấy lịch sử phòng từ thời điểm họ tham gia.";
+"notice_room_history_visible_to_anyone" = "%@ làm cho mọi người có thể thấy lịch sử nhóm.";
+"notice_room_history_visible_to_members" = "%@ làm cho thành viên trong nhóm có thể thấy được lịch sử nhóm.";
+"notice_room_history_visible_to_members_from_invited_point" = "%@ làm cho mọi thành viên có thể thấy được lịch sử nhóm từ thời điểm được mời.";
+"notice_room_history_visible_to_members_from_joined_point" = "%@ làm cho mọi người có thể thấy lịch sử nhóm từ thời điểm họ tham gia.";
 "notice_crypto_unable_to_decrypt" = "** Không thể giải mã: %@ **";
 "notice_crypto_error_unknown_inbound_session_id" = "Thiết bị gửi đi đã không gửi cho chúng ta các khoá giải mã tin nhắn.";
 // room display name
-"room_displayname_empty_room" = "Phòng trống";
+"room_displayname_empty_room" = "Nhóm trống";
 "room_displayname_two_members" = "%@ và %@";
 // Settings
 "settings" = "Cài đặt";
 "settings_enable_inapp_notifications" = "Bật thông báo bên trong ứng dụng";
 "settings_enable_push_notifications" = "Bật thông báo";
 "settings_enter_validation_token_for" = "Nhập mã thông báo xác nhận cho %@:";
-"notification_settings_room_rule_title" = "Phòng chat: '%@'";
+"notification_settings_room_rule_title" = "Nhóm chat: '%@'";
 // Devices
 "device_details_title" = "Thông tin thiết bị\n";
 "device_details_name" = "Tên\n";
@@ -1783,31 +1783,31 @@
 "account_msisdn_validation_error" = "Không thể xác thực số điện thoại.";
 "account_error_display_name_change_failed" = "Thay đổi tên hiển thị thất bại";
 "account_error_picture_change_failed" = "Thay đổi hình ảnh thất bại";
-"account_error_matrix_session_is_not_opened" = "Phiên làm việc matrix chưa được mở";
+"account_error_matrix_session_is_not_opened" = "Phiên làm việc 5HPC chưa được mở";
 "account_error_email_wrong_title" = "Địa chỉ email không hợp lệ";
 "account_error_email_wrong_description" = "Nó có vẻ không phải là một địa chỉ email hợp lệ";
 "account_error_msisdn_wrong_title" = "Số điện thoại không hợp lệ";
 "account_error_msisdn_wrong_description" = "Nó có vẻ không phải là một số điện thoại hợp lệ";
 // Room creation
-"room_creation_name_title" = "Tên phòng:";
+"room_creation_name_title" = "Tên nhóm:";
 "room_creation_name_placeholder" = "(ví dụ: lunchGroup)";
-"room_creation_alias_title" = "Bí danh phòng:";
+"room_creation_alias_title" = "Bí danh nhóm:";
 "room_creation_alias_placeholder" = "(ví dụ: #foo:example.org)";
 "room_creation_alias_placeholder_with_homeserver" = "(ví dụ: #foo%@)";
 "room_creation_participants_title" = "Người tham gia:";
 "room_creation_participants_placeholder" = "(ví dụ: @bob:homeserver1; @john:homeserver2...)";
 // Room
-"room_please_select" = "Vui lòng chọn một phòng";
-"room_error_join_failed_title" = "Tham gia phòng thất bại";
-"room_error_join_failed_empty_room" = "Hiện tại không thể tham gia lại phòng trống.";
-"room_error_name_edition_not_authorized" = "Bạn chưa được uỷ quyền để sửa tên phòng";
-"room_error_topic_edition_not_authorized" = "Bạn chưa được uỷ quyền để sửa chủ đề phòng";
+"room_please_select" = "Vui lòng chọn một nhóm";
+"room_error_join_failed_title" = "Tham gia nhóm thất bại";
+"room_error_join_failed_empty_room" = "Hiện tại không thể tham gia lại nhóm trống.";
+"room_error_name_edition_not_authorized" = "Bạn chưa được uỷ quyền để sửa tên nhóm";
+"room_error_topic_edition_not_authorized" = "Bạn chưa được uỷ quyền để sửa chủ đề nhóm";
 "room_error_cannot_load_timeline" = "Không tải được dòng thời gian";
 "room_error_timeline_event_not_found_title" = "Không tải được vị trí dòng thời gian";
-"room_error_timeline_event_not_found" = "Ứng dụng đã cố gắng tải một điểm cụ thể trong thời gian của phòng này nhưng không thể tìm thấy nó";
-"room_left" = "Bạn đã rời phòng";
-"room_no_power_to_create_conference_call" = "Bạn cần cấp quyền để mời bắt đầu cuộc gọi hội họp trong phòng này";
-"room_no_conference_call_in_encrypted_rooms" = "Gọi hội họp chưa được hỗ trợ trong các phòng đã mã hoá";
+"room_error_timeline_event_not_found" = "Ứng dụng đã cố gắng tải một điểm cụ thể trong thời gian của nhóm này nhưng không thể tìm thấy nó";
+"room_left" = "Bạn đã rời nhóm";
+"room_no_power_to_create_conference_call" = "Bạn cần cấp quyền để mời bắt đầu cuộc gọi hội họp trong nhóm này";
+"room_no_conference_call_in_encrypted_rooms" = "Gọi hội họp chưa được hỗ trợ trong các nhóm đã mã hoá";
 // Room members
 "room_member_ignore_prompt" = "Bạn có chắc chắn muốn ẩn tất cả tin nhắn từ người dùng này?";
 "room_member_power_level_prompt" = "Bạn sẽ không thể hoàn tác thay đổi này khi bạn đang quảng cáo cho người dùng có mức năng lượng như chính bạn.\nBạn có chắc không?";
@@ -1821,10 +1821,10 @@
 "attachment_cancel_upload" = "Huỷ bỏ tải lên?";
 "attachment_multiselection_size_prompt" = "Bạn có muốn gửi hình ảnh dưới dạng:";
 "attachment_multiselection_original" = "Kích thước thực sự";
-"attachment_e2e_keys_file_prompt" = "Tập tin này chứa các khoá mã hoá được xuất từ một máy khách Matrix.\nBạn có muốn xem nội dung tập tin hoặc nhập khẩu các khóa nó chứa?";
+"attachment_e2e_keys_file_prompt" = "Tập tin này chứa các khoá mã hoá được xuất từ một máy khách 5HPC.\nBạn có muốn xem nội dung tập tin hoặc nhập khẩu các khóa nó chứa?";
 "attachment_e2e_keys_import" = "Nhập...";
 // Contacts
-"contact_mx_users" = "Người dùng của Matrix";
+"contact_mx_users" = "Người dùng của 5HPC";
 "contact_local_contacts" = "Danh bạ";
 // Search
 "search_no_results" = "Không có kết quả";
@@ -1835,13 +1835,13 @@
 "format_time_h" = "giờ";
 "format_time_d" = "ngày";
 // E2E import
-"e2e_import_room_keys" = "Nhập khóa phòng";
-"e2e_import_prompt" = "Quá trình này cho phép bạn nhập các khoá mã hoá mà trước đây bạn đã xuất từ một máy khách Matrix khác. Sau đó, bạn sẽ có thể giải mã bất kỳ thư nào mà khách hàng khác có thể giải mã.\nTệp xuất được bảo vệ bằng cụm mật khẩu. Bạn nên nhập cụm từ mật khẩu ở đây, để giải mã tệp.";
+"e2e_import_room_keys" = "Nhập khóa nhóm";
+"e2e_import_prompt" = "Quá trình này cho phép bạn nhập các khoá mã hoá mà trước đây bạn đã xuất từ một máy khách 5HPC khác. Sau đó, bạn sẽ có thể giải mã bất kỳ thư nào mà khách hàng khác có thể giải mã.\nTệp xuất được bảo vệ bằng cụm mật khẩu. Bạn nên nhập cụm từ mật khẩu ở đây, để giải mã tệp.";
 "e2e_import" = "Nhập";
 "e2e_passphrase_enter" = "Nhập cụm mật khẩu";
 // E2E export
-"e2e_export_room_keys" = "Xuất các khoá của phòng";
-"e2e_export_prompt" = "Quá trình này cho phép bạn xuất khẩu các khoá cho tin nhắn bạn đã nhận được trong các phòng được mã hoá tới một tập tin cục bộ. Sau đó, bạn sẽ có thể nhập tập tin vào máy khách Matrix khác trong tương lai, để khách hàng cũng có thể giải mã các thư này.\nTập tin được xuất sẽ cho phép bất kỳ ai có thể đọc nó để giải mã bất kỳ tin nhắn nào được mã hóa mà bạn có thể thấy, do đó bạn nên cẩn thận để giữ an toàn.";
+"e2e_export_room_keys" = "Xuất các khoá của nhóm";
+"e2e_export_prompt" = "Quá trình này cho phép bạn xuất khẩu các khoá cho tin nhắn bạn đã nhận được trong các nhóm được mã hoá tới một tập tin cục bộ. Sau đó, bạn sẽ có thể nhập tập tin vào máy khách 5HPC khác trong tương lai, để khách hàng cũng có thể giải mã các thư này.\nTập tin được xuất sẽ cho phép bất kỳ ai có thể đọc nó để giải mã bất kỳ tin nhắn nào được mã hóa mà bạn có thể thấy, do đó bạn nên cẩn thận để giữ an toàn.";
 "e2e_export" = "Xuất";
 "e2e_passphrase_confirm" = "Xác nhận cụm mật khẩu";
 "e2e_passphrase_empty" = "Cụm mật khẩu không được để trống";
@@ -1871,12 +1871,12 @@
 "language_picker_title" = "Chọn một ngôn ngữ";
 "language_picker_default_language" = "Mặc định (%@)";
 "notice_room_invite" = "%@ đã mời %@";
-"notice_room_third_party_invite" = "%@ gửi một lời mời tới %@ để tham gia phòng";
+"notice_room_third_party_invite" = "%@ gửi một lời mời tới %@ để tham gia nhóm";
 "notice_room_third_party_registered_invite" = "%@ chấp nhận lời mời cho %@";
 "notice_room_join" = "%@ đã tham gia";
 "notice_room_leave" = "%@ đã rời";
 "notice_room_reject" = "%@ từ chối lời yêu cầu";
-"notice_room_kick" = "%@ đã đá %@ ra khỏi phòng";
+"notice_room_kick" = "%@ đã đá %@ ra khỏi nhóm";
 "notice_room_unban" = "%@ đã huỷ cấm %@";
 "notice_room_ban" = "%@ đã cấm %@";
 "notice_room_withdraw" = "%@ đã thu hồi lời mời của %@";
@@ -1886,7 +1886,7 @@
 "notice_display_name_changed_from" = "%@ thay đổi tên hiển thị của họ từ %@ thành %@";
 "notice_display_name_removed" = "%@ đã gỡ bỏ tên hiển thị của họ";
 "notice_topic_changed" = "%@ thay đổi chủ đề thành: %@";
-"notice_room_name_changed" = "%@ đã thay đổi tên phòng thành: %@";
+"notice_room_name_changed" = "%@ đã thay đổi tên nhóm thành: %@";
 "notice_placed_voice_call" = "%@ tạo một cuộc gọi thoại";
 "notice_placed_video_call" = "%@ tạo một cuộc gọi video";
 "notice_answered_video_call" = "%@ đã trả lời cuộc gọi";
@@ -1905,7 +1905,7 @@
 "delete" = "Xoá";
 // actions 
 "action_logout" = "Đăng xuất";
-"create_room" = "Tạo phòng";
+"create_room" = "Tạo nhóm";
 "login" = "Đăng nhập";
 "create_account" = "Tạo tài khoản";
 "membership_invite" = "Đã mời";
@@ -1922,15 +1922,15 @@
 "login_error_must_start_http" = "URL phải bắt đầu với http[s]://";
 // room details dialog screen
 // contacts list screen 
-"invitation_message" = "Tôi muốn trò chuyện với bạn với matrix. Vui lòng truy cập trang web http://matrix.org để biết thêm thông tin.";
-// Settings screen 
+"invitation_message" = "Tôi muốn trò chuyện với bạn với 5HPC. Vui lòng truy cập trang web http://5hpc.com để biết thêm thông tin.";
+// Settings screen
 "settings_title_config" = "Cấu hình";
 "settings_title_notifications" = "Thông báo";
 // Notification settings screen 
 "notification_settings_disable_all" = "Tắt tất cả thông báo";
 "notification_settings_enable_notifications" = "Bật thông báo";
 "notification_settings_enable_notifications_warning" = "Tất cả thông báo hiện tại đang bị vô hiệu hoá cho tất cả thiết bị.";
-"notification_settings_global_info" = "Cài đặt thông báo được lưu vào tài khoản người dùng của bạn và được chia sẻ giữa tất cả các máy khách có hỗ trợ chúng (bao gồm thông báo trên máy bàn).\n\nCác quy tắc được áp dụng theo thứ tự; quy tắc đầu tiên khớp với định nghĩa của thông báo đến từ bên ngoài.\nVì vậy: Thông báo mỗi lần quan trọng hơn thông báo cho mỗi phòng điều mà quan trọng hơn thông báo mỗi người gửi.\nĐối với nhiều quy tắc cùng loại, lựa chọn đầu tiên trong danh sách phù hợp sẽ được ưu tiên.";
+"notification_settings_global_info" = "Cài đặt thông báo được lưu vào tài khoản người dùng của bạn và được chia sẻ giữa tất cả các máy khách có hỗ trợ chúng (bao gồm thông báo trên máy bàn).\n\nCác quy tắc được áp dụng theo thứ tự; quy tắc đầu tiên khớp với định nghĩa của thông báo đến từ bên ngoài.\nVì vậy: Thông báo mỗi lần quan trọng hơn thông báo cho mỗi nhóm điều mà quan trọng hơn thông báo mỗi người gửi.\nĐối với nhiều quy tắc cùng loại, lựa chọn đầu tiên trong danh sách phù hợp sẽ được ưu tiên.";
 "notification_settings_per_word_notifications" = "Thông báo mỗi từ";
 "notification_settings_per_word_info" = "Các từ khớp với trường hợp vô nghĩa và có thể bao gồm ký tự đại diện *. Vì thế:\nfoo phù hợp với chuỗi foo bao quanh bởi từ phân cách chữ (ví dụ: chấm câu và khoảng trắng hoặc bắt đầu / kết thúc dòng).\nfoo * khớp với bất kỳ từ nào bắt đầu foo.\n* foo * khớp bất kỳ từ nào trong đó bao gồm 3 chữ foo.";
 "notification_settings_always_notify" = "Luôn thông báo";
@@ -1938,20 +1938,20 @@
 "notification_settings_word_to_match" = "từ để so khớp";
 "notification_settings_highlight" = "Điểm nhấn";
 "notification_settings_custom_sound" = "Âm thanh tuỳ chỉnh";
-"notification_settings_per_room_notifications" = "Thông báo mỗi phòng";
+"notification_settings_per_room_notifications" = "Thông báo mỗi nhóm";
 "notification_settings_per_sender_notifications" = "Thông báo mỗi người gửi";
 "notification_settings_sender_hint" = "@nguoidung:tenmien.com";
-"notification_settings_select_room" = "Chọn một phòng";
+"notification_settings_select_room" = "Chọn một nhóm";
 "notification_settings_other_alerts" = "Các thông báo khác";
 "notification_settings_contain_my_user_name" = "Thông báo cho tôi với âm thanh về các tin nhắn chứa tên của tôi";
 "notification_settings_contain_my_display_name" = "Thông báo cho tôi với âm thanh về các tin nhắn chưa tên hiển thị của tôi";
 "notification_settings_just_sent_to_me" = "Thông báo cho tôi với âm thành về các tin nhắn chỉ gửi cho tôi";
-"notification_settings_invite_to_a_new_room" = "Thông báo cho tôi khi tôi được mời vào một phòng mới";
-"notification_settings_people_join_leave_rooms" = "Thông báo cho tôi khi mọi người tham gia hoặc rời các phòng";
+"notification_settings_invite_to_a_new_room" = "Thông báo cho tôi khi tôi được mời vào một nhóm mới";
+"notification_settings_people_join_leave_rooms" = "Thông báo cho tôi khi mọi người tham gia hoặc rời các nhóm";
 "notification_settings_receive_a_call" = "Thông báo cho tôi khi tôi nhận cuộc gọi";
 "notification_settings_suppress_from_bots" = "Chặn thông báo từ các bot";
 "notification_settings_by_default" = "Theo mặc định...";
-"notification_settings_notify_all_other" = "Thông báo cho tất cả tin nhắn/phòng";
+"notification_settings_notify_all_other" = "Thông báo cho tất cả tin nhắn/nhóm";
 // gcm section 
 // call string
 "call_waiting" = "Đang đợi...";
@@ -2021,7 +2021,7 @@
 "settings_analytics_and_crash_data" = "Gửi dữ liệu sự cố và phân tích";
 "settings_labs_enable_threads" = "Tin nhắn theo luồng";
 "settings_labs_enable_auto_report_decryption_errors" = "Tự động Báo cáo Lỗi Giải mã";
-"settings_labs_enable_live_location_sharing" = "Chia sẻ vị trí trực tiếp - chia sẻ vị trí hiện tại (đang phát triển, và tạm thời, các vị trí sẽ được lưu trong lịch sử phòng)";
+"settings_labs_enable_live_location_sharing" = "Chia sẻ vị trí trực tiếp - chia sẻ vị trí hiện tại (đang phát triển, và tạm thời, các vị trí sẽ được lưu trong lịch sử nhóm)";
 "settings_labs_enable_new_session_manager" = "Trình quản lý phiên mới";
 "settings_labs_enable_new_client_info_feature" = "Ghi lại tên, phiên bản và url của client để nhận dạng các phiên dễ dàng hơn trong trình quản lý phiên";
 "settings_labs_enable_new_app_layout" = "Bố cục Ứng dụng Mới";
@@ -2029,7 +2029,7 @@
 "settings_labs_enable_voice_broadcast" = "Phát sóng giọng nói";
 
 "threads_notice_title" = "Luồng không còn là thử nghiệm nữa 🎉";
-"threads_notice_information" = "Tất cả các luồng được tạo trong giai đoạn thử nghiệm bây giờ sẽ được <b>hiển thị như các trả lời thông thường</b>.<br/><br/>Đây là một sự chuyển đổi một lần, vì luồng bây giờ đã là một phần của đặc tả Matrix.";
+"threads_notice_information" = "Tất cả các luồng được tạo trong giai đoạn thử nghiệm bây giờ sẽ được <b>hiển thị như các trả lời thông thường</b>.<br/><br/>Đây là một sự chuyển đổi một lần, vì luồng bây giờ đã là một phần của đặc tả 5HPC.";
 "threads_notice_done" = "Đã hiểu";
 "notice_room_join_by_you" = "Bạn đã tham gia";
 "notice_room_created_by_you_for_dm" = "Bạn đã tham gia.";
@@ -2037,19 +2037,19 @@
 "notice_room_invite_you" = "%@ đã mời bạn";
 "room_details_polls" = "Lịch sử bình chọn";
 "room_details_access_row_title" = "Truy cập";
-"room_details_promote_room_title" = "Quảng bá phòng";
+"room_details_promote_room_title" = "Quảng bá nhóm";
 "room_details_promote_room_suggest_title" = "Đề xuất cho thành viên không gian";
 "room_member_power_level_short_owner" = "Chủ sở hữu";
 "poll_history_active_segment_title" = "Bình chọn đang hoạt động";
 "poll_history_past_segment_title" = "Bình chọn đã qua";
-"poll_history_no_active_poll_text" = "Không có bình chọn nào đang hoạt động trong phòng này";
-"poll_history_no_past_poll_text" = "Không có bình chọn nào đã qua trong phòng này";
+"poll_history_no_active_poll_text" = "Không có bình chọn nào đang hoạt động trong nhóm này";
+"poll_history_no_past_poll_text" = "Không có bình chọn nào đã qua trong nhóm này";
 "threads_empty_title" = "Sắp xếp các cuộc thảo luận bằng luồng";
 "threads_empty_info_all" = "Luồng giúp các cuộc trò chuyện của bạn đi đúng chủ đề và dễ theo dõi.";
 "threads_empty_tip" = "Mẹo: Chạm vào một tin nhắn và dùng “Luồng” để bắt đầu.";
 "room_access_settings_screen_private_message" = "Chỉ những người được mời mới có thể tìm và tham gia.";
 "space_selector_empty_view_title" = "Chưa có không gian nào.";
-"space_selector_empty_view_information" = "Không gian là một cách để nhóm các phòng và mọi người lại với nhau. Tạo một không gian để bắt đầu.";
+"space_selector_empty_view_information" = "Không gian là một cách để nhóm các nhóm và mọi người lại với nhau. Tạo một không gian để bắt đầu.";
 "space_selector_create_space" = "Tạo Không gian";
 "home_syncing" = "Đang đồng bộ";
 "onboarding_splash_page_4_message" = "5HPC cũng rất tuyệt vời cho công việc. Nó được tin dùng bởi các tổ chức bảo mật nhất thế giới.";
@@ -2187,44 +2187,44 @@
 "auth_add_email_message_2" = "Đặt một email để khôi phục tài khoản, và sau này để có thể được tìm thấy bởi những người biết bạn.";
 "auth_add_phone_message_2" = "Đặt một số điện thoại, và sau này để có thể được tìm thấy bởi những người biết bạn.";
 "auth_add_email_phone_message_2" = "Đặt một email để khôi phục tài khoản. Sử dụng email hoặc điện thoại sau này để có thể được tìm thấy bởi những người biết bạn.";
-"auth_email_is_required" = "Không có máy chủ nhận dạng nào được định cấu hình nên bạn không thể thêm địa chỉ email để đặt lại mật khẩu tài khoản Matrix của mình trong tương lai.";
-"auth_phone_is_required" = "Không có máy chủ nhận dạng nào được định cấu hình nên bạn không thể thêm số điện thoại để đặt lại mật khẩu tài khoản Matrix của mình trong tương lai.";
-"auth_forgot_password_error_no_configured_identity_server" = "Không có máy chủ nhận dạng nào được định cấu hình: thêm một máy chủ để đặt lại mật khẩu tài khoản Matrix của bạn.";
-"auth_reset_password_error_is_required" = "Không có máy chủ nhận dạng nào được định cấu hình: thêm một máy chủ trong tùy chọn máy chủ để đặt lại mật khẩu tài khoản Matrix của bạn.";
+"auth_email_is_required" = "Không có máy chủ nhận dạng nào được định cấu hình nên bạn không thể thêm địa chỉ email để đặt lại mật khẩu tài khoản 5HPC của mình trong tương lai.";
+"auth_phone_is_required" = "Không có máy chủ nhận dạng nào được định cấu hình nên bạn không thể thêm số điện thoại để đặt lại mật khẩu tài khoản 5HPC của mình trong tương lai.";
+"auth_forgot_password_error_no_configured_identity_server" = "Không có máy chủ nhận dạng nào được định cấu hình: thêm một máy chủ để đặt lại mật khẩu tài khoản 5HPC của bạn.";
+"auth_reset_password_error_is_required" = "Không có máy chủ nhận dạng nào được định cấu hình: thêm một máy chủ trong tùy chọn máy chủ để đặt lại mật khẩu tài khoản 5HPC của bạn.";
 "room_creation_error_invite_user_by_email_without_identity_server" = "Không có máy chủ nhận dạng nào được định cấu hình nên bạn không thể thêm người tham gia bằng email.";
 "room_creation_only_one_email_invite" = "Bạn chỉ có thể mời một email tại một thời điểm";
 "room_creation_user_not_found_prompt_title" = "Xác nhận";
-"room_creation_user_not_found_prompt_message" = "Không thể tìm thấy hồ sơ cho Matrix ID này. Bạn có muốn bắt đầu một DM không?";
+"room_creation_user_not_found_prompt_message" = "Không thể tìm thấy hồ sơ cho 5HPC ID này. Bạn có muốn bắt đầu một DM không?";
 "room_creation_user_not_found_prompt_invite_action" = "Bắt đầu DM";
 "contacts_address_book_permission_denied" = "Bạn không cho phép %@ truy cập danh bạ cục bộ của mình";
 "room_participants_leave_processing" = "Đang rời";
-"room_participants_leave_success" = "Đã rời phòng";
+"room_participants_leave_success" = "Đã rời nhóm";
 "room_participants_invite_prompt_to_msg" = "Bạn có chắc chắn muốn mời %@ đến %@?";
-"room_participants_invite_unknown_participant_prompt_to_msg" = "Không thể tìm thấy hồ sơ cho Matrix ID này. Bạn có chắc chắn muốn mời %@ đến %@?";
+"room_participants_invite_unknown_participant_prompt_to_msg" = "Không thể tìm thấy hồ sơ cho 5HPC ID này. Bạn có chắc chắn muốn mời %@ đến %@?";
 "room_participants_invite_anyway" = "Vẫn mời";
-"room_participants_leave_not_allowed_for_last_owner_msg" = "Bạn không thể rời phòng vì bạn là chủ sở hữu duy nhất của nó.";
+"room_participants_leave_not_allowed_for_last_owner_msg" = "Bạn không thể rời nhóm vì bạn là chủ sở hữu duy nhất của nó.";
 "room_member_power_level_owner_in" = "Chủ sở hữu trong %@";
 "room_first_message_placeholder" = "Gửi tin nhắn đầu tiên của bạn…";
 "room_event_action_reply_in_thread" = "Luồng";
 "room_event_copy_link_info" = "Đã sao chép liên kết vào khay nhớ tạm.";
-"room_action_report" = "Báo cáo phòng";
-"room_action_report_prompt_reason" = "Lý do báo cáo phòng này";
+"room_action_report" = "Báo cáo nhóm";
+"room_action_report_prompt_reason" = "Lý do báo cáo nhóm này";
 "room_accessibility_threads" = "Luồng";
 "room_accessibility_thread_more" = "Thêm";
 "room_accessibility_record_voice_message" = "Ghi âm tin nhắn thoại";
 "room_accessibility_record_voice_message_hint" = "Chạm hai lần và giữ để ghi âm.";
 "room_command_change_display_name_description" = "Thay đổi biệt hiệu hiển thị của bạn";
 "room_command_emote_description" = "Hiển thị hành động";
-"room_command_join_room_description" = "Tham gia phòng với địa chỉ đã cho";
-"room_command_part_room_description" = "Rời phòng";
-"room_command_invite_user_description" = "Mời người dùng với id đã cho vào phòng hiện tại";
-"room_command_kick_user_description" = "Xóa người dùng với id đã cho khỏi phòng này";
+"room_command_join_room_description" = "Tham gia nhóm với địa chỉ đã cho";
+"room_command_part_room_description" = "Rời nhóm";
+"room_command_invite_user_description" = "Mời người dùng với id đã cho vào nhóm hiện tại";
+"room_command_kick_user_description" = "Xóa người dùng với id đã cho khỏi nhóm này";
 "room_command_ban_user_description" = "Cấm người dùng với id đã cho";
 "room_command_unban_user_description" = "Bỏ cấm người dùng với id đã cho";
 "room_command_set_user_power_level_description" = "Xác định mức quyền lực của một người dùng";
 "room_command_reset_user_power_level_description" = "Hạ cấp người dùng với id đã cho";
-"room_command_change_room_topic_description" = "Đặt chủ đề phòng";
-"room_command_discard_session_description" = "Buộc phiên nhóm gửi đi hiện tại trong một phòng được mã hóa bị hủy bỏ";
+"room_command_change_room_topic_description" = "Đặt chủ đề nhóm";
+"room_command_discard_session_description" = "Buộc phiên nhóm gửi đi hiện tại trong một nhóm được mã hóa bị hủy bỏ";
 "room_command_error_unknown_command" = "Lệnh không hợp lệ hoặc chưa được xử lý";
 "room_thread_title" = "Luồng";
 "thread_copy_link_to_thread" = "Sao chép liên kết đến luồng";
@@ -2263,27 +2263,27 @@
 "manage_session_rename" = "Đổi tên phiên";
 "manage_session_sign_out_other_sessions" = "Đăng xuất khỏi tất cả các phiên khác";
 "user_sessions_settings" = "Quản lý các phiên";
-"room_access_settings_screen_nav_title" = "Truy cập phòng";
-"room_access_settings_screen_title" = "Ai có thể truy cập phòng này?";
+"room_access_settings_screen_nav_title" = "Truy cập nhóm";
+"room_access_settings_screen_title" = "Ai có thể truy cập nhóm này?";
 "room_access_settings_screen_message" = "Quyết định ai có thể tìm và tham gia %@.";
 "room_access_settings_screen_restricted_message" = "Cho phép bất kỳ ai trong không gian tìm và tham gia.\nBạn sẽ được yêu cầu xác nhận không gian nào.";
 "room_access_settings_screen_upgrade_required" = "Yêu cầu nâng cấp";
 "room_access_settings_screen_edit_spaces" = "Chỉnh sửa không gian";
 "room_access_settings_screen_public_message" = "Bất kỳ ai cũng có thể tìm và tham gia.";
-"room_access_settings_screen_upgrade_alert_title" = "Nâng cấp phòng";
-"room_access_settings_screen_upgrade_alert_message" = "Bất kỳ ai trong %@ sẽ có thể tìm và tham gia phòng này - không cần mời mọi người theo cách thủ công. Bạn sẽ có thể thay đổi điều này trong cài đặt phòng bất cứ lúc nào.";
-"room_access_settings_screen_upgrade_alert_message_no_param" = "Bất kỳ ai trong không gian mẹ sẽ có thể tìm và tham gia phòng này - không cần mời mọi người theo cách thủ công. Bạn sẽ có thể thay đổi điều này trong cài đặt phòng bất cứ lúc nào.";
-"room_access_settings_screen_upgrade_alert_note" = "Xin lưu ý việc nâng cấp sẽ tạo ra một phiên bản mới của phòng. Tất cả các tin nhắn hiện tại sẽ ở lại trong phòng lưu trữ này.";
-"room_access_settings_screen_upgrade_alert_auto_invite_switch" = "Tự động mời thành viên vào phòng mới";
+"room_access_settings_screen_upgrade_alert_title" = "Nâng cấp nhóm";
+"room_access_settings_screen_upgrade_alert_message" = "Bất kỳ ai trong %@ sẽ có thể tìm và tham gia nhóm này - không cần mời mọi người theo cách thủ công. Bạn sẽ có thể thay đổi điều này trong cài đặt nhóm bất cứ lúc nào.";
+"room_access_settings_screen_upgrade_alert_message_no_param" = "Bất kỳ ai trong không gian mẹ sẽ có thể tìm và tham gia nhóm này - không cần mời mọi người theo cách thủ công. Bạn sẽ có thể thay đổi điều này trong cài đặt nhóm bất cứ lúc nào.";
+"room_access_settings_screen_upgrade_alert_note" = "Xin lưu ý việc nâng cấp sẽ tạo ra một phiên bản mới của nhóm. Tất cả các tin nhắn hiện tại sẽ ở lại trong nhóm lưu trữ này.";
+"room_access_settings_screen_upgrade_alert_auto_invite_switch" = "Tự động mời thành viên vào nhóm mới";
 "room_access_settings_screen_upgrade_alert_upgrade_button" = "Nâng cấp";
-"room_access_settings_screen_upgrade_alert_upgrading" = "Đang nâng cấp phòng";
-"room_access_settings_screen_setting_room_access" = "Đang cài đặt quyền truy cập phòng";
+"room_access_settings_screen_upgrade_alert_upgrading" = "Đang nâng cấp nhóm";
+"room_access_settings_screen_setting_room_access" = "Đang cài đặt quyền truy cập nhóm";
 "room_access_space_chooser_known_spaces_section" = "Các không gian bạn biết chứa %@";
-"room_access_space_chooser_other_spaces_section" = "Các không gian hoặc phòng khác";
+"room_access_space_chooser_other_spaces_section" = "Các không gian hoặc nhóm khác";
 "room_access_space_chooser_other_spaces_section_info" = "Đây có thể là những thứ mà các quản trị viên khác của %@ là một phần của nó.";
-"room_suggestion_settings_screen_nav_title" = "Đề xuất phòng";
-"room_suggestion_settings_screen_title" = "Tạo một phòng được đề xuất trong không gian";
-"room_suggestion_settings_screen_message" = "Các phòng được đề xuất được quảng bá cho các thành viên không gian như là những phòng tốt để tham gia.";
+"room_suggestion_settings_screen_nav_title" = "Đề xuất nhóm";
+"room_suggestion_settings_screen_title" = "Tạo một nhóm được đề xuất trong không gian";
+"room_suggestion_settings_screen_message" = "Các nhóm được đề xuất được quảng bá cho các thành viên không gian như là những nhóm tốt để tham gia.";
 "key_verification_self_verify_security_upgrade_alert_title" = "Ứng dụng đã được cập nhật";
 "key_verification_self_verify_security_upgrade_alert_message" = "Tính năng nhắn tin an toàn đã được cải thiện với bản cập nhật mới nhất. Vui lòng xác minh lại thiết bị của bạn.";
 "key_verification_alert_title" = "Bạn có các phiên chưa được xác minh";
@@ -2295,20 +2295,20 @@
 "key_verification_scan_qr_code_information_new_session" = "Hướng camera của bạn vào mã QR được hiển thị trên thiết bị khác của bạn để xác minh phiên mới của bạn";
 "room_invite_to_space_option_title" = "Đến %@";
 "room_invite_to_space_option_detail" = "Họ có thể khám phá %@, nhưng sẽ không phải là thành viên của %@.";
-"room_invite_to_room_option_title" = "Chỉ đến phòng này";
+"room_invite_to_room_option_title" = "Chỉ đến nhóm này";
 "room_invite_to_room_option_detail" = "Họ sẽ không phải là một phần của %@.";
-"room_invite_not_enough_permission" = "Bạn không có quyền mời mọi người vào phòng này";
+"room_invite_not_enough_permission" = "Bạn không có quyền mời mọi người vào nhóm này";
 "space_invite_not_enough_permission" = "Bạn không có quyền mời mọi người vào không gian này";
 "spaces_add_space_title" = "Tạo không gian";
 "spaces_add_subspace_title" = "Tạo không gian trong %@";
 "spaces_create_space_title" = "Tạo một không gian";
 "spaces_create_subspace_title" = "Tạo một không gian con";
 "spaces_explore_rooms_format" = "Khám phá %@";
-"spaces_explore_rooms_room_number" = "%@ phòng";
-"spaces_explore_rooms_one_room" = "1 phòng";
-"space_home_show_all_rooms" = "Hiển thị tất cả các phòng";
+"spaces_explore_rooms_room_number" = "%@ nhóm";
+"spaces_explore_rooms_one_room" = "1 nhóm";
+"space_home_show_all_rooms" = "Hiển thị tất cả các nhóm";
 "spaces_invite_people" = "Mời mọi người";
-"spaces_add_room" = "Thêm phòng";
+"spaces_add_room" = "Thêm nhóm";
 "spaces_add_space" = "Thêm không gian";
 "space_public_join_rule_detail" = "Mở cho bất kỳ ai, tốt nhất cho các cộng đồng";
 "space_topic" = "Mô tả";
@@ -2316,7 +2316,7 @@
 "space_settings_update_failed_message" = "Không thể cập nhật cài đặt không gian. Bạn có muốn thử lại không?";
 "space_settings_current_address_message" = "Không gian của bạn có thể xem tại\n%@";
 "spaces_feature_not_available" = "Tính năng này không có sẵn ở đây. Hiện tại, bạn có thể thực hiện việc này với %@ trên máy tính của mình.";
-"spaces_creation_hint" = "Không gian là một cách mới để nhóm các phòng và mọi người.";
+"spaces_creation_hint" = "Không gian là một cách mới để nhóm các nhóm và mọi người.";
 "spaces_creation_visibility_title" = "Bạn muốn tạo loại không gian nào?";
 "spaces_creation_visibility_message" = "Để tham gia một không gian hiện có, bạn cần một lời mời.";
 "spaces_subspace_creation_visibility_title" = "Bạn muốn tạo loại không gian con nào?";
@@ -2333,8 +2333,8 @@
 "spaces_creation_cancel_title" = "Dừng tạo không gian?";
 "spaces_creation_cancel_message" = "Tiến trình của bạn sẽ bị mất.";
 "spaces_creation_new_rooms_title" = "Một số cuộc thảo luận bạn sẽ có là gì?";
-"spaces_creation_new_rooms_message" = "Chúng tôi sẽ tạo một phòng cho mỗi cuộc thảo luận.";
-"spaces_creation_new_rooms_room_name_title" = "Tên phòng";
+"spaces_creation_new_rooms_message" = "Chúng tôi sẽ tạo một nhóm cho mỗi cuộc thảo luận.";
+"spaces_creation_new_rooms_room_name_title" = "Tên nhóm";
 "spaces_creation_new_rooms_general" = "Chung";
 "spaces_creation_new_rooms_random" = "Ngẫu nhiên";
 "spaces_creation_new_rooms_support" = "Hỗ trợ";
@@ -2344,7 +2344,7 @@
 "spaces_creation_sharing_type_title" = "Bạn đang làm việc với ai?";
 "spaces_creation_sharing_type_message" = "Đảm bảo đúng người có quyền truy cập %@. Bạn có thể thay đổi điều này sau.";
 "spaces_creation_sharing_type_just_me_title" = "Chỉ mình tôi";
-"spaces_creation_sharing_type_just_me_detail" = "Một không gian riêng tư để tổ chức các phòng của bạn";
+"spaces_creation_sharing_type_just_me_detail" = "Một không gian riêng tư để tổ chức các nhóm của bạn";
 "spaces_creation_sharing_type_me_and_teammates_title" = "Tôi và đồng đội";
 "spaces_creation_sharing_type_me_and_teammates_detail" = "Một không gian riêng tư cho bạn và đồng đội của bạn";
 "spaces_creation_add_rooms_title" = "Bạn muốn thêm gì?";
@@ -2356,25 +2356,25 @@
 "spaces_creation_post_process_creating_space_task" = "Đang tạo %@";
 "spaces_creation_post_process_uploading_avatar" = "Đang tải lên ảnh đại diện";
 "spaces_creation_post_process_creating_room" = "Đang tạo %@";
-"spaces_creation_post_process_adding_rooms" = "Đang thêm %@ phòng";
+"spaces_creation_post_process_adding_rooms" = "Đang thêm %@ nhóm";
 "spaces_creation_post_process_inviting_users" = "Đang mời %@ người dùng";
 "spaces_creation_in_spacename" = "trong %@";
 "spaces_creation_in_spacename_plus_one" = "trong %@ + 1 không gian";
 "spaces_creation_in_spacename_plus_many" = "trong %@ + %@ không gian";
 "spaces_creation_in_many_spaces" = "trong %@ không gian";
 "spaces_creation_in_one_space" = "trong 1 không gian";
-"spaces_add_room_missing_permission_message" = "Bạn không có quyền thêm phòng vào không gian này.";
+"spaces_add_room_missing_permission_message" = "Bạn không có quyền thêm nhóm vào không gian này.";
 "leave_space_action" = "Rời không gian";
-"leave_space_and_one_room" = "Rời không gian và 1 phòng";
-"leave_space_and_more_rooms" = "Rời không gian và %@ phòng";
-"leave_space_selection_title" = "CHỌN PHÒNG";
-"leave_space_selection_all_rooms" = "Chọn tất cả các phòng";
-"leave_space_selection_no_rooms" = "Không chọn phòng nào";
+"leave_space_and_one_room" = "Rời không gian và 1 nhóm";
+"leave_space_and_more_rooms" = "Rời không gian và %@ nhóm";
+"leave_space_selection_title" = "CHỌN nhóm";
+"leave_space_selection_all_rooms" = "Chọn tất cả các nhóm";
+"leave_space_selection_no_rooms" = "Không chọn nhóm nào";
 "room_event_action_reaction_more" = "%@ thêm";
 "voice_message_broadcast_in_progress_title" = "Không thể bắt đầu tin nhắn thoại";
 "voice_message_broadcast_in_progress_message" = "Bạn không thể bắt đầu tin nhắn thoại vì bạn hiện đang ghi âm một buổi phát sóng trực tiếp. Vui lòng kết thúc buổi phát sóng trực tiếp của bạn để bắt đầu ghi âm tin nhắn thoại";
 "voice_broadcast_unauthorized_title" = "Không thể bắt đầu một buổi phát sóng giọng nói mới";
-"voice_broadcast_permission_denied_message" = "Bạn không có quyền cần thiết để bắt đầu một buổi phát sóng giọng nói trong phòng này. Liên hệ với quản trị viên phòng để nâng cấp quyền của bạn.";
+"voice_broadcast_permission_denied_message" = "Bạn không có quyền cần thiết để bắt đầu một buổi phát sóng giọng nói trong nhóm này. Liên hệ với quản trị viên nhóm để nâng cấp quyền của bạn.";
 "voice_broadcast_blocked_by_someone_else_message" = "Ai đó đã đang ghi âm một buổi phát sóng giọng nói. Đợi cho buổi phát sóng giọng nói của họ kết thúc để bắt đầu một buổi mới.";
 "voice_broadcast_already_in_progress_message" = "Bạn đã đang ghi âm một buổi phát sóng giọng nói. Vui lòng kết thúc buổi phát sóng giọng nói hiện tại của bạn để bắt đầu một buổi mới.";
 "voice_broadcast_playback_loading_error" = "Không thể phát buổi phát sóng giọng nói này.";
@@ -2384,7 +2384,7 @@
 "voice_broadcast_time_left" = "%@ còn lại";
 "voice_broadcast_buffering" = "Đang đệm...";
 "voice_broadcast_stop_alert_title" = "Dừng phát sóng trực tiếp?";
-"voice_broadcast_stop_alert_description" = "Bạn có chắc chắn muốn dừng buổi phát sóng trực tiếp của mình không? Điều này sẽ kết thúc buổi phát sóng, và bản ghi âm đầy đủ sẽ có sẵn trong phòng.";
+"voice_broadcast_stop_alert_description" = "Bạn có chắc chắn muốn dừng buổi phát sóng trực tiếp của mình không? Điều này sẽ kết thúc buổi phát sóng, và bản ghi âm đầy đủ sẽ có sẵn trong nhóm.";
 "voice_broadcast_stop_alert_agree_button" = "Vâng, dừng lại";
 "voice_broadcast_voip_cannot_start_title" = "Không thể bắt đầu cuộc gọi";
 "voice_broadcast_voip_cannot_start_description" = "Bạn không thể bắt đầu cuộc gọi vì bạn hiện đang ghi âm một buổi phát sóng trực tiếp. Vui lòng kết thúc buổi phát sóng trực tiếp của bạn để bắt đầu cuộc gọi.";
@@ -2405,7 +2405,7 @@
 "all_chats_edit_layout_sorting_options_title" = "Sắp xếp tin nhắn theo";
 "all_chats_all_filter" = "Tất cả";
 "all_chats_empty_view_title" = "%@\ntrông hơi trống rỗng.";
-"all_chats_empty_space_information" = "Không gian là một cách mới để nhóm các phòng và mọi người. Thêm một phòng hiện có, hoặc tạo một phòng mới, bằng cách sử dụng nút dưới cùng bên phải.";
+"all_chats_empty_space_information" = "Không gian là một cách mới để nhóm các nhóm và mọi người. Thêm một nhóm hiện có, hoặc tạo một nhóm mới, bằng cách sử dụng nút dưới cùng bên phải.";
 "all_chats_empty_list_placeholder_title" = "Bạn đã xem hết.";
 "all_chats_empty_unreads_placeholder_message" = "Đây là nơi các tin nhắn chưa đọc của bạn sẽ hiển thị, khi bạn có.";
 "all_chats_nothing_found_placeholder_title" = "Không tìm thấy gì.";
@@ -2417,7 +2417,7 @@
 "room_invites_empty_view_title" = "Không có gì mới.";
 "room_invites_empty_view_information" = "Đây là nơi các lời mời của bạn xuất hiện.";
 "room_waiting_other_participants_title" = "Đang chờ người dùng tham gia %@";
-"room_waiting_other_participants_message" = "Sau khi người dùng được mời đã tham gia %@, bạn sẽ có thể trò chuyện và phòng sẽ được mã hóa đầu cuối";
+"room_waiting_other_participants_message" = "Sau khi người dùng được mời đã tham gia %@, bạn sẽ có thể trò chuyện và nhóm sẽ được mã hóa đầu cuối";
 "space_selector_title" = "Không gian của tôi";
 "space_detail_nav_title" = "Chi tiết không gian";
 "space_invite_nav_title" = "Lời mời không gian";
@@ -2471,7 +2471,7 @@
 "location_sharing_invalid_authorization_not_now" = "Để sau";
 "location_sharing_invalid_authorization_settings" = "Cài đặt";
 "location_sharing_invalid_power_level_title" = "Bạn không có quyền chia sẻ vị trí trực tiếp";
-"location_sharing_invalid_power_level_message" = "Bạn cần có quyền phù hợp để chia sẻ vị trí trực tiếp trong phòng này.";
+"location_sharing_invalid_power_level_message" = "Bạn cần có quyền phù hợp để chia sẻ vị trí trực tiếp trong nhóm này.";
 "location_sharing_open_apple_maps" = "Mở trong Apple Maps";
 "location_sharing_open_google_maps" = "Mở trong Google Maps";
 "location_sharing_open_open_street_maps" = "Mở trong OpenStreetMap";
@@ -2508,7 +2508,7 @@
 "location_sharing_live_stop_sharing_error" = "Không thể dừng chia sẻ vị trí";
 "location_sharing_live_stop_sharing_progress" = "Dừng chia sẻ vị trí";
 "location_sharing_live_lab_promotion_title" = "Chia sẻ vị trí trực tiếp";
-"location_sharing_live_lab_promotion_text" = "Xin lưu ý: đây là một tính năng thử nghiệm sử dụng một triển khai tạm thời cho phép lịch sử vị trí được chia sẻ của bạn hiển thị vĩnh viễn cho người khác trong phòng.";
+"location_sharing_live_lab_promotion_text" = "Xin lưu ý: đây là một tính năng thử nghiệm sử dụng một triển khai tạm thời cho phép lịch sử vị trí được chia sẻ của bạn hiển thị vĩnh viễn cho người khác trong nhóm.";
 "location_sharing_live_lab_promotion_activation" = "Bật chia sẻ vị trí trực tiếp";
 "user_sessions_default_session_display_name" = "%@ iOS";
 "user_sessions_overview_title" = "Phiên";
@@ -2547,11 +2547,11 @@
 "user_session_verified_session_description" = "Các phiên đã xác minh là bất cứ nơi nào bạn đang sử dụng 5HPC sau khi nhập cụm mật khẩu của bạn hoặc xác nhận danh tính của bạn với một phiên đã xác minh khác.\n\nĐiều này có nghĩa là bạn có tất cả các khóa cần thiết để mở khóa các tin nhắn được mã hóa của bạn và xác nhận với những người dùng khác rằng bạn tin tưởng phiên này.";
 "user_session_unverified_session_title" = "Phiên chưa được xác minh";
 "user_session_unverified_session_description" = "Các phiên chưa được xác minh là các phiên đã đăng nhập bằng thông tin đăng nhập của bạn nhưng chưa được xác minh chéo.\n\nBạn nên đặc biệt chắc chắn rằng bạn nhận ra các phiên này vì chúng có thể đại diện cho việc sử dụng trái phép tài khoản của bạn.";
-"user_session_permanently_unverified_session_description" = "Phiên này không hỗ trợ mã hóa, vì vậy nó không thể được xác minh.\n\nBạn sẽ không thể tham gia vào các phòng đã bật mã hóa khi sử dụng phiên này.\n\nĐể bảo mật và quyền riêng tư tốt nhất, bạn nên sử dụng các máy khách Matrix hỗ trợ mã hóa.";
+"user_session_permanently_unverified_session_description" = "Phiên này không hỗ trợ mã hóa, vì vậy nó không thể được xác minh.\n\nBạn sẽ không thể tham gia vào các nhóm đã bật mã hóa khi sử dụng phiên này.\n\nĐể bảo mật và quyền riêng tư tốt nhất, bạn nên sử dụng các máy khách 5HPC hỗ trợ mã hóa.";
 "user_session_inactive_session_title" = "Phiên không hoạt động";
 "user_session_inactive_session_description" = "Các phiên không hoạt động là các phiên bạn đã không sử dụng trong một thời gian, nhưng chúng vẫn tiếp tục nhận được các khóa mã hóa.\n\nViệc xóa các phiên không hoạt động giúp cải thiện bảo mật và hiệu suất, và giúp bạn dễ dàng xác định xem một phiên mới có đáng ngờ hay không.";
 "user_session_rename_session_title" = "Đổi tên phiên";
-"user_session_rename_session_description" = "Những người dùng khác trong các tin nhắn trực tiếp và các phòng bạn tham gia có thể xem danh sách đầy đủ các phiên của bạn.\n\nĐiều này cung cấp cho họ sự tự tin rằng họ thực sự đang nói chuyện với bạn, nhưng nó cũng có nghĩa là họ có thể thấy tên phiên bạn nhập ở đây.";
+"user_session_rename_session_description" = "Những người dùng khác trong các tin nhắn trực tiếp và các nhóm bạn tham gia có thể xem danh sách đầy đủ các phiên của bạn.\n\nĐiều này cung cấp cho họ sự tự tin rằng họ thực sự đang nói chuyện với bạn, nhưng nó cũng có nghĩa là họ có thể thấy tên phiên bạn nhập ở đây.";
 "user_other_session_security_recommendation_title" = "Các phiên khác";
 "user_other_session_unverified_sessions_header_subtitle" = "Xác minh các phiên của bạn để tăng cường nhắn tin an toàn hoặc đăng xuất khỏi những phiên bạn không nhận ra hoặc không còn sử dụng.";
 "user_other_session_current_session_details" = "Phiên hiện tại của bạn";
@@ -2636,22 +2636,22 @@
 "ignore_user" = "Bỏ qua người dùng";
 "notice_room_name_removed_for_dm" = "%@ đã xóa tên";
 "notice_room_created_for_dm" = "%@ đã tham gia.";
-"notice_room_join_rule_invite" = "%@ đã làm cho phòng chỉ cho phép mời.";
-"notice_room_join_rule_invite_for_dm" = "%@ đã làm cho phòng này chỉ cho phép mời.";
-"notice_room_join_rule_invite_by_you" = "Bạn đã làm cho phòng chỉ cho phép mời.";
-"notice_room_join_rule_invite_by_you_for_dm" = "Bạn đã làm cho phòng này chỉ cho phép mời.";
-"notice_room_join_rule_public" = "%@ đã làm cho phòng công khai.";
-"notice_room_join_rule_public_for_dm" = "%@ đã làm cho phòng này công khai.";
-"notice_room_join_rule_public_by_you" = "Bạn đã làm cho phòng công khai.";
-"notice_room_join_rule_public_by_you_for_dm" = "Bạn đã làm cho phòng này công khai.";
+"notice_room_join_rule_invite" = "%@ đã làm cho nhóm chỉ cho phép mời.";
+"notice_room_join_rule_invite_for_dm" = "%@ đã làm cho nhóm này chỉ cho phép mời.";
+"notice_room_join_rule_invite_by_you" = "Bạn đã làm cho nhóm chỉ cho phép mời.";
+"notice_room_join_rule_invite_by_you_for_dm" = "Bạn đã làm cho nhóm này chỉ cho phép mời.";
+"notice_room_join_rule_public" = "%@ đã làm cho nhóm công khai.";
+"notice_room_join_rule_public_for_dm" = "%@ đã làm cho nhóm này công khai.";
+"notice_room_join_rule_public_by_you" = "Bạn đã làm cho nhóm công khai.";
+"notice_room_join_rule_public_by_you_for_dm" = "Bạn đã làm cho nhóm này công khai.";
 "notice_room_power_level_intro_for_dm" = "Mức quyền lực của các thành viên là:";
-"notice_room_aliases" = "Các bí danh của phòng là: %@";
+"notice_room_aliases" = "Các bí danh của nhóm là: %@";
 "notice_room_aliases_for_dm" = "Các bí danh là: %@";
-"notice_room_related_groups" = "Các nhóm liên quan đến phòng này là: %@";
+"notice_room_related_groups" = "Các nhóm liên quan đến nhóm này là: %@";
 "notice_encryption_enabled_ok" = "%@ đã bật mã hóa đầu cuối.";
 "notice_encryption_enabled_unknown_algorithm" = "%1$@ đã bật mã hóa đầu cuối (thuật toán không nhận dạng được %2$@).";
 "notice_error_unformattable_event" = "** Không thể hiển thị tin nhắn. Vui lòng báo cáo lỗi";
-"notice_room_history_visible_to_members_for_dm" = "%@ đã làm cho các tin nhắn trong tương lai hiển thị cho tất cả thành viên phòng.";
+"notice_room_history_visible_to_members_for_dm" = "%@ đã làm cho các tin nhắn trong tương lai hiển thị cho tất cả thành viên nhóm.";
 "notice_room_history_visible_to_members_from_invited_point_for_dm" = "%@ đã làm cho các tin nhắn trong tương lai hiển thị cho mọi người, từ khi họ được mời.";
 "notice_room_history_visible_to_members_from_joined_point_for_dm" = "%@ đã làm cho các tin nhắn trong tương lai hiển thị cho mọi người, từ khi họ tham gia.";
 "notice_sticker" = "nhãn dán";
@@ -2682,20 +2682,20 @@
 "error_common_message" = "Đã xảy ra lỗi. Vui lòng thử lại sau.";
 "microphone_access_not_granted_for_voice_message" = "Tin nhắn thoại yêu cầu quyền truy cập vào Micrô nhưng %@ không có quyền sử dụng nó";
 "notice_room_third_party_invite_for_dm" = "%@ đã mời %@";
-"notice_room_third_party_revoked_invite" = "%@ đã thu hồi lời mời của %@ để tham gia phòng";
+"notice_room_third_party_revoked_invite" = "%@ đã thu hồi lời mời của %@ để tham gia nhóm";
 "notice_room_third_party_revoked_invite_for_dm" = "%@ đã thu hồi lời mời của %@";
 "notice_display_name_changed_to" = "%@ đã đổi tên hiển thị của họ thành %@";
 "notice_room_name_changed_for_dm" = "%@ đã đổi tên thành %@.";
 "notice_declined_video_call" = "%@ đã từ chối cuộc gọi";
 "notice_room_third_party_invite_by_you_for_dm" = "Bạn đã mời %@";
-"notice_room_third_party_revoked_invite_by_you" = "Bạn đã thu hồi lời mời của %@ để tham gia phòng";
+"notice_room_third_party_revoked_invite_by_you" = "Bạn đã thu hồi lời mời của %@ để tham gia nhóm";
 "notice_room_third_party_revoked_invite_by_you_for_dm" = "Bạn đã thu hồi lời mời của %@";
 "notice_room_name_changed_by_you_for_dm" = "Bạn đã đổi tên thành %@.";
 "notice_declined_video_call_by_you" = "Bạn đã từ chối cuộc gọi";
 "notice_room_name_removed_by_you_for_dm" = "Bạn đã xóa tên";
 "notice_encryption_enabled_ok_by_you" = "Bạn đã bật mã hóa đầu cuối.";
 "notice_encryption_enabled_unknown_algorithm_by_you" = "Bạn đã bật mã hóa đầu cuối (thuật toán không nhận dạng được %@).";
-"notice_room_history_visible_to_members_by_you_for_dm" = "Bạn đã làm cho các tin nhắn trong tương lai hiển thị cho tất cả thành viên phòng.";
+"notice_room_history_visible_to_members_by_you_for_dm" = "Bạn đã làm cho các tin nhắn trong tương lai hiển thị cho tất cả thành viên nhóm.";
 "notice_room_history_visible_to_members_from_invited_point_by_you_for_dm" = "Bạn đã làm cho các tin nhắn trong tương lai hiển thị cho mọi người, từ khi họ được mời.";
 "notice_room_history_visible_to_members_from_joined_point_by_you_for_dm" = "Bạn đã làm cho các tin nhắn trong tương lai hiển thị cho mọi người, từ khi họ tham gia.";
 "call_remote_holded" = "%@ đã giữ cuộc gọi";
@@ -2710,9 +2710,94 @@
 "call_video_with_user" = "Cuộc gọi video với %@";
 "call_consulting_with_user" = "Đang tư vấn với %@";
 "call_transfer_to_user" = "Chuyển đến %@";
-"pill_room_fallback_display_name" = "Không gian/Phòng";
+"pill_room_fallback_display_name" = "Không gian/nhóm";
 "pill_message" = "Tin nhắn";
 "pill_message_from" = "Tin nhắn từ %@";
 "pill_message_in" = "Tin nhắn trong %@";
+"create_room_section_footer_type_private" = "Chỉ những người được mời mới có thể tìm thấy và tham gia.";
+"create_room_section_footer_type_restricted" = "Bất kỳ ai trong tên Space đều có thể tìm thấy và tham gia.";
+"create_room_section_footer_type_public" = "Chỉ những người được mời mới có thể tìm thấy và tham gia, không chỉ những người trong tên Space.";
+"create_room_promotion_header" = "QUẢNG BÁ";
+"create_room_show_in_directory_footer" = "Điều này sẽ giúp mọi người tìm và tham gia.";
+"create_room_suggest_room" = "Đề xuất cho thành viên không gian";
+"create_room_suggest_room_footer" = "Các nhóm được đề xuất sẽ được quảng bá đến các thành viên không gian là nhóm nên tham gia.";
+"create_room_processing" = "Đang tạo nhóm";
+
+"enable" = "Bật";
+"search_filter_placeholder" = "Lọc";
+"room_event_action_remove_poll" = "Xóa bình chọn";
+"room_event_action_end_poll" = "Kết thúc bình chọn";
+"room_event_action_forward" = "Chuyển tiếp";
+"room_event_action_view_in_room" = "Xem trong nhóm";
+"room_displayname_more_than_two_members" = "%@ và %@ người khác";
+"network_offline_title" = "Bạn đang ngoại tuyến";
+"network_offline_message" = "Bạn đang ngoại tuyến, hãy kiểm tra kết nối.";
+"analytics_prompt_title" = "Giúp cải thiện %@";
+"analytics_prompt_message_new_user" = "Giúp chúng tôi xác định các vấn đề và cải thiện %@ bằng cách chia sẻ dữ liệu sử dụng ẩn danh. Để hiểu cách mọi người sử dụng nhiều thiết bị, chúng tôi sẽ tạo một mã định danh ngẫu nhiên, được chia sẻ bởi các thiết bị của bạn.";
+"analytics_prompt_message_upgrade" = "Trước đây, bạn đã đồng ý chia sẻ dữ liệu sử dụng ẩn danh với chúng tôi. Bây giờ, để giúp hiểu cách mọi người sử dụng nhiều thiết bị, chúng tôi sẽ tạo một mã định danh ngẫu nhiên, được chia sẻ bởi các thiết bị của bạn.";
+"analytics_prompt_terms_new_user" = "Bạn có thể đọc tất cả các điều khoản của chúng tôi %@.";
+"analytics_prompt_terms_link_new_user" = "tại đây";
+"analytics_prompt_terms_upgrade" = "Đọc tất cả các điều khoản của chúng tôi %@. Có được không?";
+"analytics_prompt_terms_link_upgrade" = "tại đây";
+"analytics_prompt_point_1" = "Chúng tôi <b>không</b> ghi lại hoặc lập hồ sơ bất kỳ dữ liệu tài khoản nào";
+"analytics_prompt_point_2" = "Chúng tôi <b>không</b> chia sẻ thông tin với bên thứ ba";
+"analytics_prompt_point_3" = "Bạn có thể tắt tính năng này bất cứ lúc nào trong cài đặt";
+"analytics_prompt_not_now" = "Để sau";
+"analytics_prompt_yes" = "Vâng, được thôi";
+"analytics_prompt_stop" = "Dừng chia sẻ";
+"e2e_enabling_on_app_update" = "%@ hiện hỗ trợ mã hóa đầu cuối nhưng bạn cần đăng nhập lại để bật tính năng này.\n\nBạn có thể thực hiện ngay bây giờ hoặc sau đó từ cài đặt ứng dụng.";
+"share_extension_low_quality_video_title" = "Video sẽ được gửi ở chất lượng thấp";
+"share_extension_low_quality_video_message" = "Gửi bằng %@ để có chất lượng tốt hơn, hoặc gửi ở chất lượng thấp bên dưới.";
+"share_extension_send_now" = "Gửi ngay";
+"key_backup_recover_from_private_key_progress" = "Hoàn thành %@%%";
+"launch_loading_generic" = "Đang đồng bộ các cuộc trò chuyện của bạn";
+"launch_loading_delay_warning" = "Việc này có thể mất thêm một chút thời gian.\nCảm ơn sự kiên nhẫn của bạn.";
+"home_context_menu_make_dm" = "Chuyển đến Danh bạ";
+"home_context_menu_make_room" = "Chuyển đến nhóm chat";
+"home_context_menu_notifications" = "Thông báo";
+"home_context_menu_mute" = "Tắt tiếng";
+"home_context_menu_unmute" = "Bật tiếng";
+"home_context_menu_favourite" = "Yêu thích";
+"home_context_menu_unfavourite" = "Xóa khỏi Yêu thích";
+"home_context_menu_low_priority" = "Ưu tiên thấp";
+"home_context_menu_normal_priority" = "Ưu tiên bình thường";
+"home_context_menu_leave" = "Rời khỏi";
+"home_context_menu_mark_as_read" = "Đánh dấu đã đọc";
+"home_context_menu_mark_as_unread" = "Đánh dấu chưa đọc";
+"share_invite_link_action" = "Chia sẻ liên kết mời";
+"share_invite_link_room_text" = "Này, tham gia nhóm này trên %@";
+"share_invite_link_space_text" = "Này, tham gia không gian này trên %@";
+"side_menu_coach_message" = "Vuốt sang phải hoặc chạm để xem tất cả các nhóm";
+"call_jitsi_unable_to_start" = "Không thể bắt đầu cuộc gọi hội nghị";
+"call_unsupported_matrix_rtc_call" = "Cuộc gọi không được hỗ trợ. Cần có ứng dụng 5HPC X mới để tham gia cuộc gọi này.";
+"device_verification_self_verify_wait_recover_secrets_additional_help" = "Không thể truy cập phiên %@ hiện có?";
+"notice_room_third_party_invite_by_you" = "Bạn đã gửi lời mời đến %@ để tham gia nhóm";
+"notice_room_third_party_registered_invite_by_you" = "Bạn đã chấp nhận lời mời cho %@";
+"notice_room_leave_by_you" = "Bạn đã rời khỏi";
+"notice_room_reject_by_you" = "Bạn đã từ chối lời mời";
+"notice_room_kick_by_you" = "Bạn đã xóa %@";
+"notice_room_unban_by_you" = "Bạn đã bỏ cấm %@";
+"notice_room_ban_by_you" = "Bạn đã cấm %@";
+"notice_room_withdraw_by_you" = "Bạn đã rút lại lời mời của %@";
+"notice_avatar_url_changed_by_you" = "Bạn đã thay đổi ảnh đại diện của mình";
+"notice_display_name_set_by_you" = "Bạn đã đặt tên hiển thị của mình thành %@";
+"notice_display_name_changed_from_by_you" = "Bạn đã thay đổi tên hiển thị của mình từ %@ thành %@";
+"notice_display_name_removed_by_you" = "Bạn đã xóa tên hiển thị của mình";
+"notice_topic_changed_by_you" = "Bạn đã thay đổi chủ đề thành \"%@\".";
+"notice_room_name_changed_by_you" = "Bạn đã thay đổi tên nhóm thành %@.";
+"notice_placed_voice_call_by_you" = "Bạn đã thực hiện một cuộc gọi thoại";
+"notice_placed_video_call_by_you" = "Bạn đã thực hiện một cuộc gọi video";
+"notice_answered_video_call_by_you" = "Bạn đã trả lời cuộc gọi";
+"notice_ended_video_call_by_you" = "Bạn đã kết thúc cuộc gọi";
+"notice_conference_call_request_by_you" = "Bạn đã yêu cầu một hội nghị VoIP";
+"notice_room_name_removed_by_you" = "Bạn đã xóa tên nhóm";
+"notice_room_topic_removed_by_you" = "Bạn đã xóa chủ đề";
+"notice_room_history_visible_to_anyone_by_you" = "Bạn đã làm cho lịch sử nhóm trong tương lai hiển thị với bất kỳ ai.";
+"notice_room_history_visible_to_members_by_you" = "Bạn đã làm cho lịch sử nhóm trong tương lai hiển thị với tất cả thành viên nhóm.";
+"notice_room_history_visible_to_members_from_invited_point_by_you" = "Bạn đã làm cho lịch sử nhóm trong tương lai hiển thị với tất cả thành viên nhóm, từ thời điểm họ được mời.";
+"notice_room_history_visible_to_members_from_joined_point_by_you" = "Bạn đã làm cho lịch sử nhóm trong tương lai hiển thị với tất cả thành viên nhóm, từ thời điểm họ tham gia.";
+"account_error_push_not_allowed" = "Thông báo không được phép";
+"device_details_rename_prompt_title" = "Tên phiên";
+"event_formatter_message_deleted" = "Tin nhắn đã bị xóa";
 
 
