@@ -14,7 +14,7 @@ import DesignKit
 class DefaultTheme: NSObject, Theme {
 
     var identifier: String = ThemeIdentifier.light.rawValue
-    
+    var thuybackgroundColor: UIColor = UIColor(rgb: 0xF5F7FA)
     var backgroundColor: UIColor = UIColor(rgb: 0xFFFFFF)
 
     var baseColor: UIColor {

@@ -345,7 +345,7 @@ final class BuildSettings: NSObject {
     
     // Timeline style
     static let roomScreenAllowTimelineStyleConfiguration: Bool = true
-    static let roomScreenTimelineDefaultStyleIdentifier: RoomTimelineStyleIdentifier = .plain
+    static let roomScreenTimelineDefaultStyleIdentifier: RoomTimelineStyleIdentifier = .bubble
     static var isRoomScreenEnableMessageBubblesByDefault: Bool {
         return self.roomScreenTimelineDefaultStyleIdentifier == .bubble
     }

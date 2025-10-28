@@ -185,6 +185,23 @@ CallAudioRouteMenuViewDelegate>
     return NO;
 }
 
+#pragma mark - Layout
+
+- (void)viewDidLayoutSubviews
+{
+    // Luôn gọi hàm của lớp cha trước
+    [super viewDidLayoutSubviews];
+    
+    //
+    // ***** GIẢI PHÁP LẬT NGƯỢC CAMERA *****
+    //
+    // Lớp cha đang lật view video bên trong (private) bằng scaleX(-1).
+    // Chúng ta sẽ lật view container bên ngoài (public) bằng scaleX(-1).
+    // Kết quả là: (-1) * (-1) = 1 (hiển thị bình thường).
+    //
+    self.localPreviewContainerView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+}
+
 #pragma mark - override MXKViewController
 
 - (UIView *)createIncomingCallView

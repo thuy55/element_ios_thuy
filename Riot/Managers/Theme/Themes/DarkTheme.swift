@@ -14,7 +14,7 @@ import DesignKit
 class DarkTheme: NSObject, Theme {
     
     var identifier: String = ThemeIdentifier.dark.rawValue
-
+    var thuybackgroundColor: UIColor = UIColor(rgb: 0x23242a)
     var backgroundColor: UIColor = UIColor(rgb: 0x15191E)
 
     var baseColor: UIColor {

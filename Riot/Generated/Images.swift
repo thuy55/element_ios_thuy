@@ -148,6 +148,7 @@ internal class Asset: NSObject {
     internal static let roomActionNotificationMuted = ImageAsset(name: "room_action_notification_muted")
     internal static let roomActionPriorityHigh = ImageAsset(name: "room_action_priority_high")
     internal static let roomActionPriorityLow = ImageAsset(name: "room_action_priority_low")
+    internal static let add = ImageAsset(name: "add")
     internal static let allChatsEditIcon = ImageAsset(name: "all_chats_edit_icon")
     internal static let allChatsEmptyListPlaceholderIcon = ImageAsset(name: "all_chats_empty_list_placeholder_icon")
     internal static let allChatsEmptyScreenArtwork = ImageAsset(name: "all_chats_empty_screen_artwork")

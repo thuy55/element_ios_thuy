@@ -13,7 +13,7 @@ import DesignKit
 @objc protocol Theme: ThemeV2 {
     
     var identifier: String { get }
-
+    var thuybackgroundColor: UIColor { get }
     var backgroundColor: UIColor { get }
     var baseColor: UIColor { get }
 

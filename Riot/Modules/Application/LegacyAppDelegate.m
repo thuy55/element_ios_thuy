@@ -492,6 +492,7 @@ NSString *const AppDelegateUniversalLinkDidChangeNotification = @"AppDelegateUni
         [self configurePinCodeScreenFor:application createIfRequired:YES];
     });
     
+    
     return YES;
 }
 

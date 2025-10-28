@@ -10,11 +10,13 @@ Please see LICENSE in the repository root for full details.
 
 #import "GeneratedInterface-Swift.h"
 
+
 @implementation MXKRoomIncomingTextMsgBubbleCell
 
 - (void)setupViews
 {
     [super setupViews];
+    
     
     RoomTimelineConfiguration *timelineConfiguration = [RoomTimelineConfiguration shared];
     

@@ -262,11 +262,11 @@
 "settings_user_interface" = "GIAO DIỆN NGƯỜI DÙNG";
 "settings_ignored_users" = "NGƯỜI DÙNG BỊ LÀM NGƠ";
 "settings_contacts" = "DANH BẠ";
-"settings_advanced" = "NÂNG CAO";
-"settings_other" = "KHÁC";
-"settings_labs" = "NHÓM THÍ NGHIỆM";
-"settings_devices" = "THIẾT BỊ";
-"settings_cryptography" = "MÃ HOÁ";
+"settings_advanced" = "Nâng cao";
+"settings_other" = "Khác";
+"settings_labs" = "Nhóm thí nghiệm";
+"settings_devices" = "Thiết bị";
+"settings_cryptography" = "Mã hoá";
 "settings_sign_out" = "Đăng xuất";
 "settings_sign_out_confirmation" = "Bạn có chắc chắn?";
 "settings_sign_out_e2e_warn" = "Bạn sẽ mất end-to-end khoá bảo mật. Điều đó có nghĩa rằng bạn sẽ không thể đọc các tin nhắn trước đó đã được mã hoá trong nhóm bởi thiết bị này.";

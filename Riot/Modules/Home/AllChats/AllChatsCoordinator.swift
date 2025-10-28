@@ -302,6 +302,10 @@ class AllChatsCoordinator: NSObject, SplitViewMasterCoordinatorProtocol {
         self.navigationRouter.push(viewController, animated: true, popCompletion: nil)
     }
     
+    @objc private func didTapAvatarButton() {
+            self.showSettings()
+        }
+    
     private func showContactDetails(with contact: MXKContact, presentationParameters: ScreenPresentationParameters) {
         
         let coordinatorParameters = ContactDetailsCoordinatorParameters(contact: contact)
@@ -353,33 +357,41 @@ class AllChatsCoordinator: NSObject, SplitViewMasterCoordinatorProtocol {
     }
 
     private func createAvatarButtonItem(for viewController: UIViewController) {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 36, height: 36))
-        view.backgroundColor = .clear
-        
-        let avatarInsets: UIEdgeInsets = .init(top: 7, left: 7, bottom: 7, right: 7)
-        let button: UIButton = .init(frame: view.bounds)
-        button.imageEdgeInsets = avatarInsets
-        button.setImage(Asset.Images.tabPeople.image, for: .normal)
-        button.menu = avatarMenu
-        button.showsMenuAsPrimaryAction = true
-        button.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        button.accessibilityLabel = VectorL10n.allChatsUserMenuAccessibilityLabel
-        view.addSubview(button)
-        self.avatarMenuButton = button
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: 45, height: 45))
+            view.backgroundColor = .clear
+            
+            let avatarInsets: UIEdgeInsets = .init(top: 7, left: 7, bottom: 7, right: 7)
+            let button: UIButton = .init(frame: view.bounds)
+            button.imageEdgeInsets = avatarInsets
+            button.setImage(Asset.Images.tabPeople.image, for: .normal)
+            
+            // --- SỬA ĐỔI Ở ĐÂY ---
+            // XÓA 2 dòng này:
+            // button.menu = avatarMenu
+            // button.showsMenuAsPrimaryAction = true
+            
+            // THÊM dòng này để gọi trực tiếp hàm:
+            button.addTarget(self, action: #selector(didTapAvatarButton), for: .touchUpInside)
+            // --- KẾT THÚC SỬA ĐỔI ---
 
-        let avatarView = UserAvatarView(frame: view.bounds.inset(by: avatarInsets))
-        avatarView.isUserInteractionEnabled = false
-        avatarView.update(theme: ThemeService.shared().theme)
-        avatarView.autoresizingMask = [.flexibleTopMargin, .flexibleBottomMargin]
-        view.addSubview(avatarView)
-        NSLayoutConstraint.activate([
-            view.widthAnchor.constraint(equalToConstant: 36),
-            view.heightAnchor.constraint(equalToConstant: 36)
-        ])
-        self.avatarMenuView = avatarView
-        updateAvatarButtonItem()
-        viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: view)
-    }
+            button.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+            button.accessibilityLabel = VectorL10n.allChatsUserMenuAccessibilityLabel
+            view.addSubview(button)
+            self.avatarMenuButton = button
+
+            let avatarView = UserAvatarView(frame: view.bounds.inset(by: avatarInsets))
+            avatarView.isUserInteractionEnabled = false
+            avatarView.update(theme: ThemeService.shared().theme)
+            avatarView.autoresizingMask = [.flexibleTopMargin, .flexibleBottomMargin]
+            view.addSubview(avatarView)
+            NSLayoutConstraint.activate([
+                view.widthAnchor.constraint(equalToConstant: 36),
+                view.heightAnchor.constraint(equalToConstant: 36)
+            ])
+            self.avatarMenuView = avatarView
+            updateAvatarButtonItem()
+            viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: view)
+        }
     
     private func updateAvatarButtonItem() {
         MXLog.info("[AllChatsCoordinator] updating avatar button item.")

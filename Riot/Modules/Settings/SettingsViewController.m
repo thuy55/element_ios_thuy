@@ -31,6 +31,11 @@ Please see LICENSE in the repository root for full details.
 
 #import "GeneratedInterface-Swift.h"
 
+#import "NotificationSettingsPageViewController.h"
+#import "LabsSettingsViewController.h"
+#import "AdvancedSettingsViewController.h"
+
+
 @import DesignKit;
 
 NSString* const kSettingsViewControllerPhoneBookCountryCellId = @"kSettingsViewControllerPhoneBookCountryCellId";
@@ -56,7 +61,9 @@ typedef NS_ENUM(NSUInteger, SECTION_TAG)
     SECTION_TAG_ADVANCED,
     SECTION_TAG_ABOUT,
     SECTION_TAG_LABS,
-    SECTION_TAG_DEACTIVATE_ACCOUNT
+    SECTION_TAG_DEACTIVATE_ACCOUNT,
+//    Thêm mới nè
+    SECTION_TAG_MEDIA_AND_LINKS
 };
 
 typedef NS_ENUM(NSUInteger, USER_SETTINGS_INDEX)
@@ -78,27 +85,27 @@ typedef NS_ENUM(NSUInteger, USER_SETTINGS_OFFSET)
 
 typedef NS_ENUM(NSUInteger, SENDING_MEDIA)
 {
-    SENDING_MEDIA_CONFIRM_SIZE = 0
+    SENDING_MEDIA_CONFIRM_SIZE = 100
 };
 
 typedef NS_ENUM(NSUInteger, LINKS_SHOW_URL_PREVIEWS)
 {
-    LINKS_SHOW_URL_PREVIEWS_INDEX = 0,
-    LINKS_SHOW_URL_PREVIEWS_DESCRIPTION_INDEX
+    LINKS_SHOW_URL_PREVIEWS_INDEX = 101,
+//    LINKS_SHOW_URL_PREVIEWS_DESCRIPTION_INDEX
 };
 
-typedef NS_ENUM(NSUInteger, NOTIFICATION_SETTINGS)
-{
-    NOTIFICATION_SETTINGS_ENABLE_PUSH_INDEX = 0,
-    NOTIFICATION_SETTINGS_SYSTEM_SETTINGS,
-    NOTIFICATION_SETTINGS_SHOW_IN_APP_INDEX,
-    NOTIFICATION_SETTINGS_SHOW_DECODED_CONTENT,
-    NOTIFICATION_SETTINGS_PIN_MISSED_NOTIFICATIONS_INDEX,
-    NOTIFICATION_SETTINGS_PIN_UNREAD_INDEX,
-    NOTIFICATION_SETTINGS_DEFAULT_SETTINGS_INDEX,
-    NOTIFICATION_SETTINGS_MENTION_AND_KEYWORDS_SETTINGS_INDEX,
-    NOTIFICATION_SETTINGS_OTHER_SETTINGS_INDEX,
-};
+//typedef NS_ENUM(NSUInteger, NOTIFICATION_SETTINGS)
+//{
+//    NOTIFICATION_SETTINGS_ENABLE_PUSH_INDEX = 0,
+//    NOTIFICATION_SETTINGS_SYSTEM_SETTINGS,
+//    NOTIFICATION_SETTINGS_SHOW_IN_APP_INDEX,
+//    NOTIFICATION_SETTINGS_SHOW_DECODED_CONTENT,
+//    NOTIFICATION_SETTINGS_PIN_MISSED_NOTIFICATIONS_INDEX,
+//    NOTIFICATION_SETTINGS_PIN_UNREAD_INDEX,
+//    NOTIFICATION_SETTINGS_DEFAULT_SETTINGS_INDEX,
+//    NOTIFICATION_SETTINGS_MENTION_AND_KEYWORDS_SETTINGS_INDEX,
+//    NOTIFICATION_SETTINGS_OTHER_SETTINGS_INDEX,
+//};
 
 typedef NS_ENUM(NSUInteger, CALLS_ENABLE_STUN_SERVER)
 {
@@ -139,14 +146,14 @@ typedef NS_ENUM(NSUInteger, PRESENCE)
     PRESENCE_OFFLINE_MODE = 0,
 };
 
-typedef NS_ENUM(NSUInteger, ADVANCED)
-{
-    ADVANCED_CRASH_REPORT_INDEX = 0,
-    ADVANCED_ENABLE_RAGESHAKE_INDEX,
-    ADVANCED_MARK_ALL_AS_READ_INDEX,
-    ADVANCED_CLEAR_CACHE_INDEX,
-    ADVANCED_REPORT_BUG_INDEX,
-};
+//typedef NS_ENUM(NSUInteger, ADVANCED)
+//{
+//    ADVANCED_CRASH_REPORT_INDEX = 0,
+//    ADVANCED_ENABLE_RAGESHAKE_INDEX,
+//    ADVANCED_MARK_ALL_AS_READ_INDEX,
+//    ADVANCED_CLEAR_CACHE_INDEX,
+//    ADVANCED_REPORT_BUG_INDEX,
+//};
 
 typedef NS_ENUM(NSUInteger, ABOUT)
 {
@@ -156,17 +163,17 @@ typedef NS_ENUM(NSUInteger, ABOUT)
     ABOUT_THIRD_PARTY_INDEX,
 };
 
-typedef NS_ENUM(NSUInteger, LABS_ENABLE)
-{
-    LABS_ENABLE_RINGING_FOR_GROUP_CALLS_INDEX = 0,
-    LABS_ENABLE_THREADS_INDEX,
-    LABS_ENABLE_AUTO_REPORT_DECRYPTION_ERRORS,
-    LABS_ENABLE_LIVE_LOCATION_SHARING,
-    LABS_ENABLE_NEW_SESSION_MANAGER,
-    LABS_ENABLE_NEW_CLIENT_INFO_FEATURE,
-    LABS_ENABLE_WYSIWYG_COMPOSER,
-    LABS_ENABLE_VOICE_BROADCAST
-};
+//typedef NS_ENUM(NSUInteger, LABS_ENABLE)
+//{
+//    LABS_ENABLE_RINGING_FOR_GROUP_CALLS_INDEX = 0,
+//    LABS_ENABLE_THREADS_INDEX,
+//    LABS_ENABLE_AUTO_REPORT_DECRYPTION_ERRORS,
+//    LABS_ENABLE_LIVE_LOCATION_SHARING,
+//    LABS_ENABLE_NEW_SESSION_MANAGER,
+//    LABS_ENABLE_NEW_CLIENT_INFO_FEATURE,
+//    LABS_ENABLE_WYSIWYG_COMPOSER,
+//    LABS_ENABLE_VOICE_BROADCAST
+//};
 
 typedef NS_ENUM(NSUInteger, SECURITY)
 {
@@ -191,7 +198,7 @@ SettingsDiscoveryTableViewSectionDelegate, SettingsDiscoveryViewModelCoordinator
 SettingsIdentityServerCoordinatorBridgePresenterDelegate,
 ServiceTermsModalCoordinatorBridgePresenterDelegate,
 TableViewSectionsDelegate,
-ThreadsBetaCoordinatorBridgePresenterDelegate,
+//ThreadsBetaCoordinatorBridgePresenterDelegate,
 ChangePasswordCoordinatorBridgePresenterDelegate,
 SSOAuthenticationPresenterDelegate>
 {
@@ -277,7 +284,7 @@ SSOAuthenticationPresenterDelegate>
 
 @property (nonatomic, strong) UserInteractiveAuthenticationService *userInteractiveAuthenticationService;
 
-@property (nonatomic, strong) ThreadsBetaCoordinatorBridgePresenter *threadsBetaBridgePresenter;
+//@property (nonatomic, strong) ThreadsBetaCoordinatorBridgePresenter *threadsBetaBridgePresenter;
 @property (nonatomic, strong) ChangePasswordCoordinatorBridgePresenter *changePasswordBridgePresenter;
 @property (nonatomic, strong) UserSessionsFlowCoordinatorBridgePresenter *userSessionsFlowCoordinatorBridgePresenter;
 
@@ -337,9 +344,7 @@ SSOAuthenticationPresenterDelegate>
 {
     NSMutableArray<Section*> *tmpSections = [NSMutableArray arrayWithCapacity:SECTION_TAG_DEACTIVATE_ACCOUNT + 1];
     
-    Section *sectionSignOut = [Section sectionWithTag:SECTION_TAG_SIGN_OUT];
-    [sectionSignOut addRowWithTag:0];
-    [tmpSections addObject:sectionSignOut];
+    
     
     Section *sectionUserSettings = [Section sectionWithTag:SECTION_TAG_USER_SETTINGS];
     [sectionUserSettings addRowWithTag:USER_SETTINGS_PROFILE_PICTURE_INDEX];
@@ -378,16 +383,11 @@ SSOAuthenticationPresenterDelegate>
         {
 //            [sectionUserSettings addRowWithTag:USER_SETTINGS_ADD_PHONENUMBER_INDEX];
         }
-//        if (BuildSettings.settingsScreenShowThreepidExplanatory)
-//        {
-//            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:[VectorL10n settingsThreePidsManagementInformationPart1] attributes:@{}];
-//            [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:[VectorL10n settingsThreePidsManagementInformationPart2] attributes:@{NSForegroundColorAttributeName: ThemeService.shared.theme.tintColor}]];
-//            [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:[VectorL10n settingsThreePidsManagementInformationPart3] attributes:@{}]];
-//            sectionUserSettings.attributedFooterTitle = attributedString;
-//        }
+
     }
     
-    sectionUserSettings.headerTitle = [VectorL10n settingsUserSettings];
+  sectionUserSettings.headerTitle = [VectorL10n settingsUserSettings];
+    sectionUserSettings.headerTitle = @"";
     [tmpSections addObject:sectionUserSettings];
     
     NSString *manageAccountURL = self.mainSession.homeserverWellknown.authentication.account;
@@ -399,21 +399,6 @@ SSOAuthenticationPresenterDelegate>
         account.footerTitle = [VectorL10n settingsManageAccountDescription:manageAccountURL];
         [tmpSections addObject:account];
     }
-        
-    if (BuildSettings.settingsScreenShowConfirmMediaSize)
-    {
-        Section *sectionMedia = [Section sectionWithTag:SECTION_TAG_SENDING_MEDIA];
-        [sectionMedia addRowWithTag:SENDING_MEDIA_CONFIRM_SIZE];
-        sectionMedia.headerTitle = [VectorL10n settingsSendingMedia];
-        sectionMedia.footerTitle = VectorL10n.settingsConfirmMediaSizeDescription;
-        [tmpSections addObject:sectionMedia];
-    }
-    
-    Section *sectionLinks = [Section sectionWithTag:SECTION_TAG_LINKS];
-    [sectionLinks addRowWithTag:LINKS_SHOW_URL_PREVIEWS_INDEX];
-    sectionLinks.headerTitle = [VectorL10n settingsLinks];
-    sectionLinks.footerTitle = VectorL10n.settingsShowUrlPreviewsDescription;
-    [tmpSections addObject:sectionLinks];
     
     Section *sectionSecurity = [Section sectionWithTag:SECTION_TAG_SECURITY];
     [sectionSecurity addRowWithTag:SECURITY_BUTTON_INDEX];
@@ -424,78 +409,17 @@ SSOAuthenticationPresenterDelegate>
         [sectionSecurity addRowWithTag:DEVICE_MANAGER_INDEX];
     }
     
-    sectionSecurity.headerTitle = [VectorL10n settingsSecurity];
+//    sectionSecurity.headerTitle = [VectorL10n settingsSecurity];
+    sectionUserSettings.headerTitle = @"";
     [tmpSections addObject:sectionSecurity];
     
-    Section *sectionNotificationSettings = [Section sectionWithTag:SECTION_TAG_NOTIFICATIONS];
-    [sectionNotificationSettings addRowWithTag:NOTIFICATION_SETTINGS_ENABLE_PUSH_INDEX];
-    [sectionNotificationSettings addRowWithTag:NOTIFICATION_SETTINGS_SYSTEM_SETTINGS];
-    [sectionNotificationSettings addRowWithTag:NOTIFICATION_SETTINGS_SHOW_IN_APP_INDEX];
-    if (RiotSettings.shared.settingsScreenShowNotificationDecodedContentOption)
-    {
-        [sectionNotificationSettings addRowWithTag:NOTIFICATION_SETTINGS_SHOW_DECODED_CONTENT];
-    }
-
-    [sectionNotificationSettings addRowWithTag:NOTIFICATION_SETTINGS_PIN_MISSED_NOTIFICATIONS_INDEX];
-    [sectionNotificationSettings addRowWithTag:NOTIFICATION_SETTINGS_PIN_UNREAD_INDEX];
-    
-    [sectionNotificationSettings addRowWithTag:NOTIFICATION_SETTINGS_DEFAULT_SETTINGS_INDEX];
-    [sectionNotificationSettings addRowWithTag:NOTIFICATION_SETTINGS_MENTION_AND_KEYWORDS_SETTINGS_INDEX];
-    [sectionNotificationSettings addRowWithTag:NOTIFICATION_SETTINGS_OTHER_SETTINGS_INDEX];
-
-    sectionNotificationSettings.headerTitle = [VectorL10n settingsNotifications];
-    [tmpSections addObject:sectionNotificationSettings];
-    
-//    if (BuildSettings.allowVoIPUsage && BuildSettings.stunServerFallbackUrlString && RiotSettings.shared.settingsScreenShowEnableStunServerFallback)
-//    {
-//        Section *sectionCalls = [Section sectionWithTag:SECTION_TAG_CALLS];
-//        sectionCalls.headerTitle = [VectorL10n settingsCallsSettings];
-//
-//        // Remove "stun:"
-//        NSString* stunFallbackHost = [BuildSettings.stunServerFallbackUrlString componentsSeparatedByString:@":"].lastObject;
-//        sectionCalls.footerTitle = [VectorL10n settingsCallsStunServerFallbackDescription:stunFallbackHost];
-//
-//        [sectionCalls addRowWithTag:CALLS_ENABLE_STUN_SERVER_FALLBACK_INDEX];
-//        [tmpSections addObject:sectionCalls];
-//    }
-    
-//    if (BuildSettings.settingsScreenShowDiscoverySettings)
-//    {
-//        Section *sectionDiscovery = [Section sectionWithTag:SECTION_TAG_DISCOVERY];
-//        NSInteger count = self.settingsDiscoveryTableViewSection.numberOfRows;
-//        for (NSInteger index = 0; index < count; index++)
-//        {
-//            [sectionDiscovery addRowWithTag:index];
-//        }
-//        sectionDiscovery.headerTitle = [VectorL10n settingsDiscoverySettings];
-//        sectionDiscovery.attributedFooterTitle = self.settingsDiscoveryTableViewSection.attributedFooterTitle;
-//        [tmpSections addObject:sectionDiscovery];
-//    }
-//
-//    if (BuildSettings.settingsScreenAllowIdentityServerConfig)
-//    {
-//        Section *sectionIdentityServer = [Section sectionWithTag:SECTION_TAG_IDENTITY_SERVER];
-//        [sectionIdentityServer addRowWithTag:IDENTITY_SERVER_INDEX];
-//
-//        sectionIdentityServer.headerTitle = [VectorL10n settingsIdentityServerSettings];
-//        sectionIdentityServer.footerTitle = account.mxSession.identityService.identityServer ? VectorL10n.settingsIdentityServerDescription : VectorL10n.settingsIdentityServerNoIsDescription;
-//        [tmpSections addObject:sectionIdentityServer];
-//    }
-//
-//    if (BuildSettings.allowLocalContactsAccess)
-//    {
-//        Section *sectionLocalContacts = [Section sectionWithTag:SECTION_TAG_LOCAL_CONTACTS];
-//        [sectionLocalContacts addRowWithTag:LOCAL_CONTACTS_SYNC_INDEX];
-//        if (MXKAppSettings.standardAppSettings.syncLocalContacts)
-//        {
-//            [sectionLocalContacts addRowWithTag:LOCAL_CONTACTS_PHONEBOOK_COUNTRY_INDEX];
-//        }
-//
-//        NSString *headerTitle = UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone ? VectorL10n.settingsPhoneContacts : VectorL10n.settingsContacts;
-//        sectionLocalContacts.headerTitle = headerTitle;
-//        sectionLocalContacts.footerTitle = VectorL10n.settingsContactsEnableSyncDescription;
-//        [tmpSections addObject:sectionLocalContacts];
-//    }
+    // --- MÃ THAY THẾ ---
+        Section *sectionNotificationSettings = [Section sectionWithTag:SECTION_TAG_NOTIFICATIONS];
+        [sectionNotificationSettings addRowWithTag:0]; // Chỉ thêm MỘT hàng duy nhất
+//        sectionNotificationSettings.headerTitle = [VectorL10n settingsNotifications];
+    sectionNotificationSettings.headerTitle = nil;
+        [tmpSections addObject:sectionNotificationSettings];
+        // --- KẾT THÚC THAY THẾ ---
     
     MXSession *session = [AppDelegate theDelegate].mxSessions.firstObject;
     if (session.ignoredUsers.count)
@@ -523,24 +447,15 @@ SSOAuthenticationPresenterDelegate>
     }
     
     Section *sectionUserInterface = [Section sectionWithTag:SECTION_TAG_USER_INTERFACE];
-    sectionUserInterface.headerTitle = [VectorL10n settingsUserInterface];
+//    sectionUserInterface.headerTitle = [VectorL10n settingsUserInterface];
+    sectionNotificationSettings.headerTitle = nil;
     
     [sectionUserInterface addRowWithTag:USER_INTERFACE_LANGUAGE_INDEX];
     [sectionUserInterface addRowWithTag:USER_INTERFACE_THEME_INDEX];
         
     [tmpSections addObject:sectionUserInterface];
 
-    Section *sectionTimeline = [Section sectionWithTag:SECTION_TAG_TIMELINE];
-    sectionTimeline.headerTitle = VectorL10n.settingsTimeline;
-
-    if (BuildSettings.roomScreenAllowTimelineStyleConfiguration)
-    {
-        [sectionTimeline addRowWithTag:TIMELINE_STYLE_INDEX];
-    }
-    [sectionTimeline addRowWithTag:TIMELINE_SHOW_REDACTIONS_IN_ROOM_HISTORY_INDEX];
-    [sectionTimeline addRowWithTag:TIMELINE_USE_ONLY_LATEST_USER_AVATAR_AND_NAME_INDEX];
-
-    [tmpSections addObject:sectionTimeline];
+    
     
     if(BuildSettings.settingsScreenPresenceAllowConfiguration)
     {
@@ -552,80 +467,64 @@ SSOAuthenticationPresenterDelegate>
         [tmpSections addObject:sectionPresence];
     }
     
-    Section *sectionAdvanced = [Section sectionWithTag:SECTION_TAG_ADVANCED];
-    sectionAdvanced.headerTitle = [VectorL10n settingsAdvanced];
-    
-    if (BuildSettings.settingsScreenAllowChangingCrashUsageDataSettings)
+    // --- KHỐI GỘP: Truyền thông và Liên kết ---
+        Section *sectionMediaAndLinks = [Section sectionWithTag:SECTION_TAG_MEDIA_AND_LINKS];
+//        sectionMediaAndLinks.headerTitle = [VectorL10n settingsSendingMedia];
+    sectionUserSettings.headerTitle = @"";
+        
+        // 1. Xác nhận kích thước phương tiện
+        if (BuildSettings.settingsScreenShowConfirmMediaSize)
+        {
+            [sectionMediaAndLinks addRowWithTag:SENDING_MEDIA_CONFIRM_SIZE];
+        }
+        
+        // 2. Hiện bản xem trước URL
+        [sectionMediaAndLinks addRowWithTag:LINKS_SHOW_URL_PREVIEWS_INDEX];
+        
+        // ... Phần footerTitle giữ nguyên ...
+        [tmpSections addObject:sectionMediaAndLinks];
+        // ----------------------------------------
+        // --- KẾT THÚC KHỐI MỚI ---
+    Section *sectionTimeline = [Section sectionWithTag:SECTION_TAG_TIMELINE];
+//    sectionTimeline.headerTitle = VectorL10n.settingsTimeline;
+
+    if (BuildSettings.roomScreenAllowTimelineStyleConfiguration)
     {
-        [sectionAdvanced addRowWithTag:ADVANCED_CRASH_REPORT_INDEX];
+        [sectionTimeline addRowWithTag:TIMELINE_STYLE_INDEX];
     }
-    if (BuildSettings.settingsScreenAllowChangingRageshakeSettings)
-    {
-        [sectionAdvanced addRowWithTag:ADVANCED_ENABLE_RAGESHAKE_INDEX];
-    }
-    [sectionAdvanced addRowWithTag:ADVANCED_MARK_ALL_AS_READ_INDEX];
-    [sectionAdvanced addRowWithTag:ADVANCED_CLEAR_CACHE_INDEX];
-    if (BuildSettings.settingsScreenAllowBugReportingManually)
-    {
-        [sectionAdvanced addRowWithTag:ADVANCED_REPORT_BUG_INDEX];
-    }
+    [sectionTimeline addRowWithTag:TIMELINE_SHOW_REDACTIONS_IN_ROOM_HISTORY_INDEX];
+    [sectionTimeline addRowWithTag:TIMELINE_USE_ONLY_LATEST_USER_AVATAR_AND_NAME_INDEX];
+
+    [tmpSections addObject:sectionTimeline];
     
-    [tmpSections addObject:sectionAdvanced];
     
-//    Section *sectionAbout = [Section sectionWithTag:SECTION_TAG_ABOUT];
-//    if (BuildSettings.applicationCopyrightUrlString.length)
-//    {
-//        [sectionAbout addRowWithTag:ABOUT_COPYRIGHT_INDEX];
-//    }
-//    if (BuildSettings.applicationAcceptableUsePolicyUrlString.length)
-//    {
-//        [sectionAbout addRowWithTag:ABOUT_ACCEPTABLE_USE_INDEX];
-//    }
-//    if (BuildSettings.applicationPrivacyPolicyUrlString.length)
-//    {
-//        [sectionAbout addRowWithTag:ABOUT_PRIVACY_INDEX];
-//    }
-//    [sectionAbout addRowWithTag:ABOUT_THIRD_PARTY_INDEX];
-//    sectionAbout.headerTitle = VectorL10n.settingsAbout;
-//
-//    if (BuildSettings.settingsScreenShowAdvancedSettings)
-//    {
-//        sectionAbout.footerTitle = [self buildAboutSectionFooterTitleWithAccount:account];
-//    }
-//
-//    [tmpSections addObject:sectionAbout];
+    // --- MÃ THAY THẾ ---
+        Section *sectionAdvanced = [Section sectionWithTag:SECTION_TAG_ADVANCED];
+//        sectionAdvanced.headerTitle = [VectorL10n settingsAdvanced];
+    sectionUserSettings.headerTitle = @"";
+        [sectionAdvanced addRowWithTag:0]; // Chỉ thêm MỘT hàng
+        [tmpSections addObject:sectionAdvanced];
+        // --- KẾT THÚC THAY THẾ ---
     
+
     if (BuildSettings.settingsScreenShowLabSettings)
-    {
-        Section *sectionLabs = [Section sectionWithTag:SECTION_TAG_LABS];
-        [sectionLabs addRowWithTag:LABS_ENABLE_RINGING_FOR_GROUP_CALLS_INDEX];
-        [sectionLabs addRowWithTag:LABS_ENABLE_THREADS_INDEX];
-        [sectionLabs addRowWithTag:LABS_ENABLE_AUTO_REPORT_DECRYPTION_ERRORS];
-        if (BuildSettings.locationSharingEnabled)
         {
-            [sectionLabs addRowWithTag:LABS_ENABLE_LIVE_LOCATION_SHARING];
-        }
-        [sectionLabs addRowWithTag:LABS_ENABLE_NEW_SESSION_MANAGER];
-        [sectionLabs addRowWithTag:LABS_ENABLE_NEW_CLIENT_INFO_FEATURE];
-        if (@available(iOS 15.0, *))
-        {
-            [sectionLabs addRowWithTag:LABS_ENABLE_WYSIWYG_COMPOSER];
-        }
-        [sectionLabs addRowWithTag:LABS_ENABLE_VOICE_BROADCAST];
-        sectionLabs.headerTitle = [VectorL10n settingsLabs];
-        if (sectionLabs.hasAnyRows)
-        {
+            Section *sectionLabs = [Section sectionWithTag:SECTION_TAG_LABS];
+            [sectionLabs addRowWithTag:0]; // Chỉ thêm MỘT hàng
+//            sectionLabs.headerTitle = [VectorL10n settingsLabs];
             [tmpSections addObject:sectionLabs];
         }
-    }
     
     if (BuildSettings.settingsScreenAllowDeactivatingAccount && !self.mainSession.homeserverWellknown.authentication)
     {
         Section *sectionDeactivate = [Section sectionWithTag:SECTION_TAG_DEACTIVATE_ACCOUNT];
         [sectionDeactivate addRowWithTag:0];
-        sectionDeactivate.headerTitle = [VectorL10n settingsDeactivateAccount];
+//        sectionDeactivate.headerTitle = [VectorL10n settingsDeactivateAccount];
         [tmpSections addObject:sectionDeactivate];
     }
+    Section *sectionSignOut = [Section sectionWithTag:SECTION_TAG_SIGN_OUT];
+    [sectionSignOut addRowWithTag:0];
+    [tmpSections addObject:sectionSignOut];
     
     //  update sections
     _tableViewSections.sections = tmpSections;
@@ -651,7 +550,7 @@ SSOAuthenticationPresenterDelegate>
     self.tableView.estimatedRowHeight = 50;
     self.tableView.sectionFooterHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedSectionFooterHeight = 50;
-    
+    self.tableView.separatorColor = ThemeService.shared.theme.lineBreakColor;
     MXWeakify(self);
     
     // Add observer to handle removed accounts
@@ -726,7 +625,10 @@ SSOAuthenticationPresenterDelegate>
     self.activityIndicator.backgroundColor = ThemeService.shared.theme.overlayBackgroundColor;
     
     // Check the table view style to select its bg color.
-    self.tableView.backgroundColor = ((self.tableView.style == UITableViewStylePlain) ? ThemeService.shared.theme.backgroundColor : ThemeService.shared.theme.headerBackgroundColor);
+    // DÒNG NÀY CHỌN MÀU NỀN
+    self.tableView.backgroundColor = ((self.tableView.style == UITableViewStylePlain) ? ThemeService.shared.theme.thuybackgroundColor : ThemeService.shared.theme.thuybackgroundColor);
+    
+    // DÒNG NÀY ĐẶT MÀU CHO VIEW CHÍNH
     self.view.backgroundColor = self.tableView.backgroundColor;
     self.tableView.separatorColor = ThemeService.shared.theme.lineBreakColor;
     
@@ -1472,6 +1374,11 @@ SSOAuthenticationPresenterDelegate>
     
     labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsEnableRoomMessageBubbles];
     
+    // --- Bổ sung Dynamic Type START ---
+            labelAndSwitchCell.mxkLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+            labelAndSwitchCell.mxkLabel.adjustsFontForContentSizeCategory = YES;
+            // --- Bổ sung Dynamic Type END ---
+    
     labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.roomScreenEnableMessageBubbles;
     labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
     labelAndSwitchCell.mxkSwitch.enabled = YES;
@@ -1670,7 +1577,12 @@ SSOAuthenticationPresenterDelegate>
         cell.accessoryView = nil;
     }
     cell.textLabel.accessibilityIdentifier = nil;
-    cell.textLabel.font = [UIFont systemFontOfSize:17];
+    
+    // --- BỔ SUNG DYNAMIC TYPE START ---
+    cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody]; // Sử dụng font thích ứng
+    cell.textLabel.adjustsFontForContentSizeCategory = YES; // Bật tự động điều chỉnh
+    // --- BỔ SUNG DYNAMIC TYPE END ---
+    
     cell.textLabel.textColor = ThemeService.shared.theme.textPrimaryColor;
     cell.contentView.backgroundColor = UIColor.clearColor;
     
@@ -1730,7 +1642,11 @@ SSOAuthenticationPresenterDelegate>
         [signOutCell.mxkButton setTitle:title forState:UIControlStateNormal];
         [signOutCell.mxkButton setTitle:title forState:UIControlStateHighlighted];
         [signOutCell.mxkButton setTintColor:ThemeService.shared.theme.tintColor];
-        signOutCell.mxkButton.titleLabel.font = [UIFont systemFontOfSize:17];
+        // Dùng Body Style làm cơ sở cho chữ nút
+        signOutCell.mxkButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+
+        // Bật khả năng tự động điều chỉnh font cho nhãn của nút
+        signOutCell.mxkButton.titleLabel.adjustsFontForContentSizeCategory = YES;
         
         [signOutCell.mxkButton  removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
         [signOutCell.mxkButton addTarget:self action:@selector(onSignout:) forControlEvents:UIControlEventTouchUpInside];
@@ -1759,14 +1675,23 @@ SSOAuthenticationPresenterDelegate>
                 [profileCell.mxkImageView addGestureRecognizer:tap];
             }
             
+//            profileCell.mxkLabel.text = [VectorL10n settingsProfilePicture];
+//            profileCell.accessibilityIdentifier=@"SettingsVCProfilPictureStaticText";
+//            profileCell.mxkLabel.textColor = ThemeService.shared.theme.textPrimaryColor;
+            
             profileCell.mxkLabel.text = [VectorL10n settingsProfilePicture];
-            profileCell.accessibilityIdentifier=@"SettingsVCProfilPictureStaticText";
+            profileCell.accessibilityIdentifier = @"SettingsVCProfilPictureStaticText";
             profileCell.mxkLabel.textColor = ThemeService.shared.theme.textPrimaryColor;
+
+            // --- Thêm dòng này để thiết lập kích thước chữ (ví dụ: Dynamic Type Body) ---
+            profileCell.mxkLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+            profileCell.mxkLabel.adjustsFontForContentSizeCategory = YES;
+            // -----------------------------------------------------------------------------
             
             // if the user defines a new avatar
             if (newAvatarImage)
             {
-                profileCell.mxkImageView.image = newAvatarImage;
+                profileCell.mxkImageView.image = newAvatarImage;	
             }
             else
             {
@@ -1804,6 +1729,18 @@ SSOAuthenticationPresenterDelegate>
             [displaynameCell.mxkTextField removeTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
             [displaynameCell.mxkTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
             displaynameCell.mxkTextField.accessibilityIdentifier=@"SettingsVCDisplayNameTextField";
+            
+//            / --- Bổ sung Dynamic Type START ---
+                
+                // Áp dụng Dynamic Type cho Label: sử dụng font mặc định của Body Text Style
+                displaynameCell.mxkLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                displaynameCell.mxkLabel.adjustsFontForContentSizeCategory = YES;
+                
+                // Áp dụng Dynamic Type cho TextField: sử dụng font mặc định của Body Text Style
+                displaynameCell.mxkTextField.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                displaynameCell.mxkTextField.adjustsFontForContentSizeCategory = YES;
+                
+                // --- Bổ sung Dynamic Type END ---
             
             cell = displaynameCell;
         }
@@ -1987,169 +1924,163 @@ SSOAuthenticationPresenterDelegate>
             passwordCell.mxkTextField.text = @"*********";
             passwordCell.mxkTextField.userInteractionEnabled = NO;
             passwordCell.mxkLabel.accessibilityIdentifier=@"SettingsVCChangePwdStaticText";
+            // --- Cài đặt Dynamic Type cho Label và TextField ---
+
+            // 1. Label (Tên mục cài đặt)
+            passwordCell.mxkLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+            passwordCell.mxkLabel.adjustsFontForContentSizeCategory = YES;
+
+            // 2. TextField (Ô hiển thị ********)
+            passwordCell.mxkTextField.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+            passwordCell.mxkTextField.adjustsFontForContentSizeCategory = YES;
+
+            // ------------------------------------------------------------------
             
             cell = passwordCell;
         }
     }
-    else if (section == SECTION_TAG_SENDING_MEDIA)
+    else if (section == SECTION_TAG_TIMELINE)
     {
-        if (row == SENDING_MEDIA_CONFIRM_SIZE)
+        if (row == TIMELINE_STYLE_INDEX)
+        {
+            cell = [self buildMessageBubblesCellForTableView:tableView atIndexPath:indexPath];
+        }
+        else if (row == TIMELINE_SHOW_REDACTIONS_IN_ROOM_HISTORY_INDEX)
         {
             MXKTableViewCellWithLabelAndSwitch* labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
-    
-            labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsConfirmMediaSize];
-            labelAndSwitchCell.mxkSwitch.on =  RiotSettings.shared.showMediaCompressionPrompt;
+
+            labelAndSwitchCell.mxkLabel.text = VectorL10n.settingsUiShowRedactionsInRoomHistory;
+            // --- Bổ sung Dynamic Type START ---
+                    labelAndSwitchCell.mxkLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                    labelAndSwitchCell.mxkLabel.adjustsFontForContentSizeCategory = YES;
+                    // --- Bổ sung Dynamic Type END ---
+
+            labelAndSwitchCell.mxkSwitch.on = [MXKAppSettings standardAppSettings].showRedactionsInRoomHistory;
             labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
             labelAndSwitchCell.mxkSwitch.enabled = YES;
-            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleConfirmMediaSize:) forControlEvents:UIControlEventTouchUpInside];
-            
+            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleShowRedacted:) forControlEvents:UIControlEventTouchUpInside];
+
             cell = labelAndSwitchCell;
         }
-    }
-    else if (section == SECTION_TAG_LINKS)
-    {
-        if (row == LINKS_SHOW_URL_PREVIEWS_INDEX)
+        else if (row == TIMELINE_USE_ONLY_LATEST_USER_AVATAR_AND_NAME_INDEX)
         {
             MXKTableViewCellWithLabelAndSwitch *labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
-            
-            labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsShowUrlPreviews];
-            labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.roomScreenShowsURLPreviews;
-            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
-            labelAndSwitchCell.mxkSwitch.enabled = YES;
-            
-            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableURLPreviews:) forControlEvents:UIControlEventTouchUpInside];
-            
-            cell = labelAndSwitchCell;
-        }
-        else if (row == LINKS_SHOW_URL_PREVIEWS_DESCRIPTION_INDEX)
-        {
-            MXKTableViewCell *descriptionCell = [self getDefaultTableViewCell:tableView];
-            descriptionCell.textLabel.text = [VectorL10n settingsShowUrlPreviewsDescription];
-            descriptionCell.textLabel.numberOfLines = 0;
-            descriptionCell.selectionStyle = UITableViewCellSelectionStyleNone;
 
-            cell = descriptionCell;
+            labelAndSwitchCell.mxkLabel.text = VectorL10n.settingsLabsUseOnlyLatestUserAvatarAndName;
+            labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.roomScreenUseOnlyLatestUserAvatarAndName;
+            labelAndSwitchCell.mxkSwitch.enabled = YES;
+            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
+            // --- Bổ sung Dynamic Type START ---
+                    labelAndSwitchCell.mxkLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                    labelAndSwitchCell.mxkLabel.adjustsFontForContentSizeCategory = YES;
+                    // --- Bổ sung Dynamic Type END ---
+
+            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleUseOnlyLatestUserAvatarAndName:) forControlEvents:UIControlEventTouchUpInside];
+
+            cell = labelAndSwitchCell;
         }
     }
-    else if (section == SECTION_TAG_NOTIFICATIONS)
-    {
-        if (row == NOTIFICATION_SETTINGS_ENABLE_PUSH_INDEX)
-        {
-            MXKTableViewCellWithLabelAndSwitch* labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
-    
-            labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsEnablePushNotif];
-            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
-            labelAndSwitchCell.mxkSwitch.enabled = YES;
-            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(togglePushNotifications:) forControlEvents:UIControlEventTouchUpInside];
-            
-            BOOL isPushEnabled = account.pushNotificationServiceIsActive;
-            
-            // Even if push is enabled for the account, the user may have turned off notifications in system settings
-            if (isPushEnabled && self.systemNotificationSettings)
-            {
-                isPushEnabled = self.systemNotificationSettings.authorizationStatus == UNAuthorizationStatusAuthorized;
-            }
-            
-            labelAndSwitchCell.mxkSwitch.on = isPushEnabled;
-            
-            cell = labelAndSwitchCell;
-        }
-        else if (row == NOTIFICATION_SETTINGS_SYSTEM_SETTINGS)
-        {
-            cell = [tableView dequeueReusableCellWithIdentifier:kSettingsViewControllerPhoneBookCountryCellId];
-            if (!cell)
-            {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kSettingsViewControllerPhoneBookCountryCellId];
-            }
-
-            cell.textLabel.textColor = ThemeService.shared.theme.textPrimaryColor;
-
-            cell.textLabel.text = [VectorL10n settingsDeviceNotifications];
-            cell.detailTextLabel.text = @"";
-
-            [cell vc_setAccessoryDisclosureIndicatorWithCurrentTheme];
-            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-        }
-        else if (row == NOTIFICATION_SETTINGS_SHOW_IN_APP_INDEX)
-        {
-            MXKTableViewCellWithLabelAndSwitch* labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
-            
-            labelAndSwitchCell.mxkLabel.text = VectorL10n.settingsEnableInappNotifications;
-            labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.showInAppNotifications;
-            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
-            labelAndSwitchCell.mxkSwitch.enabled = account.pushNotificationServiceIsActive;
-            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleShowInAppNotifications:) forControlEvents:UIControlEventTouchUpInside];
-            
-            cell = labelAndSwitchCell;
-        }
-        else if (row == NOTIFICATION_SETTINGS_SHOW_DECODED_CONTENT)
-        {
-            MXKTableViewCellWithLabelAndSwitch* labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
-            
-            labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsShowDecryptedContent];
-            labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.showDecryptedContentInNotifications;
-            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
-            labelAndSwitchCell.mxkSwitch.enabled = account.pushNotificationServiceIsActive;
-            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleShowDecodedContent:) forControlEvents:UIControlEventTouchUpInside];
-            
-            
-            cell = labelAndSwitchCell;
-        }
-        else if (row == NOTIFICATION_SETTINGS_PIN_MISSED_NOTIFICATIONS_INDEX)
-        {
-            MXKTableViewCellWithLabelAndSwitch* labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
-            
-            labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsPinRoomsWithMissedNotif];
-            labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.pinRoomsWithMissedNotificationsOnHome;
-            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
-            labelAndSwitchCell.mxkSwitch.enabled = YES;
-            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(togglePinRoomsWithMissedNotif:) forControlEvents:UIControlEventTouchUpInside];
-            
-            cell = labelAndSwitchCell;
-        }
-        else if (row == NOTIFICATION_SETTINGS_PIN_UNREAD_INDEX)
-        {
-            MXKTableViewCellWithLabelAndSwitch* labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
-            
-            labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsPinRoomsWithUnread];
-            labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.pinRoomsWithUnreadMessagesOnHome;
-            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
-            labelAndSwitchCell.mxkSwitch.enabled = YES;
-            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(togglePinRoomsWithUnread:) forControlEvents:UIControlEventTouchUpInside];
-            
-            cell = labelAndSwitchCell;
-        }
-        else if (row == NOTIFICATION_SETTINGS_DEFAULT_SETTINGS_INDEX || row == NOTIFICATION_SETTINGS_MENTION_AND_KEYWORDS_SETTINGS_INDEX || row == NOTIFICATION_SETTINGS_OTHER_SETTINGS_INDEX)
-        {
-            cell = [self getDefaultTableViewCell:tableView];
-            if (row == NOTIFICATION_SETTINGS_DEFAULT_SETTINGS_INDEX)
-            {
-                cell.textLabel.text = [VectorL10n settingsDefault];
-            }
-            else if (row == NOTIFICATION_SETTINGS_MENTION_AND_KEYWORDS_SETTINGS_INDEX)
-            {
-                cell.textLabel.text = [VectorL10n settingsMentionsAndKeywords];
-            }
-            else if (row == NOTIFICATION_SETTINGS_OTHER_SETTINGS_INDEX)
-            {
-                cell.textLabel.text = [VectorL10n settingsOther];
-            }
-            [cell vc_setAccessoryDisclosureIndicatorWithCurrentTheme];
-        }
-    }
-    else if (section == SECTION_TAG_CALLS)
-    {
-//        if (row == CALLS_ENABLE_STUN_SERVER_FALLBACK_INDEX)
+//    else if (section == SECTION_TAG_SENDING_MEDIA)
+//    {
+//        if (row == SENDING_MEDIA_CONFIRM_SIZE)
 //        {
 //            MXKTableViewCellWithLabelAndSwitch* labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
-//            labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsCallsStunServerFallbackButton];
-//            labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.allowStunServerFallback;
+//
+//            labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsConfirmMediaSize];
+//            labelAndSwitchCell.mxkSwitch.on =  RiotSettings.shared.showMediaCompressionPrompt;
 //            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
 //            labelAndSwitchCell.mxkSwitch.enabled = YES;
-//            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleStunServerFallback:) forControlEvents:UIControlEventTouchUpInside];
+//            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleConfirmMediaSize:) forControlEvents:UIControlEventTouchUpInside];
 //
 //            cell = labelAndSwitchCell;
 //        }
+//    }
+//    else if (section == SECTION_TAG_LINKS)
+//    {
+//        if (row == LINKS_SHOW_URL_PREVIEWS_INDEX)
+//        {
+//            MXKTableViewCellWithLabelAndSwitch *labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
+//
+//            labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsShowUrlPreviews];
+//            labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.roomScreenShowsURLPreviews;
+//            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
+//            labelAndSwitchCell.mxkSwitch.enabled = YES;
+//
+//            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableURLPreviews:) forControlEvents:UIControlEventTouchUpInside];
+//
+//            cell = labelAndSwitchCell;
+//        }
+//        else if (row == LINKS_SHOW_URL_PREVIEWS_DESCRIPTION_INDEX)
+//        {
+//            MXKTableViewCell *descriptionCell = [self getDefaultTableViewCell:tableView];
+//            descriptionCell.textLabel.text = [VectorL10n settingsShowUrlPreviewsDescription];
+//            descriptionCell.textLabel.numberOfLines = 0;
+//            descriptionCell.selectionStyle = UITableViewCellSelectionStyleNone;
+//
+//            cell = descriptionCell;
+//        }
+//    }
+    
+    // --- KHỐI THAY THẾ CHO SECTION_TAG_MEDIA_AND_LINKS TRONG tableView:cellForRowAtIndexPath: ---
+        else if (section == SECTION_TAG_MEDIA_AND_LINKS)
+            {
+                // Lấy tag duy nhất đã gán cho hàng này trong updateSections
+                NSInteger rowTag = tagsIndexPath.row;
+
+                if (rowTag == SENDING_MEDIA_CONFIRM_SIZE)
+                {
+                    // Logic cho "Xác nhận kích thước phương tiện"
+                    MXKTableViewCellWithLabelAndSwitch* labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
+            
+                    labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsConfirmMediaSize];
+                    labelAndSwitchCell.mxkLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                    labelAndSwitchCell.mxkLabel.adjustsFontForContentSizeCategory = YES;
+                    
+                    labelAndSwitchCell.mxkSwitch.on =  RiotSettings.shared.showMediaCompressionPrompt;
+                    labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
+                    labelAndSwitchCell.mxkSwitch.enabled = YES;
+                    [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleConfirmMediaSize:) forControlEvents:UIControlEventTouchUpInside];
+                    
+                    cell = labelAndSwitchCell;
+                }
+                else if (rowTag == LINKS_SHOW_URL_PREVIEWS_INDEX)
+                {
+                    // Logic cho "Hiện bản xem trước URL"
+                    MXKTableViewCellWithLabelAndSwitch *labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
+                    
+                    labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsShowUrlPreviews];
+                    
+                    labelAndSwitchCell.mxkLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                    labelAndSwitchCell.mxkLabel.adjustsFontForContentSizeCategory = YES;
+                    labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.roomScreenShowsURLPreviews;
+                    labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
+                    labelAndSwitchCell.mxkSwitch.enabled = YES;
+                    
+                    [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableURLPreviews:) forControlEvents:UIControlEventTouchUpInside];
+                    
+                    cell = labelAndSwitchCell;
+                }
+            }
+
+        else if (section == SECTION_TAG_NOTIFICATIONS)
+        {
+            // Tạo một ô (cell) đơn giản để điều hướng
+            cell = [self getDefaultTableViewCell:tableView];
+            cell.textLabel.text = [VectorL10n settingsTitleNotifications]; // Tên mục: "Thông báo"
+
+            // 👇 THÊM PADDING TRÁI Ở ĐÂY 👇
+            // Đặt độ rộng của một mức thụt vào (ví dụ: 20 points)
+            cell.indentationWidth = 20.0;
+            // Áp dụng 1 mức thụt vào
+            cell.indentationLevel = 1;
+            cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+            cell.textLabel.adjustsFontForContentSizeCategory = YES;
+
+            [cell vc_setAccessoryDisclosureIndicatorWithCurrentTheme]; // Thêm mũi tên ">"
+        }
+    else if (section == SECTION_TAG_CALLS)
+    {
+
     }
     else if (section == SECTION_TAG_DISCOVERY)
     {
@@ -2204,32 +2135,60 @@ SSOAuthenticationPresenterDelegate>
     }
     else if (section == SECTION_TAG_USER_INTERFACE)
     {
+      
         if (row == USER_INTERFACE_LANGUAGE_INDEX)
         {
             cell = [tableView dequeueReusableCellWithIdentifier:kSettingsViewControllerPhoneBookCountryCellId];
             if (!cell)
             {
+                // Khởi tạo cell với kiểu UITableViewCellStyleValue1
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kSettingsViewControllerPhoneBookCountryCellId];
             }
-
+            
+            // Khai báo và lấy ngôn ngữ hiện tại
             NSString *language = [NSBundle mxk_language];
             if (!language)
             {
                 language = [MXKLanguagePickerViewController defaultLanguage];
             }
+            
+            // Khai báo và lấy mô tả ngôn ngữ
             NSString *languageDescription = [MXKLanguagePickerViewController languageDescription:language];
-
+            
             // Capitalise the description in the language locale
             NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:language];
             languageDescription = [languageDescription capitalizedStringWithLocale:locale];
-
+            
+            CGFloat leadingInset = tableView.vc_separatorInset.left;
+            cell.preservesSuperviewLayoutMargins = NO;
+            cell.layoutMargins = UIEdgeInsetsMake(0, leadingInset, 0, cell.layoutMargins.right);
+            
+            cell.indentationWidth = 20.0;
+            cell.indentationLevel = 1;
+            
+            
+            // --- BẮT ĐẦU ĐIỀU CHỈNH FONT VÀ MÀU (Dynamic Type) ---
+            
+            // Font cho tiêu đề ("Ngôn ngữ")
+            cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+            cell.textLabel.adjustsFontForContentSizeCategory = YES;
             cell.textLabel.textColor = ThemeService.shared.theme.textPrimaryColor;
 
+            // Font và màu cho giá trị (ví dụ: "Tiếng Việt")
+            cell.detailTextLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+            cell.detailTextLabel.adjustsFontForContentSizeCategory = YES;
+            cell.detailTextLabel.textColor = ThemeService.shared.theme.textSecondaryColor;
+            
+            // --- KẾT THÚC ĐIỀU CHỈNH FONT VÀ MÀU ---
+            
             cell.textLabel.text = [VectorL10n settingsUiLanguage];
-            cell.detailTextLabel.text = languageDescription;
+            cell.detailTextLabel.text = languageDescription; // Biến đã được khai báo ở trên
 
             [cell vc_setAccessoryDisclosureIndicatorWithCurrentTheme];
             cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+            
+            // Cần phải gán cell cho biến 'cell' của hàm nếu bạn đang ở trong tableView:cellForRowAtIndexPath:
+            // Tuy nhiên, vì code này đã được đặt trong một khối if, bạn chỉ cần return cell ở cuối hàm.
         }
         else if (row == USER_INTERFACE_THEME_INDEX)
         {
@@ -2248,49 +2207,35 @@ SSOAuthenticationPresenterDelegate>
 
             theme = [NSString stringWithFormat:@"settings_ui_theme_%@", theme];
             NSString *i18nTheme = NSLocalizedStringFromTable(theme, @"Vector", nil);
-
+            
+            // --- BẮT ĐẦU ĐIỀU CHỈNH FONT VÀ MÀU (Dynamic Type) ---
+            
+            // Font cho tiêu đề ("Chủ đề")
+            cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+            cell.textLabel.adjustsFontForContentSizeCategory = YES;
             cell.textLabel.textColor = ThemeService.shared.theme.textPrimaryColor;
+
+            // Font và màu cho giá trị (ví dụ: "Tối")
+            cell.detailTextLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+            cell.detailTextLabel.adjustsFontForContentSizeCategory = YES;
+            cell.detailTextLabel.textColor = ThemeService.shared.theme.textSecondaryColor;
+
+            // --- KẾT THÚC ĐIỀU CHỈNH FONT VÀ MÀU ---
 
             cell.textLabel.text = [VectorL10n settingsUiTheme];
             cell.detailTextLabel.text = i18nTheme;
+            
+            // 👇 THÊM PADDING TRÁI Ở ĐÂY 👇
+            // Đặt độ rộng của một mức thụt vào (ví dụ: 20 points)
+            cell.indentationWidth = 20.0;
+            // Áp dụng 1 mức thụt vào
+            cell.indentationLevel = 1;
 
             [cell vc_setAccessoryDisclosureIndicatorWithCurrentTheme];
             cell.selectionStyle = UITableViewCellSelectionStyleDefault;
         }
     }
-    else if (section == SECTION_TAG_TIMELINE)
-    {
-        if (row == TIMELINE_STYLE_INDEX)
-        {
-            cell = [self buildMessageBubblesCellForTableView:tableView atIndexPath:indexPath];
-        }
-        else if (row == TIMELINE_SHOW_REDACTIONS_IN_ROOM_HISTORY_INDEX)
-        {
-            MXKTableViewCellWithLabelAndSwitch* labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
-
-            labelAndSwitchCell.mxkLabel.text = VectorL10n.settingsUiShowRedactionsInRoomHistory;
-
-            labelAndSwitchCell.mxkSwitch.on = [MXKAppSettings standardAppSettings].showRedactionsInRoomHistory;
-            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
-            labelAndSwitchCell.mxkSwitch.enabled = YES;
-            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleShowRedacted:) forControlEvents:UIControlEventTouchUpInside];
-
-            cell = labelAndSwitchCell;
-        }
-        else if (row == TIMELINE_USE_ONLY_LATEST_USER_AVATAR_AND_NAME_INDEX)
-        {
-            MXKTableViewCellWithLabelAndSwitch *labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
-
-            labelAndSwitchCell.mxkLabel.text = VectorL10n.settingsLabsUseOnlyLatestUserAvatarAndName;
-            labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.roomScreenUseOnlyLatestUserAvatarAndName;
-            labelAndSwitchCell.mxkSwitch.enabled = YES;
-            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
-
-            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleUseOnlyLatestUserAvatarAndName:) forControlEvents:UIControlEventTouchUpInside];
-
-            cell = labelAndSwitchCell;
-        }
-    }
+    
     else if (section == SECTION_TAG_IGNORED_USERS)
     {
         MXKTableViewCell *ignoredUserCell = [self getDefaultTableViewCell:tableView];
@@ -2353,235 +2298,48 @@ SSOAuthenticationPresenterDelegate>
             cell = labelAndSwitchCell;
         }
     }
+
+    // --- MÃ THAY THẾ ---
     else if (section == SECTION_TAG_ADVANCED)
-    {
-        if (row == ADVANCED_CRASH_REPORT_INDEX)
         {
-            MXKTableViewCellWithLabelAndSwitch* sendCrashReportCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
+            // Tạo một ô (cell) đơn giản để điều hướng (GIỐNG HỆT LABS)
+            cell = [self getDefaultTableViewCell:tableView];
+            cell.textLabel.text = [VectorL10n settingsAdvanced]; // Tên mục: "Nâng cao"
             
-            sendCrashReportCell.mxkLabel.text = VectorL10n.settingsAnalyticsAndCrashData;
-            sendCrashReportCell.mxkSwitch.on = RiotSettings.shared.enableAnalytics;
-            sendCrashReportCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
-            sendCrashReportCell.mxkSwitch.enabled = YES;
-            [sendCrashReportCell.mxkSwitch addTarget:self action:@selector(toggleAnalytics:) forControlEvents:UIControlEventTouchUpInside];
+            // --- Bổ sung Dynamic Type START ---
+            cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+            cell.textLabel.adjustsFontForContentSizeCategory = YES;
+                    // --- Bổ sung Dynamic Type END ---
             
-            cell = sendCrashReportCell;
+            cell.indentationWidth = 20.0;
+                // Áp dụng 1 mức thụt vào
+                cell.indentationLevel = 1;
+            [cell vc_setAccessoryDisclosureIndicatorWithCurrentTheme]; // Thêm mũi tên ">"
         }
-        else if (row == ADVANCED_ENABLE_RAGESHAKE_INDEX)
+    
+        // --- KẾT THÚC THAY THẾ ---
+
+    
+    // --- MÃ THAY THẾ ---
+        else if (section == SECTION_TAG_LABS)
         {
-            MXKTableViewCellWithLabelAndSwitch* enableRageShakeCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
-
-            enableRageShakeCell.mxkLabel.text = [VectorL10n settingsEnableRageshake];
-            enableRageShakeCell.mxkSwitch.on = RiotSettings.shared.enableRageShake;
-            enableRageShakeCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
-            enableRageShakeCell.mxkSwitch.enabled = YES;
-            [enableRageShakeCell.mxkSwitch addTarget:self action:@selector(toggleEnableRageShake:) forControlEvents:UIControlEventTouchUpInside];
-
-            cell = enableRageShakeCell;
-        }
-        else if (row == ADVANCED_MARK_ALL_AS_READ_INDEX)
-        {
-            MXKTableViewCellWithButton *markAllBtnCell = [tableView dequeueReusableCellWithIdentifier:[MXKTableViewCellWithButton defaultReuseIdentifier]];
-            if (!markAllBtnCell)
-            {
-                markAllBtnCell = [[MXKTableViewCellWithButton alloc] init];
-            }
-            else
-            {
-                // Fix https://github.com/vector-im/riot-ios/issues/1354
-                markAllBtnCell.mxkButton.titleLabel.text = nil;
-            }
+            // Tạo một ô (cell) đơn giản để điều hướng
+            cell = [self getDefaultTableViewCell:tableView];
+            cell.textLabel.text = [VectorL10n settingsLabs]; // Tên mục: "Nhóm thí nghiệm"
+            cell.indentationWidth = 20.0;
+                // Áp dụng 1 mức thụt vào
+                cell.indentationLevel = 1;
             
-            NSString *btnTitle = [VectorL10n settingsMarkAllAsRead];
-            [markAllBtnCell.mxkButton setTitle:btnTitle forState:UIControlStateNormal];
-            [markAllBtnCell.mxkButton setTitle:btnTitle forState:UIControlStateHighlighted];
-            [markAllBtnCell.mxkButton setTintColor:ThemeService.shared.theme.tintColor];
-            markAllBtnCell.mxkButton.titleLabel.font = [UIFont systemFontOfSize:17];
-            
-            [markAllBtnCell.mxkButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-            [markAllBtnCell.mxkButton addTarget:self action:@selector(markAllAsRead:) forControlEvents:UIControlEventTouchUpInside];
-            markAllBtnCell.mxkButton.accessibilityIdentifier = nil;
-            
-            cell = markAllBtnCell;
+            // --- Bổ sung Dynamic Type START ---
+                    cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                    cell.textLabel.adjustsFontForContentSizeCategory = YES;
+                    // --- Bổ sung Dynamic Type END ---
+            [cell vc_setAccessoryDisclosureIndicatorWithCurrentTheme]; // Thêm mũi tên ">"
         }
-        else if (row == ADVANCED_CLEAR_CACHE_INDEX)
-        {
-            MXKTableViewCellWithButton *clearCacheBtnCell = [tableView dequeueReusableCellWithIdentifier:[MXKTableViewCellWithButton defaultReuseIdentifier]];
-            if (!clearCacheBtnCell)
-            {
-                clearCacheBtnCell = [[MXKTableViewCellWithButton alloc] init];
-            }
-            else
-            {
-                // Fix https://github.com/vector-im/riot-ios/issues/1354
-                clearCacheBtnCell.mxkButton.titleLabel.text = nil;
-            }
-            
-            NSString *btnTitle = [VectorL10n settingsClearCache];
-            [clearCacheBtnCell.mxkButton setTitle:btnTitle forState:UIControlStateNormal];
-            [clearCacheBtnCell.mxkButton setTitle:btnTitle forState:UIControlStateHighlighted];
-            [clearCacheBtnCell.mxkButton setTintColor:ThemeService.shared.theme.tintColor];
-            clearCacheBtnCell.mxkButton.titleLabel.font = [UIFont systemFontOfSize:17];
-            
-            [clearCacheBtnCell.mxkButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-            [clearCacheBtnCell.mxkButton addTarget:self action:@selector(clearCache:) forControlEvents:UIControlEventTouchUpInside];
-            clearCacheBtnCell.mxkButton.accessibilityIdentifier = nil;
-            
-            cell = clearCacheBtnCell;
-        }
-        else if (row == ADVANCED_REPORT_BUG_INDEX)
-        {
-            MXKTableViewCellWithButton *reportBugBtnCell = [tableView dequeueReusableCellWithIdentifier:[MXKTableViewCellWithButton defaultReuseIdentifier]];
-            if (!reportBugBtnCell)
-            {
-                reportBugBtnCell = [[MXKTableViewCellWithButton alloc] init];
-            }
-            else
-            {
-                // Fix https://github.com/vector-im/riot-ios/issues/1354
-                reportBugBtnCell.mxkButton.titleLabel.text = nil;
-            }
-
-            NSString *btnTitle = [VectorL10n settingsReportBug];
-            [reportBugBtnCell.mxkButton setTitle:btnTitle forState:UIControlStateNormal];
-            [reportBugBtnCell.mxkButton setTitle:btnTitle forState:UIControlStateHighlighted];
-            [reportBugBtnCell.mxkButton setTintColor:ThemeService.shared.theme.tintColor];
-            reportBugBtnCell.mxkButton.titleLabel.font = [UIFont systemFontOfSize:17];
-
-            [reportBugBtnCell.mxkButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-            [reportBugBtnCell.mxkButton addTarget:self action:@selector(reportBug:) forControlEvents:UIControlEventTouchUpInside];
-            reportBugBtnCell.mxkButton.accessibilityIdentifier = nil;
-
-            cell = reportBugBtnCell;
-        }
-    }
-//    else if (section == SECTION_TAG_ABOUT)
-//    {
-//        if (row == ABOUT_ACCEPTABLE_USE_INDEX)
-//        {
-//            MXKTableViewCell *termAndConditionCell = [self getDefaultTableViewCell:tableView];
-//
-//            termAndConditionCell.textLabel.text = [VectorL10n settingsAcceptableUse];
-//
-//            [termAndConditionCell vc_setAccessoryDisclosureIndicatorWithCurrentTheme];
-//
-//            cell = termAndConditionCell;
-//        }
-//        else if (row == ABOUT_COPYRIGHT_INDEX)
-//        {
-//            MXKTableViewCell *copyrightCell = [self getDefaultTableViewCell:tableView];
-//
-//            copyrightCell.textLabel.text = [VectorL10n settingsCopyright];
-//
-//            [copyrightCell vc_setAccessoryDisclosureIndicatorWithCurrentTheme];
-//
-//            cell = copyrightCell;
-//        }
-//        else if (row == ABOUT_PRIVACY_INDEX)
-//        {
-//            MXKTableViewCell *privacyPolicyCell = [self getDefaultTableViewCell:tableView];
-//
-//            privacyPolicyCell.textLabel.text = [VectorL10n settingsPrivacyPolicy];
-//
-//            [privacyPolicyCell vc_setAccessoryDisclosureIndicatorWithCurrentTheme];
-//
-//            cell = privacyPolicyCell;
-//        }
-//        else if (row == ABOUT_THIRD_PARTY_INDEX)
-//        {
-//            MXKTableViewCell *thirdPartyCell = [self getDefaultTableViewCell:tableView];
-//
-//            thirdPartyCell.textLabel.text = [VectorL10n settingsThirdPartyNotices];
-//
-//            [thirdPartyCell vc_setAccessoryDisclosureIndicatorWithCurrentTheme];
-//
-//            cell = thirdPartyCell;
-//        }
-//    }
-    else if (section == SECTION_TAG_LABS)
-    {
-        if (row == LABS_ENABLE_RINGING_FOR_GROUP_CALLS_INDEX)
-        {
-            MXKTableViewCellWithLabelAndSwitch *labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
-            
-            labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsLabsEnableRingingForGroupCalls];
-            labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.enableRingingForGroupCalls;
-            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
-            
-            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableRingingForGroupCalls:) forControlEvents:UIControlEventTouchUpInside];
-            
-            cell = labelAndSwitchCell;
-        }
-        else if (row == LABS_ENABLE_THREADS_INDEX)
-        {
-            MXKTableViewCellWithLabelAndSwitch *labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
-            
-            labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsLabsEnableThreads];
-            labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.enableThreads;
-            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
-            
-            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableThreads:) forControlEvents:UIControlEventTouchUpInside];
-            
-            cell = labelAndSwitchCell;
-        }
-        else if (row == LABS_ENABLE_AUTO_REPORT_DECRYPTION_ERRORS)
-        {
-            cell = [self buildAutoReportDecryptionErrorsCellForTableView:tableView atIndexPath:indexPath];
-        }
-        else if (row == LABS_ENABLE_LIVE_LOCATION_SHARING)
-        {
-            cell = [self buildLiveLocationSharingCellForTableView:tableView atIndexPath:indexPath];
-        }
-        else if (row == LABS_ENABLE_NEW_SESSION_MANAGER)
-        {
-            MXKTableViewCellWithLabelAndSwitch *labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
-
-            labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsLabsEnableNewSessionManager];
-            labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.enableNewSessionManager;
-            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
-
-            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableNewSessionManager:) forControlEvents:UIControlEventTouchUpInside];
-
-            cell = labelAndSwitchCell;
-        }
-        else if (row == LABS_ENABLE_NEW_CLIENT_INFO_FEATURE)
-        {
-            MXKTableViewCellWithLabelAndSwitch *labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
-
-            labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsLabsEnableNewClientInfoFeature];
-            labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.enableClientInformationFeature;
-            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
-
-            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableNewClientInfoFeature:) forControlEvents:UIControlEventTouchUpInside];
-
-            cell = labelAndSwitchCell;
-        }
-        else if (row == LABS_ENABLE_WYSIWYG_COMPOSER)
-        {
-            MXKTableViewCellWithLabelAndSwitch *labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
-
-            labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsLabsEnableWysiwygComposer];
-            labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.enableWysiwygComposer;
-            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
-
-            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableWysiwygComposerFeature:) forControlEvents:UIControlEventTouchUpInside];
-
-            cell = labelAndSwitchCell;
-        }
-        
-        else if (row == LABS_ENABLE_VOICE_BROADCAST)
-        {
-            MXKTableViewCellWithLabelAndSwitch *labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
-
-            labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsLabsEnableVoiceBroadcast];
-            labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.enableVoiceBroadcast;
-            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
-
-            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableVoiceBroadcastFeature:) forControlEvents:UIControlEventTouchUpInside];
-
-            cell = labelAndSwitchCell;
-        }
-    }
+        // --- KẾT THÚC THAY THẾ ---
+    /// --- THÊM KHỐI MỚI NÀY VÀO ---
+     
+        // --- KẾT THÚC THÊM ---
     else if (section == SECTION_TAG_SECURITY)
     {
         switch (row)
@@ -2590,11 +2348,27 @@ SSOAuthenticationPresenterDelegate>
                 cell = [self getDefaultTableViewCell:tableView];
                 cell.textLabel.text = [VectorL10n securitySettingsTitle];
                 [cell vc_setAccessoryDisclosureIndicatorWithCurrentTheme];
+                // --- Bổ sung Dynamic Type START ---
+                    cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                    cell.textLabel.adjustsFontForContentSizeCategory = YES;
+                    // --- Bổ sung Dynamic Type END ---
+//                / --- BỔ SUNG INDENTATION START ---
+                            cell.indentationWidth = 20.0;
+                            cell.indentationLevel = 1;
+                            // --- BỔ SUNG INDENTATION END ---
                 break;
             case DEVICE_MANAGER_INDEX:
                 cell = [self getDefaultTableViewCell:tableView];
                 cell.textLabel.text = [VectorL10n userSessionsSettings];
                 [cell vc_setAccessoryDisclosureIndicatorWithCurrentTheme];
+                // --- Bổ sung Dynamic Type START ---
+                    cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                    cell.textLabel.adjustsFontForContentSizeCategory = YES;
+                    // --- Bổ sung Dynamic Type END ---
+//                / --- BỔ SUNG INDENTATION START ---
+                            cell.indentationWidth = 20.0;
+                            cell.indentationLevel = 1;
+                            // --- BỔ SUNG INDENTATION END ---
                 break;
         }
     }
@@ -2616,7 +2390,11 @@ SSOAuthenticationPresenterDelegate>
         [deactivateAccountBtnCell.mxkButton setTitle:btnTitle forState:UIControlStateNormal];
         [deactivateAccountBtnCell.mxkButton setTitle:btnTitle forState:UIControlStateHighlighted];
         [deactivateAccountBtnCell.mxkButton setTintColor:ThemeService.shared.theme.warningColor];
-        deactivateAccountBtnCell.mxkButton.titleLabel.font = [UIFont systemFontOfSize:17];
+        
+        // --- Bổ sung Dynamic Type START ---
+        deactivateAccountBtnCell.mxkButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+        deactivateAccountBtnCell.mxkButton.titleLabel.adjustsFontForContentSizeCategory = YES;
+        // --- Bổ sung Dynamic Type END ---
         
         [deactivateAccountBtnCell.mxkButton removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
         [deactivateAccountBtnCell.mxkButton addTarget:self action:@selector(deactivateAccountAction) forControlEvents:UIControlEventTouchUpInside];
@@ -2635,6 +2413,7 @@ SSOAuthenticationPresenterDelegate>
                 break;
         }
     }
+    
 
     return cell;
 }
@@ -2704,8 +2483,22 @@ SSOAuthenticationPresenterDelegate>
 
 #pragma mark - UITableView delegate
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // [KHỐI CODE MỚI: Đặt Separator Inset về Zero cho TẤT CẢ CELL]
+    
+    // Ép đường kẻ phân cách (separator) kéo dài hết chiều rộng (full width)
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+    cell.preservesSuperviewLayoutMargins = NO;
+    
+    // [KẾT THÚC KHỐI CODE MỚI]
+
+    // (Phần code theme và selection của bạn)
     cell.backgroundColor = ThemeService.shared.theme.backgroundColor;
     
     if (cell.selectionStyle != UITableViewCellSelectionStyleNone)
@@ -2724,7 +2517,9 @@ SSOAuthenticationPresenterDelegate>
             }
             else
             {
-                cell.selectedBackgroundView.backgroundColor = nil;
+                if (cell.selectedBackgroundView) {
+                    cell.selectedBackgroundView.backgroundColor = nil;
+                }
             }
         }
     }
@@ -2786,14 +2581,52 @@ SSOAuthenticationPresenterDelegate>
                 [self showThemePicker];
             }
         }
-        else if (section == SECTION_TAG_NOTIFICATIONS && row == NOTIFICATION_SETTINGS_SYSTEM_SETTINGS)
-        {
-            [self openSystemSettingsApp];
-        }
+        else if (section == SECTION_TAG_NOTIFICATIONS)
+                {
+                    // Tạo và đẩy View Controller mới
+                    NotificationSettingsPageViewController *notificationPage = [[NotificationSettingsPageViewController alloc] init];
+                    
+                    // (Quan trọng) Truyền session cho trang mới
+                    [notificationPage addMatrixSession:self.mainSession];
+                    
+                    // Đẩy trang mới vào navigation stack
+                    [self pushViewController:notificationPage];
+                    
+                    // Bỏ chọn hàng
+                    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+                }
         else if (section == SECTION_TAG_DISCOVERY)
         {
             [self.settingsDiscoveryTableViewSection selectRow:row];
         }
+        // --- THÊM KHỐI MỚI NÀY VÀO ---
+                else if (section == SECTION_TAG_LABS)
+                {
+                    // Tạo và đẩy View Controller mới
+                    LabsSettingsViewController *labsPage = [[LabsSettingsViewController alloc] init];
+                    
+                    // (Quan trọng) Truyền session cho trang mới
+                    [labsPage addMatrixSession:self.mainSession];
+                    
+                    // Đẩy trang mới vào
+                    [self pushViewController:labsPage];
+                    
+                    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+                }
+                else if (section == SECTION_TAG_ADVANCED)
+                        {
+                            // Tạo và đẩy View Controller mới
+                            AdvancedSettingsViewController *advancedPage = [[AdvancedSettingsViewController alloc] init];
+                            
+                            // (Quan trọng) Truyền session cho trang mới
+                            [advancedPage addMatrixSession:self.mainSession];
+                            
+                            // Đẩy trang mới vào
+                            [self pushViewController:advancedPage];
+                            
+                            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+                        }
+                // --- KẾT THÚC THÊM ---
         else if (section == SECTION_TAG_IDENTITY_SERVER)
         {
             switch (row)
@@ -2970,20 +2803,36 @@ SSOAuthenticationPresenterDelegate>
                 }
             }
         }
+//        else if (section == SECTION_TAG_NOTIFICATIONS)
+//        {
+//            switch (row) {
+//                case NOTIFICATION_SETTINGS_DEFAULT_SETTINGS_INDEX:
+//                    [self showNotificationSettings:NotificationSettingsScreenDefaultNotifications];
+//                    break;
+//                case NOTIFICATION_SETTINGS_MENTION_AND_KEYWORDS_SETTINGS_INDEX:
+//                    [self showNotificationSettings:NotificationSettingsScreenMentionsAndKeywords];
+//                    break;
+//                case NOTIFICATION_SETTINGS_OTHER_SETTINGS_INDEX:
+//                    [self showNotificationSettings:NotificationSettingsScreenOther];
+//                    break;
+//            }
+//        }
+        // --- MÃ THAY THẾ ---
         else if (section == SECTION_TAG_NOTIFICATIONS)
-        {
-            switch (row) {
-                case NOTIFICATION_SETTINGS_DEFAULT_SETTINGS_INDEX:
-                    [self showNotificationSettings:NotificationSettingsScreenDefaultNotifications];
-                    break;
-                case NOTIFICATION_SETTINGS_MENTION_AND_KEYWORDS_SETTINGS_INDEX:
-                    [self showNotificationSettings:NotificationSettingsScreenMentionsAndKeywords];
-                    break;
-                case NOTIFICATION_SETTINGS_OTHER_SETTINGS_INDEX:
-                    [self showNotificationSettings:NotificationSettingsScreenOther];
-                    break;
+            {
+                // Tạo và đẩy View Controller mới
+                NotificationSettingsPageViewController *notificationPage = [[NotificationSettingsPageViewController alloc] init];
+                
+                // (Quan trọng) Truyền session cho trang mới
+                [notificationPage addMatrixSession:self.mainSession];
+                
+                // Đẩy trang mới vào navigation stack
+                [self pushViewController:notificationPage];
+                
+                // Bỏ chọn hàng
+                [tableView deselectRowAtIndexPath:indexPath animated:YES];
             }
-        }
+            // --- KẾT THÚC THAY THẾ ---
         else if (section == SECTION_TAG_ACCOUNT)
         {
             switch(row) {
@@ -3316,28 +3165,28 @@ SSOAuthenticationPresenterDelegate>
     RiotSettings.shared.enableRingingForGroupCalls = sender.isOn;
 }
 
-- (void)toggleEnableThreads:(UISwitch *)sender
-{
-    if (sender.isOn && !self.mainSession.store.supportedMatrixVersions.supportsThreads)
-    {
-        //  user wants to turn on the threads setting but the server does not support it
-        if (self.threadsBetaBridgePresenter)
-        {
-            [self.threadsBetaBridgePresenter dismissWithAnimated:YES completion:nil];
-            self.threadsBetaBridgePresenter = nil;
-        }
-
-        self.threadsBetaBridgePresenter = [[ThreadsBetaCoordinatorBridgePresenter alloc] initWithThreadId:@""
-                                                                                                 infoText:VectorL10n.threadsDiscourageInformation1
-                                                                                           additionalText:VectorL10n.threadsDiscourageInformation2];
-        self.threadsBetaBridgePresenter.delegate = self;
-
-        [self.threadsBetaBridgePresenter presentFrom:self.presentedViewController?:self animated:YES];
-        return;
-    }
-
-    [self enableThreads:sender.isOn];
-}
+//- (void)toggleEnableThreads:(UISwitch *)sender
+//{
+//    if (sender.isOn && !self.mainSession.store.supportedMatrixVersions.supportsThreads)
+//    {
+//        //  user wants to turn on the threads setting but the server does not support it
+//        if (self.threadsBetaBridgePresenter)
+//        {
+//            [self.threadsBetaBridgePresenter dismissWithAnimated:YES completion:nil];
+//            self.threadsBetaBridgePresenter = nil;
+//        }
+//
+//        self.threadsBetaBridgePresenter = [[ThreadsBetaCoordinatorBridgePresenter alloc] initWithThreadId:@""
+//                                                                                                 infoText:VectorL10n.threadsDiscourageInformation1
+//                                                                                           additionalText:VectorL10n.threadsDiscourageInformation2];
+//        self.threadsBetaBridgePresenter.delegate = self;
+//
+//        [self.threadsBetaBridgePresenter presentFrom:self.presentedViewController?:self animated:YES];
+//        return;
+//    }
+//
+//    [self enableThreads:sender.isOn];
+//}
 
 - (void)enableThreads:(BOOL)enable
 {
@@ -4142,6 +3991,100 @@ SSOAuthenticationPresenterDelegate>
     
     return YES;
 }
+#pragma mark - UITableView delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    // Lấy Section Tag từ array đã tạo trong updateSections
+    NSIndexPath *tagsIndexPath = [_tableViewSections tagsIndexPathFromTableViewIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+    
+    // Nếu không thể lấy được tagsIndexPath, sử dụng chiều cao mặc định.
+    if (!tagsIndexPath) {
+        return UITableViewAutomaticDimension;
+    }
+    
+    NSInteger sectionTag = tagsIndexPath.section;
+    
+    // CHỈ ÉP CHIỀU CAO CHO SECTION THÔNG BÁO (SECTION_TAG_NOTIFICATIONS)
+    if (sectionTag == SECTION_TAG_NOTIFICATIONS || sectionTag == SECTION_TAG_USER_INTERFACE || sectionTag == SECTION_TAG_LABS || sectionTag == SECTION_TAG_TIMELINE || sectionTag == SECTION_TAG_DEACTIVATE_ACCOUNT)
+    {
+        // CGFLOAT_MIN (tức là 0.0000001) là giá trị nhỏ nhất được phép.
+        // Trả về 0 sẽ khiến hệ thống sử dụng chiều cao mặc định của nó.
+        return CGFLOAT_MIN;
+    }
+    
+    // Đối với tất cả các section khác, sử dụng chiều cao tự động hoặc chiều cao mặc định
+    return UITableViewAutomaticDimension;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    NSIndexPath *tagsIndexPath = [_tableViewSections tagsIndexPathFromTableViewIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
+    
+    if (!tagsIndexPath) {
+        return UITableViewAutomaticDimension;
+    }
+    
+    NSInteger sectionTag = tagsIndexPath.section;
+
+    // ÉP CHIỀU CAO FOOTER CHO SECTION THÔNG BÁO
+    if (sectionTag == SECTION_TAG_NOTIFICATIONS || sectionTag == SECTION_TAG_USER_INTERFACE || sectionTag == SECTION_TAG_LABS || sectionTag == SECTION_TAG_TIMELINE || sectionTag == SECTION_TAG_DEACTIVATE_ACCOUNT)
+    {
+        // CGFLOAT_MIN sẽ loại bỏ khoảng cách footer
+        return CGFLOAT_MIN;
+    }
+    
+    // Đối với các section khác, để hệ thống tự xử lý hoặc nếu có footerTitle
+    Section *sectionObj = [_tableViewSections sectionAtIndex:section];
+    if (sectionObj.attributedFooterTitle || sectionObj.footerTitle.length)
+    {
+        return UITableViewAutomaticDimension;
+    }
+    
+    // Nếu không có footer text, vẫn nên ép về CGFLOAT_MIN để loại bỏ khoảng cách giữa các section
+    return CGFLOAT_MIN;
+}
+
+#pragma mark - UITableView delegate
+
+// ... (Các hàm delegate khác như heightForHeaderInSection có thể ở đây)
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Lấy Section Tag để xác định hàng
+    NSIndexPath *tagsIndexPath = [self.tableViewSections tagsIndexPathFromTableViewIndexPath:indexPath];
+    
+    // Khai báo chiều cao tối thiểu
+    const CGFloat kMinCellHeight = 50.0f;
+    
+    // --- Lấy cell để tính toán chiều cao Dynamic Type (CÁCH TỐN HIỆU NĂNG) ---
+    // Tuyệt đối không gọi [tableView cellForRowAtIndexPath:] ở đây.
+    
+    // Cách đúng là: Tạo một cell tạm thời và gọi systemLayoutSizeFittingSize:
+    // Tuy nhiên, việc này rất phức tạp và tốn kém hiệu năng.
+    // Thay vào đó, hãy sử dụng UITableViewAutomaticDimension!
+    
+    // Giả sử hầu hết các cell sẽ tự động điều chỉnh
+    // Nếu bạn muốn áp dụng Auto Layout/Dynamic Type, bạn PHẢI trả về UITableViewAutomaticDimension
+    return UITableViewAutomaticDimension;
+    
+    /*
+    // CHỈ DÙNG ĐOẠN CODE BÊN DƯỚI NẾU BẠN CẦN CHIỀU CAO CỐ ĐỊNH HOÀN TOÀN CHO MỘT SỐ HÀNG
+    
+    NSInteger sectionTag = tagsIndexPath.section;
+    
+    if (sectionTag == SECTION_TAG_SIGN_OUT || sectionTag == SECTION_TAG_DEACTIVATE_ACCOUNT)
+    {
+        // Ví dụ: Hai nút này LUÔN CỐ ĐỊNH chiều cao 50.0f (không Dynamic Type)
+        return kMinCellHeight;
+    }
+    // Còn lại: trả về UITableViewAutomaticDimension để Dynamic Type hoạt động
+    else
+    {
+        return UITableViewAutomaticDimension;
+    }
+    */
+}
 
 #pragma password update management
 
@@ -4516,23 +4459,23 @@ SSOAuthenticationPresenterDelegate>
 
 #pragma mark - ThreadsBetaCoordinatorBridgePresenterDelegate
 
-- (void)threadsBetaCoordinatorBridgePresenterDelegateDidTapEnable:(ThreadsBetaCoordinatorBridgePresenter *)coordinatorBridgePresenter
-{
-    MXWeakify(self);
-    [self.threadsBetaBridgePresenter dismissWithAnimated:YES completion:^{
-        MXStrongifyAndReturnIfNil(self);
-        [self enableThreads:YES];
-    }];
-}
-
-- (void)threadsBetaCoordinatorBridgePresenterDelegateDidTapCancel:(ThreadsBetaCoordinatorBridgePresenter *)coordinatorBridgePresenter
-{
-    MXWeakify(self);
-    [self.threadsBetaBridgePresenter dismissWithAnimated:YES completion:^{
-        MXStrongifyAndReturnIfNil(self);
-        [self updateSections];
-    }];
-}
+//- (void)threadsBetaCoordinatorBridgePresenterDelegateDidTapEnable:(ThreadsBetaCoordinatorBridgePresenter *)coordinatorBridgePresenter
+//{
+//    MXWeakify(self);
+//    [self.threadsBetaBridgePresenter dismissWithAnimated:YES completion:^{
+//        MXStrongifyAndReturnIfNil(self);
+//        [self enableThreads:YES];
+//    }];
+//}
+//
+//- (void)threadsBetaCoordinatorBridgePresenterDelegateDidTapCancel:(ThreadsBetaCoordinatorBridgePresenter *)coordinatorBridgePresenter
+//{
+//    MXWeakify(self);
+//    [self.threadsBetaBridgePresenter dismissWithAnimated:YES completion:^{
+//        MXStrongifyAndReturnIfNil(self);
+//        [self updateSections];
+//    }];
+//}
 
 #pragma mark - ChangePasswordCoordinatorBridgePresenterDelegate
 

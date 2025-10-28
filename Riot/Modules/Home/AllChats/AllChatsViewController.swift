@@ -104,57 +104,40 @@ class AllChatsViewController: HomeViewController {
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        editActionProvider.delegate = self
-        spaceActionProvider.delegate = self
-        
-        recentsTableView.tag = RecentsDataSourceMode.allChats.rawValue
-        recentsTableView.clipsToBounds = false
-        recentsTableView.register(RecentEmptySectionTableViewCell.nib, forCellReuseIdentifier: RecentEmptySectionTableViewCell.reuseIdentifier)
-        recentsTableView.register(RecentEmptySpaceSectionTableViewCell.nib, forCellReuseIdentifier: RecentEmptySpaceSectionTableViewCell.reuseIdentifier)
-        recentsTableView.register(RecentsInvitesTableViewCell.nib, forCellReuseIdentifier: RecentsInvitesTableViewCell.reuseIdentifier)
-        recentsTableView.contentInsetAdjustmentBehavior = .automatic
-        
-        toolbarHeight = toolbar.frame.height
-        // --- THÊM CODE ĐỂ XÓA NỀN TOOLBAR ---
-                toolbar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
-        toolbar.setShadowImage(UIImage(), forToolbarPosition: .any) // Tùy chọn: xóa đường kẻ 1px phía trên toolbar
-        // --- CODE ÉP TOOLBAR THAY ĐỔI CHIỀU CAO ---
+            super.viewDidLoad()
+            
+            editActionProvider.delegate = self
+            spaceActionProvider.delegate = self
+            
+            recentsTableView.tag = RecentsDataSourceMode.allChats.rawValue
+            recentsTableView.clipsToBounds = false
+            recentsTableView.register(RecentEmptySectionTableViewCell.nib, forCellReuseIdentifier: RecentEmptySectionTableViewCell.reuseIdentifier)
+            recentsTableView.register(RecentEmptySpaceSectionTableViewCell.nib, forCellReuseIdentifier: RecentEmptySpaceSectionTableViewCell.reuseIdentifier)
+            recentsTableView.register(RecentsInvitesTableViewCell.nib, forCellReuseIdentifier: RecentsInvitesTableViewCell.reuseIdentifier)
+            recentsTableView.contentInsetAdjustmentBehavior = .automatic
+            
+            // --- BẮT ĐẦU SỬA ĐỔI ---
 
-                // 1. Tính toán lại kích thước nút (PHẢI GIỐNG HỆT BƯỚC 1)
-                let iconImage = Asset.Images.allChatsSpacesIcon.image
-                let padding: CGFloat = 10.0 // <-- ĐẢM BẢO GIÁ TRỊ NÀY GIỐNG HỆT BƯỚC 1
-                let iconSize = iconImage.size.height
-                let buttonTotalSize = iconSize + (padding * 2)
-                
-                // 2. Đặt chiều cao tối thiểu cho toolbar
-                //    (Chúng ta thêm 10pt đệm trên/dưới cho đẹp)
-                let toolbarMinHeight = buttonTotalSize + 10.0
+            // 1. Ẩn toolbar vĩnh viễn
+            toolbar.isHidden = true
+            
+            // 2. Ghim empty view vào đáy màn hình (thay vì vào toolbar)
+            emptyViewBottomAnchor = self.view.safeAreaLayoutGuide.bottomAnchor
 
-                // 3. Kích hoạt constraint
-                toolbar.translatesAutoresizingMaskIntoConstraints = false
-                let heightConstraint = toolbar.heightAnchor.constraint(greaterThanOrEqualToConstant: toolbarMinHeight)
-                
-                // Set priority để tránh xung đột với constraint hệ thống
-                heightConstraint.priority = .defaultHigh // (750)
-                heightConstraint.isActive = true
+            // --- KẾT THÚC SỬA ĐỔI ---
 
-                // --- KẾT THÚC CODE ÉP TOOLBAR ---
-        emptyViewBottomAnchor = toolbar.topAnchor
+            updateUI()
+            
+            navigationItem.largeTitleDisplayMode = .automatic
+            navigationController?.navigationBar.prefersLargeTitles = true
 
-        updateUI()
-        
-        navigationItem.largeTitleDisplayMode = .automatic
-        navigationController?.navigationBar.prefersLargeTitles = true
+            searchController.obscuresBackgroundDuringPresentation = false
+            searchController.searchResultsUpdater = self
+            searchController.delegate = self
 
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchResultsUpdater = self
-        searchController.delegate = self
-
-        NotificationCenter.default.addObserver(self, selector: #selector(self.setupEditOptions), name: AllChatsLayoutSettingsManager.didUpdateSettings, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateBadgeButton), name: MXSpaceNotificationCounter.didUpdateNotificationCount, object: nil)
-    }
+            NotificationCenter.default.addObserver(self, selector: #selector(self.setupEditOptions), name: AllChatsLayoutSettingsManager.didUpdateSettings, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(self.updateBadgeButton), name: MXSpaceNotificationCounter.didUpdateNotificationCount, object: nil)
+        }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -509,19 +492,52 @@ class AllChatsViewController: HomeViewController {
     }
 
     private func updateUI() {
-        let currentSpace = self.dataSource?.currentSpace
-        self.title = currentSpace?.summary?.displayName ?? VectorL10n.allChatsTitle
-        
-        setupEditOptions()
-        updateToolbar(with: editActionProvider.updateMenu(with: mainSession, parentSpace: currentSpace, completion: { [weak self] menu in
-            self?.updateToolbar(with: menu)
-        }))
-        updateEmptyView()
-        updateBadgeButton()
-    }
+            let currentSpace = self.dataSource?.currentSpace
+            self.title = currentSpace?.summary?.displayName ?? VectorL10n.allChatsTitle
+            
+            setupEditOptions()
+            
+            // 1. Lấy menu
+            let menu = editActionProvider.updateMenu(with: mainSession, parentSpace: currentSpace, completion: { [weak self] menu in
+                // Cập nhật menu khi load xong
+                if let editButton = self?.editBarButtonItem.customView as? UIButton {
+                    editButton.menu = menu
+                }
+            })
+            
+            // 2. Gán menu cho nút edit
+            if let editButton = self.editBarButtonItem.customView as? UIButton {
+                editButton.menu = menu
+            }
+
+            // --- SỬA Ở ĐÂY: Dùng một "customView" rỗng để tạo khoảng cách ---
+            
+            // 1. Tạo một View rỗng
+            let spacerView = UIView()
+            spacerView.translatesAutoresizingMaskIntoConstraints = false
+            
+            // 2. Đặt chiều rộng cho nó (đây chính là khoảng cách)
+            let spacing: CGFloat = 20.0 // <-- TĂNG/GIẢM SỐ NÀY
+            spacerView.widthAnchor.constraint(equalToConstant: spacing).isActive = true
+            
+            // 3. Bọc view rỗng đó trong một UIBarButtonItem
+            let spacerItem = UIBarButtonItem(customView: spacerView)
+            
+            // 4. Gán vào thanh navigation
+            //    Thứ tự: [Nút phải, Đệm, Nút trái]
+            self.navigationItem.rightBarButtonItems = [editBarButtonItem, spacerItem, spacesButton]
+            
+            // --- KẾT THÚC SỬA ---
+            
+            // 5. Gọi updateToolbar để ẩn nó đi
+            updateToolbar(with: menu)
+            
+            updateEmptyView()
+            updateBadgeButton()
+        }
     
     private func updateRightNavigationItem(with menu: UIMenu) {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), menu: menu)
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), menu: menu)
     }
     
 //    private lazy var spacesButton: BadgedBarButtonItem = {
@@ -556,8 +572,8 @@ class AllChatsViewController: HomeViewController {
         let buttonTotalSize = iconSize + (padding * 2)
 
         // 4. Đặt viền và bo tròn
-        innerButton.layer.borderColor = theme.colors.accent.cgColor
-        innerButton.layer.borderWidth = 1.0
+//        innerButton.layer.borderColor = theme.colors.accent.cgColor
+//        innerButton.layer.borderWidth = 1.0
         innerButton.layer.cornerRadius = buttonTotalSize / 2 // Làm cho nó tròn
         innerButton.layer.masksToBounds = true
         
@@ -574,45 +590,45 @@ class AllChatsViewController: HomeViewController {
     // (Nằm ngay sau dấu } của spacesButton)
         
     private lazy var editBarButtonItem: UIBarButtonItem = {
-        // 1. Dùng .custom để toàn quyền kiểm soát
-        let editButton = UIButton(type: .custom)
-        
-        // 2. Lấy thông tin ảnh
-        let iconImage = Asset.Images.allChatsEditIcon.image
-        editButton.setImage(iconImage, for: .normal)
-        editButton.tintColor = theme.colors.accent
+            // 1. Dùng .custom để toàn quyền kiểm soát
+            let editButton = UIButton(type: .custom)
+            
+            // 2. Lấy thông tin ảnh
+            let iconImage = Asset.Images.add.image
+            editButton.setImage(iconImage, for: .normal)
+            editButton.tintColor = theme.colors.accent
 
-        // 3. Sao chép logic kích thước
-        let padding: CGFloat = 10.0
-        
-        // --- SỬA Ở ĐÂY ---
-        // Lấy cả chiều rộng và chiều cao để tìm cạnh lớn nhất
-        let iconHeight = iconImage.size.height
-        let iconWidth = iconImage.size.width
-        let iconSize = max(iconHeight, iconWidth) // Lấy cạnh lớn nhất làm chuẩn
-        // --- KẾT THÚC SỬA ---
-        
-        let buttonTotalSize = iconSize + (padding * 2)
+            // 3. Sao chép logic kích thước
+            let padding: CGFloat = 0
+            
+            // --- SỬA Ở ĐÂY ---
+            // Lấy cả chiều rộng và chiều cao để tìm cạnh lớn nhất
+            let iconHeight = iconImage.size.height
+            let iconWidth = iconImage.size.width
+            let iconSize = max(iconHeight, iconWidth) // Lấy cạnh lớn nhất làm chuẩn
+            // --- KẾT THÚC SỬA ---
+            
+            let buttonTotalSize = iconSize + (padding * 2)
 
-        // 4. Đặt viền và bo tròn (giống hệt)
-        editButton.layer.borderColor = theme.colors.accent.cgColor
-        editButton.layer.borderWidth = 1.0
-        editButton.layer.cornerRadius = buttonTotalSize / 2
-        editButton.layer.masksToBounds = true
-        
-        // 5. Quan trọng: Nút này hiển thị Menu
-        editButton.showsMenuAsPrimaryAction = true
-        
-        // 6. Đặt kích thước cố định
-        editButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            editButton.widthAnchor.constraint(equalToConstant: buttonTotalSize),
-            editButton.heightAnchor.constraint(equalToConstant: buttonTotalSize)
-        ])
-        
-        // 7. Trả về một UIBarButtonItem chứa nút này
-        return UIBarButtonItem(customView: editButton)
-    }()
+            // 4. Đặt viền và bo tròn (ĐÃ BỎ VIỀN)
+            // editButton.layer.borderColor = theme.colors.accent.cgColor (Đã xóa)
+            // editButton.layer.borderWidth = 1.0 (Đã xóa)
+            editButton.layer.cornerRadius = buttonTotalSize / 2
+            editButton.layer.masksToBounds = true
+            
+            // 5. Quan trọng: Nút này hiển thị Menu
+            editButton.showsMenuAsPrimaryAction = true
+            
+            // 6. Đặt kích thước cố định
+            editButton.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                editButton.widthAnchor.constraint(equalToConstant: buttonTotalSize),
+                editButton.heightAnchor.constraint(equalToConstant: buttonTotalSize)
+            ])
+            
+            // 7. Trả về một UIBarButtonItem chứa nút này
+            return UIBarButtonItem(customView: editButton)
+        }()
     
     @objc private func updateBadgeButton() {
         guard isViewLoaded, let session = mainSession else {
@@ -638,28 +654,16 @@ class AllChatsViewController: HomeViewController {
     }
     
     private func updateToolbar(with menu: UIMenu) {
-        guard isViewLoaded else {
-            return
+            guard isViewLoaded else {
+                return
+            }
+            
+            // 1. Ẩn toolbar đi
+            self.isToolbarHidden = true
+            
+            // 2. (Quan trọng) Xóa tất cả các nút khỏi nó
+            self.toolbar.items = []
         }
-        
-        self.isToolbarHidden = false
-        self.update(with: theme)
-        
-        // --- SỬA ĐỔI TỪ ĐÂY ---
-                
-                // 1. Lấy nút `editButton` thật (nằm trong customView)
-                if let editButton = editBarButtonItem.customView as? UIButton {
-                    // 2. Gán menu mới cho nó
-                    editButton.menu = menu
-                }
-                
-                // 3. Sử dụng `editBarButtonItem` đã được tạo
-                self.toolbar.items = [
-                    spacesButton,
-                    UIBarButtonItem.flexibleSpace(),
-                    editBarButtonItem // <-- Thay thế dòng cũ
-                ]
-    }
     
     private func showCreateSpace(parentSpaceId: String?) {
         let coordinator = SpaceCreationCoordinator(parameters: SpaceCreationCoordinatorParameters(session: self.mainSession, parentSpaceId: parentSpaceId))
