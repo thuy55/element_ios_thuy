@@ -60,6 +60,11 @@ final class ThreadListViewController: UIViewController {
         self.registerThemeServiceDidChangeThemeNotification()
         self.update(theme: self.theme)
         
+        // --- BỔ SUNG AUTO LAYOUT CHO DYNAMIC TYPE START ---
+            self.threadsTableView.rowHeight = UITableView.automaticDimension
+            self.threadsTableView.estimatedRowHeight = 74.0 // Giá trị ước tính cho thread cell
+            // --- BỔ SUNG AUTO LAYOUT CHO DYNAMIC TYPE END ---
+        
         self.viewModel.viewDelegate = self
 
         self.viewModel.process(viewAction: .loadData)

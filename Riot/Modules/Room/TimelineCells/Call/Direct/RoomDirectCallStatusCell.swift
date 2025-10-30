@@ -1,4 +1,4 @@
-// 
+//
 // Copyright 2020-2024 New Vector Ltd.
 //
 // SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-Element-Commercial
@@ -103,18 +103,29 @@ class RoomDirectCallStatusCell: RoomCallBaseCell {
     }
     
     private func bottomView(for state: ViewState) -> UIView? {
+        
+        // --- KHAI BÁO DYNAMIC FONT CHO NÚT START ---
+        let dynamicFont = UIFont.preferredFont(forTextStyle: .body)
+        // --- KHAI BÁO DYNAMIC FONT CHO NÚT END ---
+        
         switch state {
         case .unknown:
             return nil
         case .ringing:
             let view = HorizontalButtonsContainerView.loadFromNib()
             
+            // --- ÁP DỤNG FONT CHO NÚT 1 (Decline) ---
+            view.firstButton.titleLabel?.font = dynamicFont
+            view.firstButton.titleLabel?.adjustsFontForContentSizeCategory = true
             view.firstButton.style = .negative
             view.firstButton.setTitle(VectorL10n.eventFormatterCallDecline, for: .normal)
             view.firstButton.setImage(Asset.Images.voiceCallHangupIcon.image, for: .normal)
             view.firstButton.removeTarget(nil, action: nil, for: .touchUpInside)
             view.firstButton.addTarget(self, action: #selector(declineCallAction(_:)), for: .touchUpInside)
             
+            // --- ÁP DỤNG FONT CHO NÚT 2 (Answer) ---
+            view.secondButton.titleLabel?.font = dynamicFont
+            view.secondButton.titleLabel?.adjustsFontForContentSizeCategory = true
             view.secondButton.style = .positive
             view.secondButton.setTitle(VectorL10n.eventFormatterCallAnswer, for: .normal)
             view.secondButton.setImage(callButtonIcon, for: .normal)
@@ -126,6 +137,9 @@ class RoomDirectCallStatusCell: RoomCallBaseCell {
             let view = HorizontalButtonsContainerView.loadFromNib()
             view.secondButton.isHidden = true
             
+            // --- ÁP DỤNG FONT CHO NÚT 1 (End Call) ---
+            view.firstButton.titleLabel?.font = dynamicFont
+            view.firstButton.titleLabel?.adjustsFontForContentSizeCategory = true
             view.firstButton.style = .negative
             view.firstButton.setTitle(VectorL10n.eventFormatterCallEndCall, for: .normal)
             view.firstButton.setImage(Asset.Images.voiceCallHangupIcon.image, for: .normal)
@@ -137,6 +151,9 @@ class RoomDirectCallStatusCell: RoomCallBaseCell {
             let view = HorizontalButtonsContainerView.loadFromNib()
             view.secondButton.isHidden = true
             
+            // --- ÁP DỤNG FONT CHO NÚT 1 (Callback) ---
+            view.firstButton.titleLabel?.font = dynamicFont
+            view.firstButton.titleLabel?.adjustsFontForContentSizeCategory = true
             view.firstButton.style = .positive
             view.firstButton.setTitle(VectorL10n.eventFormatterCallBack, for: .normal)
             view.firstButton.setImage(callButtonIcon, for: .normal)
@@ -148,6 +165,9 @@ class RoomDirectCallStatusCell: RoomCallBaseCell {
             let view = HorizontalButtonsContainerView.loadFromNib()
             view.secondButton.isHidden = true
             
+            // --- ÁP DỤNG FONT CHO NÚT 1 (Callback) ---
+            view.firstButton.titleLabel?.font = dynamicFont
+            view.firstButton.titleLabel?.adjustsFontForContentSizeCategory = true
             view.firstButton.style = .positive
             view.firstButton.setTitle(VectorL10n.eventFormatterCallBack, for: .normal)
             view.firstButton.setImage(callButtonIcon, for: .normal)
@@ -161,6 +181,9 @@ class RoomDirectCallStatusCell: RoomCallBaseCell {
             let view = HorizontalButtonsContainerView.loadFromNib()
             view.secondButton.isHidden = true
             
+            // --- ÁP DỤNG FONT CHO NÚT 1 (Retry) ---
+            view.firstButton.titleLabel?.font = dynamicFont
+            view.firstButton.titleLabel?.adjustsFontForContentSizeCategory = true
             view.firstButton.style = .positive
             view.firstButton.setTitle(VectorL10n.eventFormatterCallRetry, for: .normal)
             view.firstButton.setImage(callButtonIcon, for: .normal)
@@ -340,6 +363,16 @@ class RoomDirectCallStatusCell: RoomCallBaseCell {
             return
         }
         
+        // --- BỔ SUNG DYNAMIC TYPE CHO CALLER NAME VÀ STATUS LABEL START ---
+
+        // 1. Label Tên người gọi (callerNameLabel)
+        innerContentView.callerNameLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        innerContentView.callerNameLabel.adjustsFontForContentSizeCategory = true
+        innerContentView.callerNameLabel.numberOfLines = 1
+        
+
+        // --- BỔ SUNG DYNAMIC TYPE CHO CALLER NAME VÀ STATUS LABEL END ---
+
         if bubbleCellData.senderId == bubbleCellData.mxSession.myUserId {
             //  event sent by my user, no means in displaying our own avatar and display name
             if let directUserId = bubbleCellData.mxSession.directUserId(inRoom: bubbleCellData.roomId) {

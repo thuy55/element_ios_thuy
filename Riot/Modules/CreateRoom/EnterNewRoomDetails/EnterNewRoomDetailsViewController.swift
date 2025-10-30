@@ -33,7 +33,7 @@ final class EnterNewRoomDetailsViewController: UIViewController {
         static let roomAddressMaximumNumberOfChars = 50
         static let roomTopicMaximumNumberOfChars = 250
         static let chooseAvatarTableViewCellHeight: CGFloat = 140
-        static let textViewTableViewCellHeight: CGFloat = 150
+        static let textViewTableViewCellHeight: CGFloat = 150 // Giữ nguyên, nhưng sẽ bị ghi đè bởi AutomaticDimension
     }
     
     // MARK: - Properties
@@ -404,8 +404,15 @@ extension EnterNewRoomDetailsViewController: UITableViewDataSource {
             if cell == nil {
                 cell = UITableViewCell(style: .default, reuseIdentifier: Constants.defaultStyleCellReuseIdentifier)
             }
-            cell.textLabel?.font = .systemFont(ofSize: 17)
-            cell.detailTextLabel?.font = .systemFont(ofSize: 16)
+            // --- BỔ SUNG DYNAMIC TYPE CHO CELL MẶC ĐỊNH START ---
+            cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+            cell.textLabel?.adjustsFontForContentSizeCategory = true
+            cell.textLabel?.numberOfLines = 0 // Cho phép ngắt dòng để cell co giãn
+            
+            cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
+            cell.detailTextLabel?.adjustsFontForContentSizeCategory = true
+            // --- BỔ SUNG DYNAMIC TYPE CHO CELL MẶC ĐỊNH END ---
+            
             cell.textLabel?.text = row.text
             if row.accessoryType == .checkmark {
                 cell.accessoryView = UIImageView(image: Asset.Images.checkmark.image)
@@ -428,7 +435,11 @@ extension EnterNewRoomDetailsViewController: UITableViewDataSource {
             return cell
         case .textField(let tag, let placeholder, let delegate):
             let cell: TextFieldTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.textField.font = .systemFont(ofSize: 17)
+            // --- BỔ SUNG DYNAMIC TYPE CHO TEXT FIELD START ---
+            cell.textField.font = UIFont.preferredFont(forTextStyle: .body)
+            cell.textField.adjustsFontForContentSizeCategory = true
+            // --- BỔ SUNG DYNAMIC TYPE CHO TEXT FIELD END ---
+
             cell.textField.insets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
             cell.textField.autocapitalizationType = .words
             cell.textField.tag = tag
@@ -452,7 +463,11 @@ extension EnterNewRoomDetailsViewController: UITableViewDataSource {
             cell.textView.contentInset = .zero
             cell.textView.textContainerInset = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
             cell.textView.placeholder = placeholder
-            cell.textView.font = .systemFont(ofSize: 17)
+            // --- BỔ SUNG DYNAMIC TYPE CHO TEXT VIEW START ---
+            cell.textView.font = UIFont.preferredFont(forTextStyle: .body)
+            cell.textView.adjustsFontForContentSizeCategory = true
+            // --- BỔ SUNG DYNAMIC TYPE CHO TEXT VIEW END ---
+            
             cell.textView.text = row.text
             cell.textView.isEditable = true
             cell.textView.isScrollEnabled = false
@@ -463,7 +478,12 @@ extension EnterNewRoomDetailsViewController: UITableViewDataSource {
             return cell
         case .withSwitch(let isOn, let onValueChanged):
             let cell: MXKTableViewCellWithLabelAndSwitch = tableView.dequeueReusableCell(for: indexPath)
-            cell.mxkLabel.font = .systemFont(ofSize: 17)
+            // --- BỔ SUNG DYNAMIC TYPE CHO LABEL CÓ SWITCH START ---
+            cell.mxkLabel.font = UIFont.preferredFont(forTextStyle: .body)
+            cell.mxkLabel.adjustsFontForContentSizeCategory = true
+            cell.mxkLabel.numberOfLines = 0 // Cho phép co giãn
+            // --- BỔ SUNG DYNAMIC TYPE CHO LABEL CÓ SWITCH END ---
+
             cell.mxkLabel.text = row.text
             cell.mxkSwitch.isOn = isOn
             cell.mxkSwitch.removeTarget(nil, action: nil, for: .valueChanged)
@@ -509,7 +529,12 @@ extension EnterNewRoomDetailsViewController: UITableViewDelegate {
         let view: TextViewTableViewHeaderFooterView? = tableView.dequeueReusableHeaderFooterView()
 
         view?.textView.text = header
-        view?.textView.font = .systemFont(ofSize: 13)
+        // --- BỔ SUNG DYNAMIC TYPE CHO HEADER START ---
+        view?.textView.font = UIFont.preferredFont(forTextStyle: .caption1) // Font nhỏ hơn cho header
+        view?.textView.adjustsFontForContentSizeCategory = true
+        view?.textView.isScrollEnabled = false // Cho phép co giãn
+        // --- BỔ SUNG DYNAMIC TYPE CHO HEADER END ---
+
         view?.textViewInsets = UIEdgeInsets(top: 16, left: 16, bottom: 8, right: 16)
         view?.update(theme: theme)
 
@@ -524,7 +549,12 @@ extension EnterNewRoomDetailsViewController: UITableViewDelegate {
         let view: TextViewTableViewHeaderFooterView? = tableView.dequeueReusableHeaderFooterView()
 
         view?.textView.text = footer
-        view?.textView.font = .systemFont(ofSize: 13)
+        // --- BỔ SUNG DYNAMIC TYPE CHO FOOTER START ---
+        view?.textView.font = UIFont.preferredFont(forTextStyle: .caption1) // Font nhỏ hơn cho footer
+        view?.textView.adjustsFontForContentSizeCategory = true
+        view?.textView.isScrollEnabled = false // Cho phép co giãn
+        // --- BỔ SUNG DYNAMIC TYPE CHO FOOTER END ---
+
         view?.update(theme: theme)
 
         return view
@@ -542,10 +572,13 @@ extension EnterNewRoomDetailsViewController: UITableViewDelegate {
         
         switch row.type {
         case .avatar:
+            // Giữ nguyên chiều cao cố định cho avatar (để tránh layout bị lỗi nếu image quá nhỏ)
             return Constants.chooseAvatarTableViewCellHeight
         case .textView:
-            return Constants.textViewTableViewCellHeight
+            // Xóa fixed height để Dynamic Type hoạt động, chỉ giữ estimated
+            return UITableView.automaticDimension
         default:
+            // Sử dụng automaticDimension để cell tự co giãn (quan trọng cho default và switch)
             return UITableView.automaticDimension
         }
     }
@@ -554,14 +587,14 @@ extension EnterNewRoomDetailsViewController: UITableViewDelegate {
         if sections[section].header == nil {
             return 18
         }
-        return UITableView.automaticDimension
+        return UITableView.automaticDimension // Cho phép header co giãn
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if sections[section].footer == nil {
             return 18
         }
-        return UITableView.automaticDimension
+        return UITableView.automaticDimension // Cho phép footer co giãn
     }
     
 }
@@ -641,6 +674,9 @@ extension EnterNewRoomDetailsViewController: UITextViewDelegate {
         switch textView.tag {
         case Constants.roomTopicTextViewTag:
             viewModel.roomCreationParameters.topic = textView.text
+            // Kích hoạt lại việc tính toán chiều cao cell cho UITextView
+            mainTableView.beginUpdates()
+            mainTableView.endUpdates()
         default:
             break
         }

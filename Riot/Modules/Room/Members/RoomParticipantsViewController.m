@@ -135,7 +135,10 @@ Please see LICENSE in the repository root for full details.
     self.tableView.tableFooterView = [[UIView alloc] init];
     
     [self.tableView registerClass:ContactTableViewCell.class forCellReuseIdentifier:@"ParticipantTableViewCellId"];
-    
+    // --- BỔ SUNG AUTO LAYOUT CHO TABLE VIEW START ---
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.estimatedRowHeight = 74.0; // Giữ giá trị ước tính này (tối thiểu)
+        // --- BỔ SUNG AUTO LAYOUT CHO TABLE VIEW END ---
     
     if (_showInviteUserFab)
     {
@@ -925,6 +928,21 @@ Please see LICENSE in the repository root for full details.
         
         participantCell.mxRoom = self.mxRoom;
         
+        // --- BỔ SUNG DYNAMIC TYPE START ---
+        
+        // Tên thành viên (Label chính)
+        participantCell.contactDisplayNameLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+        participantCell.contactDisplayNameLabel.adjustsFontForContentSizeCategory = YES;
+        participantCell.contactDisplayNameLabel.numberOfLines = 0; // Quan trọng: Cho phép ngắt dòng để cell co giãn
+        
+        // Cấp độ quyền hạn (Label phụ)
+        participantCell.powerLevelLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1]; // Dùng font nhỏ hơn
+        participantCell.powerLevelLabel.adjustsFontForContentSizeCategory = YES;
+        participantCell.powerLevelLabel.numberOfLines = 1; // Thường chỉ có 1 dòng
+        
+        // --- BỔ SUNG DYNAMIC TYPE END ---
+
+        
         Contact *contact;
         
         if ((indexPath.section == participantsSection && userParticipant && indexPath.row == 0) && !currentSearchText.length)
@@ -1103,7 +1121,8 @@ Please see LICENSE in the repository root for full details.
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 74.0;
+//    return 74.0;
+    return UITableViewAutomaticDimension;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

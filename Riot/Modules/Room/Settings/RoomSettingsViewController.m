@@ -2050,7 +2050,14 @@ NSString *const kRoomSettingsAdvancedE2eEnabledCellViewIdentifier = @"kRoomSetti
         // Customize label style
         UITableViewHeaderFooterView *tableViewHeaderFooterView = (UITableViewHeaderFooterView*)view;
         tableViewHeaderFooterView.textLabel.textColor = ThemeService.shared.theme.textPrimaryColor;
-        tableViewHeaderFooterView.textLabel.font = [UIFont systemFontOfSize:15];
+//        tableViewHeaderFooterView.textLabel.font = [UIFont systemFontOfSize:15];
+        
+        // --- BỔ SUNG DYNAMIC TYPE CHO HEADER START ---
+                tableViewHeaderFooterView.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1]; // Font nhỏ hơn (Caption1)
+                tableViewHeaderFooterView.textLabel.adjustsFontForContentSizeCategory = YES;
+                tableViewHeaderFooterView.textLabel.numberOfLines = 0; // Cho phép co giãn
+                // --- BỔ SUNG DYNAMIC TYPE CHO HEADER END ---
+        
         tableViewHeaderFooterView.contentView.backgroundColor = ThemeService.shared.theme.headerBackgroundColor;
     }
 }
@@ -2065,11 +2072,11 @@ NSString *const kRoomSettingsAdvancedE2eEnabledCellViewIdentifier = @"kRoomSetti
     {
         if (row == ROOM_SETTINGS_MAIN_SECTION_ROW_TOPIC)
         {
-            return ROOM_TOPIC_CELL_HEIGHT;
+            return UITableViewAutomaticDimension; // Thay thế ROOM_TOPIC_CELL_HEIGHT
         }
     }
     
-    return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+    return UITableViewAutomaticDimension; // Sử dụng AutomaticDimension ở cuối
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -2166,6 +2173,11 @@ NSString *const kRoomSettingsAdvancedE2eEnabledCellViewIdentifier = @"kRoomSetti
                 roomPhotoCell.userInteractionEnabled = (oneSelfPowerLevel >= [powerLevels minimumPowerLevelForSendingEventAsStateEvent:kMXEventTypeStringRoomAvatar]);
                 roomPhotoCell.mxkImageView.alpha = roomPhotoCell.userInteractionEnabled ? 1.0f : 0.5f;
             }
+            // --- BỔ SUNG DYNAMIC TYPE (Label) START ---
+                        roomPhotoCell.mxkLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                        roomPhotoCell.mxkLabel.adjustsFontForContentSizeCategory = YES;
+                        roomPhotoCell.mxkLabel.numberOfLines = 0;
+                        // --- BỔ SUNG DYNAMIC TYPE (Label) END ---
             
             cell = roomPhotoCell;
         }
@@ -2196,6 +2208,15 @@ NSString *const kRoomSettingsAdvancedE2eEnabledCellViewIdentifier = @"kRoomSetti
             // disable the edition if the user cannot update it
             topicTextView.editable = (oneSelfPowerLevel >= [powerLevels minimumPowerLevelForSendingEventAsStateEvent:kMXEventTypeStringRoomTopic]);
             topicTextView.textColor = ThemeService.shared.theme.textSecondaryColor;
+            
+            // --- BỔ SUNG DYNAMIC TYPE (Label & TextView) START ---
+                        roomTopicCell.label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                        roomTopicCell.label.adjustsFontForContentSizeCategory = YES;
+                        roomTopicCell.label.numberOfLines = 0; // Label cho Topic
+                        
+                        roomTopicCell.textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody]; // TextView
+                        roomTopicCell.textView.adjustsFontForContentSizeCategory = YES;
+                        // --- BỔ SUNG DYNAMIC TYPE (Label & TextView) END ---
             
             topicTextView.keyboardAppearance = ThemeService.shared.theme.keyboardAppearance;
             
@@ -2243,6 +2264,15 @@ NSString *const kRoomSettingsAdvancedE2eEnabledCellViewIdentifier = @"kRoomSetti
             nameTextField.userInteractionEnabled = (oneSelfPowerLevel >= [powerLevels minimumPowerLevelForSendingEventAsStateEvent:kMXEventTypeStringRoomName]);
             nameTextField.textColor = ThemeService.shared.theme.textSecondaryColor;
             
+            // --- BỔ SUNG DYNAMIC TYPE (Label & TextField) START ---
+                        roomNameCell.mxkLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                        roomNameCell.mxkLabel.adjustsFontForContentSizeCategory = YES;
+                        roomNameCell.mxkLabel.numberOfLines = 0;
+                        
+                        roomNameCell.mxkTextField.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                        roomNameCell.mxkTextField.adjustsFontForContentSizeCategory = YES;
+                        // --- BỔ SUNG DYNAMIC TYPE (Label & TextField) END ---
+            
             // Add a "textFieldDidChange" notification method to the text field control.
             [nameTextField addTarget:self action:@selector(onTextFieldUpdate:) forControlEvents:UIControlEventEditingChanged];
             
@@ -2261,12 +2291,38 @@ NSString *const kRoomSettingsAdvancedE2eEnabledCellViewIdentifier = @"kRoomSetti
                 
                 NSArray *labels = roomTagCell.labels;
                 UILabel *label;
-                label = labels[0];
-                label.textColor = ThemeService.shared.theme.textPrimaryColor;
-                label.text = [VectorL10n roomDetailsFavouriteTag];
-                label = labels[1];
-                label.textColor = ThemeService.shared.theme.textPrimaryColor;
-                label.text = [VectorL10n roomDetailsLowPriorityTag];
+//                label = labels[0];
+//                label.textColor = ThemeService.shared.theme.textPrimaryColor;
+//                label.text = [VectorL10n roomDetailsFavouriteTag];
+//                label = labels[1];
+//                label.textColor = ThemeService.shared.theme.textPrimaryColor;
+//                label.text = [VectorL10n roomDetailsLowPriorityTag];
+                
+                // --- BỔ SUNG DYNAMIC TYPE START (Định nghĩa font) ---
+                        UIFont *labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                        // --- BỔ SUNG DYNAMIC TYPE END ---
+
+                        // Thiết lập Label 1
+                        label = labels[0];
+                        label.textColor = ThemeService.shared.theme.textPrimaryColor;
+                        label.text = [VectorL10n roomDetailsFavouriteTag];
+                        
+                        // Áp dụng Dynamic Type cho Label 1
+                        label.font = labelFont;
+                        label.adjustsFontForContentSizeCategory = YES;
+                        label.numberOfLines = 0; // Cho phép co giãn
+
+                        // Thiết lập Label 2
+                        label = labels[1];
+                        label.textColor = ThemeService.shared.theme.textPrimaryColor;
+                        label.text = [VectorL10n roomDetailsLowPriorityTag];
+                        
+                        // Áp dụng Dynamic Type cho Label 2
+                        label.font = labelFont;
+                        label.adjustsFontForContentSizeCategory = YES;
+                        label.numberOfLines = 0; // Cho phép co giãn
+                
+                
                 
                 if (updatedItemsDict[kRoomSettingsTagKey])
                 {
@@ -2291,6 +2347,8 @@ NSString *const kRoomSettingsAdvancedE2eEnabledCellViewIdentifier = @"kRoomSetti
                         [roomTagCell setCheckBoxValue:YES atIndex:1];
                     }
                 }
+                
+                
                 
                 cell = roomTagCell;
             }
@@ -2362,10 +2420,23 @@ NSString *const kRoomSettingsAdvancedE2eEnabledCellViewIdentifier = @"kRoomSetti
             cell.accessoryType = UITableViewCellAccessoryNone;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.textLabel.text = [VectorL10n roomDetailsAccessSectionNoAddressWarning];
+            // --- BỔ SUNG DYNAMIC TYPE (Warning) START ---
+                        cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                        cell.textLabel.adjustsFontForContentSizeCategory = YES;
+                        // --- BỔ SUNG DYNAMIC TYPE (Warning) END ---
         }
         else if (row == ROOM_SETTINGS_ROOM_ACCESS_SECTION_ROW_ACCESS)
         {
             TitleAndRightDetailTableViewCell *roomAccessCell = [tableView dequeueReusableCellWithIdentifier:[TitleAndRightDetailTableViewCell defaultReuseIdentifier] forIndexPath:indexPath];
+            // --- BỔ SUNG DYNAMIC TYPE (TitleAndRightDetailCell) START ---
+                        roomAccessCell.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                        roomAccessCell.titleLabel.adjustsFontForContentSizeCategory = YES;
+                        roomAccessCell.titleLabel.numberOfLines = 0;
+                        
+                        roomAccessCell.detailLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+                        roomAccessCell.detailLabel.adjustsFontForContentSizeCategory = YES;
+                        roomAccessCell.detailLabel.numberOfLines = 0;
+                        // --- BỔ SUNG DYNAMIC TYPE (TitleAndRightDetailCell) END ---
                         
             // Retrieve the potential updated values for joinRule and guestAccess
             NSString *joinRule = updatedItemsDict[kRoomSettingsJoinRuleKey];
@@ -2402,6 +2473,11 @@ NSString *const kRoomSettingsAdvancedE2eEnabledCellViewIdentifier = @"kRoomSetti
         {
             TableViewCellWithCheckBoxAndLabel *roomAccessCell = [tableView dequeueReusableCellWithIdentifier:[TableViewCellWithCheckBoxAndLabel defaultReuseIdentifier] forIndexPath:indexPath];
             
+            // --- BỔ SUNG DYNAMIC TYPE (Checkbox Label) START ---
+                        roomAccessCell.label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                        roomAccessCell.label.adjustsFontForContentSizeCategory = YES;
+                        roomAccessCell.label.numberOfLines = 0;
+                        // --- BỔ SUNG DYNAMIC TYPE (Checkbox Label) END ---
             roomAccessCell.checkBoxLeadingConstraint.constant = tableView.vc_separatorInset.left;
             
             // Retrieve the potential updated values for joinRule and guestAccess
@@ -2463,7 +2539,17 @@ NSString *const kRoomSettingsAdvancedE2eEnabledCellViewIdentifier = @"kRoomSetti
         else if (row == ROOM_SETTINGS_ROOM_PROMOTE_SECTION_ROW_SUGGEST)
         {
             TitleAndRightDetailTableViewCell *roomSuggestionCell = [tableView dequeueReusableCellWithIdentifier:[TitleAndRightDetailTableViewCell defaultReuseIdentifier] forIndexPath:indexPath];
-                        
+                  
+            // --- BỔ SUNG DYNAMIC TYPE (TitleAndRightDetailCell) START ---
+                        roomSuggestionCell.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                        roomSuggestionCell.titleLabel.adjustsFontForContentSizeCategory = YES;
+                        roomSuggestionCell.titleLabel.numberOfLines = 0;
+
+                        roomSuggestionCell.detailLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+                        roomSuggestionCell.detailLabel.adjustsFontForContentSizeCategory = YES;
+                        roomSuggestionCell.detailLabel.numberOfLines = 0;
+                        // --- BỔ SUNG DYNAMIC TYPE (TitleAndRightDetailCell) END ---
+            
             roomSuggestionCell.titleLabel.text = [VectorL10n roomDetailsPromoteRoomSuggestTitle];
             roomSuggestionCell.detailLabel.text = [self.mainSession.spaceService directParentIdsOfRoomWithId:self.roomId whereRoomIsSuggested:YES].count ? [VectorL10n on] : [VectorL10n off];
 
@@ -2529,6 +2615,12 @@ NSString *const kRoomSettingsAdvancedE2eEnabledCellViewIdentifier = @"kRoomSetti
         historyVisibilityCell.userInteractionEnabled = (oneSelfPowerLevel >= [powerLevels minimumPowerLevelForSendingEventAsStateEvent:kMXEventTypeStringRoomHistoryVisibility]);
         historyVisibilityCell.checkBox.alpha = historyVisibilityCell.userInteractionEnabled ? 1.0f : 0.5f;
         
+        // --- BỔ SUNG DYNAMIC TYPE (Checkbox Label) START ---
+                historyVisibilityCell.label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                historyVisibilityCell.label.adjustsFontForContentSizeCategory = YES;
+                historyVisibilityCell.label.numberOfLines = 0;
+                // --- BỔ SUNG DYNAMIC TYPE (Checkbox Label) END ---
+        
         cell = historyVisibilityCell;
     }
     else if (section == SECTION_TAG_ADDRESSES)
@@ -2567,6 +2659,11 @@ NSString *const kRoomSettingsAdvancedE2eEnabledCellViewIdentifier = @"kRoomSetti
             addAddressTextField.spellCheckingType = UITextSpellCheckingTypeNo;
             addAddressTextField.delegate = self;
             
+//            / --- BỔ SUNG DYNAMIC TYPE (TextField) START ---
+                        addAddressCell.mxkTextField.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                        addAddressCell.mxkTextField.adjustsFontForContentSizeCategory = YES;
+                        // --- BỔ SỔUNG DYNAMIC TYPE (TextField) END ---
+            
             cell = addAddressCell;
         }
         else if (row == ROOM_SETTINGS_ROOM_ADDRESS_NO_LOCAL_ADDRESS)
@@ -2587,6 +2684,12 @@ NSString *const kRoomSettingsAdvancedE2eEnabledCellViewIdentifier = @"kRoomSetti
             {
                 addressCell.textLabel.text = [VectorL10n roomDetailsNoLocalAddresses];
             }
+            
+            // --- BỔ SUNG DYNAMIC TYPE (Label) START ---
+                        addressCell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                        addressCell.textLabel.adjustsFontForContentSizeCategory = YES;
+                        addressCell.textLabel.numberOfLines = 0;
+                        // --- BỔ SUNG DYNAMIC TYPE (Label) END ---
             
             cell = addressCell;
         }
@@ -2629,6 +2732,12 @@ NSString *const kRoomSettingsAdvancedE2eEnabledCellViewIdentifier = @"kRoomSetti
                 }
             }
             
+            // --- BỔ SUNG DYNAMIC TYPE (Label) START ---
+                        addressCell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                        addressCell.textLabel.adjustsFontForContentSizeCategory = YES;
+                        addressCell.textLabel.numberOfLines = 0;
+                        // --- BỔ SUNG DYNAMIC TYPE (Label) END ---
+            
             cell = addressCell;
         }
     }
@@ -2644,6 +2753,12 @@ NSString *const kRoomSettingsAdvancedE2eEnabledCellViewIdentifier = @"kRoomSetti
         addressCell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         addressCell.textLabel.text = bannedMembers[row].userId;
+        
+        // --- BỔ SUNG DYNAMIC TYPE (Label) START ---
+                addressCell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                addressCell.textLabel.adjustsFontForContentSizeCategory = YES;
+                addressCell.textLabel.numberOfLines = 0;
+                // --- BỔ SUNG DYNAMIC TYPE (Label) END ---
         
         cell = addressCell;
     }
@@ -2672,6 +2787,16 @@ NSString *const kRoomSettingsAdvancedE2eEnabledCellViewIdentifier = @"kRoomSetti
             cell.detailTextLabel.text = mxRoomState.roomId;
             cell.detailTextLabel.textColor = ThemeService.shared.theme.textSecondaryColor;
             cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+            
+            // --- BỔ SUNG DYNAMIC TYPE (Title & Detail) START ---
+                        cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                        cell.textLabel.adjustsFontForContentSizeCategory = YES;
+                        cell.textLabel.numberOfLines = 0;
+
+                        cell.detailTextLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+                        cell.detailTextLabel.adjustsFontForContentSizeCategory = YES;
+                        cell.detailTextLabel.numberOfLines = 0; // Cho phép Room ID dài co giãn
+                        // --- BỔ SUNG DYNAMIC TYPE (Title & Detail) END ---
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
@@ -2735,6 +2860,11 @@ NSString *const kRoomSettingsAdvancedE2eEnabledCellViewIdentifier = @"kRoomSetti
                 cell.textLabel.text = [VectorL10n roomDetailsAdvancedE2eEncryptionEnabled];
             }
             cell.textLabel.textColor = ThemeService.shared.theme.textPrimaryColor;
+            // --- BỔ SUNG DYNAMIC TYPE (Label) START ---
+                        cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                        cell.textLabel.adjustsFontForContentSizeCategory = YES;
+                        cell.textLabel.numberOfLines = 0;
+                        // --- BỔ SUNG DYNAMIC TYPE (Label) END ---
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
@@ -2770,6 +2900,12 @@ NSString *const kRoomSettingsAdvancedE2eEnabledCellViewIdentifier = @"kRoomSetti
             }
             cell.textLabel.textColor = ThemeService.shared.theme.textPrimaryColor;
             
+            // --- BỔ SUNG DYNAMIC TYPE (Label) START ---
+                        cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                        cell.textLabel.adjustsFontForContentSizeCategory = YES;
+                        cell.textLabel.numberOfLines = 0;
+                        // --- BỔ SUNG DYNAMIC TYPE (Label) END ---
+            
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
     }
@@ -2792,6 +2928,12 @@ NSString *const kRoomSettingsAdvancedE2eEnabledCellViewIdentifier = @"kRoomSetti
     cell.mxkSwitchTrailingConstraint.constant = 15;
     
     cell.mxkLabel.textColor = ThemeService.shared.theme.textPrimaryColor;
+    
+    // --- BỔ SUNG DYNAMIC TYPE CHO LABEL START ---
+        cell.mxkLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+        cell.mxkLabel.adjustsFontForContentSizeCategory = YES;
+        cell.mxkLabel.numberOfLines = 0; // Quan trọng để cell co giãn
+        // --- BỔ SUNG DYNAMIC TYPE CHO LABEL END ---
     
     cell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
     [cell.mxkSwitch removeTarget:self action:nil forControlEvents:UIControlEventValueChanged];

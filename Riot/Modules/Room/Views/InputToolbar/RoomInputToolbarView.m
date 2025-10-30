@@ -92,7 +92,7 @@ static const NSTimeInterval kActionMenuComposerHeightAnimationDuration = .3;
     self.textView.layer.borderWidth = 0;
     self.textView.backgroundColor = [UIColor clearColor];
 
-    self.textView.font = [UIFont systemFontOfSize:15];
+    self.textView.font = [UIFont systemFontOfSize:18];
     self.textView.textColor = ThemeService.shared.theme.textPrimaryColor;
     self.textView.tintColor = ThemeService.shared.theme.tintColor;
     self.textView.placeholderColor = ThemeService.shared.theme.textTertiaryColor;

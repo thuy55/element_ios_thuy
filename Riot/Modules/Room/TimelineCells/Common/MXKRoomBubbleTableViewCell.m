@@ -486,6 +486,19 @@ static BOOL _disableLongPressGestureOnEvent;
         // Check conditions to display the message sender name
         if (self.userNameLabel)
         {
+            // --- BỔ SUNG DYNAMIC TYPE START ---
+            
+            // Áp dụng font Dynamic Type (Sử dụng Subheadline cho tên người gửi)
+            self.userNameLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+            
+            // Bật khả năng co giãn cỡ chữ
+            self.userNameLabel.adjustsFontForContentSizeCategory = YES;
+            
+            // Cho phép tên hiển thị trên nhiều dòng nếu cần (sử dụng 0) hoặc giữ 1 dòng
+            self.userNameLabel.numberOfLines = 1;
+            
+            // --- BỔ SUNG DYNAMIC TYPE END ---
+
             // Display sender's name except if the name appears in the displayed text (see emote and membership events)
             if (bubbleData.shouldHideSenderName == NO)
             {
@@ -618,8 +631,13 @@ static BOOL _disableLongPressGestureOnEvent;
             if ((bubbleData.showBubbleDateTime && !bubbleData.useCustomDateTimeLabel)
                 || (bubbleData.showBubbleReceipts && !bubbleData.useCustomReceipts))
             {
-                // Add datetime label for each component
-                self.bubbleInfoContainer.hidden = NO;
+                // --- BỔ SUNG LOGIC KHOẢNG CÁCH FILE START ---
+                CGFloat verticalPadding = 0.0f;
+                if (bubbleData.isAttachment)
+                {
+                    verticalPadding = 10.0f; // Khoảng đệm 10 points cho file/attachment
+                }
+                // --- BỔ SUNG LOGIC KHOẢNG CÁCH FILE END ---
                 
                 // ensure that older subviews are removed
                 // They should be (they are removed when the is not anymore used).
@@ -638,7 +656,8 @@ static BOOL _disableLongPressGestureOnEvent;
                         
                         if (component.date && bubbleData.showBubbleDateTime && !bubbleData.useCustomDateTimeLabel)
                         {
-                            UILabel *dateTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, component.position.y, self.bubbleInfoContainer.frame.size.width , 15)];
+                            // VỊ TRÍ 1: Khởi tạo Label (áp dụng padding vào Frame Y)
+                            UILabel *dateTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, component.position.y + timeLabelOffset + verticalPadding, self.bubbleInfoContainer.frame.size.width , 15)];
                             
                             dateTimeLabel.text = [bubbleData.eventFormatter dateStringFromDate:component.date withTime:YES];
                             if (bubbleData.isIncoming)
@@ -650,13 +669,19 @@ static BOOL _disableLongPressGestureOnEvent;
                                 dateTimeLabel.textAlignment = NSTextAlignmentLeft;
                             }
                             dateTimeLabel.textColor = [UIColor lightGrayColor];
-                            dateTimeLabel.font = [UIFont systemFontOfSize:11];
+                            
+                            // --- BỔ SUNG DYNAMIC TYPE START ---
+                            dateTimeLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
+                            dateTimeLabel.adjustsFontForContentSizeCategory = YES;
+                            // --- BỔ SUNG DYNAMIC TYPE END ---
+
                             dateTimeLabel.adjustsFontSizeToFitWidth = YES;
                             dateTimeLabel.minimumScaleFactor = 0.6;
                             
                             [dateTimeLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
                             [self.bubbleInfoContainer addSubview:dateTimeLabel];
-                            // Force dateTimeLabel in full width (to handle auto-layout in case of screen rotation)
+                            
+                            // --- KHỞI TẠO CÁC RÀNG BUỘC NGANG (HORIZONTAL CONSTRAINTS) ---
                             NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:dateTimeLabel
                                                                                               attribute:NSLayoutAttributeLeading
                                                                                               relatedBy:NSLayoutRelationEqual
@@ -665,20 +690,23 @@ static BOOL _disableLongPressGestureOnEvent;
                                                                                              multiplier:1.0
                                                                                                constant:0];
                             NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:dateTimeLabel
-                                                                                               attribute:NSLayoutAttributeTrailing
-                                                                                               relatedBy:NSLayoutRelationEqual
-                                                                                                  toItem:self.bubbleInfoContainer
-                                                                                               attribute:NSLayoutAttributeTrailing
-                                                                                              multiplier:1.0
-                                                                                                constant:0];
-                            // Vertical constraints are required for iOS > 8
+                                                                                            attribute:NSLayoutAttributeTrailing
+                                                                                            relatedBy:NSLayoutRelationEqual
+                                                                                               toItem:self.bubbleInfoContainer
+                                                                                            attribute:NSLayoutAttributeTrailing
+                                                                                           multiplier:1.0
+                                                                                             constant:0];
+                            // --- KẾT THÚC KHỞI TẠO CÁC RÀNG BUỘC NGANG ---
+                            
+                            // VỊ TRÍ 2: Áp dụng padding vào Top Constraint
                             NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:dateTimeLabel
                                                                                              attribute:NSLayoutAttributeTop
                                                                                              relatedBy:NSLayoutRelationEqual
                                                                                                 toItem:self.bubbleInfoContainer
                                                                                              attribute:NSLayoutAttributeTop
                                                                                             multiplier:1.0
-                                                                                              constant:component.position.y];
+                                                                                              constant:(component.position.y + verticalPadding)]; // <--- THÊM PADDING
+                            
                             NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:dateTimeLabel
                                                                                                 attribute:NSLayoutAttributeHeight
                                                                                                 relatedBy:NSLayoutRelationEqual
@@ -722,35 +750,26 @@ static BOOL _disableLongPressGestureOnEvent;
                             
                             if (roomMembers.count)
                             {
-                                MXKReceiptSendersContainer* avatarsContainer = [[MXKReceiptSendersContainer alloc] initWithFrame:CGRectMake(0, component.position.y + timeLabelOffset, self.bubbleInfoContainer.frame.size.width , 15) andMediaManager:bubbleData.mxSession.mediaManager];
+                                // VỊ TRÍ 3: Áp dụng padding vào tọa độ Y (Frame) cho Read Receipts
+                                MXKReceiptSendersContainer* avatarsContainer = [[MXKReceiptSendersContainer alloc] initWithFrame:CGRectMake(0, component.position.y + timeLabelOffset + verticalPadding, self.bubbleInfoContainer.frame.size.width , 15) andMediaManager:bubbleData.mxSession.mediaManager];
                                 
                                 [avatarsContainer refreshReceiptSenders:roomMembers withPlaceHolders:placeholders andAlignment:self.readReceiptsAlignment];
                                 
                                 [self.bubbleInfoContainer addSubview:avatarsContainer];
                                 
-                                // Force dateTimeLabel in full width (to handle auto-layout in case of screen rotation)
-                                NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:avatarsContainer
-                                                                                                  attribute:NSLayoutAttributeLeading
-                                                                                                  relatedBy:NSLayoutRelationEqual
-                                                                                                     toItem:self.bubbleInfoContainer
-                                                                                                  attribute:NSLayoutAttributeLeading
-                                                                                                 multiplier:1.0
-                                                                                                   constant:0];
-                                NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:avatarsContainer
-                                                                                                   attribute:NSLayoutAttributeTrailing
-                                                                                                   relatedBy:NSLayoutRelationEqual
-                                                                                                      toItem:self.bubbleInfoContainer
-                                                                                                   attribute:NSLayoutAttributeTrailing
-                                                                                                  multiplier:1.0
-                                                                                                    constant:0];
-                                // Vertical constraints are required for iOS > 8
+                                // --- KHỞI TẠO CÁC RÀNG BUỘC NGANG (HORIZONTAL CONSTRAINTS) ---
+                                NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:avatarsContainer attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.bubbleInfoContainer attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0];
+                                NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:avatarsContainer attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.bubbleInfoContainer attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
+                                // --- KẾT THÚC KHỞI TẠO CÁC RÀNG BUỘC NGANG ---
+                                
+                                // VỊ TRÍ 4: Áp dụng padding vào Top Constraint cho Read Receipts
                                 NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:avatarsContainer
                                                                                                  attribute:NSLayoutAttributeTop
                                                                                                  relatedBy:NSLayoutRelationEqual
                                                                                                     toItem:self.bubbleInfoContainer
                                                                                                  attribute:NSLayoutAttributeTop
                                                                                                 multiplier:1.0
-                                                                                                  constant:(component.position.y + timeLabelOffset)];
+                                                                                                  constant:(component.position.y + timeLabelOffset + verticalPadding)]; // <--- THÊM PADDING
                                 
                                 NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:avatarsContainer
                                                                                                     attribute:NSLayoutAttributeHeight

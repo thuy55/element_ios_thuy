@@ -23,7 +23,7 @@ class VectorWellKnownTests: XCTestCase {
     
     func testVectorWellKnownParsing() {
         
-        let expectedJitsiServer = "your.jitsi.example.org"
+        let expectedJitsiServer = "jitsi.5hpc.com"
         let expectedE2EEEByDefaultEnabled = false
         
         let wellKnownDictionary: [String: Any] = [

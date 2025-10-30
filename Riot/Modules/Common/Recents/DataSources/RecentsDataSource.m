@@ -728,7 +728,7 @@ NSString *const kRecentsDataSourceTapOnDirectoryServerChange = @"kRecentsDataSou
         {
             title = [VectorL10n peopleInvitesSection];
         }
-        else
+        else	
         {
             title = [VectorL10n roomRecentsInvitesSection];
         }

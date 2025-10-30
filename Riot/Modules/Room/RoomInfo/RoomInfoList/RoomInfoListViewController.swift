@@ -1,5 +1,3 @@
-// File created from ScreenTemplate
-// $ createScreen.sh Room2/RoomInfo RoomInfoList
 /*
  Copyright 2020 New Vector Ltd
  
@@ -220,8 +218,8 @@ final class RoomInfoListViewController: UIViewController {
         }
 
         let sectionSettings = Section(header: VectorL10n.roomInfoListSectionOther,
-                                      rows: rows,
-                                      footer: nil)
+                                     rows: rows,
+                                     footer: nil)
         
         let leaveTitle = viewData.basicInfoViewData.isDirect ?
             VectorL10n.roomParticipantsLeavePromptTitleForDm :
@@ -234,15 +232,15 @@ final class RoomInfoListViewController: UIViewController {
             }
         }
         let sectionLeave = Section(header: nil,
-                                   rows: [rowLeave],
-                                   footer: nil)
+                                     rows: [rowLeave],
+                                     footer: nil)
         
         let rowReport = Row(type: .destructive, icon: Asset.Images.error.image, text: VectorL10n.roomEventActionReport, accessoryType: .disclosureIndicator) {
             self.viewModel.process(viewAction: .report)
         }
         let sectionReport = Section(header: nil,
-                                    rows: [rowReport],
-                                    footer: nil)
+                                     rows: [rowReport],
+                                     footer: nil)
         
         tmpSections.append(sectionSettings)
         tmpSections.append(sectionLeave)
@@ -358,6 +356,20 @@ extension RoomInfoListViewController: UITableViewDataSource {
             if cell == nil {
                 cell = UITableViewCell(style: .default, reuseIdentifier: Constants.defaultStyleCellReuseIdentifier)
             }
+            
+            // --- BỔ SUNG DYNAMIC TYPE START ---
+            
+            // Text Label
+            cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+            cell.textLabel?.adjustsFontForContentSizeCategory = true
+            cell.textLabel?.numberOfLines = 0 // Quan trọng để cell co giãn
+            
+            // Detail Text Label (Mặc dù không dùng trong file này, vẫn thêm cho cell style)
+            cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
+            cell.detailTextLabel?.adjustsFontForContentSizeCategory = true
+            
+            // --- BỔ SUNG DYNAMIC TYPE END ---
+            
             if let icon = row.icon {
                 if row.type == .default {
                     cell.imageView?.image = MXKTools.resize(icon, to: CGSize(width: 20, height: 20))?.vc_tintedImage(usingColor: theme.textSecondaryColor)
@@ -365,8 +377,6 @@ extension RoomInfoListViewController: UITableViewDataSource {
                     cell.imageView?.image = MXKTools.resize(icon, to: CGSize(width: 20, height: 20))?.vc_tintedImage(usingColor: theme.noticeColor)
                 }
             }
-            cell.textLabel?.font = .systemFont(ofSize: 17)
-            cell.detailTextLabel?.font = .systemFont(ofSize: 16)
             cell.textLabel?.text = row.text
             if row.accessoryType == .checkmark {
                 cell.accessoryView = UIImageView(image: Asset.Images.checkmark.image)
@@ -378,6 +388,7 @@ extension RoomInfoListViewController: UITableViewDataSource {
                 cell.textLabel?.textColor = theme.textPrimaryColor
                 cell.detailTextLabel?.textColor = theme.textSecondaryColor
             } else if row.type == .destructive {
+                // Đảm bảo chữ Destructive (Rời/Báo cáo) cũng co giãn
                 cell.textLabel?.textColor = theme.noticeColor
                 cell.detailTextLabel?.textColor = theme.noticeSecondaryColor
             }
@@ -416,7 +427,12 @@ extension RoomInfoListViewController: UITableViewDelegate {
         let view: TextViewTableViewHeaderFooterView? = tableView.dequeueReusableHeaderFooterView()
 
         view?.textView.text = header
-        view?.textView.font = .systemFont(ofSize: 13)
+        // --- BỔ SUNG DYNAMIC TYPE CHO HEADER START ---
+        view?.textView.font = UIFont.preferredFont(forTextStyle: .caption1)
+        view?.textView.adjustsFontForContentSizeCategory = true
+        view?.textView.isScrollEnabled = false
+        // --- BỔ SUNG DYNAMIC TYPE CHO HEADER END ---
+        
         view?.textViewInsets = UIEdgeInsets(top: 16, left: 16, bottom: 8, right: 16)
         view?.update(theme: theme)
 
@@ -431,7 +447,12 @@ extension RoomInfoListViewController: UITableViewDelegate {
         let view: TextViewTableViewHeaderFooterView? = tableView.dequeueReusableHeaderFooterView()
 
         view?.textView.text = footer
-        view?.textView.font = .systemFont(ofSize: 13)
+        // --- BỔ SUNG DYNAMIC TYPE CHO FOOTER START ---
+        view?.textView.font = UIFont.preferredFont(forTextStyle: .caption1)
+        view?.textView.adjustsFontForContentSizeCategory = true
+        view?.textView.isScrollEnabled = false
+        // --- BỔ SUNG DYNAMIC TYPE CHO FOOTER END ---
+
         view?.update(theme: theme)
 
         return view
@@ -446,14 +467,16 @@ extension RoomInfoListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if sections[section].header == nil {
-            return Constants.tableViewSectionMinHeight
+            // Giữ nguyên logic tối thiểu, nhưng vẫn cho phép co giãn nếu có nội dung
+            return UITableView.automaticDimension
         }
         return UITableView.automaticDimension
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if sections[section].footer == nil {
-            return Constants.tableViewSectionMinHeight
+            // Giữ nguyên logic tối thiểu, nhưng vẫn cho phép co giãn nếu có nội dung
+            return UITableView.automaticDimension
         }
         return UITableView.automaticDimension
     }

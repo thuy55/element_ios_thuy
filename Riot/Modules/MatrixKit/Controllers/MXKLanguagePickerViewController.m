@@ -19,13 +19,14 @@ NSString* const kMXKLanguagePickerCellDataKeyText = @"text";
 NSString* const kMXKLanguagePickerCellDataKeyDetailText = @"detailText";
 NSString* const kMXKLanguagePickerCellDataKeyLanguage = @"language";
 
-@interface MXKLanguagePickerViewController ()
+@interface MXKLanguagePickerViewController () <UISearchResultsUpdating>
 {
     NSMutableArray<NSDictionary*> *cellDataArray;
     NSMutableArray<NSDictionary*> *filteredCellDataArray;
     
     NSString *previousSearchPattern;
 }
+
 
 @end
 
@@ -42,7 +43,7 @@ NSString* const kMXKLanguagePickerCellDataKeyLanguage = @"language";
 + (instancetype)languagePickerViewController
 {
     return [[[self class] alloc] initWithNibName:NSStringFromClass([MXKLanguagePickerViewController class])
-                                          bundle:[NSBundle bundleForClass:[MXKLanguagePickerViewController class]]];
+                                         bundle:[NSBundle bundleForClass:[MXKLanguagePickerViewController class]]];
 }
 
 + (NSString *)languageDescription:(NSString *)language
@@ -94,10 +95,10 @@ NSString* const kMXKLanguagePickerCellDataKeyLanguage = @"language";
         // trỏ đến ngôn ngữ đầu tiên trong danh sách cho phép (ví dụ: Tiếng Anh)
         defaultLanguage = allowedLanguages.firstObject; // Dùng ngôn ngữ đầu tiên làm mặc định nếu OS default không được phép
         languageDescription = [VectorL10n languagePickerDefaultLanguage:[MXKLanguagePickerViewController languageDescription:defaultLanguage]];
-         [cellDataArray addObject:@{
+        [cellDataArray addObject:@{
             kMXKLanguagePickerCellDataKeyText:languageDescription
             // Key ngôn ngữ thực tế sẽ được thêm vào trong vòng lặp dưới đây nếu cần
-         }];
+        }];
     }
     // --- END: Chỉ thêm ngôn ngữ mặc định nếu nó có trong danh sách cho phép ---
 
@@ -118,11 +119,11 @@ NSString* const kMXKLanguagePickerCellDataKeyLanguage = @"language";
             // nhưng không phải là ngôn ngữ mặc định hiển thị trong dòng đầu tiên.
             BOOL isDisplayedAsDefault = NO;
             if (cellDataArray.count > 0) {
-                 NSString *defaultDisplayText = cellDataArray[0][kMXKLanguagePickerCellDataKeyText];
-                 NSString *currentDefaultLangDesc = [VectorL10n languagePickerDefaultLanguage:[MXKLanguagePickerViewController languageDescription:language]];
-                 if ([defaultDisplayText isEqualToString:currentDefaultLangDesc]) {
-                     isDisplayedAsDefault = YES;
-                 }
+                NSString *defaultDisplayText = cellDataArray[0][kMXKLanguagePickerCellDataKeyText];
+                NSString *currentDefaultLangDesc = [VectorL10n languagePickerDefaultLanguage:[MXKLanguagePickerViewController languageDescription:language]];
+                if ([defaultDisplayText isEqualToString:currentDefaultLangDesc]) {
+                    isDisplayedAsDefault = YES;
+                }
             }
 
 
@@ -173,10 +174,14 @@ NSString* const kMXKLanguagePickerCellDataKeyLanguage = @"language";
         [[[self class] nib] instantiateWithOwner:self options:nil];
     }
 
+    // Đảm bảo Table View có thể tự co giãn chiều cao cell
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 50.0f;
+    
     [self setupSearchController];
 
     self.navigationItem.title = [VectorL10n languagePickerTitle];
-        
+            
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -225,6 +230,21 @@ NSString* const kMXKLanguagePickerCellDataKeyLanguage = @"language";
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:kMXKLanguagePickerViewControllerCellId];
     }
+    
+    // --- BỔ SUNG DYNAMIC TYPE START ---
+    
+    // Cho phép textLabel ngắt dòng (cần thiết để cell co giãn)
+    cell.textLabel.numberOfLines = 0;
+    
+    // Áp dụng Dynamic Type cho tiêu đề (Ngôn ngữ gốc)
+    cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    cell.textLabel.adjustsFontForContentSizeCategory = YES;
+    
+    // Áp dụng Dynamic Type cho chi tiết (Ngôn ngữ địa phương)
+    cell.detailTextLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+    cell.detailTextLabel.adjustsFontForContentSizeCategory = YES;
+    
+    // --- BỔ SUNG DYNAMIC TYPE END ---
     
     NSInteger index = indexPath.row;
     NSDictionary *itemCellData;

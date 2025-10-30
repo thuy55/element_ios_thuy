@@ -3120,6 +3120,8 @@ static CGSize kThreadListBarButtonItemImageSize;
     return [timelineConfiguration.currentStyle.cellProvider cellViewClassForCellIdentifier:cellIdentifier];;
 }
 
+
+//HÀM HIỂN THỊ TIN NHẮN
 - (RoomTimelineCellIdentifier)cellIdentifierForCellData:(MXKCellData*)cellData andRoomDataSource:(RoomDataSource *)customizedRoomDataSource;
 {
     // Sanity check

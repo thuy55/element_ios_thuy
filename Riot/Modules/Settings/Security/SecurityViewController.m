@@ -674,11 +674,18 @@ TableViewSectionsDelegate>
             break;
     }
     
-    return [[NSAttributedString alloc] initWithString:crossSigningInformation
-                                           attributes:@{
-                                                        NSForegroundColorAttributeName : ThemeService.shared.theme.textPrimaryColor,
-                                                        NSFontAttributeName: [UIFont systemFontOfSize:17]
-                                                        }];
+    // --- BỔ SUNG DYNAMIC TYPE START ---
+        
+        // 1. Định nghĩa Font Dynamic Type cơ sở (Body Style)
+        UIFont *baseDynamicFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+        
+        // 2. Trả về NSAttributedString với Dynamic Font
+        return [[NSAttributedString alloc] initWithString:crossSigningInformation
+                                               attributes:@{
+                                                             NSForegroundColorAttributeName : ThemeService.shared.theme.textPrimaryColor,
+                                                             NSFontAttributeName: baseDynamicFont
+                                                             }];
+        // --- BỔ SUNG DYNAMIC TYPE END ---
 }
 
 - (UITableViewCell*)crossSigningButtonCellInTableView:(UITableView*)tableView forAction:(NSInteger)action
@@ -821,8 +828,19 @@ TableViewSectionsDelegate>
 - (void)setUpcrossSigningButtonCellForReset:(MXKTableViewCellWithButton*)buttonCell
 {
     NSString *btnTitle = [VectorL10n securitySettingsCrosssigningReset];
+    
     [buttonCell.mxkButton setTitle:btnTitle forState:UIControlStateNormal];
     [buttonCell.mxkButton setTitle:btnTitle forState:UIControlStateHighlighted];
+    
+    // --- BỔ SUNG DYNAMIC TYPE START ---
+    
+    // Áp dụng font Dynamic Type (Body Style là tiêu chuẩn cho nút)
+    buttonCell.mxkButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    
+    // Bật khả năng tự động điều chỉnh cỡ chữ
+    buttonCell.mxkButton.titleLabel.adjustsFontForContentSizeCategory = YES;
+    
+    // --- BỔ SUNG DYNAMIC TYPE END ---
     
     buttonCell.mxkButton.tintColor = ThemeService.shared.theme.warningColor;
     
@@ -834,6 +852,16 @@ TableViewSectionsDelegate>
     NSString *btnTitle = [VectorL10n securitySettingsCrosssigningCompleteSecurity];
     [buttonCell.mxkButton setTitle:btnTitle forState:UIControlStateNormal];
     [buttonCell.mxkButton setTitle:btnTitle forState:UIControlStateHighlighted];
+    
+    // --- BỔ SUNG DYNAMIC TYPE START ---
+        
+        // Áp dụng font Dynamic Type (Body Style là tiêu chuẩn cho nút)
+        buttonCell.mxkButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+        
+        // Bật khả năng tự động điều chỉnh cỡ chữ
+        buttonCell.mxkButton.titleLabel.adjustsFontForContentSizeCategory = YES;
+        
+        // --- BỔ SUNG DYNAMIC TYPE END ---
     
     [buttonCell.mxkButton addTarget:self action:@selector(presentCompleteSecurity) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -1022,6 +1050,12 @@ TableViewSectionsDelegate>
     cell.mxkSwitchTrailingConstraint.constant = 15;
 
     cell.mxkLabel.textColor = ThemeService.shared.theme.textPrimaryColor;
+    
+    // --- BỔ SUNG DYNAMIC TYPE START ---
+        cell.mxkLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+        cell.mxkLabel.adjustsFontForContentSizeCategory = YES;
+        cell.mxkLabel.numberOfLines = 0; // Quan trọng để cell co giãn
+        // --- BỔ SUNG DYNAMIC TYPE END ---
 
     [cell.mxkSwitch removeTarget:self action:nil forControlEvents:UIControlEventValueChanged];
 
@@ -1046,7 +1080,13 @@ TableViewSectionsDelegate>
         cell.imageView.image = nil;
     }
     cell.textLabel.accessibilityIdentifier = nil;
-    cell.textLabel.font = [UIFont systemFontOfSize:17];
+//    cell.textLabel.font = [UIFont systemFontOfSize:17];
+    // --- BỔ SUNG DYNAMIC TYPE START ---
+        cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+        cell.textLabel.adjustsFontForContentSizeCategory = YES;
+        cell.textLabel.numberOfLines = 0;
+        // --- BỔ SUNG DYNAMIC TYPE END ---
+    
     cell.textLabel.textColor = ThemeService.shared.theme.textPrimaryColor;
     cell.contentView.backgroundColor = UIColor.clearColor;
 
@@ -1055,17 +1095,46 @@ TableViewSectionsDelegate>
 
 - (MXKTableViewCell*)deviceCellWithDevice:(MXDevice*)device forTableView:(UITableView*)tableView
 {
+    // Lấy cell mặc định.
     MXKTableViewCell *cell = [self getDefaultTableViewCell:tableView];
+    
     NSString *name = device.displayName;
     NSString *deviceId = device.deviceId;
+    
     cell.textLabel.text = (name.length ? [NSString stringWithFormat:@"%@ (%@)", name, deviceId] : [NSString stringWithFormat:@"(%@)", deviceId]);
+    
+    // Cho phép textLabel ngắt dòng
     cell.textLabel.numberOfLines = 0;
+    
     [cell vc_setAccessoryDisclosureIndicatorWithCurrentTheme];
 
+    // --- DYNAMIC TYPE (Cỡ nhỏ: Subheadline) START ---
+    
+    // 1. Định nghĩa Font cơ sở Dynamic Type nhỏ hơn
+    UIFont *baseDynamicFont = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+    
+    // 2. Áp dụng font cơ sở Dynamic Type cho tất cả các thiết bị
+    cell.textLabel.font = baseDynamicFont;
+    cell.textLabel.adjustsFontForContentSizeCategory = YES; // Cho phép co giãn cỡ chữ
+    
     if ([deviceId isEqualToString:self.mainSession.matrixRestClient.credentials.deviceId])
     {
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:17];
+        // 3. Nếu là thiết bị hiện tại, tạo font đậm (Bold) Dynamic Type
+        
+        // Lấy Descriptor của font Dynamic Type hiện tại
+        UIFontDescriptor *descriptor = [baseDynamicFont fontDescriptor];
+        
+        // Thêm thuộc tính Đậm vào Descriptor
+        descriptor = [descriptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
+        
+        // Tạo font mới từ Descriptor (size:0 bảo tồn kích thước Dynamic Type)
+        cell.textLabel.font = [UIFont fontWithDescriptor:descriptor size:0];
+        
+        // Đảm bảo vẫn là YES (thực ra không cần thiết lập lại nhưng đặt ở đây để chắc chắn)
+        cell.textLabel.adjustsFontForContentSizeCategory = YES;
     }
+    
+    // --- DYNAMIC TYPE END ---
 
     cell.imageView.image = [self shieldImageForDevice:deviceId];
 
@@ -1101,7 +1170,13 @@ TableViewSectionsDelegate>
     MXKTableViewCellWithTextView *textViewCell = [tableView dequeueReusableCellWithIdentifier:[MXKTableViewCellWithTextView defaultReuseIdentifier] forIndexPath:indexPath];
 
     textViewCell.mxkTextView.textColor = ThemeService.shared.theme.textPrimaryColor;
-    textViewCell.mxkTextView.font = [UIFont systemFontOfSize:17];
+//    textViewCell.mxkTextView.font = [UIFont systemFontOfSize:17];
+    
+    // --- BỔ SUNG DYNAMIC TYPE START ---
+        textViewCell.mxkTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+        textViewCell.mxkTextView.adjustsFontForContentSizeCategory = YES;
+        // --- BỔ SUNG DYNAMIC TYPE END ---
+    
     textViewCell.mxkTextView.backgroundColor = [UIColor clearColor];
     textViewCell.mxkTextViewLeadingConstraint.constant = tableView.vc_separatorInset.left;
     textViewCell.mxkTextViewTrailingConstraint.constant = tableView.vc_separatorInset.right;
@@ -1125,7 +1200,11 @@ TableViewSectionsDelegate>
         cell.mxkButton.enabled = YES;
     }
     
-    cell.mxkButton.titleLabel.font = [UIFont systemFontOfSize:17];
+//    cell.mxkButton.titleLabel.font = [UIFont systemFontOfSize:17];
+    // --- BỔ SUNG DYNAMIC TYPE CHO NÚT START ---
+        cell.mxkButton.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+        cell.mxkButton.titleLabel.adjustsFontForContentSizeCategory = YES;
+        // --- BỔ SUNG DYNAMIC TYPE CHO NÚT END ---
     [cell.mxkButton setTintColor:ThemeService.shared.theme.tintColor];
     
     return cell;
@@ -1175,6 +1254,9 @@ TableViewSectionsDelegate>
                 
                 switchCell.mxkLabel.text = [VectorL10n pinProtectionSettingsEnablePin];
                 switchCell.mxkSwitch.on = [PinCodePreferences shared].isPinSet;
+                
+                switchCell.mxkLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                switchCell.mxkLabel.adjustsFontForContentSizeCategory = YES;
                 [switchCell.mxkSwitch addTarget:self action:@selector(enablePinCodeSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
                 
                 cell = switchCell;

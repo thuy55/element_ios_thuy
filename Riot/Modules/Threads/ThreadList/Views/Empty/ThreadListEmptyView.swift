@@ -61,6 +61,28 @@ extension ThreadListEmptyView: Themable {
         infoLabel.textColor = theme.colors.secondaryContent
         tipLabel.textColor = theme.colors.secondaryContent
         showAllThreadsButton.tintColor = theme.colors.accent
+        
+        // --- BỔ SUNG DYNAMIC TYPE START ---
+        
+        // Tiêu đề (Lớn, đậm)
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+        titleLabel.adjustsFontForContentSizeCategory = true
+        titleLabel.numberOfLines = 0
+        
+        // Thông tin (Nội dung chính)
+        infoLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        infoLabel.adjustsFontForContentSizeCategory = true
+        infoLabel.numberOfLines = 0
+        
+        // Gợi ý/Mẹo (Chữ nhỏ)
+        tipLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
+        tipLabel.adjustsFontForContentSizeCategory = true
+        tipLabel.numberOfLines = 0
+        
+        // Nút (Tiêu chuẩn Body)
+        showAllThreadsButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+        showAllThreadsButton.titleLabel?.adjustsFontForContentSizeCategory = true
+        // --- BỔ SUNG DYNAMIC TYPE END ---
     }
     
 }

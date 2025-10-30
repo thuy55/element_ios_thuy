@@ -96,6 +96,23 @@ extension CallCellContentView: Themable {
         callIconView.tintColor = theme.textSecondaryColor
         callStatusLabel.textColor = theme.textSecondaryColor
         
+        // 1. Label Tên người gọi (callerNameLabel)
+        callerNameLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        callerNameLabel.adjustsFontForContentSizeCategory = true
+        callerNameLabel.numberOfLines = 1
+        
+        // TRONG: override func render(_ cellData: MXKCellData!)
+
+//        / 2. Trạng thái cuộc gọi (Call Status) - Font phụ/nhỏ hơn
+        callStatusLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
+        callStatusLabel.adjustsFontForContentSizeCategory = true
+        callStatusLabel.numberOfLines = 1
+
+                // 3. Pagination Label (Ngày/Giờ) - Font rất nhỏ
+        paginationLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
+        paginationLabel.adjustsFontForContentSizeCategory = true
+        paginationLabel.numberOfLines = 1
+        
         if let bottomContainerView = bottomContainerView as? Themable {
             bottomContainerView.update(theme: theme)
         }

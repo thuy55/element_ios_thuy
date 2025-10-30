@@ -124,6 +124,27 @@ final class KeyVerificationSelfVerifyWaitViewController: UIViewController {
         }
         
         self.titleLabel.text = VectorL10n.deviceVerificationSelfVerifyOpenOnOtherDeviceTitle(AppInfo.current.displayName)
+        
+        
+        // Trong mã Swift (giả định)
+
+        // 1. Áp dụng Dynamic Type Font Style
+        if #available(iOS 11.0, *) {
+            // Chọn một Text Style phù hợp (ví dụ: Body)
+            self.informationLabel.font = UIFont.preferredFont(forTextStyle: .body)
+
+            // 2. Bật tính năng Dynamic Type
+            self.informationLabel.adjustsFontForContentSizeCategory = true
+            
+            // 3. Đảm bảo label có thể hiển thị nhiều dòng khi font thay đổi
+            self.informationLabel.numberOfLines = 0
+        } else {
+            // Fallback cho iOS cũ hơn
+            self.informationLabel.font = UIFont.systemFont(ofSize: 17)
+        }
+
+        // 4. Thiết lập nội dung text
+        
         self.informationLabel.text = VectorL10n.deviceVerificationSelfVerifyOpenOnOtherDeviceInformation
         
         self.desktopClientImageView.image = Asset.Images.monitor.image.withRenderingMode(.alwaysTemplate)

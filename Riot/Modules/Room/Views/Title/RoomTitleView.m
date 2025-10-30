@@ -123,6 +123,17 @@ Please see LICENSE in the repository root for full details.
         {
             self.displayNameTextField.textColor = ThemeService.shared.theme.textPrimaryColor;
         }
+        
+        // --- BỔ SUNG DYNAMIC TYPE START ---
+
+        // 1. Thiết lập font Dynamic Type (Body Style là tiêu chuẩn cho nội dung)
+        self.displayNameTextField.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+
+        // 2. Bật tính năng tự động điều chỉnh cỡ chữ
+        self.displayNameTextField.adjustsFontForContentSizeCategory = YES;
+
+        // --- BỔ SUNG DYNAMIC TYPE END ---
+        
     }
 }
 

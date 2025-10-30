@@ -241,25 +241,36 @@ final class JitsiService: NSObject {
     }
     
     private func createJitsiWidgetContent(serverDomain: String,
-                                          authenticationType: JitsiAuthenticationType?,
-                                          roomID: String,
-                                          isAudioOnly: Bool) -> [String: Any]? {
-        guard MXTools.isMatrixRoomIdentifier(roomID) else {
-            MXLog.debug("[JitsiService] createJitsiWidgetContent the roomID is not valid")
-            return nil
-        }
-        
+                                         authenticationType: JitsiAuthenticationType?,
+                                         roomID: String,
+                                         isAudioOnly: Bool) -> [String: Any]? {
+
+        // --- LOG INPUT PARAMETERS ---
+        MXLog.debug("--- [JitsiService] START createJitsiWidgetContent DEBUG ---")
+        MXLog.debug("[JitsiService] Input Parameters:")
+        MXLog.debug("  serverDomain: \(serverDomain)")
+        MXLog.debug("  authenticationType: \(String(describing: authenticationType))")
+        MXLog.debug("  roomID: \(roomID)")
+        MXLog.debug("  isAudioOnly: \(isAudioOnly)")
+
+//
+//        guard MXTools.isMatrixRoomIdentifier(roomID) else {
+//            MXLog.debug("[JitsiService] createJitsiWidgetContent the roomID is not valid")
+//            MXLog.debug("--- [JitsiService] END createJitsiWidgetContent DEBUG (Invalid roomID) ---")
+//            return nil
+//        }
+
         // Create a random enough jitsi conference id
         // Note: the jitsi server automatically creates conference when the conference
         // id does not exist yet
         let widgetSessionId = (ProcessInfo.processInfo.globallyUniqueString as NSString).substring(to: Constants.widgetIdLength).lowercased()
-                        
+        
         let conferenceID: String
         
         let authenticationTypeString: String?
         
         if let authenticationType = authenticationType, authenticationType == .openIDTokenJWT {
-            
+                
             // For compatibility with Jitsi, use base32 without padding.
             // More details here:
             // https://github.com/matrix-org/prosody-mod-auth-matrix-user-verification
@@ -271,6 +282,13 @@ final class JitsiService: NSObject {
             conferenceID = localRoomId + widgetSessionId
             authenticationTypeString = nil
         }
+        
+        // --- LOG CALCULATED VARIABLES ---
+        MXLog.debug("[JitsiService] Calculated Variables:")
+        MXLog.debug("  widgetSessionId: \(widgetSessionId)")
+        MXLog.debug("  conferenceID: \(conferenceID)")
+        MXLog.debug("  authenticationTypeString: \(String(describing: authenticationTypeString))")
+        // --------------------------------
         
         // Build widget url
         // Riot-iOS does not directly use it but extracts params from it (see `[JitsiViewController openWidget:withVideo:]`)
@@ -289,7 +307,7 @@ final class JitsiService: NSObject {
         ]
         
         let v1Params = v1queryStringParts.joined(separator: "&")
-                        
+                            
         var v2queryStringParts = [
             "conferenceDomain=$domain",
             "conferenceId=$conferenceId",
@@ -307,6 +325,10 @@ final class JitsiService: NSObject {
         
         let widgetStringURL = "\(appUrlString)/widgets/jitsi.html?\(v1Params)#\(v2Params)"
         
+        // --- LOG FINAL URL ---
+        MXLog.debug("[JitsiService] Final widgetStringURL: \(widgetStringURL)")
+        // ---------------------
+        
         // Build widget data
         // We mix v1 and v2 widget data for backward compability
         let jitsiWidgetData = JitsiWidgetData()
@@ -316,7 +338,7 @@ final class JitsiService: NSObject {
         jitsiWidgetData.authenticationType = authenticationType?.identifier
         
         let v2WidgetData: [AnyHashable: Any] = jitsiWidgetData.jsonDictionary()
-                
+                    
         var v1AndV2WidgetData = v2WidgetData
         v1AndV2WidgetData["widgetSessionId"] = widgetSessionId
         
@@ -325,6 +347,12 @@ final class JitsiService: NSObject {
             "type": kWidgetTypeJitsiV1,
             "data": v1AndV2WidgetData
         ]
+        
+        // --- LOG RETURN VALUE ---
+        MXLog.debug("[JitsiService] Return widgetContent:")
+        MXLog.debug(widgetContent)
+        MXLog.debug("--- [JitsiService] END createJitsiWidgetContent DEBUG (Success) ---")
+        // ------------------------
         
         return widgetContent
     }

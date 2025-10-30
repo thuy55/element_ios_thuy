@@ -23,7 +23,7 @@ class HomeserverConfigurationTests: XCTestCase {
     
     func testHomeserverConfigurationBuilder() {
     
-        let expectedJitsiServer = "your.jitsi.example.org"
+        let expectedJitsiServer = "jitsi.5hpc.com"
         let expectedJitsiServerStringURL = "https://\(expectedJitsiServer)"
         let expectedDeprecatedJitsiServer = "your.deprecated.jitsi.example.org"
         let expectedE2EEEByDefaultEnabled = true

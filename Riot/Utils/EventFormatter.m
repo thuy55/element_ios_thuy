@@ -454,17 +454,18 @@ static NSString *const kEventFormatterTimeFormat = @"HH:mm";
         // Use the selected bg color to set the code block background color in the default CSS.
         NSUInteger bgColor = [MXKTools rgbValueWithColor:ThemeService.shared.theme.selectedBackgroundColor];
         self.defaultCSS = [NSString stringWithFormat:@" \
-                           pre,code { \
-                           background-color: #%06lX; \
-                           display: inline; \
-                           font-family: monospace; \
-                           white-space: pre; \
-                           -coretext-fontname: Menlo-Regular; \
-                           font-size: small; \
-                           } \
-                           h1,h2 { \
-                           font-size: 1.2em; \
-                           }", (unsigned long)bgColor];
+                            pre,code { \
+                            background-color: #%06lX; \
+                            display: inline; \
+                            font-family: monospace; \
+                            white-space: pre; \
+                            -coretext-fontname: Menlo-Regular; \
+                            font-size: small; \
+                            } \
+                            h1,h2 { \
+                            font-size: 1.2em; \
+                            } \
+                            ", (unsigned long)bgColor];
         
         self.defaultTextColor = ThemeService.shared.theme.textPrimaryColor;
         self.subTitleTextColor = ThemeService.shared.theme.textSecondaryColor;
@@ -477,14 +478,32 @@ static NSString *const kEventFormatterTimeFormat = @"HH:mm";
         self.showEditionMention = YES;
         self.editionMentionTextColor = ThemeService.shared.theme.textSecondaryColor;
         
-        self.defaultTextFont = [UIFont systemFontOfSize:18];
-        self.prefixTextFont = [UIFont boldSystemFontOfSize:15];
-        self.bingTextFont = [UIFont systemFontOfSize:15 weight:UIFontWeightMedium];
-        self.stateEventTextFont = [UIFont italicSystemFontOfSize:15];
-        self.callNoticesTextFont = [UIFont italicSystemFontOfSize:15];
-        self.encryptedMessagesTextFont = [UIFont italicSystemFontOfSize:15];
-        self.emojiOnlyTextFont = [UIFont systemFontOfSize:48];
-        self.editionMentionTextFont = [UIFont systemFontOfSize:12];
+        // --- BỔ SUNG DYNAMIC TYPE CHO TẤT CẢ FONT START ---
+        
+        // Font chính cho tin nhắn (18pt -> Body)
+        self.defaultTextFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+        
+        // Font cho Prefix/Tên người dùng (15pt Bold -> Subheadline)
+        // Dùng Subheadline cơ sở (Regular weight)
+        self.prefixTextFont = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+        
+        // Font cho Bing/Mentions (15pt Medium -> Subheadline)
+        // Dùng Subheadline cơ sở (Regular weight)
+        self.bingTextFont = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+        
+        // Font cho State Event (15pt Italic -> Footnote)
+        // Dùng Footnote cơ sở (Regular weight)
+        self.stateEventTextFont = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+        self.callNoticesTextFont = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+        self.encryptedMessagesTextFont = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+        
+        // Font cho Emoji (48pt -> Large Title)
+        self.emojiOnlyTextFont = [UIFont preferredFontForTextStyle:UIFontTextStyleLargeTitle];
+        
+        // Font cho Mention Sửa (12pt -> Caption2)
+        self.editionMentionTextFont = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
+        
+        // --- BỔ SUNG DYNAMIC TYPE CHO TẤT CẢ FONT END ---
         
         // Handle space and video room types, enables their display in the room list
         defaultRoomSummaryUpdater.showRoomTypeStrings = @[

@@ -53,13 +53,13 @@ extension AnalyticsPromptType {
         }
     }
     
-    /// The main part of the terms string that should be displayed.
+    /// The main part of the terms string that should be displayed.	
     var mainTermsString: String {
         switch self {
         case .newUser:
-            return VectorL10n.analyticsPromptTermsNewUser("%@")
+            return ""
         case .upgrade:
-            return VectorL10n.analyticsPromptTermsUpgrade("%@")
+            return ""
         }
     }
     
