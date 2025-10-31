@@ -158,6 +158,7 @@ internal class Asset: NSObject {
     internal static let allChatsSpacesIcon = ImageAsset(name: "all_chats_spaces_icon")
     internal static let homeEmptyScreenArtwork = ImageAsset(name: "home_empty_screen_artwork")
     internal static let homeEmptyScreenArtworkDark = ImageAsset(name: "home_empty_screen_artwork_dark")
+    internal static let inviteHomeIcon = ImageAsset(name: "invite_home_icon")
     internal static let plusFloatingAction = ImageAsset(name: "plus_floating_action")
     internal static let versionCheckCloseIcon = ImageAsset(name: "version_check_close_icon")
     internal static let versionCheckInfoIcon = ImageAsset(name: "version_check_info_icon")

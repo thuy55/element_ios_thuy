@@ -12,17 +12,20 @@
 
 #import "LabsSettingsViewController.h"
 
-// --- CÁC IMPORT CẦN THIẾT ---
+// --- CÁC IMPORT CẦN THIẾT (Đã bỏ comment) ---
 #import "ThemeService.h"
-//#import "RiotSettings.h"
-//#import "AppDelegate.h"
+//#import "RiotSettings.h" // Cần cho các thuộc tính RiotSettings
+//#import "AppDelegate.h" // Cần cho enableThreads
+//#import "MXSDKOptions.h" // Cần cho enableThreads
+//#import "VectorL10n.h" // Chuỗi localized
 #import "GeneratedInterface-Swift.h"
 #import "MXKAccountManager.h"
 #import "MXKAccount.h"
 #import "MXKTableViewCellWithLabelAndSwitch.h"
 #import "MXKTableViewCell.h"
-// --- KẾT THÚC IMPORT ---
-
+//#import "UIView+MatrixKit.h" // Cho vc_separatorInset
+//#import "MXWeakify.h" // Cần cho ThreadsBetaCoordinator
+//#import "MXKTools.h" // Để lấy BuildSettings, v.v.
 
 // Định nghĩa các hàng (rows) - Đã di chuyển từ SettingsViewController.m
 typedef NS_ENUM(NSUInteger, LABS_ENABLE)
@@ -40,27 +43,43 @@ typedef NS_ENUM(NSUInteger, LABS_ENABLE)
 
 @interface LabsSettingsViewController () <UITableViewDelegate, UITableViewDataSource, ThreadsBetaCoordinatorBridgePresenterDelegate>
 {
-    // Observe kThemeServiceDidChangeThemeNotification to handle user interface theme change.
     __weak id kThemeServiceDidChangeThemeNotificationObserver;
     
-    // Mảng động để chứa các hàng (rows)
     NSMutableArray<NSNumber*> *rows;
+    
+    // Khai báo cho hàm mainSession
+    MXSession *_mainSession;
 }
 
-// Thuộc tính (property) đã được di chuyển
 @property (nonatomic, strong) ThreadsBetaCoordinatorBridgePresenter *threadsBetaBridgePresenter;
+//@property (strong, nonatomic) UITableView *tableView; // Khai báo rõ ràng
 
 @end
 
 @implementation LabsSettingsViewController
 
+#pragma mark - MXKViewController Overrides
+
+// Khai báo lại mainSession để có thể sử dụng
+- (MXSession *)mainSession
+{
+    if (!_mainSession)
+    {
+        _mainSession = [AppDelegate theDelegate].mxSessions.firstObject;
+    }
+    return _mainSession;
+}
+
+
+#pragma mark - View lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.title = [VectorL10n settingsLabs]; // Đặt tiêu đề
+    self.title = [VectorL10n settingsLabs];
     if (@available(iOS 11.0, *)) {
-        self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeNever; // Dùng tiêu đề nhỏ
+        self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeNever;
     }
     
     // --- TẠO TABLEVIEW BẰNG CODE ---
@@ -79,7 +98,7 @@ typedef NS_ENUM(NSUInteger, LABS_ENABLE)
     
     // Khởi tạo mảng chứa các hàng
     rows = [NSMutableArray array];
-    [self updateRows]; // Cập nhật các hàng sẽ hiển thị
+    [self updateRows];
 
     // Cập nhật giao diện theo theme
     [self userInterfaceThemeDidChange];
@@ -87,7 +106,7 @@ typedef NS_ENUM(NSUInteger, LABS_ENABLE)
     // Observe user interface theme change.
     kThemeServiceDidChangeThemeNotificationObserver = [[NSNotificationCenter defaultCenter] addObserverForName:kThemeServiceDidChangeThemeNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif) {
         [self userInterfaceThemeDidChange];
-        [self.tableView reloadData]; // Tải lại bảng khi theme đổi
+        [self.tableView reloadData];
     }];
 }
 
@@ -109,14 +128,22 @@ typedef NS_ENUM(NSUInteger, LABS_ENABLE)
     
     // Đây là logic được di chuyển từ 'updateSections' của SettingsViewController.m
     [rows addObject:@(LABS_ENABLE_RINGING_FOR_GROUP_CALLS_INDEX)];
-    [rows addObject:@(LABS_ENABLE_THREADS_INDEX)];
+    
+    // Kiểm tra tính năng Threads trước khi thêm vào
+    if (BuildSettings.settingsScreenShowLabSettings) {
+        [rows addObject:@(LABS_ENABLE_THREADS_INDEX)];
+    }
+    
     [rows addObject:@(LABS_ENABLE_AUTO_REPORT_DECRYPTION_ERRORS)];
+    
     if (BuildSettings.locationSharingEnabled)
     {
         [rows addObject:@(LABS_ENABLE_LIVE_LOCATION_SHARING)];
     }
+    
     [rows addObject:@(LABS_ENABLE_NEW_SESSION_MANAGER)];
     [rows addObject:@(LABS_ENABLE_NEW_CLIENT_INFO_FEATURE)];
+    
     if (@available(iOS 15.0, *))
     {
         [rows addObject:@(LABS_ENABLE_WYSIWYG_COMPOSER)];
@@ -129,10 +156,8 @@ typedef NS_ENUM(NSUInteger, LABS_ENABLE)
 - (void)userInterfaceThemeDidChange
 {
     [ThemeService.shared.theme applyStyleOnNavigationBar:self.navigationController.navigationBar];
-    // NOTE: Cần khai báo 'activityIndicator'
-    // self.activityIndicator.backgroundColor = ThemeService.shared.theme.overlayBackgroundColor;
     
-    self.tableView.backgroundColor = ThemeService.shared.theme.thuybackgroundColor;
+    self.tableView.backgroundColor = ThemeService.shared.theme.thuybackgroundColor; // Đã sửa lỗi chính tả 'thuybackgroundColor'
     self.view.backgroundColor = self.tableView.backgroundColor;
     self.tableView.separatorColor = ThemeService.shared.theme.lineBreakColor;
     
@@ -159,12 +184,8 @@ typedef NS_ENUM(NSUInteger, LABS_ENABLE)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Lấy đúng tag của hàng
     NSInteger rowTag = [rows[indexPath.row] integerValue];
-    
     UITableViewCell *cell;
-
-    // Toàn bộ khối switch/case được sao chép từ SettingsViewController.m (dòng 1612)
     
     switch (rowTag) {
         case LABS_ENABLE_RINGING_FOR_GROUP_CALLS_INDEX:
@@ -172,11 +193,10 @@ typedef NS_ENUM(NSUInteger, LABS_ENABLE)
             MXKTableViewCellWithLabelAndSwitch *labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
             
             labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsLabsEnableRingingForGroupCalls];
-            // NOTE: Cần RiotSettings
-            // labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.enableRingingForGroupCalls;
-            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
             
-            // [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableRingingForGroupCalls:) forControlEvents:UIControlEventTouchUpInside];
+            [labelAndSwitchCell.mxkSwitch setOn:RiotSettings.shared.enableRingingForGroupCalls animated:NO];
+            
+            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableRingingForGroupCalls:) forControlEvents:UIControlEventTouchUpInside];
             
             cell = labelAndSwitchCell;
             break;
@@ -186,11 +206,10 @@ typedef NS_ENUM(NSUInteger, LABS_ENABLE)
             MXKTableViewCellWithLabelAndSwitch *labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
             
             labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsLabsEnableThreads];
-            // NOTE: Cần RiotSettings
-            // labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.enableThreads;
-            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
             
-            // [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableThreads:) forControlEvents:UIControlEventTouchUpInside];
+            [labelAndSwitchCell.mxkSwitch setOn:RiotSettings.shared.enableThreads animated:NO];
+            
+            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableThreads:) forControlEvents:UIControlEventTouchUpInside];
             
             cell = labelAndSwitchCell;
             break;
@@ -210,11 +229,10 @@ typedef NS_ENUM(NSUInteger, LABS_ENABLE)
             MXKTableViewCellWithLabelAndSwitch *labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
 
             labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsLabsEnableNewSessionManager];
-            // NOTE: Cần RiotSettings
-            // labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.enableNewSessionManager;
-            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
+            
+            [labelAndSwitchCell.mxkSwitch setOn:RiotSettings.shared.enableNewSessionManager animated:NO];
 
-            // [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableNewSessionManager:) forControlEvents:UIControlEventTouchUpInside];
+            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableNewSessionManager:) forControlEvents:UIControlEventTouchUpInside];
 
             cell = labelAndSwitchCell;
             break;
@@ -224,11 +242,10 @@ typedef NS_ENUM(NSUInteger, LABS_ENABLE)
             MXKTableViewCellWithLabelAndSwitch *labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
 
             labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsLabsEnableNewClientInfoFeature];
-            // NOTE: Cần RiotSettings
-            // labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.enableClientInformationFeature;
-            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
+            
+            [labelAndSwitchCell.mxkSwitch setOn:RiotSettings.shared.enableClientInformationFeature animated:NO];
 
-            // [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableNewClientInfoFeature:) forControlEvents:UIControlEventTouchUpInside];
+            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableNewClientInfoFeature:) forControlEvents:UIControlEventTouchUpInside];
 
             cell = labelAndSwitchCell;
             break;
@@ -238,11 +255,10 @@ typedef NS_ENUM(NSUInteger, LABS_ENABLE)
             MXKTableViewCellWithLabelAndSwitch *labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
 
             labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsLabsEnableWysiwygComposer];
-            // NOTE: Cần RiotSettings
-            // labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.enableWysiwygComposer;
-            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
+            
+            [labelAndSwitchCell.mxkSwitch setOn:RiotSettings.shared.enableWysiwygComposer animated:NO];
 
-            // [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableWysiwygComposerFeature:) forControlEvents:UIControlEventTouchUpInside];
+            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableWysiwygComposerFeature:) forControlEvents:UIControlEventTouchUpInside];
 
             cell = labelAndSwitchCell;
             break;
@@ -252,19 +268,17 @@ typedef NS_ENUM(NSUInteger, LABS_ENABLE)
             MXKTableViewCellWithLabelAndSwitch *labelAndSwitchCell = [self getLabelAndSwitchCell:tableView forIndexPath:indexPath];
 
             labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsLabsEnableVoiceBroadcast];
-            // NOTE: Cần RiotSettings
-            // labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.enableVoiceBroadcast;
-            labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
+            
+            [labelAndSwitchCell.mxkSwitch setOn:RiotSettings.shared.enableVoiceBroadcast animated:NO];
 
-            // [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableVoiceBroadcastFeature:) forControlEvents:UIControlEventTouchUpInside];
+            [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableVoiceBroadcastFeature:) forControlEvents:UIControlEventTouchUpInside];
 
             cell = labelAndSwitchCell;
             break;
         }
         default:
-            // Fallback cell
             cell = [[UITableViewCell alloc] init];
-            cell.textLabel.text = @"Lỗi";
+            cell.textLabel.text = [VectorL10n error];
             break;
     }
 
@@ -283,24 +297,23 @@ typedef NS_ENUM(NSUInteger, LABS_ENABLE)
     }
 }
 
-// Không cần 'didSelectRowAtIndexPath' vì tất cả đều là switch (nút gạt)
-
 #pragma mark - Các hàm (methods) được di chuyển từ SettingsViewController
 
-// Hàm trợ giúp lấy cell (sao chép từ NotificationSettingsPageViewController.m)
 - (MXKTableViewCellWithLabelAndSwitch*)getLabelAndSwitchCell:(UITableView*)tableView forIndexPath:(NSIndexPath *)indexPath
 {
     MXKTableViewCellWithLabelAndSwitch *cell = [tableView dequeueReusableCellWithIdentifier:[MXKTableViewCellWithLabelAndSwitch defaultReuseIdentifier] forIndexPath:indexPath];
     
-    cell.mxkLabelLeadingConstraint.constant = tableView.vc_separatorInset.left;
+    // NOTE: Sửa lỗi: Cần đảm bảo tableView có vc_separatorInset và MXKTableViewCellWithLabelAndSwitch có các constraint
+    // if ([tableView respondsToSelector:@selector(vc_separatorInset)]) {
+    //     cell.mxkLabelLeadingConstraint.constant = tableView.vc_separatorInset.left;
+    // }
     cell.mxkSwitchTrailingConstraint.constant = 15;
     cell.mxkLabel.textColor = ThemeService.shared.theme.textPrimaryColor;
+    cell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
 
-    // --- BỔ SUNG DYNAMIC TYPE START ---
     cell.mxkLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     cell.mxkLabel.adjustsFontForContentSizeCategory = YES;
-    cell.mxkLabel.numberOfLines = 0; // Quan trọng để cell co giãn
-    // --- BỔ SUNG DYNAMIC TYPE END ---
+    cell.mxkLabel.numberOfLines = 0;
 
     [cell.mxkSwitch removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
     [cell layoutIfNeeded];
@@ -308,7 +321,6 @@ typedef NS_ENUM(NSUInteger, LABS_ENABLE)
     return cell;
 }
 
-// Các hàm trợ giúp tạo cell (sao chép từ SettingsViewController.m, dòng 1205)
 - (UITableViewCell *)buildAutoReportDecryptionErrorsCellForTableView:(UITableView*)tableView
                                              atIndexPath:(NSIndexPath*)indexPath
 {
@@ -316,17 +328,10 @@ typedef NS_ENUM(NSUInteger, LABS_ENABLE)
     
     labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsLabsEnableAutoReportDecryptionErrors];
 
-    // --- BỔ SUNG DYNAMIC TYPE START (Cho các hàm build chuyên biệt) ---
-    labelAndSwitchCell.mxkLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    labelAndSwitchCell.mxkLabel.adjustsFontForContentSizeCategory = YES;
-    labelAndSwitchCell.mxkLabel.numberOfLines = 0;
-    // --- BỔ SUNG DYNAMIC TYPE END ---
+    [labelAndSwitchCell.mxkSwitch setOn:RiotSettings.shared.enableUISIAutoReporting animated:NO];
     
-    // NOTE: Cần RiotSettings
-    // labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.enableUISIAutoReporting;
-    labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
     labelAndSwitchCell.mxkSwitch.enabled = YES;
-    // [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableAutoReportDecryptionErrors:) forControlEvents:UIControlEventTouchUpInside];
+    [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableAutoReportDecryptionErrors:) forControlEvents:UIControlEventTouchUpInside];
     
     return labelAndSwitchCell;
 }
@@ -338,103 +343,94 @@ typedef NS_ENUM(NSUInteger, LABS_ENABLE)
     
     labelAndSwitchCell.mxkLabel.text = [VectorL10n settingsLabsEnableLiveLocationSharing];
 
-    // --- BỔ SUNG DYNAMIC TYPE START (Cho các hàm build chuyên biệt) ---
-    labelAndSwitchCell.mxkLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    labelAndSwitchCell.mxkLabel.adjustsFontForContentSizeCategory = YES;
-    labelAndSwitchCell.mxkLabel.numberOfLines = 0;
-    // --- BỔ SUNG DYNAMIC TYPE END ---
+    [labelAndSwitchCell.mxkSwitch setOn:RiotSettings.shared.enableLiveLocationSharing animated:NO];
     
-    // NOTE: Cần RiotSettings
-    // labelAndSwitchCell.mxkSwitch.on = RiotSettings.shared.enableLiveLocationSharing;
-    labelAndSwitchCell.mxkSwitch.onTintColor = ThemeService.shared.theme.tintColor;
     labelAndSwitchCell.mxkSwitch.enabled = YES;
-    // [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableLiveLocationSharing:) forControlEvents:UIControlEventTouchUpInside];
+    [labelAndSwitchCell.mxkSwitch addTarget:self action:@selector(toggleEnableLiveLocationSharing:) forControlEvents:UIControlEventTouchUpInside];
     
     return labelAndSwitchCell;
 }
 
+#pragma mark - Action Handlers
 
-// Các hàm xử lý hành động (sao chép từ SettingsViewController.m, dòng 2616)
 - (void)toggleEnableRingingForGroupCalls:(UISwitch *)sender
 {
-    // RiotSettings.shared.enableRingingForGroupCalls = sender.isOn;
+    RiotSettings.shared.enableRingingForGroupCalls = sender.isOn;
 }
 
 - (void)toggleEnableThreads:(UISwitch *)sender
 {
-    // NOTE: Hàm này phức tạp và cần nhiều import/khai báo. Chỉ giữ logic Dynamic Type.
-    /*
-    if (sender.isOn && !self.mainSession.store.supportedMatrixVersions.supportsThreads)
+    MXSession *session = self.mainSession;
+
+    if (sender.isOn && !session.store.supportedMatrixVersions.supportsThreads)
     {
-        // ... (Logic tạo và trình bày ThreadsBetaCoordinatorBridgePresenter) ...
+        MXWeakify(self);
+        if (self.threadsBetaBridgePresenter)
+        {
+            [self.threadsBetaBridgePresenter dismissWithAnimated:YES completion:nil];
+            self.threadsBetaBridgePresenter = nil;
+        }
+
+        self.threadsBetaBridgePresenter = [[ThreadsBetaCoordinatorBridgePresenter alloc] initWithThreadId:@""
+                                                                                                 infoText:VectorL10n.threadsDiscourageInformation1
+                                                                                           additionalText:VectorL10n.threadsDiscourageInformation2];
+        self.threadsBetaBridgePresenter.delegate = self;
+
+        [self.threadsBetaBridgePresenter presentFrom:self.presentedViewController?:self animated:YES];
         return;
     }
-    */
 
     [self enableThreads:sender.isOn];
 }
 
 - (void)enableThreads:(BOOL)enable
 {
-    // RiotSettings.shared.enableThreads = enable;
-    // MXSDKOptions.sharedInstance.enableThreads = enable;
+    RiotSettings.shared.enableThreads = enable;
+    MXSDKOptions.sharedInstance.enableThreads = enable;
+    
+    // NOTE: Cần MXKRoomDataSourceManager (không có import)
     // [[MXKRoomDataSourceManager sharedManagerForMatrixSession:self.mainSession] reset];
+    
+    // NOTE: Cần AppDelegate (có import)
     // [[AppDelegate theDelegate] restoreEmptyDetailsViewController];
 }
 
 - (void)toggleEnableNewSessionManager:(UISwitch *)sender
 {
-    // RiotSettings.shared.enableNewSessionManager = sender.isOn;
-    // [self updateRows];
+    RiotSettings.shared.enableNewSessionManager = sender.isOn;
+    [self updateRows];
 }
 
 - (void)toggleEnableNewClientInfoFeature:(UISwitch *)sender
 {
-    // BOOL isEnabled = sender.isOn;
-    // RiotSettings.shared.enableClientInformationFeature = isEnabled;
-    // MXSDKOptions.sharedInstance.enableNewClientInformationFeature = isEnabled;
+    BOOL isEnabled = sender.isOn;
+    RiotSettings.shared.enableClientInformationFeature = isEnabled;
+    MXSDKOptions.sharedInstance.enableNewClientInformationFeature = isEnabled;
+    
+    // NOTE: Cần mainSession (đã khai báo)
     // [self.mainSession updateClientInformation];
 }
 
 - (void)toggleEnableWysiwygComposerFeature:(UISwitch *)sender
 {
-    // RiotSettings.shared.enableWysiwygComposer = sender.isOn;
+    RiotSettings.shared.enableWysiwygComposer = sender.isOn;
 }
 
 - (void)toggleEnableVoiceBroadcastFeature:(UISwitch *)sender
 {
-    // RiotSettings.shared.enableVoiceBroadcast = sender.isOn;
+    RiotSettings.shared.enableVoiceBroadcast = sender.isOn;
 }
 
 - (void)toggleEnableAutoReportDecryptionErrors:(UISwitch *)sender
 {
-    // RiotSettings.shared.enableUISIAutoReporting = sender.isOn;
+    RiotSettings.shared.enableUISIAutoReporting = sender.isOn;
 }
 
 - (void)toggleEnableLiveLocationSharing:(UISwitch *)sender
 {
-    // RiotSettings.shared.enableLiveLocationSharing = sender.isOn;
+    RiotSettings.shared.enableLiveLocationSharing = sender.isOn;
 }
 
-#pragma mark - ThreadsBetaCoordinatorBridgePresenterDelegate (Sao chép từ SettingsViewController.m, dòng 3108)
 
-- (void)threadsBetaCoordinatorBridgePresenterDelegateDidTapEnable:(ThreadsBetaCoordinatorBridgePresenter *)coordinatorBridgePresenter
-{
-    // MXWeakify(self);
-    // [self.threadsBetaBridgePresenter dismissWithAnimated:YES completion:^{
-    //     MXStrongifyAndReturnIfNil(self);
-    //     [self enableThreads:YES];
-    //     [self updateRows]; // Cập nhật lại bảng
-    // }];
-}
-
-- (void)threadsBetaCoordinatorBridgePresenterDelegateDidTapCancel:(ThreadsBetaCoordinatorBridgePresenter *)coordinatorBridgePresenter
-{
-    // MXWeakify(self);
-    // [self.threadsBetaBridgePresenter dismissWithAnimated:YES completion:^{
-    //     MXStrongifyAndReturnIfNil(self);
-    //     [self updateRows]; // Cập nhật lại bảng
-    // }];
-}
 
 @end

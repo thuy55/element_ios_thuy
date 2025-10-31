@@ -151,6 +151,9 @@ class AllChatsViewController: HomeViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.spaceListDidChange), name: MXSpaceService.didBuildSpaceGraph, object: nil)
         
         set(tableHeadeView: self.bannerView)
+        
+        // --- THÊM DÒNG NÀY VÀO ---
+                self.updateInvitesBadge()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -308,7 +311,9 @@ class AllChatsViewController: HomeViewController {
             return super.tableView(tableView, numberOfRowsInSection: section)
         }
         
-        return dataSource?.tableView(tableView, numberOfRowsInSection: section) ?? 0
+//        return dataSource?.tableView(tableView, numberOfRowsInSection: section) ?? 0
+        
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -512,20 +517,41 @@ class AllChatsViewController: HomeViewController {
 
             // --- SỬA Ở ĐÂY: Dùng một "customView" rỗng để tạo khoảng cách ---
             
-            // 1. Tạo một View rỗng
-            let spacerView = UIView()
-            spacerView.translatesAutoresizingMaskIntoConstraints = false
-            
-            // 2. Đặt chiều rộng cho nó (đây chính là khoảng cách)
-            let spacing: CGFloat = 20.0 // <-- TĂNG/GIẢM SỐ NÀY
-            spacerView.widthAnchor.constraint(equalToConstant: spacing).isActive = true
-            
-            // 3. Bọc view rỗng đó trong một UIBarButtonItem
-            let spacerItem = UIBarButtonItem(customView: spacerView)
-            
-            // 4. Gán vào thanh navigation
-            //    Thứ tự: [Nút phải, Đệm, Nút trái]
-            self.navigationItem.rightBarButtonItems = [editBarButtonItem, spacerItem, spacesButton]
+//            // 1. Tạo một View rỗng
+//            let spacerView = UIView()
+//            spacerView.translatesAutoresizingMaskIntoConstraints = false
+//            
+//            // 2. Đặt chiều rộng cho nó (đây chính là khoảng cách)
+//            let spacing: CGFloat = 20.0 // <-- TĂNG/GIẢM SỐ NÀY
+//            spacerView.widthAnchor.constraint(equalToConstant: spacing).isActive = true
+//            
+//            // 3. Bọc view rỗng đó trong một UIBarButtonItem
+//            let spacerItem = UIBarButtonItem(customView: spacerView)
+//            
+//            // 4. Gán vào thanh navigation
+//            //    Thứ tự: [Nút phải, Đệm, Nút trái]
+//            self.navigationItem.rightBarButtonItems = [editBarButtonItem, spacerItem, spacesButton]
+        
+        // --- THAY THẾ KHỐI CODE TẠO SPACER VÀ GÁN NÚT (Dòng 559-569) ---
+                    
+                    // 1. Tạo một View rỗng (Đệm 1)
+                    let spacerView1 = UIView()
+                    spacerView1.translatesAutoresizingMaskIntoConstraints = false
+                    let spacing: CGFloat = 20.0 // Khoảng cách
+                    spacerView1.widthAnchor.constraint(equalToConstant: spacing).isActive = true
+                    let spacerItem1 = UIBarButtonItem(customView: spacerView1)
+                    
+                    // 2. Tạo Đệm 2 (giữa Nút Spaces và Nút Mời Mới)
+                    let spacerView2 = UIView()
+                    spacerView2.translatesAutoresizingMaskIntoConstraints = false
+                    spacerView2.widthAnchor.constraint(equalToConstant: spacing).isActive = true
+                    let spacerItem2 = UIBarButtonItem(customView: spacerView2)
+                    
+                    // 4. Gán vào thanh navigation
+                    //    Thứ tự: [Nút Edit, Đệm 1, Nút Spaces, Đệm 2, Nút Mời Mới]
+                    self.navigationItem.rightBarButtonItems = [editBarButtonItem, spacerItem1, spacesButton, spacerItem2, invitesBarButtonItem]
+                    
+                    // --- KẾT THÚC THAY THẾ ---
             
             // --- KẾT THÚC SỬA ---
             
@@ -630,28 +656,98 @@ class AllChatsViewController: HomeViewController {
             return UIBarButtonItem(customView: editButton)
         }()
     
+    
+    // (Dán code này thay thế cho 'invitesBarButtonItem' cũ)
+
+    private lazy var invitesBarButtonItem: BadgedBarButtonItem = {
+            // 1. Tạo nút bên trong (innerButton)
+            let innerButton = UIButton(type: .custom)
+            innerButton.accessibilityLabel = "Invites" // Tên cho VoiceOver
+            
+            // 2. Gán hành động (Action)
+            innerButton.addTarget(self, action: #selector(invitesButtonTapped), for: .touchUpInside)
+            
+            // 3. Đặt hình ảnh
+            let iconImage = Asset.Images.inviteHomeIcon.image
+            innerButton.setImage(iconImage, for: .normal)
+
+            // 4. Sao chép logic kích thước
+            
+            // --- SỬA Ở ĐÂY ---
+            // Đặt padding = 0 để nút vừa khít với ảnh
+            let padding: CGFloat = 0.0
+            // --- KẾT THÚC SỬA ---
+            
+            let iconHeight = iconImage.size.height
+            let iconWidth = iconImage.size.width
+            let iconSize = max(iconHeight, iconWidth)
+            let buttonTotalSize = iconSize + (padding * 2) // Bây giờ buttonTotalSize sẽ bằng iconSize
+
+            // 5. Đặt kích thước cố định
+            innerButton.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                innerButton.widthAnchor.constraint(equalToConstant: buttonTotalSize),
+                innerButton.heightAnchor.constraint(equalToConstant: buttonTotalSize)
+            ])
+            
+            // 6. Trả về một BadgedBarButtonItem
+            return BadgedBarButtonItem(withBaseButton: innerButton, theme: theme)
+        }()
     @objc private func updateBadgeButton() {
-        guard isViewLoaded, let session = mainSession else {
-            return
-        }
+//        guard isViewLoaded, let session = mainSession else {
+//            return
+//        }
+//        
+//        let notificationCount = session.spaceService.missedNotificationsCount
+//        let hasSpaceInvite = session.spaceService.hasSpaceInvite
+//        let isBadgeHighlighed = session.spaceService.hasHighlightNotification || hasSpaceInvite
+//        let badgeValue: String
+//        
+//        switch notificationCount {
+//        case 0:
+//            badgeValue = hasSpaceInvite ? "!" : "0"
+//        case (1 ... Constants.spacesButtonMaxCount):
+//            badgeValue = "\(notificationCount)"
+//        default:
+//            badgeValue = "\(Constants.spacesButtonMaxCount)+"
+//        }
+//        
+//        spacesButton.badgeText = badgeValue
+//        spacesButton.badgeBackgroundColor = isBadgeHighlighed ? theme.noticeColor : theme.noticeSecondaryColor
         
-        let notificationCount = session.spaceService.missedNotificationsCount
-        let hasSpaceInvite = session.spaceService.hasSpaceInvite
-        let isBadgeHighlighed = session.spaceService.hasHighlightNotification || hasSpaceInvite
-        let badgeValue: String
-        
-        switch notificationCount {
-        case 0:
-            badgeValue = hasSpaceInvite ? "!" : "0"
-        case (1 ... Constants.spacesButtonMaxCount):
-            badgeValue = "\(notificationCount)"
-        default:
-            badgeValue = "\(Constants.spacesButtonMaxCount)+"
-        }
-        
-        spacesButton.badgeText = badgeValue
-        spacesButton.badgeBackgroundColor = isBadgeHighlighed ? theme.noticeColor : theme.noticeSecondaryColor
+        // --- THÊM DÒNG NÀY VÀO CUỐI HÀM ---
+                self.updateInvitesBadge()
     }
+    
+    // (Dán hàm mới này ngay sau hàm updateBadgeButton)
+
+        @objc private func updateInvitesBadge() {
+            guard isViewLoaded, let dataSource = self.dataSource as? RecentsDataSource else {
+                return
+            }
+            
+            // 1. Lấy số lượng (count) từ RecentsDataSource
+            // (Đây chính là 'count' mà bạn hỏi)
+            // --- SỬA LỖI Ở ĐÂY ---
+                    // Xóa '?' sau 'counts' vì nó không phải là optional
+                    let count = dataSource.recentsListService.invitedRoomListData?.counts.total?.numberOfRooms ?? 0
+                    // --- KẾT THÚC SỬA LỖI ---
+            // 2. Định dạng chuỗi
+            let badgeValue: String
+            if count == 0 {
+                badgeValue = "0" // Ẩn badge nếu bằng 0
+            } else if count > 99 {
+                badgeValue = "99+" // Giới hạn 99+
+            } else {
+                badgeValue = "\(count)"
+            }
+            
+            // 3. Cập nhật lên nút
+            invitesBarButtonItem.badgeText = badgeValue
+            
+            // (Tùy chọn: Đặt màu)
+             invitesBarButtonItem.badgeBackgroundColor = theme.noticeColor
+        }
     
     private func updateToolbar(with menu: UIMenu) {
             guard isViewLoaded else {
@@ -781,6 +877,12 @@ class AllChatsViewController: HomeViewController {
         invitesViewController.displayList(recentsDataSource)
         self.navigationController?.pushViewController(invitesViewController, animated: true)
     }
+    
+    // --- THÊM HÀM MỚI NÀY VÀO ---
+        @objc private func invitesButtonTapped() {
+            // Gọi hàm gốc để điều hướng
+            self.showRoomInviteList()
+        }
     
 }
 

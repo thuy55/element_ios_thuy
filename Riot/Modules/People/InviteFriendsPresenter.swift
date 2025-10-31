@@ -60,7 +60,7 @@ final class InviteFriendsPresenter: NSObject {
         let appName = AppInfo.current.displayName
 
         // 2. Define your App Store link
-        let appStoreLink = "https://apps.apple.com/app/id284882215" // Make sure this ID is correct
+        let appStoreLink = "https://testflight.apple.com/join/NADxgCGj" // Make sure this ID is correct
 
         // 3. Create the final text with the desired format (two lines)
         let resultText = """

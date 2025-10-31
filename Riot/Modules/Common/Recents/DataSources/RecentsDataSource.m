@@ -290,7 +290,7 @@ NSString *const kRecentsDataSourceTapOnDirectoryServerChange = @"kRecentsDataSou
         shrinkedSectionsBitMask = RECENTSDATASOURCE_SECTION_DIRECTORY;
     }
 
-    stickyHeader = [self viewForHeaderInSection:section withFrame:frame inTableView:tableView];
+//    stickyHeader = [self viewForHeaderInSection:section withFrame:frame inTableView:tableView];
 
     shrinkedSectionsBitMask = savedShrinkedSectionsBitMask;
 
@@ -761,6 +761,7 @@ NSString *const kRecentsDataSourceTapOnDirectoryServerChange = @"kRecentsDataSou
                                                                                            attributes:@{NSForegroundColorAttributeName : ThemeService.shared.theme.headerTextSecondaryColor,
                                                                                                         NSFontAttributeName: [UIFont boldSystemFontOfSize:15.0]}]];
 
+        
         sectionTitle = mutableSectionTitle;
     }
     else if (title)

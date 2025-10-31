@@ -15,7 +15,7 @@ class RoomInvitesViewController: RecentsViewController {
         return UINib(nibName: String(describing: self), bundle: Bundle(for: self.classForCoder()))
     }
     
-    static func instantiate() -> Self {
+    @objc static func instantiate() -> Self {
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         guard let viewController = storyboard.instantiateViewController(withIdentifier: "RoomInvitesViewController") as? Self else {
             fatalError("No view controller of type \(self) in the main storyboard")

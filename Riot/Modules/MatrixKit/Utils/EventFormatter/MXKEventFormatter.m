@@ -1285,12 +1285,20 @@ static NSString *const kRepliedTextPattern = @"<mx-reply>.*<blockquote>.*<br>(.*
                     
                     NSString *repliedEventContent;
                     MXJSONModelSetString(repliedEventContent, repliedEvent.content[kMXMessageBodyKey]);
-                    body = [NSString stringWithFormat:@"<mx-reply><blockquote><a href=\"%@\">In reply to</a> <a href=\"%@\">%@</a><br>%@</blockquote></mx-reply>%@",
-                            [MXTools permalinkToEvent:repliedEventId inRoom:event.roomId],
-                            [MXTools permalinkToUserWithUserId:repliedEvent.sender],
+//                    body = [NSString stringWithFormat:@"<mx-reply><blockquote><a href=\"%@\">In reply to</a> <a href=\"%@\">%@</a><br>%@</blockquote></mx-reply>%@",
+//                            [MXTools permalinkToEvent:repliedEventId inRoom:event.roomId],
+//                            [MXTools permalinkToUserWithUserId:repliedEvent.sender],
+//                            repliedEvent.sender,
+//                            repliedEventContent,
+//                            body];
+                    
+                    body = [NSString stringWithFormat:@"<mx-reply><blockquote>Trả lời \u00A0%@<br>%@</blockquote></mx-reply>%@",
+                            // Link 1: Đã xóa, thay bằng "In reply to\u00A0" (Chuỗi này sẽ được thay thế/định dạng trong renderReplyTo:)
+                            // Link 2: Đã xóa, thay bằng tên người gửi
                             repliedEvent.sender,
                             repliedEventContent,
                             body];
+                    
                     
                 }
                 else
@@ -1819,7 +1827,7 @@ static NSString *const kRepliedTextPattern = @"<mx-reply>.*<blockquote>.*<br>(.*
             html = [self buildHTMLStringForEvent:event inReplyToEvent:repliedEvent] ?: html;
         }
 
-        html = [self renderReplyTo:html withRoomState:roomState];
+//        html = [self renderReplyTo:html withRoomState:roomState];
         html = [self renderPollEndedReplyTo:html repliedEvent:repliedEvent];
     }
 
@@ -1862,6 +1870,7 @@ static NSString *const kRepliedTextPattern = @"<mx-reply>.*<blockquote>.*<br>(.*
     NSString *eventContent;
     NSString *html;
 
+    // --- 1. Trích xuất nội dung tin nhắn được trả lời (repliedEventContent) ---
     if (repliedEvent.isRedactedEvent)
     {
         repliedEventContent = nil;
@@ -1901,7 +1910,6 @@ static NSString *const kRepliedTextPattern = @"<mx-reply>.*<blockquote>.*<br>(.*
             }
         }
 
-        // No message content in a non-redacted event. Formatter should use fallback.
         if (!repliedEventContent)
         {
             MXLogWarning(@"[MXKEventFormatter] Unable to retrieve content from replied event %@", repliedEvent.eventId)
@@ -1909,6 +1917,7 @@ static NSString *const kRepliedTextPattern = @"<mx-reply>.*<blockquote>.*<br>(.*
         }
     }
 
+    // --- 2. Trích xuất nội dung tin nhắn mới (eventContent) ---
     if (event.content[kMXMessageContentKeyNewContent])
     {
         MXJSONModelSetString(eventContent, event.content[kMXMessageContentKeyNewContent][@"formatted_body"]);
@@ -1928,12 +1937,30 @@ static NSString *const kRepliedTextPattern = @"<mx-reply>.*<blockquote>.*<br>(.*
         }
     }
 
+    // --- 3. Tạo HTML mới (Không Link, có Tên hiển thị) ---
     if (eventContent && repliedEvent.sender)
     {
-        html = [NSString stringWithFormat:@"<mx-reply><blockquote><a href=\"%@\">In reply to</a> <a href=\"%@\">%@</a><br>%@</blockquote></mx-reply>%@",
-                [MXTools permalinkToEvent:repliedEvent.eventId inRoom:repliedEvent.roomId],
-                [MXTools permalinkToUserWithUserId:repliedEvent.sender],
-                repliedEvent.sender,
+        // a) Lấy Room State để tra cứu Tên hiển thị
+        MXRoom *room = [self->mxSession roomWithRoomId:event.roomId];
+        
+        // SỬA LỖI: Dùng dangerousSyncState
+        MXRoomState *roomState = room.dangerousSyncState;
+        
+        NSString *senderName = repliedEvent.sender; // Fallback to MXID
+        if (roomState) {
+            NSString *displayName = [roomState.members memberName:repliedEvent.sender];
+            if (displayName.length) {
+                senderName = displayName; // Dùng Tên hiển thị nếu có
+            }
+        }
+
+        // b) Chuẩn hóa tên để chèn vào HTML (Giả định stringByAddingHTMLEntities tồn tại)
+        NSString *formattedName = senderName.stringByAddingHTMLEntities;
+        
+        // c) Tạo HTML đã sửa đổi: Loại bỏ link và sử dụng Tên hiển thị
+        // Lưu ý: Chuỗi "Trả lời 111 \u00A0%@" sẽ được định dạng lại thành <small><b>...</b></small> trong renderReplyTo:
+        html = [NSString stringWithFormat:@"<mx-reply><blockquote>Trả lời \u00A0%@<br>%@</blockquote></mx-reply>%@",
+                formattedName,              // Tên hiển thị đã tra cứu
                 repliedEventContent,
                 eventContent];
     }
@@ -1975,6 +2002,9 @@ static NSString *const kRepliedTextPattern = @"<mx-reply>.*<blockquote>.*<br>(.*
     
     __block NSUInteger hrefCount = 0;
     
+    // BỔ SUNG: Biến để lưu phạm vi toàn bộ thẻ <a> đầu tiên (cần cho việc gỡ bỏ link)
+    __block NSRange inReplyToLinkFullTagRange = NSMakeRange(NSNotFound, 0);
+    
     __block NSRange inReplyToLinkRange = NSMakeRange(NSNotFound, 0);
     __block NSRange inReplyToTextRange = NSMakeRange(NSNotFound, 0);
     __block NSRange userIdRange = NSMakeRange(NSNotFound, 0);
@@ -1990,6 +2020,7 @@ static NSString *const kRepliedTextPattern = @"<mx-reply>.*<blockquote>.*<br>(.*
                                      }
                                      else if (hrefCount == 0 && match.numberOfRanges >= 2)
                                      {
+                                        inReplyToLinkFullTagRange = [match range]; // Lấy phạm vi toàn bộ thẻ <a>
                                         inReplyToLinkRange = [match rangeAtIndex:1];
                                         inReplyToTextRange = [match rangeAtIndex:2];
                                      }
@@ -2003,11 +2034,7 @@ static NSString *const kRepliedTextPattern = @"<mx-reply>.*<blockquote>.*<br>(.*
     
     // Note: Take care to replace text starting with the end
     
-    // Replace <a href=\"https://matrix.to/#/mxid\">mxid</a>
-    // By <a href=\"https://matrix.to/#/mxid\">Display name</a>
-    // To replace the user Matrix ID by his display name when available.
-    // This link is the second <a> HTML node of the html string
-    
+    // 1. Thay thế MXID bằng Display name (Link thứ hai)
     if (userIdRange.location != NSNotFound)
     {
         NSString *userId = [html substringWithRange:userIdRange];
@@ -2016,19 +2043,24 @@ static NSString *const kRepliedTextPattern = @"<mx-reply>.*<blockquote>.*<br>(.*
         
         if (senderDisplayName)
         {
+            // Thao tác thay thế (phải thực hiện trước thay thế link đầu tiên)
             html = [html stringByReplacingCharactersInRange:userIdRange withString:senderDisplayName.stringByAddingHTMLEntities];
         }
     }
     
-    // Replace <mx-reply><blockquote><a href=\"__permalink__\">In reply to</a>
-    // By <mx-reply><blockquote><a href=\"__permalink__\">['In reply to' from resources]</a>
-    // To localize the "In reply to" string
-    // This link is the first <a> HTML node of the html string
-    
-    if (inReplyToTextRange.location != NSNotFound)
-    {
-        html = [html stringByReplacingCharactersInRange:inReplyToTextRange withString:[VectorL10n noticeInReplyTo]];
-    }
+    // 2. SỬA LỖI: Loại bỏ link và khoảng trắng (Link thứ nhất)
+    // Thay thế toàn bộ thẻ <a> bằng chuỗi đã địa phương hóa.
+    if (inReplyToLinkFullTagRange.location != NSNotFound)
+        {
+            // 1. Tạo chuỗi thay thế có định dạng HTML: <small><b>[VectorL10n noticeInReplyTo]</b></small>
+            NSString *localizedReplyText = [VectorL10n noticeInReplyTo];
+            NSString *replacementString = [NSString stringWithFormat:@"<small><b>%@</b></small> ", localizedReplyText];
+            
+            // 2. Thay thế toàn bộ phạm vi thẻ <a> đầu tiên bằng chuỗi HTML định dạng
+            html = [html stringByReplacingCharactersInRange:inReplyToLinkFullTagRange withString:replacementString];
+            
+            // Bỏ qua logic cũ, vì toàn bộ thẻ <a> đã bị loại bỏ
+        }
     
     return html;
 }
