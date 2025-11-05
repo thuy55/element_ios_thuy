@@ -44,32 +44,32 @@ struct ComposerCreateActionList: View {
                 .padding(.horizontal, 16)
                 .padding(.vertical, 12)
             }
-            if viewModel.viewState.wysiwygEnabled {
-                SeparatorLine()
-                HStack(spacing: 16) {
-                    Image(textFormattingIcon)
-                        .renderingMode(.template)
-                        .foregroundColor(theme.colors.accent)
-                    Text(VectorL10n.wysiwygComposerStartActionTextFormatting)
-                        .foregroundColor(theme.colors.primaryContent)
-                        .font(theme.fonts.body)
-                        .accessibilityIdentifier("textFormatting")
-                    Spacer()
-                    Toggle("", isOn: $viewModel.textFormattingEnabled)
-                        .labelsHidden()
-                        .toggleStyle(SwitchToggleStyle(tint: theme.colors.accent))
-                        .onChange(of: viewModel.textFormattingEnabled) { isOn in
-                            viewModel.send(viewAction: .toggleTextFormatting(isOn))
-                        }
-                }
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    viewModel.textFormattingEnabled.toggle()
-                }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 12)
-
-            }
+//            if viewModel.viewState.wysiwygEnabled {
+//                SeparatorLine()
+//                HStack(spacing: 16) {
+//                    Image(textFormattingIcon)
+//                        .renderingMode(.template)
+//                        .foregroundColor(theme.colors.accent)
+//                    Text(VectorL10n.wysiwygComposerStartActionTextFormatting)
+//                        .foregroundColor(theme.colors.primaryContent)
+//                        .font(theme.fonts.body)
+//                        .accessibilityIdentifier("textFormatting")
+//                    Spacer()
+//                    Toggle("", isOn: $viewModel.textFormattingEnabled)
+//                        .labelsHidden()
+//                        .toggleStyle(SwitchToggleStyle(tint: theme.colors.accent))
+//                        .onChange(of: viewModel.textFormattingEnabled) { isOn in
+//                            viewModel.send(viewAction: .toggleTextFormatting(isOn))
+//                        }
+//                }
+//                .contentShape(Rectangle())
+//                .onTapGesture {
+//                    viewModel.textFormattingEnabled.toggle()
+//                }
+//                .padding(.horizontal, 16)
+//                .padding(.vertical, 12)
+//
+//            }
         }
     }
 

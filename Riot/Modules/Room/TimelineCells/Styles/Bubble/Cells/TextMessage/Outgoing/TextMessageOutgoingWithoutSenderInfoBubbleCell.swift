@@ -74,3 +74,4 @@ class TextMessageOutgoingWithoutSenderInfoBubbleCell: TextMessageBaseBubbleCell,
         self.textMessageContentView?.bubbleBackgroundViewTrailingConstraint = trailingConstraint
     }
 }
+

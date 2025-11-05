@@ -27,4 +27,5 @@ Please see LICENSE in the repository root for full details.
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *lastEventDecriptionLabelTrailingConstraint;
 @property (weak, nonatomic) IBOutlet UIImageView *unsentImageView;
 
+
 @end

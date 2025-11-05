@@ -283,6 +283,10 @@ public class VectorL10n: NSObject {
   public static var answerCall: String { 
     return VectorL10n.tr("Vector", "answer_call") 
   }
+  /// Are you sure?
+  public static var areYouSure: String { 
+    return VectorL10n.tr("Vector", "are_you_sure") 
+  }
   /// Attach Media from Library
   public static var attachMedia: String { 
     return VectorL10n.tr("Vector", "attach_media") 
@@ -7323,6 +7327,10 @@ public class VectorL10n: NSObject {
   public static var setPowerLevel: String { 
     return VectorL10n.tr("Vector", "set_power_level") 
   }
+  /// Set up cross-signing
+  public static var setUpCrossSigning: String { 
+    return VectorL10n.tr("Vector", "set_up_cross_signing") 
+  }
   /// Settings
   public static var settings: String { 
     return VectorL10n.tr("Vector", "settings") 
@@ -8858,6 +8866,10 @@ public class VectorL10n: NSObject {
   /// Threads
   public static var threadsTitle: String { 
     return VectorL10n.tr("Vector", "threads_title") 
+  }
+  /// Anyone you have verified with will see security alerts. You almost certainly don't want to do this, unless you've lost every device you can cross-sign from.
+  public static var title1: String { 
+    return VectorL10n.tr("Vector", "title_1") 
   }
   /// Favourites
   public static var titleFavourites: String { 

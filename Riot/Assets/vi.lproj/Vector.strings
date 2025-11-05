@@ -180,7 +180,7 @@
 "room_participants_action_unban" = "Huỷ cấm";
 "room_participants_action_ignore" = "Ẩn tất cả tin nhắn từ người dùng này";
 "room_participants_action_unignore" = "Hiển thị tất cả tin nhắn từ người dùng này";
-"room_participants_action_set_default_power_level" = "Thiết lập lại về người dùng bình thường";
+"room_participants_action_set_default_power_level" = "Thiết lập lại về thành viên";
 "room_participants_action_set_moderator" = "Trao quyền người kiểm duyệt";
 "room_participants_action_set_admin" = "Trao quyền quản trị viên";
 "room_participants_action_start_new_chat" = "Bắt đầu cuộc trò chuyện mới";
@@ -2021,7 +2021,7 @@
 "settings_analytics_and_crash_data" = "Gửi dữ liệu sự cố và phân tích";
 "settings_labs_enable_threads" = "Tin nhắn theo luồng";
 "settings_labs_enable_auto_report_decryption_errors" = "Tự động Báo cáo Lỗi Giải mã";
-"settings_labs_enable_live_location_sharing" = "Chia sẻ vị trí trực tiếp - chia sẻ vị trí hiện tại (đang phát triển, và tạm thời, các vị trí sẽ được lưu trong lịch sử nhóm)";
+"settings_labs_enable_live_location_sharing" = "Chia sẻ vị trí trực tiếp - chia sẻ vị trí hiện tại";
 "settings_labs_enable_new_session_manager" = "Trình quản lý phiên mới";
 "settings_labs_enable_new_client_info_feature" = "Ghi lại tên, phiên bản và url của client để nhận dạng các phiên dễ dàng hơn trong trình quản lý phiên";
 "settings_labs_enable_new_app_layout" = "Bố cục Ứng dụng Mới";
@@ -2800,4 +2800,7 @@
 "device_details_rename_prompt_title" = "Tên phiên";
 "event_formatter_message_deleted" = "Tin nhắn đã bị xóa";
 
+"are_you_sure" = "Bạn có chắc?";
+"title_1" = "Bất kỳ ai bạn đã xác minh đều sẽ thấy cảnh báo bảo mật. Bạn gần như chắc chắn không muốn làm điều này, trừ khi bạn đã mất tất cả các thiết bị có thể xác thực chéo.";
+"set_up_cross_signing" = "Thiết lập chữ ký chéo";
 

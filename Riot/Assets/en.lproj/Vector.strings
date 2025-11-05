@@ -3209,3 +3209,7 @@ To enable access, tap Settings> Location and select Always";
 "pill_message" = "Message";
 "pill_message_from" = "Message from %@";
 "pill_message_in" = "Message in %@";
+
+"are_you_sure" = "Are you sure?";
+"title_1" = "Anyone you have verified with will see security alerts. You almost certainly don't want to do this, unless you've lost every device you can cross-sign from.";
+"set_up_cross_signing" = "Set up cross-signing";

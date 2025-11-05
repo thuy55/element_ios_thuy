@@ -165,7 +165,7 @@ final class RiotSettings: NSObject {
     var enableClientInformationFeature
 
     /// Flag indicating if the wysiwyg composer feature is enabled
-    @UserDefault(key: "enableWysiwygComposer", defaultValue: false, storage: defaults)
+    @UserDefault(key: "enableWysiwygComposer", defaultValue: true, storage: defaults)
     var enableWysiwygComposer
 
     @UserDefault(key: "enableWysiwygTextFormatting", defaultValue: true, storage: defaults)

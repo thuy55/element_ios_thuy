@@ -768,6 +768,11 @@ extension AuthenticationCoordinator: AuthenticationServiceDelegate {
 // MARK: - KeyVerificationCoordinatorDelegate
 extension AuthenticationCoordinator: KeyVerificationCoordinatorDelegate {
     func keyVerificationCoordinatorDidComplete(_ coordinator: KeyVerificationCoordinatorType, otherUserId: String, otherDeviceId: String) {
+        // --- BẮT ĐẦU SỬA ĐỔI ---
+                // Ghi lại rằng người dùng đã hoàn tất xác minh
+        //không mở alert khi đã xác minh thành công
+                RiotSettings.shared.hideVerifyThisSessionAlert = true
+                // --- KẾT THÚC SỬA ĐỔI ---
         navigationRouter.dismissModule(animated: true) { [weak self] in
             self?.authenticationDidComplete()
         }

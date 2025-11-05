@@ -113,16 +113,49 @@ Please see LICENSE in the repository root for full details.
             [self.presenceIndicatorView stopListeningPresenceUpdates];
         }
         
-        self.displayNameTextField.text = self.mxRoom.summary.displayName;
-        if (!self.displayNameTextField.text.length)
-        {
-            self.displayNameTextField.text = [VectorL10n roomDisplaynameEmptyRoom];
-            self.displayNameTextField.textColor = ThemeService.shared.theme.textSecondaryColor;
-        }
-        else
-        {
-            self.displayNameTextField.textColor = ThemeService.shared.theme.textPrimaryColor;
-        }
+//        self.displayNameTextField.text = self.mxRoom.summary.displayName;
+//        if (!self.displayNameTextField.text.length)
+//        {
+//            self.displayNameTextField.text = [VectorL10n roomDisplaynameEmptyRoom];
+//            self.displayNameTextField.textColor = ThemeService.shared.theme.textSecondaryColor;
+//        }
+//        else
+//        {
+//            self.displayNameTextField.textColor = ThemeService.shared.theme.textPrimaryColor;
+//        }
+        
+        // --- BẮT ĐẦU SỬA ĐỔI ---
+                
+                // Lấy tên hiển thị gốc
+                NSString *displayName = self.mxRoom.summary.displayName;
+
+                // Kiểm tra nếu đây là phòng chat nhóm (không phải 1-1)
+                if (!self.mxRoom.isDirect)
+                {
+                    // Lấy số lượng thành viên
+                    NSUInteger memberCount = self.mxRoom.summary.membersCount.joined;
+                    if (memberCount > 0)
+                    {
+                        // Gắn số lượng vào tên (ví dụ: "Tên Nhóm (5)")
+                        displayName = [NSString stringWithFormat:@"%@ (%lu)", displayName, (unsigned long)memberCount];
+                    }
+                }
+                
+                // Gán tên đã cập nhật vào label
+                self.displayNameTextField.text = displayName;
+
+                // Xử lý trường hợp phòng không có tên
+                if (!self.displayNameTextField.text.length)
+                {
+                    self.displayNameTextField.text = [VectorL10n roomDisplaynameEmptyRoom];
+                    self.displayNameTextField.textColor = ThemeService.shared.theme.textSecondaryColor;
+                }
+                else
+                {
+                    self.displayNameTextField.textColor = ThemeService.shared.theme.textPrimaryColor;
+                }
+                
+                // --- KẾT THÚC SỬA ĐỔI ---
         
         // --- BỔ SUNG DYNAMIC TYPE START ---
 

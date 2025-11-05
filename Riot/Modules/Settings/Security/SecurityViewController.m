@@ -752,7 +752,7 @@ TableViewSectionsDelegate>
 
 - (void)setupCrossSigning:(id)sender
 {
-    [self setupCrossSigningWithTitle:@"Set up cross-signing"    // TODO
+    [self setupCrossSigningWithTitle:[VectorL10n setUpCrossSigning]    // TODO
                              message:[VectorL10n securitySettingsUserPasswordDescription]
                              success:^{
                              } failure:^(NSError *error) {
@@ -805,11 +805,15 @@ TableViewSectionsDelegate>
     [currentAlert dismissViewControllerAnimated:NO completion:nil];
     
     // Double confirmation
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Are you sure?"  // TODO
-                                                                             message:@"Anyone you have verified with will see security alerts. You almost certainly don't want to do this, unless you've lost every device you can cross-sign from."     // TODO
-                                                                      preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Are you sure?"  // TODO
+//                                                                             message:@"Anyone you have verified with will see security alerts. You almost certainly don't want to do this, unless you've lost every device you can cross-sign from."     // TODO
+//                                                                      preferredStyle:UIAlertControllerStyleAlert];
     
-    [alertController addAction:[UIAlertAction actionWithTitle:@"Reset"
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[VectorL10n areYouSure]
+                                                                           message:[VectorL10n title1]
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+  
+    [alertController addAction:[UIAlertAction actionWithTitle:[VectorL10n secretsResetResetAction]
                                                         style:UIAlertActionStyleDefault
                                                       handler:^(UIAlertAction * action)
                                 {

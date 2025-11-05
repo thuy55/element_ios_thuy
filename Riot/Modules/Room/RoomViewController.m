@@ -3670,7 +3670,7 @@ static CGSize kThreadListBarButtonItemImageSize;
                         if (tappedEvent.location) {
                             [_delegate roomViewController:self didRequestLocationPresentationForEvent:tappedEvent bubbleData:bubbleData];
                         } else {
-                            [self showContextualMenuForEvent:tappedEvent fromSingleTapGesture:YES cell:cell animated:YES];
+//                            [self showContextualMenuForEvent:tappedEvent fromSingleTapGesture:YES cell:cell animated:YES];
                         }
                     }
                 }
