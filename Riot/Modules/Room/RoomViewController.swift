@@ -389,6 +389,7 @@ extension RoomViewController: MentionReplacer {
               let roomState = roomDataSource.roomState else {
             return nil
         }
+        
 
         return PillsFormatter.mentionPill(withUrl: url,
                                           andLabel: text,

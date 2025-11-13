@@ -46,6 +46,32 @@ static NSString *const kRepliedTextPattern = @"<mx-reply>.*<blockquote>.*<br>(.*
     if (self)
     {
         mxSession = matrixSession;
+        
+        // *** BẮT ĐẦU ĐOẠN CODE THÊM MỚI ***
+                
+                // Block này sẽ xử lý thẻ <img> (từ file MXKEventFormatter.m)
+                // Nó sẽ gọi MediaManager để lấy URL https://... có thể hiển thị được
+                // (MediaManager sẽ tự động xử lý việc giải mã)
+                self.htmlImageHandler = ^NSURL *(NSString *src, CGFloat width, CGFloat height) {
+                    
+                    // Dùng 'self->mxSession' (biến protected) để truy cập
+                    // Class con (EventFormatter) có quyền truy cập biến này
+                    if (!self->mxSession || !self->mxSession.mediaManager) {
+                        return nil;
+                    }
+                    
+                    if ([src hasPrefix:kMXContentUriScheme]) {
+                        
+                        // DÙNG HÀM CÔNG KHAI (PUBLIC) NÀY:
+                        // Nó sẽ biến "mxc://..." thành "https://.../_matrix/media/v3/download/..."
+                        // và tự động thêm các "key" giải mã vào URL nếu cần.
+                        return [self->mxSession.mediaManager urlOfContent:src];
+                    }
+                    
+                    // Nếu là link http/https bình thường
+                    return [NSURL URLWithString:src];
+                };
+                // *** KẾT THÚC ĐOẠN CODE THÊM MỚI ***
 
         [self initDateTimeFormatters];
 
@@ -1876,30 +1902,118 @@ static NSString *const kRepliedTextPattern = @"<mx-reply>.*<blockquote>.*<br>(.*
                 MXJSONModelSetString(repliedEventContent, repliedEvent.content[kMXMessageContentKeyNewContent][kMXMessageBodyKey]);
             }
         }
+//        else
+//        {
+//            MXReplyEventParser *parser = [[MXReplyEventParser alloc] init];
+//            MXReplyEventParts *parts = [parser parse:repliedEvent];
+//            MXJSONModelSetString(repliedEventContent, parts.formattedBodyParts.replyText)
+//            if (!repliedEventContent)
+//            {
+//                MXJSONModelSetString(repliedEventContent, parts.bodyParts.replyText)
+//            }
+//            if (!repliedEventContent)
+//            {
+//                MXJSONModelSetString(repliedEventContent, repliedEvent.content[@"formatted_body"]);
+//            }
+//            if (!repliedEventContent)
+//            {
+//                MXJSONModelSetString(repliedEventContent, repliedEvent.content[kMXMessageBodyKey]);
+//            }
+//            if (!repliedEventContent && repliedEvent.eventType == MXEventTypePollStart) {
+//                repliedEventContent = [MXEventContentPollStart modelFromJSON:repliedEvent.content].question;
+//            }
+//            if (!repliedEventContent && repliedEvent.eventType == MXEventTypePollEnd) {
+//                repliedEventContent = MXSendReplyEventDefaultStringLocalizer.new.endedPollMessage;
+//            }
+//        }
+        
+        
+//        làm ngắn nôị dung reply ...
         else
-        {
-            MXReplyEventParser *parser = [[MXReplyEventParser alloc] init];
-            MXReplyEventParts *parts = [parser parse:repliedEvent];
-            MXJSONModelSetString(repliedEventContent, parts.formattedBodyParts.replyText)
-            if (!repliedEventContent)
             {
-                MXJSONModelSetString(repliedEventContent, parts.bodyParts.replyText)
+                // --- BẮT ĐẦU THAY ĐỔI LOGIC (PHIÊN BẢN 2 - SỬA LỖI MẤT XUỐNG DÒNG) ---
+                
+                NSString *originalBody;
+
+                // 1. Thử lấy 'body' từ `new_content` (nếu là tin nhắn đã chỉnh sửa)
+                if (repliedEvent.content[kMXMessageContentKeyNewContent])
+                {
+                    MXJSONModelSetString(originalBody, repliedEvent.content[kMXMessageContentKeyNewContent][kMXMessageBodyKey]);
+                }
+
+                // 2. Nếu không, thử lấy 'body' từ `reply_text` (nếu nó là một reply lồng nhau)
+                if (!originalBody)
+                {
+                    MXReplyEventParser *parser = [[MXReplyEventParser alloc] init];
+                    MXReplyEventParts *parts = [parser parse:repliedEvent];
+                    MXJSONModelSetString(originalBody, parts.bodyParts.replyText);
+                }
+
+                // 3. Nếu không, lấy 'body' gốc
+                if (!originalBody)
+                {
+                    MXJSONModelSetString(originalBody, repliedEvent.content[kMXMessageBodyKey]);
+                }
+                
+                // 4. Xử lý fallback cho Polls
+                if (!originalBody && repliedEvent.eventType == MXEventTypePollStart) {
+                    originalBody = [MXEventContentPollStart modelFromJSON:repliedEvent.content].question;
+                }
+                if (!originalBody && repliedEvent.eventType == MXEventTypePollEnd) {
+                    originalBody = MXSendReplyEventDefaultStringLocalizer.new.endedPollMessage;
+                }
+                
+                // 5. Xử lý fallback cho Ảnh/Sticker
+                if (!originalBody) {
+                    NSString *repliedMsgType;
+                    if (repliedEvent.eventType == MXEventTypeRoomMessage) {
+                        MXJSONModelSetString(repliedMsgType, repliedEvent.content[kMXMessageTypeKey]);
+                    } else if (repliedEvent.eventType == MXEventTypeSticker) {
+                        repliedMsgType = kMXMessageTypeImage;
+                    }
+                    
+                    if ([repliedMsgType isEqualToString:kMXMessageTypeImage]) {
+                        originalBody = repliedEvent.content[kMXMessageBodyKey] ?: [VectorL10n noticeImageAttachment];
+                    }
+                }
+
+                // 6. Xử lý, cắt ngắn, và chuyển đổi text sang HTML
+                if (originalBody)
+                {
+                    // Giai đoạn 1: Chuẩn hóa. Đảm bảo mọi thứ đều là \n
+                    NSString *plainText = [originalBody stringByReplacingOccurrencesOfString:@"<br>"
+                                                                                 withString:@"\n"
+                                                                                    options:NSCaseInsensitiveSearch
+                                                                                      range:NSMakeRange(0, originalBody.length)];
+                    plainText = [plainText stringByReplacingOccurrencesOfString:@"<br />"
+                                                                    withString:@"\n"
+                                                                       options:NSCaseInsensitiveSearch
+                                                                         range:NSMakeRange(0, plainText.length)];
+
+                    // Giai đoạn 2: Tách dòng và cắt ngắn
+                    NSArray<NSString *> *lines = [plainText componentsSeparatedByString:@"\n"];
+                    NSString *processedText; // Chuỗi text thô đã xử lý
+                    
+                    if (lines.count > 2) {
+                        // Lấy 2 dòng đầu tiên
+                        NSArray<NSString *> *truncatedLines = [lines subarrayWithRange:NSMakeRange(0, 2)];
+                        // Nối lại bằng \n và thêm "..."
+                        processedText = [NSString stringWithFormat:@"%@  ...", [truncatedLines componentsJoinedByString:@"\n"]];
+                    } else {
+                        // Không cần cắt, dùng luôn text đã chuẩn hóa
+                        processedText = plainText;
+                    }
+
+                    // Giai đoạn 3: Chuyển đổi text thô thành HTML an toàn
+                    // 1. Escape các ký tự HTML đặc biệt (như <, >, &)
+                    //    (Dùng phương thức có sẵn từ DTCoreText mà file này đã import)
+                    NSString *escapedText = [processedText stringByAddingHTMLEntities];
+                    
+                    // 2. Chuyển đổi ký tự \n (đã được escape) thành thẻ <br />
+                    repliedEventContent = [escapedText stringByReplacingOccurrencesOfString:@"\n" withString:@"<br />"];
+                }
+                // --- KẾT THÚC THAY ĐỔI LOGIC (PHIÊN BẢN 2) ---
             }
-            if (!repliedEventContent)
-            {
-                MXJSONModelSetString(repliedEventContent, repliedEvent.content[@"formatted_body"]);
-            }
-            if (!repliedEventContent)
-            {
-                MXJSONModelSetString(repliedEventContent, repliedEvent.content[kMXMessageBodyKey]);
-            }
-            if (!repliedEventContent && repliedEvent.eventType == MXEventTypePollStart) {
-                repliedEventContent = [MXEventContentPollStart modelFromJSON:repliedEvent.content].question;
-            }
-            if (!repliedEventContent && repliedEvent.eventType == MXEventTypePollEnd) {
-                repliedEventContent = MXSendReplyEventDefaultStringLocalizer.new.endedPollMessage;
-            }
-        }
 
         // No message content in a non-redacted event. Formatter should use fallback.
         if (!repliedEventContent)
@@ -1944,6 +2058,180 @@ static NSString *const kRepliedTextPattern = @"<mx-reply>.*<blockquote>.*<br>(.*
 
     return html;
 }
+
+// LẤY ĐUỌC LINK ẢNH NHƯNG NÓ ĐÃ BỊ MÃ HOÁ RỒI, KHÔNG HIỂN THỊ ĐƯỢC
+//- (NSString*)buildHTMLStringForEvent:(MXEvent*)event inReplyToEvent:(MXEvent*)repliedEvent
+//{
+//    // --- BẮT ĐẦU DEBUG LOG ---
+//    NSLog(@"[REPLY DEBUG] === Bắt đầu buildHTMLStringForEvent ===");
+//    // --- KẾT THÚC DEBUG LOG ---
+//
+//    NSString *repliedEventContent;
+//    NSString *eventContent;
+//    NSString *html;
+//
+//    if (repliedEvent.isRedactedEvent)
+//    {
+//        // --- BẮT ĐẦU DEBUG LOG ---
+//        NSLog(@"[REPLY DEBUG] Tin nhắn gốc đã bị thu hồi (redacted).");
+//        // --- KẾT THÚC DEBUG LOG ---
+//        repliedEventContent = nil;
+//    }
+//    else
+//    {
+//        // --- BẮT ĐẦU DEBUG LOG ---
+//        NSLog(@"[REPLY DEBUG] Bắt đầu xử lý tin nhắn gốc (repliedEvent): %@", repliedEvent.eventId);
+//        NSLog(@"[REPLY DEBUG] Toàn bộ content của tin nhắn gốc: %@", repliedEvent.content);
+//        // --- KẾT THÚC DEBUG LOG ---
+//
+//        // --- BẮT ĐẦU LOGIC MỚI ĐỂ CHECK ẢNH/STICKER ---
+//        NSString *repliedMsgType;
+//        if (repliedEvent.eventType == MXEventTypeRoomMessage) {
+//            MXJSONModelSetString(repliedMsgType, repliedEvent.content[kMXMessageTypeKey]);
+//        } else if (repliedEvent.eventType == MXEventTypeSticker) {
+//            repliedMsgType = kMXMessageTypeImage;
+//        }
+//        
+//        // --- BẮT ĐẦU DEBUG LOG ---
+//        NSLog(@"[REPLY DEBUG] Loại tin nhắn gốc (msgtype): %@", repliedMsgType);
+//        // --- KẾT THÚC DEBUG LOG ---
+//
+//        if ([repliedMsgType isEqualToString:kMXMessageTypeImage])
+//        {
+//            // --- BẮT ĐẦU DEBUG LOG ---
+//            NSLog(@"[REPLY DEBUG] Đây là tin nhắn ảnh/sticker. Đang tìm thumbnail...");
+//            // --- KẾT THÚC DEBUG LOG ---
+//            NSString *thumbnailUrl;
+//            NSDictionary *info;
+//            MXJSONModelSetDictionary(info, repliedEvent.content[@"info"]);
+//            
+////            if (info) {
+////                // --- BẮT ĐẦU DEBUG LOG ---
+////                NSLog(@"[REPLY DEBUG] Đã tìm thấy dictionary 'info': %@", info);
+////                // --- KẾT THÚC DEBUG LOG ---
+////                MXJSONModelSetString(thumbnailUrl, info[@"thumbnail_url"]);
+//            if (info) {
+//                NSDictionary *thumbnailFile;
+//                MXJSONModelSetDictionary(thumbnailFile, info[@"thumbnail_file"]); // Lấy dictionary "thumbnail_file"
+//                if (thumbnailFile) {
+//                    NSLog(@"[REPLY DEBUG] Đã tìm thấy dictionary aaaaaa 'info': %@", info[@"thumbnail_file"]);
+//                    MXJSONModelSetString(thumbnailUrl, thumbnailFile[@"url"]); // Lấy "url" từ bên trong
+//                }
+//            } else {
+//                // --- BẮT ĐẦU DEBUG LOG ---
+//                NSLog(@"[REPLY DEBUG] KHÔNG tìm thấy dictionary 'info' trong content.");
+//                // --- KẾT THÚC DEBUG LOG ---
+//            }
+//
+//            if (thumbnailUrl.length)
+//            {
+//                // --- BẮT ĐẦU DEBUG LOG ---
+//                NSLog(@"[REPLY DEBUG] ĐÃ TÌM THẤY thumbnail_url: %@", thumbnailUrl);
+//                // --- KẾT THÚC DEBUG LOG ---
+//                repliedEventContent = [NSString stringWithFormat:@"<img src=\"%@\" style=\"max-width: 100px; max-height: 100px; object-fit: cover; border-radius: 4px;\" />", thumbnailUrl];
+//            }
+//            else
+//            {
+//                // --- BẮT ĐẦU DEBUG LOG ---
+//                NSLog(@"[REPLY DEBUG] KHÔNG tìm thấy thumbnail_url. Sẽ dùng fallback (tên file).");
+//                // --- KẾT THÚC DEBUG LOG ---
+//                MXJSONModelSetString(repliedEventContent, repliedEvent.content[kMXMessageBodyKey]);
+//                if (!repliedEventContent) {
+//                    repliedEventContent = [VectorL10n noticeImageAttachment]; // "Image"
+//                }
+//            }
+//        }
+//        // --- KẾT THÚC LOGIC MỚI ---
+//
+//
+//        if (!repliedEventContent)
+//        {
+//            // --- BẮT ĐẦU DEBUG LOG ---
+//            NSLog(@"[REPLY DEBUG] Không phải ảnh/sticker, hoặc fallback thất bại. Dùng logic cũ (lấy text).");
+//            // --- KẾT THÚC DEBUG LOG ---
+//            
+//            // --- BẮT ĐẦU CODE GỐC ĐỂ LẤY TEXT ---
+//            if (repliedEvent.content[kMXMessageContentKeyNewContent])
+//            {
+//                MXJSONModelSetString(repliedEventContent, repliedEvent.content[kMXMessageContentKeyNewContent][@"formatted_body"]);
+//                if (!repliedEventContent)
+//                {
+//                    MXJSONModelSetString(repliedEventContent, repliedEvent.content[kMXMessageContentKeyNewContent][kMXMessageBodyKey]);
+//                }
+//            }
+//            else
+//            {
+//                MXReplyEventParser *parser = [[MXReplyEventParser alloc] init];
+//                MXReplyEventParts *parts = [parser parse:repliedEvent];
+//                MXJSONModelSetString(repliedEventContent, parts.formattedBodyParts.replyText)
+//                if (!repliedEventContent)
+//                {
+//                    MXJSONModelSetString(repliedEventContent, parts.bodyParts.replyText)
+//                }
+//                if (!repliedEventContent)
+//                {
+//                    MXJSONModelSetString(repliedEventContent, repliedEvent.content[@"formatted_body"]);
+//                }
+//                if (!repliedEventContent)
+//                {
+//                    MXJSONModelSetString(repliedEventContent, repliedEvent.content[kMXMessageBodyKey]);
+//                }
+//                if (!repliedEventContent && repliedEvent.eventType == MXEventTypePollStart) {
+//                    repliedEventContent = [MXEventContentPollStart modelFromJSON:repliedEvent.content].question;
+//                }
+//                if (!repliedEventContent && repliedEvent.eventType == MXEventTypePollEnd) {
+//                    repliedEventContent = MXSendReplyEventDefaultStringLocalizer.new.endedPollMessage;
+//                }
+//            }
+//            // --- KẾT THÚC CODE GỐC ĐỂ LẤY TEXT ---
+//        }
+//
+//        // No message content in a non-redacted event. Formatter should use fallback.
+//        if (!repliedEventContent)
+//        {
+//            MXLogWarning(@"[MXKEventFormatter] Unable to retrieve content from replied event %@", repliedEvent.eventId)
+//            return nil;
+//        }
+//    }
+//
+//    if (event.content[kMXMessageContentKeyNewContent])
+//    {
+//        MXJSONModelSetString(eventContent, event.content[kMXMessageContentKeyNewContent][@"formatted_body"]);
+//        if (!eventContent)
+//        {
+//            MXJSONModelSetString(eventContent, event.content[kMXMessageContentKeyNewContent][kMXMessageBodyKey]);
+//        }
+//    }
+//    else
+//    {
+//        MXReplyEventParser *parser = [[MXReplyEventParser alloc] init];
+//        MXReplyEventParts *parts = [parser parse:event];
+//        MXJSONModelSetString(eventContent, parts.formattedBodyParts.replyText)
+//        if (!eventContent)
+//        {
+//            MXJSONModelSetString(eventContent, parts.bodyParts.replyText)
+//        }
+//    }
+//
+//    if (eventContent && repliedEvent.sender)
+//    {
+//        html = [NSString stringWithFormat:@"<mx-reply><blockquote><a href=\"%@\">In reply to</a> <a href=\"%@\">%@</a><br>%@</blockquote></mx-reply>%@",
+//                [MXTools permalinkToEvent:repliedEvent.eventId inRoom:repliedEvent.roomId],
+//                [MXTools permalinkToUserWithUserId:repliedEvent.sender],
+//                repliedEvent.sender,
+//                repliedEventContent,
+//                eventContent];
+//    }
+//    else
+//    {
+//        MXLogWarning(@"[MXKEventFormatter] Unable to build reply event %@", event.eventId)
+//    }
+//
+//    // --- BẮT ĐẦU DEBUG LOG ---
+//    NSLog(@"[REPLY DEBUG] === Kết thúc buildHTMLStringForEvent ===");
+//    // --- KẾT THÚC DEBUG LOG ---
+//    return html;
+//}
 
 /**
  Special treatment for "In reply to" message.

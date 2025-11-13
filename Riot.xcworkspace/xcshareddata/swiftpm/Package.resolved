@@ -1,5 +1,5 @@
 {
-  "originHash" : "bb061934eb11e230018a45401d97b933ab4065ebc12a21d6062bcbcf3b0d7894",
+  "originHash" : "834067b269a8f0ee3964a9764d6bca64c92ad4438239729b769a7ea91a2caddf",
   "pins" : [
     {
       "identity" : "devicekit",
@@ -60,8 +60,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/element-hq/matrix-rich-text-editor-swift",
       "state" : {
-        "revision" : "b6583a47b5d14d2dc8405a0303ebd4041b877707",
-        "version" : "2.37.12"
+        "revision" : "16a3e895719b9bdc304db94e0a0c8307cc1d4b5e",
+        "version" : "2.40.0"
       }
     },
     {

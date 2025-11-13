@@ -314,6 +314,7 @@ typedef NS_ENUM (NSUInteger, MXKRoomDataSourceError) {
         
         // Set default MXEvent -> NSString formatter
         self.eventFormatter = [[MXKEventFormatter alloc] initWithMatrixSession:self.mxSession];
+        
         // Apply here the event types filter to display only the wanted event types.
         self.eventFormatter.eventTypesFilterForMessages = [MXKAppSettings standardAppSettings].eventsFilterForMessages;
         

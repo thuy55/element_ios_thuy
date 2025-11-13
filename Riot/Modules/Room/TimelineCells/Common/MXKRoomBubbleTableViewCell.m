@@ -477,6 +477,8 @@ static BOOL _disableLongPressGestureOnEvent;
     // Configure the view for the selected state
 }
 
+
+// hiển thị tin nhắn
 - (void)render:(MXKCellData *)cellData
 {
     [self prepareRender:cellData];
@@ -582,45 +584,89 @@ static BOOL _disableLongPressGestureOnEvent;
             [self renderGif];
         }
         else if (self.messageTextView)
-        {
-            // Compute message content size
-            bubbleData.maxTextViewWidth = self.frame.size.width - (self.msgTextViewLeadingConstraint.constant + self.msgTextViewTrailingConstraint.constant);
-            CGSize contentSize = bubbleData.contentSize;
-            
-            // Prepare displayed text message
-            NSAttributedString* newText = nil;
-            
-            // Underline attached file name
-            if (self.isBubbleDataContainsFileAttachment)
-            {
-                NSMutableAttributedString *updatedText = [[NSMutableAttributedString alloc] initWithAttributedString:self.suitableAttributedTextMessage];
-                [updatedText addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, updatedText.length)];
-                
-                newText = updatedText;
-            }
-            else
-            {
-                newText = self.suitableAttributedTextMessage;
-            }
-            
-            // update the text only if it is required
-            // updating a text is quite long (even with the same text).
-            if (![self.messageTextView.attributedText isEqualToAttributedString:newText])
-            {
-                self.messageTextView.attributedText = newText;
-
-                if (bubbleData.displayFix & MXKRoomBubbleComponentDisplayFixHtmlBlockquote)
                 {
-                    [self fixHTMLBlockQuoteRendering:YES];
+                    // Compute message content size
+                    bubbleData.maxTextViewWidth = self.frame.size.width - (self.msgTextViewLeadingConstraint.constant + self.msgTextViewTrailingConstraint.constant);
+                    CGSize contentSize = bubbleData.contentSize;
+                    
+                    // Prepare displayed text message
+                    NSAttributedString* newText = nil;
+                    
+                    // Underline attached file name
+                    if (self.isBubbleDataContainsFileAttachment)
+                    {
+                        NSMutableAttributedString *updatedText = [[NSMutableAttributedString alloc] initWithAttributedString:self.suitableAttributedTextMessage];
+                        [updatedText addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, updatedText.length)];
+                        
+                        newText = updatedText;
+                    }
+                    else
+                    {
+                        newText = self.suitableAttributedTextMessage;
+                    }
+
+                    // ------------------------------------------------------------------
+                    // --- BẮT ĐẦU SỬA LỖI HOÀN CHỈNH (FIX KHOẢNG CÁCH ĐOẠN LỚN) - V2 ---
+                    // ------------------------------------------------------------------
+                    
+                    if (newText && newText.length > 0)
+                    {
+                        // 1. Tạo một bản sao có thể thay đổi
+                        NSMutableAttributedString *mutableText = [[NSMutableAttributedString alloc] initWithAttributedString:newText];
+                        NSRange fullRange = NSMakeRange(0, mutableText.length);
+
+                        // 2. Lặp qua tất cả các thuộc tính NSParagraphStyle trong chuỗi
+                        [mutableText enumerateAttribute:NSParagraphStyleAttributeName
+                                                inRange:fullRange
+                                                options:0
+                                             usingBlock:^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
+                            
+                            if (value && [value isKindOfClass:[NSParagraphStyle class]])
+                            {
+                                NSParagraphStyle *originalStyle = (NSParagraphStyle *)value;
+                                
+                                // 3. Chỉ sửa nếu một trong hai khoảng cách (trước hoặc sau) lớn hơn 0
+                                if (originalStyle.paragraphSpacing > 0 || originalStyle.paragraphSpacingBefore > 0)
+                                {
+                                    // 4. Tạo style mới dựa trên style cũ
+                                    NSMutableParagraphStyle *modifiedStyle = [originalStyle mutableCopy];
+                                    
+                                    // 5. SET TẤT CẢ KHOẢNG CÁCH ĐOẠN VỀ 0
+                                    modifiedStyle.paragraphSpacing = 0;       // Khoảng cách SAU đoạn
+                                    modifiedStyle.paragraphSpacingBefore = 0; // Khoảng cách TRƯỚC đoạn
+                                    
+                                    // 6. Áp dụng style đã sửa lại vào đúng phạm vi (range) đó
+                                    [mutableText addAttribute:NSParagraphStyleAttributeName value:modifiedStyle range:range];
+                                }
+                            }
+                        }];
+                        
+                        // 7. Gán lại newText bằng chuỗi đã sửa
+                        newText = mutableText;
+                    }
+                    
+                    // --------------------------------------------------------------
+                    // --- KẾT THÚC SỬA LỖI ---
+                    // --------------------------------------------------------------
+                    
+                    // update the text only if it is required
+                    // updating a text is quite long (even with the same text).
+                    if (![self.messageTextView.attributedText isEqualToAttributedString:newText])
+                    {
+                        self.messageTextView.attributedText = newText;
+
+                        if (bubbleData.displayFix & MXKRoomBubbleComponentDisplayFixHtmlBlockquote)
+                        {
+                            [self fixHTMLBlockQuoteRendering:YES];
+                        }
+                    }
+                    
+                    // Update msgTextView width constraint to align correctly the text
+                    if (self.msgTextViewWidthConstraint.constant != contentSize.width)
+                    {
+                        self.msgTextViewWidthConstraint.constant = contentSize.width;
+                    }
                 }
-            }
-            
-            // Update msgTextView width constraint to align correctly the text
-            if (self.msgTextViewWidthConstraint.constant != contentSize.width)
-            {
-                self.msgTextViewWidthConstraint.constant = contentSize.width;
-            }
-        }
         
         // Check and update each component position (used to align timestamps label in front of events, and to handle tap gesture on events)
         [bubbleData prepareBubbleComponentsPosition];

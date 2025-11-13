@@ -320,6 +320,87 @@ static NSString *const kEventFormatterTimeFormat = @"HH:mm";
                                                               withRoomState:roomState
                                                          andLatestRoomState:latestRoomState
                                                                       error:error];
+    
+    // --- BẮT ĐẦU SỬA LỖI HIỂN THỊ 2 DÒNG REPLY (V5 - Logic an toàn nhất) ---
+        if (event.isReplyEvent && attributedString && !event.isRedactedEvent)
+        {
+            NSString *fullString = attributedString.string;
+            
+            int replyLinesCount = 0;
+            int firstMessageLineIndex = -1;
+            
+            // Tách dòng để đếm (chỉ dùng để đếm)
+            NSArray<NSString*> *lines = [fullString componentsSeparatedByString:@"\n"];
+            for (int i = 0; i < lines.count; i++)
+            {
+                if ([lines[i] hasPrefix:@"> "])
+                {
+                    replyLinesCount++;
+                }
+                else if (replyLinesCount > 0)
+                {
+                    firstMessageLineIndex = i;
+                    break;
+                }
+            }
+            
+            // Chỉ chạy code nếu reply có 3 dòng TRỞ LÊN
+            if (replyLinesCount > 2)
+            {
+                // Tìm vị trí của KÝ TỰ XUỐNG HÀNG THỨ 2
+                NSUInteger endOfSecondLineLocation = NSNotFound;
+                int newlineCount = 0;
+                
+                // Tìm thủ công, vì nội dung có thể trùng lặp
+                for (NSUInteger i = 0; i < fullString.length; i++) {
+                    if ([fullString characterAtIndex:i] == '\n') {
+                        newlineCount++;
+                        if (newlineCount == 2) {
+                            endOfSecondLineLocation = i; // Vị trí của \n thứ 2
+                            break;
+                        }
+                    }
+                }
+                
+                // NẾU TÌM THẤY DÒNG XUỐNG HÀNG THỨ 2
+                if (endOfSecondLineLocation != NSNotFound)
+                {
+                    NSMutableAttributedString *newString = [[NSMutableAttributedString alloc] init];
+                    NSDictionary *replyAttributes = [attributedString attributesAtIndex:0 effectiveRange:NULL];
+                    NSAttributedString *newlineAttr = [[NSAttributedString alloc] initWithString:@"\n" attributes:replyAttributes];
+                
+                    // 1. LẤY 2 DÒNG REPLY ĐẦU TIÊN (từ 0 đến vị trí \n thứ 2)
+                    // (Chúng ta lấy độ dài = vị trí, vì attributedSubstringFromRange muốn độ dài,
+                    // và vị trí của \n thứ 2 chính là độ dài của 2 dòng đầu)
+                    [newString appendAttributedString:[attributedString attributedSubstringFromRange:NSMakeRange(0, endOfSecondLineLocation)]];
+                    
+                    // 2. THÊM "..."
+                    [newString appendAttributedString:newlineAttr]; // Thêm \n
+                    [newString appendAttributedString:[[NSAttributedString alloc] initWithString:@"> ..." attributes:replyAttributes]];
+                    
+                    // 3. THÊM PHẦN TIN NHẮN MỚI
+                    if (firstMessageLineIndex != -1 && firstMessageLineIndex < lines.count)
+                    {
+                        // Lấy vị trí bắt đầu của tin nhắn mới
+                        NSRange rangeOfFirstMessageLine = [fullString rangeOfString:lines[firstMessageLineIndex]];
+                        if (rangeOfFirstMessageLine.location != NSNotFound)
+                        {
+                            NSUInteger startOfMessage = rangeOfFirstMessageLine.location;
+                            
+                            // Thêm \n để ngăn cách "..." và tin nhắn mới
+                            [newString appendAttributedString:newlineAttr];
+                            
+                            // Thêm phần tin nhắn mới (từ đầu tin nhắn mới đến hết)
+                            [newString appendAttributedString:[attributedString attributedSubstringFromRange:NSMakeRange(startOfMessage, fullString.length - startOfMessage)]];
+                        }
+                    }
+                    
+                    // 4. Gán lại
+                    attributedString = newString;
+                }
+            }
+        }
+        // --- KẾT THÚC SỬA LỖI ---
 
     if (event.sentState == MXEventSentStateSent
         && [event.decryptionError.domain isEqualToString:MXDecryptingErrorDomain])

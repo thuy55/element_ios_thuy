@@ -8,6 +8,7 @@
 
 import UIKit
 import PushKit
+import WysiwygComposer
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

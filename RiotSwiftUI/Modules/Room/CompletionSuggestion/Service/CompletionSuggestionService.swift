@@ -104,6 +104,27 @@ class CompletionSuggestionService: CompletionSuggestionServiceProtocol {
         currentTextTriggerSubject.send(textTrigger)
     }
 
+//    func processSuggestionPattern(_ suggestionPattern: SuggestionPattern?) {
+//        guard let suggestionPattern else {
+//            items.send([])
+//            currentTextTriggerSubject.send(nil)
+//            return
+//        }
+//
+//        switch suggestionPattern.key {
+//        case .at:
+//            currentTextTriggerSubject.send(TextTrigger(key: .at, text: suggestionPattern.text))
+//        case .hash:
+//            // No room suggestion support yet
+//            items.send([])
+//            currentTextTriggerSubject.send(nil)
+//        case .slash:
+//            currentTextTriggerSubject.send(TextTrigger(key: .slash, text: suggestionPattern.text))
+//        case .custom:
+//            break
+//        }
+//    }
+    
     func processSuggestionPattern(_ suggestionPattern: SuggestionPattern?) {
         guard let suggestionPattern else {
             items.send([])
@@ -122,8 +143,11 @@ class CompletionSuggestionService: CompletionSuggestionServiceProtocol {
             currentTextTriggerSubject.send(TextTrigger(key: .slash, text: suggestionPattern.text))
         case .custom:
             break
+        case .colon:
+            break
         }
     }
+
     
     // MARK: - Private
     
