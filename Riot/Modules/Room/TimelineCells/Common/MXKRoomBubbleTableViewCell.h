@@ -155,7 +155,11 @@ extern NSString *const kMXKRoomBubbleCellUrlItemInteraction;
  The current bubble data displayed by the table view cell
  */
 @property (strong, nonatomic, readonly) MXKRoomBubbleCellData *bubbleData;
-
+@property (nonatomic, strong) UIView *replyToAttachmentView;
+@property (nonatomic, strong) MXKImageView *replyToAttachmentThumbnailView;
+@property (nonatomic, strong) UILabel *replyToAttachmentSenderLabel;
+@property (nonatomic, strong) UILabel *replyToAttachmentFileLabel;
+@property (nonatomic, strong) UIView *replyToAttachmentSeparatorView;
 /**
  Option to highlight or not the content of message text view (May be used in case of text selection).
  NO by default.

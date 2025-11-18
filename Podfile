@@ -13,6 +13,7 @@ use_frameworks!
 def import_MatrixSDK
   pod 'MatrixSDK', :path => 'matrix-ios-sdk/MatrixSDK.podspec', :inhibit_warnings => false
   pod 'MatrixSDK/JingleCallStack', :path => 'matrix-ios-sdk/MatrixSDK.podspec', :inhibit_warnings => false
+  
 end
 
 ########################################
@@ -26,7 +27,7 @@ def import_SwiftUI_pods
     pod 'Introspect', '~> 0.1'
     pod 'ZXingObjC', '~> 3.6.9'
 end
-
+	
 abstract_target 'RiotPods' do
 
   pod 'GBDeviceInfo', '~> 7.1.0'

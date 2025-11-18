@@ -21,6 +21,9 @@ Please see LICENSE in the repository root for full details.
 #import "MXKMessageTextView.h"
 
 #import "GeneratedInterface-Swift.h"
+@interface MXEvent (Private)
+- (MXEncryptedContentFile*)getEncryptedThumbnailFile;
+@end
 
 #pragma mark - Constant definitions
 NSString *const kMXKRoomBubbleCellTapOnMessageTextView = @"kMXKRoomBubbleCellTapOnMessageTextView";
@@ -55,9 +58,10 @@ static BOOL _disableLongPressGestureOnEvent;
     // The list of UIViews used to fix the display of side borders for HTML blockquotes
     NSMutableArray<UIView*> *htmlBlockquoteSideBorderViews;
 }
-
+@property (nonatomic, strong) MXKImageView *replyToAttachmentAvatarView;
 @property (nonatomic, weak) UIView *messageTextBackgroundView;
 @property (nonatomic) double attachmentViewBottomConstraintDefaultConstant;
+- (void)setupReplyToAttachmentView;
 
 @end
 
@@ -135,6 +139,8 @@ static BOOL _disableLongPressGestureOnEvent;
     
     [self setupMessageTextView];
     
+    [self setupReplyToAttachmentView];
+    
     if (self.playIconView)
     {
         self.playIconView.image = [NSBundle mxk_imageFromMXKAssetsBundleWithName:@"play"];
@@ -166,6 +172,7 @@ static BOOL _disableLongPressGestureOnEvent;
     }
     
     [self setupConstraintsConstantDefaultValues];
+    
 }
 
 - (void)setupSenderNameLabel
@@ -271,7 +278,100 @@ static BOOL _disableLongPressGestureOnEvent;
         [self.messageTextView addGestureRecognizer:longPress];
     }
 }
+- (void)setupReplyToAttachmentView
+{
+    // === SỬA LỖI CRASH ===
+    // Chỉ khởi tạo view này nếu cell này CÓ messageTextView
+    if (!self.messageTextView)
+    {
+        return;
+    }
+    // === KẾT THÚC SỬA LỖI ===
+    
+    // 1. Khởi tạo container
+    _replyToAttachmentView = [[UIView alloc] init];
+    _replyToAttachmentView.translatesAutoresizingMaskIntoConstraints = NO;
+    _replyToAttachmentView.hidden = YES; // Mặc định ẩn
+    _replyToAttachmentView.backgroundColor = [UIColor clearColor]; // Màu nền của view
+    
+    // 2. Vạch kẻ trái (giống như trích dẫn)
+    _replyToAttachmentSeparatorView = [[UIView alloc] init];
+    _replyToAttachmentSeparatorView.translatesAutoresizingMaskIntoConstraints = NO;
+    _replyToAttachmentSeparatorView.backgroundColor = [UIColor lightGrayColor]; // Màu vạch kẻ
+    
+    // 3. Thumbnail (dùng MXKImageView để tự giải mã)
+    _replyToAttachmentThumbnailView = [[MXKImageView alloc] init];
+    _replyToAttachmentThumbnailView.translatesAutoresizingMaskIntoConstraints = NO;
+    _replyToAttachmentThumbnailView.contentMode = UIViewContentModeScaleAspectFill;
+    _replyToAttachmentThumbnailView.clipsToBounds = YES;
+    _replyToAttachmentThumbnailView.layer.cornerRadius = 4.0;
+    _replyToAttachmentThumbnailView.mediaFolder;
+    kMXMediaManagerAvatarThumbnailFolder; // Chỉ định thư mục cache
+    _replyToAttachmentThumbnailView.defaultBackgroundColor = [UIColor clearColor]; // Sửa lỗi "hộp đen"
+    
+    // 4. Tên người gửi (Trả lời Demo)
+    _replyToAttachmentSenderLabel = [[UILabel alloc] init];
+    _replyToAttachmentSenderLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    _replyToAttachmentSenderLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+    _replyToAttachmentSenderLabel.textColor = [UIColor darkGrayColor];
+    
+    // 5. Tên file (sẽ bị ẩn đi)
+    _replyToAttachmentFileLabel = [[UILabel alloc] init];
+    _replyToAttachmentFileLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    _replyToAttachmentFileLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+    _replyToAttachmentFileLabel.textColor = [UIColor grayColor];
+    _replyToAttachmentFileLabel.hidden = YES; // <-- ẨN TÊN FILE NGAY TỪ ĐẦU
+    
+    // 6. Thêm vào view
+    [_replyToAttachmentView addSubview:_replyToAttachmentSeparatorView];
+    [_replyToAttachmentView addSubview:_replyToAttachmentThumbnailView];
+    [_replyToAttachmentView addSubview:_replyToAttachmentSenderLabel];
+    [_replyToAttachmentView addSubview:_replyToAttachmentFileLabel];
+    
+    // 7. Thêm container vào contentView, BÊN TRÊN messageTextView
+    [self.contentView insertSubview:_replyToAttachmentView aboveSubview:self.messageTextView];
+    
+    // 8. Thiết lập AutoLayout (ĐÃ ĐƯỢC CẬP NHẬT)
+    
+    // Container (che lên messageTextView)
+    [NSLayoutConstraint activateConstraints:@[
+        [_replyToAttachmentView.topAnchor constraintEqualToAnchor:self.messageTextView.topAnchor],
+        [_replyToAttachmentView.leadingAnchor constraintEqualToAnchor:self.messageTextView.leadingAnchor],
+        [_replyToAttachmentView.widthAnchor constraintEqualToAnchor:self.messageTextView.widthAnchor],
+        // CHIỀU CAO MỚI: 58pt = 4(pad) + 14(sender) + 4(pad) + 32(thumb) + 4(pad)
+        [_replyToAttachmentView.heightAnchor constraintEqualToConstant:58.0]
+    ]];
+    
+    // Vạch kẻ trái
+    [NSLayoutConstraint activateConstraints:@[
+        [_replyToAttachmentSeparatorView.leadingAnchor constraintEqualToAnchor:_replyToAttachmentView.leadingAnchor constant: 4.0],
+        [_replyToAttachmentSeparatorView.topAnchor constraintEqualToAnchor:_replyToAttachmentView.topAnchor constant:4.0],
+        [_replyToAttachmentSeparatorView.bottomAnchor constraintEqualToAnchor:_replyToAttachmentView.bottomAnchor constant:-4.0],
+        [_replyToAttachmentSeparatorView.widthAnchor constraintEqualToConstant:2.0]
+    ]];
 
+    // Tên người gửi (Ở TRÊN)
+    [NSLayoutConstraint activateConstraints:@[
+        [_replyToAttachmentSenderLabel.leadingAnchor constraintEqualToAnchor:_replyToAttachmentSeparatorView.trailingAnchor constant:8.0],
+        [_replyToAttachmentSenderLabel.trailingAnchor constraintEqualToAnchor:_replyToAttachmentView.trailingAnchor constant:-8.0],
+        [_replyToAttachmentSenderLabel.topAnchor constraintEqualToAnchor:_replyToAttachmentSeparatorView.topAnchor] // Căn lề trên
+    ]];
+    
+    // Thumbnail (Ở DƯỚI)
+    [NSLayoutConstraint activateConstraints:@[
+        [_replyToAttachmentThumbnailView.leadingAnchor constraintEqualToAnchor:_replyToAttachmentSenderLabel.leadingAnchor], // Căn lề trái giống Sender
+        [_replyToAttachmentThumbnailView.topAnchor constraintEqualToAnchor:_replyToAttachmentSenderLabel.bottomAnchor constant:4.0], // Dưới Sender 4pt
+        [_replyToAttachmentThumbnailView.widthAnchor constraintEqualToConstant:32.0],
+        [_replyToAttachmentThumbnailView.heightAnchor constraintEqualToConstant:32.0]
+    ]];
+    
+    // Tên file (Label này đã bị ẩn, không cần quan tâm layout)
+    [NSLayoutConstraint activateConstraints:@[
+        [_replyToAttachmentFileLabel.leadingAnchor constraintEqualToAnchor:_replyToAttachmentThumbnailView.trailingAnchor constant:8.0],
+        [_replyToAttachmentFileLabel.trailingAnchor constraintEqualToAnchor:_replyToAttachmentSenderLabel.trailingAnchor],
+        [_replyToAttachmentFileLabel.topAnchor constraintEqualToAnchor:_replyToAttachmentThumbnailView.topAnchor]
+    ]];
+}
 - (void)customizeTableViewCellRendering
 {
     [super customizeTableViewCellRendering];
@@ -479,6 +579,439 @@ static BOOL _disableLongPressGestureOnEvent;
 
 
 // hiển thị tin nhắn
+// hiển thị tin nhắn
+// hiển thị tin nhắn
+//- (void)render:(MXKCellData *)cellData
+//{
+//    [self prepareRender:cellData];
+//
+//    if (bubbleData)
+//    {
+//        // Check conditions to display the message sender name
+//        if (self.userNameLabel)
+//        {
+//            // --- BỔ SUNG DYNAMIC TYPE START ---
+//
+//            // Áp dụng font Dynamic Type (Sử dụng Subheadline cho tên người gửi)
+//            self.userNameLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+//
+//            // Bật khả năng co giãn cỡ chữ
+//            self.userNameLabel.adjustsFontForContentSizeCategory = YES;
+//
+//            // Cho phép tên hiển thị trên nhiều dòng nếu cần (sử dụng 0) hoặc giữ 1 dòng
+//            self.userNameLabel.numberOfLines = 1;
+//
+//            // --- BỔ SUNG DYNAMIC TYPE END ---
+//
+//            // Display sender's name except if the name appears in the displayed text (see emote and membership events)
+//            if (bubbleData.shouldHideSenderName == NO)
+//            {
+//                self.userNameLabel.text = bubbleData.senderDisplayName;
+//                self.userNameLabel.hidden = NO;
+//                self.userNameTapGestureMaskView.userInteractionEnabled = YES;
+//            }
+//            else
+//            {
+//                self.userNameLabel.hidden = YES;
+//                self.userNameTapGestureMaskView.userInteractionEnabled = NO;
+//            }
+//        }
+//
+//        // Check whether the sender's picture is actually displayed before loading it.
+//        if (self.pictureView)
+//        {
+//            self.pictureView.enableInMemoryCache = YES;
+//            // Consider here the sender avatar is stored unencrypted on Matrix media repo
+//            [self.pictureView setImageURI:bubbleData.senderAvatarUrl
+//                                 withType:nil
+//                      andImageOrientation:UIImageOrientationUp
+//                          toFitViewSize:self.pictureView.frame.size
+//                             withMethod:MXThumbnailingMethodCrop
+//                           previewImage:bubbleData.senderAvatarPlaceholder ? bubbleData.senderAvatarPlaceholder : self.picturePlaceholder
+//                           mediaManager:bubbleData.mxSession.mediaManager];
+//        }
+//
+//        if (self.attachmentView && bubbleData.isAttachmentWithThumbnail)
+//        {
+//            // Set attached media folders
+//            self.attachmentView.mediaFolder = bubbleData.roomId;
+//
+//            self.attachmentView.backgroundColor = [UIColor clearColor];
+//
+//            // Retrieve the suitable content size for the attachment thumbnail
+//            CGSize contentSize = bubbleData.contentSize;
+//
+//            // Update image view frame in order to center loading wheel (if any)
+//            CGRect frame = self.attachmentView.frame;
+//            frame.size.width = contentSize.width;
+//            frame.size.height = contentSize.height;
+//            self.attachmentView.frame = frame;
+//
+//            // Set play icon visibility
+//            self.playIconView.hidden = (bubbleData.attachment.type != MXKAttachmentTypeVideo);
+//
+//            // Hide by default file type icon
+//            self.fileTypeIconView.hidden = YES;
+//
+//            // Display the attachment thumbnail
+//            [self.attachmentView setAttachmentThumb:bubbleData.attachment];
+//
+//            if (bubbleData.attachment.contentURL)
+//            {
+//                // Add tap recognizer to open attachment
+//                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onAttachmentTap:)];
+//                [tap setNumberOfTouchesRequired:1];
+//                [tap setNumberOfTapsRequired:1];
+//                [tap setDelegate:self];
+//                [self.attachmentView addGestureRecognizer:tap];
+//            }
+//
+//            [self startProgressUI];
+//
+//            // Adjust Attachment width constant
+//            self.attachViewWidthConstraint.constant = contentSize.width;
+//
+//            // Add a long gesture recognizer on progressView to cancel the current operation (Note: only the download can be cancelled).
+//            UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPressGesture:)];
+//            [self.progressView addGestureRecognizer:longPress];
+//
+//            if (_disableLongPressGestureOnEvent == NO)
+//            {
+//                // Add a long gesture recognizer on attachment view in order to display for example the event details
+//                longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPressGesture:)];
+//                [self.attachmentView addGestureRecognizer:longPress];
+//            }
+//
+//            // Handle here the case of the attached gif
+//            [self renderGif];
+//        }
+//        else if (self.messageTextView)
+//        {
+//            // Compute message content size
+//            bubbleData.maxTextViewWidth = self.frame.size.width - (self.msgTextViewLeadingConstraint.constant + self.msgTextViewTrailingConstraint.constant);
+//            CGSize contentSize = bubbleData.contentSize;
+//
+//            // Prepare displayed text message
+//            NSAttributedString* newText = nil;
+//
+//            // Underline attached file name
+//            if (self.isBubbleDataContainsFileAttachment)
+//            {
+//                NSMutableAttributedString *updatedText = [[NSMutableAttributedString alloc] initWithAttributedString:self.suitableAttributedTextMessage];
+//                [updatedText addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, updatedText.length)];
+//
+//                newText = updatedText;
+//            }
+//            else
+//            {
+//                newText = self.suitableAttributedTextMessage;
+//            }
+//
+//            // --- BẮT ĐẦU LOGIC MỚI (PHIÊN BẢN 20 - SỬA LỖI HIỂN THỊ KÉP) ---
+//
+//            // Mặc định reset
+//            if (self.replyToAttachmentView) {
+//                self.replyToAttachmentView.hidden = YES;
+//            }
+//
+//            MXKRoomBubbleComponent *firstComponent = bubbleData.bubbleComponents.firstObject;
+//            BOOL isEncryptedImageReply = NO;
+//
+//            if (firstComponent && firstComponent.event.isReplyEvent)
+//            {
+//                NSString *repliedEventId = firstComponent.event.relatesTo.inReplyTo.eventId;
+//                MXEvent *repliedEvent = [bubbleData.mxSession.store eventWithEventId:repliedEventId inRoom:bubbleData.roomId];
+//
+//                if (repliedEvent)
+//                {
+//                    NSString *repliedMsgType;
+//                    if (repliedEvent.eventType == MXEventTypeRoomMessage) {
+//                        MXJSONModelSetString(repliedMsgType, repliedEvent.content[kMXMessageTypeKey]);
+//                    } else if (repliedEvent.eventType == MXEventTypeSticker) {
+//                        repliedMsgType = kMXMessageTypeImage;
+//                    }
+//
+//                    // CHỈ KHI LÀ ẢNH VÀ ĐÃ MÃ HÓA
+//                    if (repliedEvent.isEncrypted && [repliedMsgType isEqualToString:kMXMessageTypeImage])
+//                    {
+//                        isEncryptedImageReply = YES;
+//
+//                        // ---- BƯỚC 1: CẤU HÌNH OVERLAY (VIEW MỚI) ----
+//                        self.replyToAttachmentView.hidden = NO;
+//                        self.messageTextView.textContainerInset = UIEdgeInsetsMake(self.replyToAttachmentView.frame.size.height + 5, 0, 0, 0);
+//
+//                        MXRoom* room = [bubbleData.mxSession roomWithRoomId:bubbleData.roomId];
+//                        self.replyToAttachmentSenderLabel.text = [NSString stringWithFormat:@"Trả lời %@", [room.dangerousSyncState.members memberName:repliedEvent.sender]];
+//                        self.replyToAttachmentFileLabel.text = repliedEvent.content[kMXMessageBodyKey] ?: @"Hình ảnh";
+//
+//                        // ---- BƯỚC 2: TẠO ATTACHMENT ĐỂ GIẢI MÃ (SỬA LỖI QUAN TRỌNG) ----
+//                        // Chúng ta phải tạo một đối tượng MXKAttachment
+//                        // để MXKImageView (self.replyToAttachmentThumbnailView) biết cách giải mã nó.
+//
+//                        MXKAttachment *replyAttachment = [[MXKAttachment alloc] initWithEvent:repliedEvent
+//                                                                             andMediaManager:bubbleData.mxSession.mediaManager];
+//
+//                        // GỌI HÀM GIẢI MÃ ĐÚNG:
+//                        [self.replyToAttachmentThumbnailView setAttachmentThumb:replyAttachment];
+//
+//
+//                        // ---- BƯỚC 3: XÓA TRÍCH DẪN HTML CŨ KHỎI ATTRIBUTEDSTRING ----
+//                        // (Để xóa icon file hỏng và tên file bên dưới)
+//
+//                        if (newText.length > 0)
+//                        {
+//                            // Tạo một bản sao có thể thay đổi
+//                            NSMutableAttributedString *mutableText = [newText mutableCopy];
+//
+//                            // Tìm thuộc tính 'kMXKToolsBlockquoteMarkAttribute' (được thêm bởi MXKEventFormatter)
+//                            [mutableText enumerateAttribute:kMXKToolsBlockquoteMarkAttribute
+//                                                 inRange:NSMakeRange(0, mutableText.length)
+//                                                 options:NSAttributedStringEnumerationReverse
+//                                              usingBlock:^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
+//
+//                                // Xóa phạm vi của trích dẫn
+//                                [mutableText deleteCharactersInRange:range];
+//                                *stop = YES; // Chỉ xóa cái đầu tiên
+//                            }];
+//
+//                            // Xóa luôn ký tự xuống dòng thừa ở đầu (nếu có)
+//                            while (mutableText.length > 0 && [[mutableText.string substringToIndex:1] isEqualToString:@"\n"]) {
+//                                [mutableText deleteCharactersInRange:NSMakeRange(0, 1)];
+//                            }
+//
+//                            // Gán lại newText bằng chuỗi đã được làm sạch
+//                            newText = [mutableText copy];
+//                        }
+//
+//                    } // end if (isEncrypted)
+//                } // end if (repliedEvent)
+//            } // end if (isReplyEvent)
+//
+//            // ---- BƯỚC 4: CHẠY LOGIC CŨ (FIX KHOẢNG CÁCH) NẾU KHÔNG PHẢI LÀ REPLY ẢNH MÃ HÓA ----
+//            if (!isEncryptedImageReply)
+//            {
+//                // --- LOGIC GỐC (FIX KHOẢNG CÁCH ĐOẠN LỚN) - V2 ---
+//                if (newText && newText.length > 0)
+//                {
+//                    NSMutableAttributedString *mutableText = [[NSMutableAttributedString alloc] initWithAttributedString:newText];
+//                    NSRange fullRange = NSMakeRange(0, mutableText.length);
+//                    [mutableText enumerateAttribute:NSParagraphStyleAttributeName
+//                                         inRange:fullRange
+//                                         options:0
+//                                      usingBlock:^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
+//                        if (value && [value isKindOfClass:[NSParagraphStyle class]])
+//                        {
+//                            NSParagraphStyle *originalStyle = (NSParagraphStyle *)value;
+//                            if (originalStyle.paragraphSpacing > 0 || originalStyle.paragraphSpacingBefore > 0)
+//                            {
+//                                NSMutableParagraphStyle *modifiedStyle = [originalStyle mutableCopy];
+//                                modifiedStyle.paragraphSpacing = 0;
+//                                modifiedStyle.paragraphSpacingBefore = 0;
+//                                [mutableText addAttribute:NSParagraphStyleAttributeName value:modifiedStyle range:range];
+//                            }
+//                        }
+//                    }];
+//                    newText = mutableText;
+//                }
+//                // --- KẾT THÚC LOGIC GỐC ---
+//            }
+//            // --- KẾT THÚC LOGIC MỚI (PHIÊN BẢN 20) ---
+//
+//
+//            // update the text only if it is required
+//            // updating a text is quite long (even with the same text).
+//            if (![self.messageTextView.attributedText isEqualToAttributedString:newText])
+//            {
+//                self.messageTextView.attributedText = newText;
+//
+//                if (bubbleData.displayFix & MXKRoomBubbleComponentDisplayFixHtmlBlockquote)
+//                {
+//                    [self fixHTMLBlockQuoteRendering:YES];
+//                }
+//            }
+//
+//            // Update msgTextView width constraint to align correctly the text
+//            if (self.msgTextViewWidthConstraint.constant != contentSize.width)
+//            {
+//                self.msgTextViewWidthConstraint.constant = contentSize.width;
+//            }
+//        }
+//
+//        // Check and update each component position (used to align timestamps label in front of events, and to handle tap gesture on events)
+//        [bubbleData prepareBubbleComponentsPosition];
+//
+//        // Handle here timestamp display (only if a container has been defined)
+//        if (self.bubbleInfoContainer)
+//        {
+//            if ((bubbleData.showBubbleDateTime && !bubbleData.useCustomDateTimeLabel)
+//                || (bubbleData.showBubbleReceipts && !bubbleData.useCustomReceipts))
+//            {
+//                // --- BỔ SUNG LOGIC KHOẢNG CÁCH FILE START ---
+//                CGFloat verticalPadding = 0.0f;
+//                if (bubbleData.isAttachment)
+//                {
+//                    verticalPadding = 10.0f; // Khoảng đệm 10 points cho file/attachment
+//                }
+//                // --- BỔ SUNG LOGIC KHOẢNG CÁCH FILE END ---
+//
+//                // ensure that older subviews are removed
+//                // They should be (they are removed when the is not anymore used).
+//                // But, it seems that is not always true.
+//                NSArray* views = [self.bubbleInfoContainer subviews];
+//                for(UIView* view in views)
+//                {
+//                    [view removeFromSuperview];
+//                }
+//
+//                for (MXKRoomBubbleComponent *component in bubbleData.bubbleComponents)
+//                {
+//                    if (component.event.sentState != MXEventSentStateFailed)
+//                    {
+//                        CGFloat timeLabelOffset = 0;
+//
+//                        if (component.date && bubbleData.showBubbleDateTime && !bubbleData.useCustomDateTimeLabel)
+//                        {
+//                            // VỊ TRÍ 1: Khởi tạo Label (áp dụng padding vào Frame Y)
+//                            UILabel *dateTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, component.position.y + timeLabelOffset + verticalPadding, self.bubbleInfoContainer.frame.size.width , 15)];
+//
+//                            dateTimeLabel.text = [bubbleData.eventFormatter dateStringFromDate:component.date withTime:YES];
+//                            if (bubbleData.isIncoming)
+//                            {
+//                                dateTimeLabel.textAlignment = NSTextAlignmentRight;
+//                            }
+//                            else
+//                            {
+//                                dateTimeLabel.textAlignment = NSTextAlignmentLeft;
+//                            }
+//                            dateTimeLabel.textColor = [UIColor lightGrayColor];
+//
+//                            // --- BỔ SUNG DYNAMIC TYPE START ---
+//                            dateTimeLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
+//                            dateTimeLabel.adjustsFontForContentSizeCategory = YES;
+//                            // --- BỔ SUNG DYNAMIC TYPE END ---
+//
+//                            dateTimeLabel.adjustsFontSizeToFitWidth = YES;
+//                            dateTimeLabel.minimumScaleFactor = 0.6;
+//
+//                            [dateTimeLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+//                            [self.bubbleInfoContainer addSubview:dateTimeLabel];
+//
+//                            // --- KHỞI TẠO CÁC RÀNG BUỘC NGANG (HORIZONTAL CONSTRAINTS) ---
+//                            NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:dateTimeLabel
+//                                                                                                attribute:NSLayoutAttributeLeading
+//                                                                                                relatedBy:NSLayoutRelationEqual
+//                                                                                                   toItem:self.bubbleInfoContainer
+//                                                                                                attribute:NSLayoutAttributeLeading
+//                                                                                               multiplier:1.0
+//                                                                                                 constant:0];
+//                            NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:dateTimeLabel
+//                                                                                                 attribute:NSLayoutAttributeTrailing
+//                                                                                                 relatedBy:NSLayoutRelationEqual
+//                                                                                                    toItem:self.bubbleInfoContainer
+//                                                                                                 attribute:NSLayoutAttributeTrailing
+//                                                                                                multiplier:1.0
+//                                                                                                  constant:0];
+//                            // --- KẾT THÚC KHỞI TẠO CÁC RÀNG BUỘC NGANG ---
+//
+//                            // VỊ TRÍ 2: Áp dụng padding vào Top Constraint
+//                            NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:dateTimeLabel
+//                                                                                             attribute:NSLayoutAttributeTop
+//                                                                                             relatedBy:NSLayoutRelationEqual
+//                                                                                                toItem:self.bubbleInfoContainer
+//                                                                                             attribute:NSLayoutAttributeTop
+//                                                                                            multiplier:1.0
+//                                                                                              constant:(component.position.y + verticalPadding)]; // <--- THÊM PADDING
+//
+//                            NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:dateTimeLabel
+//                                                                                                  attribute:NSLayoutAttributeHeight
+//                                                                                                  relatedBy:NSLayoutRelationEqual
+//                                                                                                     toItem:nil
+//                                                                                                  attribute:NSLayoutAttributeNotAnAttribute
+//                                                                                                 multiplier:1.0
+//                                                                                                   constant:15];
+//                            [NSLayoutConstraint activateConstraints:@[leftConstraint, rightConstraint, topConstraint, heightConstraint]];
+//
+//                            timeLabelOffset += 15;
+//                        }
+//
+//                        if (bubbleData.showBubbleReceipts && !bubbleData.useCustomReceipts)
+//                        {
+//                            NSMutableArray* roomMembers = nil;
+//                            NSMutableArray* placeholders = nil;
+//                            NSArray<MXReceiptData*> *receipts = bubbleData.readReceipts[component.event.eventId];
+//
+//                            // Check whether some receipts are found
+//                            if (receipts.count)
+//                            {
+//                                MXRoom* room = [bubbleData.mxSession roomWithRoomId:bubbleData.roomId];
+//                                if (room)
+//                                {
+//                                    // Retrieve the corresponding room members
+//                                    roomMembers = [[NSMutableArray alloc] initWithCapacity:receipts.count];
+//                                    placeholders = [[NSMutableArray alloc] initWithCapacity:receipts.count];
+//
+//                                    MXRoomMembers *stateRoomMembers = room.dangerousSyncState.members;
+//                                    for (MXReceiptData* data in receipts)
+//                                    {
+//                                        MXRoomMember * roomMember = [stateRoomMembers memberWithUserId:data.userId];
+//                                        if (roomMember)
+//                                        {
+//                                            [roomMembers addObject:roomMember];
+//                                            [placeholders addObject:self.picturePlaceholder];
+//                                        }
+//                                    }
+//                                }
+//                            }
+//
+//                            if (roomMembers.count)
+//                            {
+//                                // VỊ TRÍ 3: Áp dụng padding vào tọa độ Y (Frame) cho Read Receipts
+//                                MXKReceiptSendersContainer* avatarsContainer = [[MXKReceiptSendersContainer alloc] initWithFrame:CGRectMake(0, component.position.y + timeLabelOffset + verticalPadding, self.bubbleInfoContainer.frame.size.width , 15) andMediaManager:bubbleData.mxSession.mediaManager];
+//
+//                                [avatarsContainer refreshReceiptSenders:roomMembers withPlaceHolders:placeholders andAlignment:self.readReceiptsAlignment];
+//
+//                                [self.bubbleInfoContainer addSubview:avatarsContainer];
+//
+//                                // --- KHỞI TẠO CÁC RÀNG BUỘC NGANG (HORIZONTAL CONSTRAINTS) ---
+//                                NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:avatarsContainer attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.bubbleInfoContainer attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0];
+//                                NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:avatarsContainer attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.bubbleInfoContainer attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
+//                                // --- KẾT THÚC KHỞI TẠO CÁC RÀNG BUỘC NGANG ---
+//
+//                                // VỊ TRÍ 4: Áp dụng padding vào Top Constraint cho Read Receipts
+//                                NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:avatarsContainer
+//                                                                                               attribute:NSLayoutAttributeTop
+//                                                                                               relatedBy:NSLayoutRelationEqual
+//                                                                                                  toItem:self.bubbleInfoContainer
+//                                                                                               attribute:NSLayoutAttributeTop
+//                                                                                              multiplier:1.0
+//                                                                                                constant:(component.position.y + timeLabelOffset + verticalPadding)]; // <--- THÊM PADDING
+//
+//                                NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:avatarsContainer
+//                                                                                                    attribute:NSLayoutAttributeHeight
+//                                                                                                    relatedBy:NSLayoutRelationEqual
+//                                                                                                       toItem:nil
+//                                                                                                    attribute:NSLayoutAttributeNotAnAttribute
+//                                                                                                   multiplier:1.0
+//                                                                                                     constant:15];
+//
+//                                [NSLayoutConstraint activateConstraints:@[leftConstraint, rightConstraint, topConstraint, heightConstraint]];
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            else
+//            {
+//                self.bubbleInfoContainer.hidden = YES;
+//            }
+//        }
+//    }
+//}
+
+
+// Dán code này vào file MXKRoomBubbleTableViewCell.m
+// Thay thế TOÀN BỘ hàm - (void)render:(MXKCellData *)cellData cũ
+
 - (void)render:(MXKCellData *)cellData
 {
     [self prepareRender:cellData];
@@ -523,9 +1056,9 @@ static BOOL _disableLongPressGestureOnEvent;
             [self.pictureView setImageURI:bubbleData.senderAvatarUrl
                                  withType:nil
                       andImageOrientation:UIImageOrientationUp
-                            toFitViewSize:self.pictureView.frame.size
-                               withMethod:MXThumbnailingMethodCrop
-                             previewImage:bubbleData.senderAvatarPlaceholder ? bubbleData.senderAvatarPlaceholder : self.picturePlaceholder
+                          toFitViewSize:self.pictureView.frame.size
+                             withMethod:MXThumbnailingMethodCrop
+                           previewImage:bubbleData.senderAvatarPlaceholder ? bubbleData.senderAvatarPlaceholder : self.picturePlaceholder
                              mediaManager:bubbleData.mxSession.mediaManager];
         }
         
@@ -584,89 +1117,165 @@ static BOOL _disableLongPressGestureOnEvent;
             [self renderGif];
         }
         else if (self.messageTextView)
+        {
+            // Compute message content size
+            bubbleData.maxTextViewWidth = self.frame.size.width - (self.msgTextViewLeadingConstraint.constant + self.msgTextViewTrailingConstraint.constant);
+            CGSize contentSize = bubbleData.contentSize;
+            
+            // Prepare displayed text message
+            NSAttributedString* newText = nil;
+            
+            // Underline attached file name
+            if (self.isBubbleDataContainsFileAttachment)
+            {
+                NSMutableAttributedString *updatedText = [[NSMutableAttributedString alloc] initWithAttributedString:self.suitableAttributedTextMessage];
+                [updatedText addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, updatedText.length)];
+                
+                newText = updatedText;
+            }
+            else
+            {
+                newText = self.suitableAttributedTextMessage;
+            }
+
+            // --- BẮT ĐẦU LOGIC MỚI (PHIÊN BẢN 22 - FIX LỖI CHỒNG LẤN) ---
+            
+            // Mặc định reset
+            if (self.replyToAttachmentView) {
+                self.replyToAttachmentView.hidden = YES;
+                self.replyToAttachmentSenderLabel.hidden = YES;
+                self.replyToAttachmentFileLabel.hidden = YES;
+                self.replyToAttachmentThumbnailView.hidden = YES;
+            }
+            
+            self.messageTextView.textContainerInset = UIEdgeInsetsZero; // QUAN TRỌNG: Reset padding
+            
+            MXKRoomBubbleComponent *firstComponent = bubbleData.bubbleComponents.firstObject;
+            BOOL isEncryptedImageReply = NO;
+            
+            if (firstComponent && firstComponent.event.isReplyEvent)
+            {
+                NSString *repliedEventId = firstComponent.event.relatesTo.inReplyTo.eventId;
+                MXEvent *repliedEvent = [bubbleData.mxSession.store eventWithEventId:repliedEventId inRoom:bubbleData.roomId];
+                
+                if (repliedEvent)
                 {
-                    // Compute message content size
-                    bubbleData.maxTextViewWidth = self.frame.size.width - (self.msgTextViewLeadingConstraint.constant + self.msgTextViewTrailingConstraint.constant);
-                    CGSize contentSize = bubbleData.contentSize;
+                    NSString *repliedMsgType;
+                    if (repliedEvent.eventType == MXEventTypeRoomMessage) {
+                        MXJSONModelSetString(repliedMsgType, repliedEvent.content[kMXMessageTypeKey]);
+                    } else if (repliedEvent.eventType == MXEventTypeSticker) {
+                        repliedMsgType = kMXMessageTypeImage;
+                    }
                     
-                    // Prepare displayed text message
-                    NSAttributedString* newText = nil;
-                    
-                    // Underline attached file name
-                    if (self.isBubbleDataContainsFileAttachment)
+                    // CHỈ KHI LÀ ẢNH VÀ ĐÃ MÃ HÓA
+                    if (repliedEvent.isEncrypted && [repliedMsgType isEqualToString:kMXMessageTypeImage])
                     {
-                        NSMutableAttributedString *updatedText = [[NSMutableAttributedString alloc] initWithAttributedString:self.suitableAttributedTextMessage];
-                        [updatedText addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, updatedText.length)];
+                        isEncryptedImageReply = YES;
                         
-                        newText = updatedText;
-                    }
-                    else
-                    {
-                        newText = self.suitableAttributedTextMessage;
-                    }
-
-                    // ------------------------------------------------------------------
-                    // --- BẮT ĐẦU SỬA LỖI HOÀN CHỈNH (FIX KHOẢNG CÁCH ĐOẠN LỚN) - V2 ---
-                    // ------------------------------------------------------------------
-                    
-                    if (newText && newText.length > 0)
-                    {
-                        // 1. Tạo một bản sao có thể thay đổi
-                        NSMutableAttributedString *mutableText = [[NSMutableAttributedString alloc] initWithAttributedString:newText];
-                        NSRange fullRange = NSMakeRange(0, mutableText.length);
-
-                        // 2. Lặp qua tất cả các thuộc tính NSParagraphStyle trong chuỗi
-                        [mutableText enumerateAttribute:NSParagraphStyleAttributeName
-                                                inRange:fullRange
-                                                options:0
-                                             usingBlock:^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
-                            
-                            if (value && [value isKindOfClass:[NSParagraphStyle class]])
-                            {
-                                NSParagraphStyle *originalStyle = (NSParagraphStyle *)value;
-                                
-                                // 3. Chỉ sửa nếu một trong hai khoảng cách (trước hoặc sau) lớn hơn 0
-                                if (originalStyle.paragraphSpacing > 0 || originalStyle.paragraphSpacingBefore > 0)
-                                {
-                                    // 4. Tạo style mới dựa trên style cũ
-                                    NSMutableParagraphStyle *modifiedStyle = [originalStyle mutableCopy];
-                                    
-                                    // 5. SET TẤT CẢ KHOẢNG CÁCH ĐOẠN VỀ 0
-                                    modifiedStyle.paragraphSpacing = 0;       // Khoảng cách SAU đoạn
-                                    modifiedStyle.paragraphSpacingBefore = 0; // Khoảng cách TRƯỚC đoạn
-                                    
-                                    // 6. Áp dụng style đã sửa lại vào đúng phạm vi (range) đó
-                                    [mutableText addAttribute:NSParagraphStyleAttributeName value:modifiedStyle range:range];
-                                }
-                            }
-                        }];
+                        // ---- BƯỚC 1: HIỂN THỊ OVERLAY NATIVE ----
+                        self.replyToAttachmentView.hidden = NO;
+                        self.replyToAttachmentSenderLabel.hidden = NO; // Hiện tên người gửi
+                        self.replyToAttachmentThumbnailView.hidden = NO; // Hiện thumbnail
+                        self.replyToAttachmentFileLabel.hidden = YES; // <-- ẨN TÊN FILE THEO YÊU CẦU
                         
-                        // 7. Gán lại newText bằng chuỗi đã sửa
-                        newText = mutableText;
-                    }
-                    
-                    // --------------------------------------------------------------
-                    // --- KẾT THÚC SỬA LỖI ---
-                    // --------------------------------------------------------------
-                    
-                    // update the text only if it is required
-                    // updating a text is quite long (even with the same text).
-                    if (![self.messageTextView.attributedText isEqualToAttributedString:newText])
-                    {
-                        self.messageTextView.attributedText = newText;
+                        // ---- BƯỚC 2: THÊM PADDING ĐỂ ĐẨY TEXT TIN NHẮN MỚI XUỐNG ----
+                        // (Phải khớp với chiều cao mới 58.0 trong setupReplyToAttachmentView)
+                        self.messageTextView.textContainerInset = UIEdgeInsetsMake(58.0, 0, 0, 0);
+                        
+                        // ---- BƯỚC 3: CẤU HÌNH OVERLAY NATIVE ----
+                        MXRoom* room = [bubbleData.mxSession roomWithRoomId:bubbleData.roomId];
+                        self.replyToAttachmentSenderLabel.text = [NSString stringWithFormat:@"Trả lời %@", [room.dangerousSyncState.members memberName:repliedEvent.sender]];
+                        self.replyToAttachmentFileLabel.text = nil; // <-- XÓA TEXT TÊN FILE
 
-                        if (bubbleData.displayFix & MXKRoomBubbleComponentDisplayFixHtmlBlockquote)
-                        {
-                            [self fixHTMLBlockQuoteRendering:YES];
-                        }
-                    }
-                    
-                    // Update msgTextView width constraint to align correctly the text
-                    if (self.msgTextViewWidthConstraint.constant != contentSize.width)
-                    {
-                        self.msgTextViewWidthConstraint.constant = contentSize.width;
+                        MXKAttachment *replyAttachment = [[MXKAttachment alloc] initWithEvent:repliedEvent
+                                                                              andMediaManager:bubbleData.mxSession.mediaManager];
+                        
+                        [self.replyToAttachmentThumbnailView setAttachmentThumb:replyAttachment];
                     }
                 }
+            }
+            
+            // ---- BƯỚC 4: XÓA BLOCKQUOTE HTML NẾU HIỂN THỊ OVERLAY NATIVE (FIX LỖI CHỒNG LẤN) ----
+            if (isEncryptedImageReply && newText.length > 0)
+            {
+                NSMutableAttributedString *mutableText = [[NSMutableAttributedString alloc] initWithAttributedString:newText];
+                
+                // Tìm attribute "kMXKToolsBlockquoteMarkAttribute" mà MXKEventFormatter đã thêm vào
+                // *** ĐÂY LÀ DÒNG ĐÃ SỬA LỖI ***
+                __block NSRange blockquoteRange = NSMakeRange(NSNotFound, 0);
+                [mutableText enumerateAttribute:kMXKToolsBlockquoteMarkAttribute
+                                        inRange:NSMakeRange(0, mutableText.length)
+                                        options:0
+                                     usingBlock:^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
+                    if (value)
+                    {
+                        blockquoteRange = range;
+                        *stop = YES;
+                    }
+                }];
+                
+                if (blockquoteRange.location != NSNotFound)
+                {
+                    // Xóa text của blockquote (phần trích dẫn HTML)
+                    [mutableText deleteCharactersInRange:blockquoteRange];
+                    
+                    // DTCoreText có thể để lại một ký tự newline ở đầu, xóa nó đi
+                    if (mutableText.length > 0 && [[mutableText.string substringToIndex:1] isEqualToString:@"\n"])
+                    {
+                        [mutableText deleteCharactersInRange:NSMakeRange(0, 1)];
+                    }
+                    
+                    newText = mutableText; // Gán lại newText đã bị cắt (chỉ còn tin nhắn mới)
+                }
+            }
+            // ---- BƯỚC 5: CHẠY LOGIC FIX KHOẢNG CÁCH NẾU LÀ REPLY THƯỜNG (KHÔNG PHẢI ẢNH MÃ HÓA) ----
+            else if (!isEncryptedImageReply)
+            {
+                // --- LOGIC GỐC (FIX KHOẢNG CÁCH ĐOẠN LỚN) - V2 ---
+                if (newText && newText.length > 0)
+                {
+                    NSMutableAttributedString *mutableText = [[NSMutableAttributedString alloc] initWithAttributedString:newText];
+                    NSRange fullRange = NSMakeRange(0, mutableText.length);
+                    [mutableText enumerateAttribute:NSParagraphStyleAttributeName
+                                            inRange:fullRange
+                                            options:0
+                                         usingBlock:^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
+                        if (value && [value isKindOfClass:[NSParagraphStyle class]])
+                        {
+                            NSParagraphStyle *originalStyle = (NSParagraphStyle *)value;
+                            if (originalStyle.paragraphSpacing > 0 || originalStyle.paragraphSpacingBefore > 0)
+                            {
+                                NSMutableParagraphStyle *modifiedStyle = [originalStyle mutableCopy];
+                                modifiedStyle.paragraphSpacing = 0;
+                                modifiedStyle.paragraphSpacingBefore = 0;
+                                [mutableText addAttribute:NSParagraphStyleAttributeName value:modifiedStyle range:range];
+                            }
+                        }
+                    }];
+                    newText = mutableText;
+                }
+                // --- KẾT THÚC LOGIC GỐC ---
+            }
+            // --- KẾT THÚC LOGIC MỚI (PHIÊN BẢN 22) ---
+            
+            // update the text only if it is required
+            // updating a text is quite long (even with the same text).
+            if (![self.messageTextView.attributedText isEqualToAttributedString:newText])
+            {
+                self.messageTextView.attributedText = newText;
+
+                if (bubbleData.displayFix & MXKRoomBubbleComponentDisplayFixHtmlBlockquote)
+                {
+                    [self fixHTMLBlockQuoteRendering:YES];
+                }
+            }
+            
+            // Update msgTextView width constraint to align correctly the text
+            if (self.msgTextViewWidthConstraint.constant != contentSize.width)
+            {
+                self.msgTextViewWidthConstraint.constant = contentSize.width;
+            }
+        }
         
         // Check and update each component position (used to align timestamps label in front of events, and to handle tap gesture on events)
         [bubbleData prepareBubbleComponentsPosition];
@@ -729,37 +1338,37 @@ static BOOL _disableLongPressGestureOnEvent;
                             
                             // --- KHỞI TẠO CÁC RÀNG BUỘC NGANG (HORIZONTAL CONSTRAINTS) ---
                             NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:dateTimeLabel
-                                                                                              attribute:NSLayoutAttributeLeading
-                                                                                              relatedBy:NSLayoutRelationEqual
-                                                                                                 toItem:self.bubbleInfoContainer
-                                                                                              attribute:NSLayoutAttributeLeading
-                                                                                             multiplier:1.0
-                                                                                               constant:0];
+                                                                                                  attribute:NSLayoutAttributeLeading
+                                                                                                  relatedBy:NSLayoutRelationEqual
+                                                                                                     toItem:self.bubbleInfoContainer
+                                                                                                  attribute:NSLayoutAttributeLeading
+                                                                                                 multiplier:1.0
+                                                                                                   constant:0];
                             NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:dateTimeLabel
-                                                                                            attribute:NSLayoutAttributeTrailing
-                                                                                            relatedBy:NSLayoutRelationEqual
-                                                                                               toItem:self.bubbleInfoContainer
-                                                                                            attribute:NSLayoutAttributeTrailing
-                                                                                           multiplier:1.0
-                                                                                             constant:0];
+                                                                                                   attribute:NSLayoutAttributeTrailing
+                                                                                                   relatedBy:NSLayoutRelationEqual
+                                                                                                      toItem:self.bubbleInfoContainer
+                                                                                                   attribute:NSLayoutAttributeTrailing
+                                                                                                  multiplier:1.0
+                                                                                                    constant:0];
                             // --- KẾT THÚC KHỞI TẠO CÁC RÀNG BUỘC NGANG ---
                             
                             // VỊ TRÍ 2: Áp dụng padding vào Top Constraint
                             NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:dateTimeLabel
-                                                                                             attribute:NSLayoutAttributeTop
-                                                                                             relatedBy:NSLayoutRelationEqual
-                                                                                                toItem:self.bubbleInfoContainer
-                                                                                             attribute:NSLayoutAttributeTop
-                                                                                            multiplier:1.0
-                                                                                              constant:(component.position.y + verticalPadding)]; // <--- THÊM PADDING
+                                                                                                 attribute:NSLayoutAttributeTop
+                                                                                                 relatedBy:NSLayoutRelationEqual
+                                                                                                    toItem:self.bubbleInfoContainer
+                                                                                                 attribute:NSLayoutAttributeTop
+                                                                                                multiplier:1.0
+                                                                                                  constant:(component.position.y + verticalPadding)]; // <--- THÊM PADDING
                             
                             NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:dateTimeLabel
-                                                                                                attribute:NSLayoutAttributeHeight
-                                                                                                relatedBy:NSLayoutRelationEqual
-                                                                                                   toItem:nil
-                                                                                                attribute:NSLayoutAttributeNotAnAttribute
-                                                                                               multiplier:1.0
-                                                                                                 constant:15];
+                                                                                                    attribute:NSLayoutAttributeHeight
+                                                                                                    relatedBy:NSLayoutRelationEqual
+                                                                                                       toItem:nil
+                                                                                                    attribute:NSLayoutAttributeNotAnAttribute
+                                                                                                   multiplier:1.0
+                                                                                                     constant:15];
                             [NSLayoutConstraint activateConstraints:@[leftConstraint, rightConstraint, topConstraint, heightConstraint]];
                             
                             timeLabelOffset += 15;
@@ -838,7 +1447,6 @@ static BOOL _disableLongPressGestureOnEvent;
         }
     }
 }
-
 - (void)prepareRender:(MXKCellData *)cellData
 {
     // Sanity check: accept only object of MXKRoomBubbleCellData classes or sub-classes
@@ -978,7 +1586,6 @@ static BOOL _disableLongPressGestureOnEvent;
     
     return rowHeight;
 }
-
 - (void)prepareForReuse
 {
     [super prepareForReuse];
@@ -1001,6 +1608,20 @@ static BOOL _disableLongPressGestureOnEvent;
     [self resetConstraintsConstantToDefault];
     [self clearAttachmentWebView];
     
+    // Dọn dẹp overlay
+    if (self.replyToAttachmentView) {
+        self.replyToAttachmentView.hidden = YES;
+        self.messageTextView.textContainerInset = UIEdgeInsetsZero;
+        
+        // Ẩn các label và ảnh khi tái sử dụng
+        self.replyToAttachmentSenderLabel.hidden = YES;
+        self.replyToAttachmentFileLabel.hidden = YES;
+        self.replyToAttachmentThumbnailView.hidden = YES;
+        
+        // Xóa ảnh cũ
+        self.replyToAttachmentThumbnailView.image = nil;
+    }
+    
     [self didEndDisplay];
 }
 
@@ -1018,7 +1639,7 @@ static BOOL _disableLongPressGestureOnEvent;
 }
 
 - (BOOL)shouldInteractWithURL:(NSURL *)URL urlItemInteractionValue:(NSNumber*)urlItemInteractionValue associatedEvent:(MXEvent*)associatedEvent
-{    
+{
     NSMutableDictionary *userInfo = [@{
                                kMXKRoomBubbleCellUrl:URL,
                                kMXKRoomBubbleCellUrlItemInteraction:urlItemInteractionValue
