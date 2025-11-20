@@ -1739,6 +1739,42 @@ static NSString *const kRepliedTextPattern = @"<mx-reply>.*<blockquote>.*<br>(.*
             attributedDisplayText = [self renderString:displayText forEvent:event];
         }
     }
+    // ... (Trong MXKEventFormatter.m, ngay trước return attributedDisplayText;)
+
+    // *** BẮT ĐẦU ĐOẠN CODE THÊM MỚI (CHỈ CÁCH 1/2 DÒNG) ***
+    if (attributedDisplayText)
+    {
+        // 1. Tạo NSParagraphStyle để kiểm soát chiều cao dòng
+        NSMutableParagraphStyle *compactParagraphStyle = [[NSMutableParagraphStyle alloc] init];
+        
+        // Tính toán chiều cao dòng mong muốn (khoảng 1/2 chiều cao font)
+        // Ví dụ, nếu defaultTextFont có size là 14, 1/2 dòng là khoảng 7 points.
+        CGFloat desiredLineHeight = self.defaultTextFont.pointSize / 2.0;
+        
+        // Đặt chiều cao dòng tối thiểu và tối đa bằng giá trị mong muốn
+        [compactParagraphStyle setMinimumLineHeight:desiredLineHeight];
+        [compactParagraphStyle setMaximumLineHeight:desiredLineHeight];
+        
+        // 2. Tạo ký tự ngắt dòng (\n) với style mới
+        // Ký tự \n sẽ mang chiều cao dòng nhỏ này
+        NSAttributedString *compactNewLine = [[NSAttributedString alloc] initWithString:@"\n"
+                                                                          attributes:@{
+                                                                                       NSForegroundColorAttributeName: self.defaultTextColor,
+                                                                                       NSFontAttributeName: self.defaultTextFont,
+                                                                                       NSParagraphStyleAttributeName: compactParagraphStyle
+                                                                                       }];
+        
+        NSMutableAttributedString *mutableAttributedText = [[NSMutableAttributedString alloc] initWithAttributedString:attributedDisplayText];
+        
+        // 3. Chỉ chèn nếu chuỗi hiện tại không kết thúc bằng ngắt dòng
+        if (![mutableAttributedText.string hasSuffix:@"\n"])
+        {
+            [mutableAttributedText appendAttributedString:compactNewLine];
+        }
+        
+        attributedDisplayText = mutableAttributedText;
+    }
+    // *** KẾT THÚC ĐOẠN CODE THÊM MỚI ***
     
     return attributedDisplayText;
 }
@@ -1890,13 +1926,7 @@ static NSString *const kRepliedTextPattern = @"<mx-reply>.*<blockquote>.*<br>(.*
  @param repliedEvent the event it replies to.
  @return an html string containing the updated content of both events.
  */
-/**
- Build the HTML body of a reply from its related event (rich replies).
 
- @param event the reply event.
- @param repliedEvent the event it replies to.
- @return an html string containing the updated content of both events.
- */
 - (NSString*)buildHTMLStringForEvent:(MXEvent*)event inReplyToEvent:(MXEvent*)repliedEvent
 {
     NSString *repliedEventContent;
@@ -1959,7 +1989,16 @@ static NSString *const kRepliedTextPattern = @"<mx-reply>.*<blockquote>.*<br>(.*
                 NSArray<NSString *> *truncatedLines = [lines subarrayWithRange:NSMakeRange(0, 2)];
                 processedText = [NSString stringWithFormat:@"%@  ...", [truncatedLines componentsJoinedByString:@"\n"]];
             } else {
+//                processedText = plainText;
+                
                 processedText = plainText;
+                                    
+                                    if (processedText.length > 60) {
+                                        // Cắt theo số ký tự an toàn và thêm ...
+                                        processedText = [processedText substringToIndex:60];
+                                        // Tùy chọn: Bạn có thể cắt tại ký tự trắng cuối cùng để không bị cắt chữ.
+                                        processedText = [NSString stringWithFormat:@"%@ ...", processedText];
+                                    }
             }
 
             NSString *escapedText = [processedText stringByAddingHTMLEntities];

@@ -215,9 +215,9 @@ final class RoomInfoListViewController: UIViewController {
         rows.append(rowUploads)
         
         //Nhóm không mã hoá mới hiển thị
-//        if !viewData.isEncrypted {
+        if !viewData.isEncrypted {
             rows.append(rowSearch)
-//        }
+        }
 
         let sectionSettings = Section(header: VectorL10n.roomInfoListSectionOther,
                                      rows: rows,

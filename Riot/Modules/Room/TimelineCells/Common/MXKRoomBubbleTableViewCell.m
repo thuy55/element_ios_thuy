@@ -1287,10 +1287,10 @@ static BOOL _disableLongPressGestureOnEvent;
                 || (bubbleData.showBubbleReceipts && !bubbleData.useCustomReceipts))
             {
                 // --- BỔ SUNG LOGIC KHOẢNG CÁCH FILE START ---
-                CGFloat verticalPadding = 0.0f;
+                CGFloat verticalPadding = 20.0f;
                 if (bubbleData.isAttachment)
                 {
-                    verticalPadding = 10.0f; // Khoảng đệm 10 points cho file/attachment
+                    verticalPadding = 20.0f; // Khoảng đệm 10 points cho file/attachment
                 }
                 // --- BỔ SUNG LOGIC KHOẢNG CÁCH FILE END ---
                 
